@@ -1,18 +1,22 @@
 export const elements = {
-    sercher: [
-        {
-            type: 'searchInput',
-            style: {
-                width: '80%',
-            }
+    sercher: [{
+        type: 'div',
+        class: ['row'],
+        elements: [{
+            type: 'div',
+            class: ['col_75', 'nonMarginRight'],
+            elements: [{
+                type: 'searchInput',
+                id: 'search',
+            }]
         }, {
-            type: 'button',
-            style: {
-                width: '20%',
-                height: '100%'
-            },
-            id: 'serch',
-            content: '🔍'
-        }
-    ]
+            type: 'div',
+            class: ['col_15', 'nonMarginLeft'],
+            elements: [{
+                type: 'button',
+                id: 'serchButton',
+                content: '&#128269;'
+            }]
+        }]
+    }]
 }

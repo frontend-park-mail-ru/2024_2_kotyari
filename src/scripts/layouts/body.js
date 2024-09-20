@@ -1,102 +1,84 @@
 import {initialize} from '../components/buildcomponents';
 import {elements} from '../components/components'
+import {icons} from "../components/icons";
 
 const root = document.body;
 const sity = 'Москва'
 
 const config1 = {
-    header: {
-        type: 'header',
-        rows: [{
-            class: 'row2',
-            columns: [{
-                class: 'col5',
+    body: [{
+            type: 'header',
+            elements: [{
+                type: 'div',
+                class: ['row4'],
+                elements: [{
+                    type: 'strong',
+                    content: `${sity}.`
+                }, {
+                    type: 'pre',
+                    content: ' '
+                }, {
+                    type: 'a',
+                    class: ['a', 'perpl'],
+                    href: '/api/kanban',
+                    content: 'Изменить город'
+                }]
+            }, {
+                type: 'div',
+                class: ['row'],
                 elements: [{
                     type: 'div',
-                    id: 'logo',
+                    class: ['col_15'],
                     elements: [{
                         type: 'logo',
-                        href: '/api/katalog',
-                        alt: 'Ozon',
-                    }],
-                    style: {
-                        width: '100%',
-                    }
-                }]
-            }, {
-                style: {
-                    flex: '0 0 5%',
-                },
-                elements: [{
-                    type: 'div',
-                    id: 'katalogButton',
-                    elements: [{
-                        type: 'dropButton',
-                        content: 'Каталог',
-                    }],
-                    style: {
-                        width: '100%',
-                        margin: '0',
-                    },
-                }]
-            }, {
-                class: 'col2',
-                elements: [{
-                    type: 'div',
-                    id: 'finder',
-                    elements: elements.sercher,
-                    style: {
-                        width: '100%',
-                        height: '100%'
-                    },
-                }]
-            }]
-        }]
-    },
-    main: {
-        type: 'main',
-        rows: [{
-            class: 'row3',  // Треть пространства для строки
-            columns: [{
-                class: 'col2',  // Половина пространства
-                elements: [{
-                    type: 'div',
-                    id: 'contentLeft',
-                    elements: [{
-                        type: 'text',
-                        content: 'Левая колонка',
                     }]
-                }]
-            }, {
-                width: '200px',  // Фиксированная ширина в пикселях
-                elements: [{
+                }, {
                     type: 'div',
-                    id: 'contentRight',
+                    class: ['col_5'],
                     elements: [{
-                        type: 'text',
-                        content: 'Фиксированная колонка 200px',
+                        type: 'div',
+                        class: ['row'],
+                        elements: [{
+                            type: 'dropButton',
+                            id: 'katalog',
+                            content: '&#8801; Каталог'
+                        }]
+                    }]
+                }, {
+                    type: 'div',
+                    class: ['col_60'],
+                    elements: elements.sercher
+                }, {
+                    type: 'div',
+                    class: ['col5'],
+                    elements: [{
+                        type: 'div',
+                        class: ['row'],
+                        elements: [{
+                            type: 'div',
+                            class: ['col_15'],
+                            elements: icons.avatar,
+                        }, {
+                            type: 'div',
+                            class: ['col_15'],
+                            elements: icons.basket,
+                        }, {
+                            type: 'div',
+                            class: ['col_15'],
+                            elements: icons.favorites,
+                        }, {
+                            type: 'div',
+                            class: ['col_15'],
+                            elements: icons.orders,
+                        }]
                     }]
                 }]
             }]
+        }, {
+            type: 'main',
+        }, {
+            type: 'footer',
         }]
-    },
-    footer: {
-        type: 'footer',
-        rows: [{
-            class: 'row1',  // Полная ширина строки
-            columns: [{
-                width: '100%',  // Полная ширина колонки
-                elements: [{
-                    type: 'div',
-                    id: 'footerText',
-                    elements: [{
-                        type: 'text',
-                        content: 'Футер',
-                    }]
-                }]
-            }]
-        }]
-    }
 };
 
-initialize(config1, root);
+initialize(config1.body, root);

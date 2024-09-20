@@ -42,6 +42,9 @@ const server = http.createServer((req, res) => {
         if (url === '/src/scripts/errors/errors') {
             filePath = '../../scripts/errors/errors.js'
         }
+        if (url === '/src/scripts/components/icons') {
+            filePath = '../../scripts/components/icons.js'
+        }
     }
 
 

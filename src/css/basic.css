@@ -44,6 +44,7 @@
     color: rgb(255, 233, 255);
     padding: 10px 20px;
     cursor: pointer;
+    width: 100%;
 }
 
 /* Стили hover для кнопок */
@@ -61,55 +62,117 @@
     font-size: 16px;
     outline: none;
     padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Табличная разметка с использованием div */
 .row {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
 .col {
-    flex: 1;
-    padding: 10px;
-    margin: 5px;
-    align-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 /* Вариации строк с разным количеством колонок */
 .row2 {
+    display: flex;
     flex: 0 0 50%; /* 2 колонки */
+    box-sizing: border-box;
 }
 
 .row3 {
+    display: flex;
     flex: 0 0 33.33%; /* 3 колонки */
+    box-sizing: border-box;
 }
 
 .row4 {
+    display: flex;
     flex: 0 0 25%; /* 4 колонки */
+    box-sizing: border-box;
+}
+
+.row_75 {
+    display: flex;
+    flex: 0 0 75%;
+    box-sizing: border-box;
 }
 
 /* Вариации колонок */
 .col2 {
-    flex: 0 0 50%;
+    flex: 0 0 45%;
     margin: 5px;
     align-content: center;
+    box-sizing: border-box;
 }
 
 .col3 {
-    flex: 0 0 33.33%;
+    flex: 0 0 33%;
     margin: 5px;
     align-content: center;
+    box-sizing: border-box;
 }
 
 .col4 {
-    flex: 0 0 25%;
-    margin: 5px;
-    align-content: center;
-}
-
-.col5 {
     flex: 0 0 20%;
     margin: 5px;
     align-content: center;
+    box-sizing: border-box;
+}
+
+.col5 {
+    flex: 0 0 15%;
+    margin: 5px;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.col_5 {
+    flex: 0 0 4%;
+    margin: 5px;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.col_15 {
+    flex: 0 0 12%;
+    margin: 5px;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.col_60 {
+    flex: 0 0 55%;
+    margin: 5px;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.col_75 {
+    flex: 0 0 72%;
+    margin: 5px;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.nonMarginLeft {
+    margin-left: 0;
+}
+
+.nonMarginRight {
+    margin-right: 0;
+}
+
+.perpl {
+    color: oklch(0.5 0.14 316.31);
 }
