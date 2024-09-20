@@ -1,5 +1,5 @@
 import {initialize} from '../components/buildcomponents';
-import {elements} from '../components/components'
+import {blocks} from '../components/components';
 import {icons} from "../components/icons";
 
 const root = document.body;
@@ -47,7 +47,7 @@ const config1 = {
                 }, {
                     type: 'div',
                     class: ['col_60'],
-                    elements: elements.sercher
+                    elements: blocks.sercher
                 }, {
                     type: 'div',
                     class: ['col5'],

@@ -45,6 +45,9 @@ const server = http.createServer((req, res) => {
         if (url === '/src/scripts/components/icons') {
             filePath = '../../scripts/components/icons.js'
         }
+        if (url === '/src/scripts/components/buildelements') {
+            filePath = '../../scripts/components/buildelements.js'
+        }
     }
 
 

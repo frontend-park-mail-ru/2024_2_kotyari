@@ -1,4 +1,4 @@
-import {buildElement, elementSettings} from "./elements";
+import {buildElement, elementSettings} from "./buildelements";
 
 const basicType = 'div';
 const nonWord = 'none';

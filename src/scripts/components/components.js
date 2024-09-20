@@ -1,4 +1,4 @@
-export const elements = {
+export const blocks = {
     sercher: [{
         type: 'div',
         class: ['row'],
