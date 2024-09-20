@@ -1,0 +1,115 @@
+/* Общие стили для header, main и footer */
+.header {
+    padding: 20px;
+    text-align: center;
+    min-height: 50px;
+}
+
+.main {
+    padding: 20px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+    min-height: 400px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Общие стили для div */
+.div {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для лого */
+.logo {
+    background: rgba(0, 0, 0, 0);
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+/* Стили для кнопки */
+.button,
+.dropButton {
+    background: oklch(0.5 0.14 316.31);
+    transition: background-color 0.3s ease-in-out;
+    border: 1px solid oklch(0.5 0.14 316.31);
+    color: rgb(255, 233, 255);
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Стили hover для кнопок */
+.button:hover,
+.dropButton:hover {
+    background: rgba(194, 67, 218, 0);
+    border-color: oklch(0.5 0.14 316.31);
+    color: oklch(0.5 0.14 316.31);
+}
+
+/* Стили для поискового input */
+.searchInput {
+    color: oklch(0.5 0.14 316.31);
+    border: 1px solid oklch(0.5 0.14 316.31);
+    font-size: 16px;
+    outline: none;
+    padding: 10px 20px;
+}
+
+/* Табличная разметка с использованием div */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+    align-content: center;
+}
+
+/* Вариации строк с разным количеством колонок */
+.row2 {
+    flex: 0 0 50%; /* 2 колонки */
+}
+
+.row3 {
+    flex: 0 0 33.33%; /* 3 колонки */
+}
+
+.row4 {
+    flex: 0 0 25%; /* 4 колонки */
+}
+
+/* Вариации колонок */
+.col2 {
+    flex: 0 0 50%;
+    margin: 5px;
+    align-content: center;
+}
+
+.col3 {
+    flex: 0 0 33.33%;
+    margin: 5px;
+    align-content: center;
+}
+
+.col4 {
+    flex: 0 0 25%;
+    margin: 5px;
+    align-content: center;
+}
+
+.col5 {
+    flex: 0 0 20%;
+    margin: 5px;
+    align-content: center;
+}
