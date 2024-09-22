@@ -296,7 +296,7 @@ header {
     }
 
     .icon-dropdown::before {
-        left: +15px;
+        left: +19px;
         transform: translateX(0);
     }
 }
