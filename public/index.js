@@ -8,5 +8,5 @@ const user = {
 
 // Ожидаем завершения рендера body, затем строим карточки
 buildBody(user).then(() => {
-
+    return buildCards();
 });
