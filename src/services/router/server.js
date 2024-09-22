@@ -15,7 +15,7 @@ app.use('/src/css', express.static(cssPath));
 
 // Универсальный обработчик маршрутов для скриптов
 app.get('/src/scripts/*', (req, res) => {
-    const filePath = path.join(scriptsPath, req.params[0]);
+    const filePath = path.join(scriptsPath, req.params[0]); // динамически вычисляем путь к файлу
     res.sendFile(filePath, (err) => {
         if (err) {
             res.status(404).send('<h1>404 Not Found</h1>');
