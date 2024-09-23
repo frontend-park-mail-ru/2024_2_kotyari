@@ -15,5 +15,5 @@ function cardSettings () {
 export function buildCards() {
     return templatize(document.getElementById('main'), '/src/scripts/components/card.hbs', data).then(() => {
         cardSettings();
-    })
+    });
 }
