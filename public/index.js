@@ -1,7 +1,7 @@
 import {buildBody} from "../src/scripts/layouts/body.js";
 import {buildCards} from "../src/scripts/components/card.js";
-import {buildModalWithContent} from "../src/scripts/components/modal.js";
-import {modalSignIn, modalSignUp} from "../src/scripts/components/authMenu.js"
+import {buildModalWithContent} from "../src/scripts/components/modalAuth.js";
+import {modalSignIn, modalSignUp} from "../src/scripts/components/modalData.js"
 
 const user = {
     // name: 'Василий',

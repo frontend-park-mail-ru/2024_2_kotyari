@@ -7,6 +7,7 @@
             {{#each fields as |field|}}
                 <label for="{{field.id}}">{{field.label}}:</label>
                 <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" {{#if field.required}}required{{/if}}/>
+                <div class="invalid-feedback" id="{{error_id}}"></div>
             {{/each}}
             <button type="submit">{{submitText}}</button>
         </form>
