@@ -50,4 +50,3 @@ buildBody(user).then(() => {
         }
     );
 });
-
