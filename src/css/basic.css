@@ -214,6 +214,10 @@ header {
     transform: translateX(-50%) translateY(-10px);
 }
 
+.body-url {
+    cursor: pointer;
+}
+
 @media (max-width: 1100px) {
     .catalog-button span {
         display: none;

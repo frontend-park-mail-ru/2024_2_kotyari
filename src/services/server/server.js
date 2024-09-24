@@ -8,6 +8,8 @@ const PORT = 3000;
 const publicPath = path.join(__dirname, '../../../public');
 const scriptsPath = path.join(__dirname, '../../scripts');
 const cssPath = path.join(__dirname, '../../css');
+const routerPath = path.join(__dirname, './');
+const cookiePath = path.join(__dirname, '../cookie');
 
 // Используем middleware для статики
 app.use(express.static(publicPath));
@@ -36,6 +38,16 @@ app.get('/:file', (req, res) => {
 // Маршрут для главной страницы
 app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+// Маршрут для главной Роутера
+app.get('/src/services/router/router.js', (req, res) => {
+    res.sendFile(path.join(routerPath, '../router/router.js'));
+});
+
+// Маршрут для Cookie
+app.get('/src/services/cookie/cookie.js', (req, res) => {
+    res.sendFile(path.join(cookiePath, '../cookie/cookie.js'));
 });
 
 // Обработка 404 ошибки для всех остальных запросов

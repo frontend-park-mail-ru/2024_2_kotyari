@@ -1,0 +1,121 @@
+/* Стили для страницы и контейнера */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+/* Стили карточки */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(25% - 32px); /* 4 карточки в строке по умолчанию */
+    min-width: 200px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-image {
+    background-color: #c4c4c4;
+    border-radius: 8px;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+/* Информация о товаре */
+.card-info {
+    width: 100%;
+}
+
+/* Стили для цены, старой цены и скидки */
+.price {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.current-price {
+    color: oklch(0.68 0.24 27.98);
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.old-price {
+    color: #888;
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+.discount {
+    color: oklch(0.68 0.24 27.98);
+}
+
+/* Описание товара */
+.description {
+    font-size: 14px;
+    color: #333;
+    max-height: 20px; /* Ограничиваем высоту описания */
+    overflow: hidden;
+    transition: max-height 0.3s ease, white-space 0.3s ease; /* Плавный переход для высоты */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* Показываем полный текст при наведении */
+.card:hover .description {
+    max-height: 100px; /* Увеличиваем высоту для показа полного текста */
+    white-space: normal; /* Переход на несколько строк */
+    overflow: visible;
+}
+
+
+/* Адаптивные стили */
+
+/* На средних экранах показываем 2 карточки */
+@media (max-width: 1024px) {
+    .card {
+        flex: 1 1 calc(50% - 32px);
+    }
+}
+
+/* На маленьких экранах - 1 карточка */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(100% - 32px);
+    }
+}
+
+/* На очень маленьких экранах уменьшаем размер карточек, чтобы влезло 4 */
+@media (max-width: 500px) {
+    .card {
+        flex: 1 1 calc(25% - 16px);
+    }
+}
+
+/* Если экран еще меньше, показываем 2 маленькие карточки */
+@media (max-width: 400px) {
+    .card {
+        flex: 1 1 calc(50% - 16px);
+    }
+}
+
+/* При минимальной ширине экрана показываем 1 маленькую карточку */
+@media (max-width: 300px) {
+    .card {
+        flex: 1 1 calc(100% - 16px);
+    }
+}

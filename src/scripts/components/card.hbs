@@ -1,0 +1,21 @@
+<div class="catalog">
+    {{#each products}}
+        <div class="card url" href="{{url}}">
+            <div class="card-image" style="background-image: url('{{image}}');"></div>
+            <div class="card-info">
+                <div class="price">
+                    <span class="current-price">{{currentPrice}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
+                    {{#if oldPrice}}
+                        <span class="old-price">{{oldPrice}} {{currency}}</span>
+                    {{/if}}
+                    {{#if discount}}
+                        <span class="discount">-{{discount}}%</span>
+                    {{/if}}
+                </div>
+                <div class="description" title="{{description}}">
+                    {{shortDescription}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

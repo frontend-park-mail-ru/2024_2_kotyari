@@ -1,13 +1,13 @@
 <header>
     <!-- Первая строка -->
     <div class="header-top">
-        <span>{{city}}. <a href="#">Изменить город</a></span>
+        <span>{{city}}. <a href="/api/changeSity" class="body-url">Изменить город</a></span>
     </div>
 
     <!-- Вторая строка -->
     <div class="header-bottom">
-        <div class="logo">Оксик</div>
-        <button class="catalog-button">&#8801;<span>Каталог</span></button>
+        <div class="logo body-url" href="/">Оксик</div>
+        <button class="catalog-button body-url" title="Каталог" href="/api/catalog">&#8801;<span>Каталог</span></button>
         <div class="search-container">
             <input type="search" placeholder="Поиск по оксик" class="search-input">
             <button class="search-button"><span class="material-icons">search</span></button>
@@ -29,15 +29,15 @@
                     </div>
                 {{/if}}
             </div>
-            <div class="icon">
+            <div class="icon body-url" href="/api/basket" title="Корзина">
                 <span class="material-icons">shopping_cart</span>
                 <span class="icon-label">Корзина</span>
             </div>
-            <div class="icon">
+            <div class="icon body-url" href="/api/favorite" title="Избранное">
                 <span class="material-icons">favorite_border</span>
                 <span class="icon-label">Избранное</span>
             </div>
-            <div class="icon">
+            <div class="icon body-url" href="/api/records" title="Заказы">
                 <span class="material-icons">receipt_long</span>
                 <span class="icon-label">Заказы</span>
             </div>
