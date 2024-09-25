@@ -3,11 +3,12 @@
         <span class="btn__close" data-action="close">&times;</span>
         <h1 class="logo">{{logo}}</h1>
         <h2 class="modal__title">{{title}}</h2>
-        <form id="{{formId}}">
+        <form id="{{formId}}" action="{{action}}" method="post">
+            <span class="errors__feedback" id="error"></span>
             {{#each fields as |field|}}
                 <label for="{{field.id}}">{{field.label}}:</label>
-                <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" {{#if field.required}}required{{/if}}/>
-                <div class="invalid-feedback" id="{{error_id}}"></div>
+                <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" data-error-id="{{field.error_id}}" {{#if field.required}}required{{/if}} />
+                <span class="errors__feedback" id="{{field.error_id}}"></span>
             {{/each}}
             <button type="submit">{{submitText}}</button>
         </form>

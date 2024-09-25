@@ -5,27 +5,27 @@ export const modalSignUp = {
     formId: 'register__form',
     fields: [
         {
-            id: 'username',
+            id: 'signup_username',
             label: 'Ваше имя',
             type: 'text',
             name: 'username',
-            error_id: "nicknameError",
+            error_id: "signup_nicknameError",
             required: true
         },
         {
-            id: 'email',
+            id: 'signup_email',
             label: 'Почта',
             type: 'email',
             name: 'email',
-            error_id: "emailError",
+            error_id: "signup_emailError",
             required: true
         },
         {
-            id: 'password',
+            id: 'signup_password',
             label: 'Пароль',
             type: 'password',
             name: 'password',
-            error_id: "passwordError",
+            error_id: "signup_passwordError",
             required: true
         },
     ],
@@ -44,19 +44,19 @@ export const modalSignIn = {
     formId: 'login__form',
     fields: [
         {
-            id: 'email',
+            id: 'login_email',
             label: 'Почта',
             type: 'email',
             name: 'email',
-            error_id: "emailError",
+            error_id: "login_emailError",
             required: true
         },
         {
-            id: 'password',
+            id: 'login_password',
             label: 'Пароль',
             type: 'password',
             name: 'password',
-            error_id: "passwordError",
+            error_id: "login_passwordError",
             required: true
         },
     ],
@@ -67,4 +67,3 @@ export const modalSignIn = {
         label: 'Зарегистрироваться',
     },
 };
-

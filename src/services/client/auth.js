@@ -1,21 +1,24 @@
-import {validateUsername, validatePassword, validateEmail} from "../../scripts/components/modalAuth";
-import {modalSignIn, modalSignUp} from "../../scripts/components/modalData";
+import {validateUsername, validatePassword, validateEmail} from "../../scripts/components/modalAuth.js";
 
 
-function handleSignIn(event) {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+export function handleSignIn(event) {
+    event.preventDefault();
 
-    // Валидация полей
-    if (!(validateEmail(email) && validatePassword(password))) {
-        event.preventDefault();
-        event.stopPropagation();
+    const form = event.target;
+    const email = form.querySelector('[name="email"]');
+    const password = form.querySelector('[name="password"]');
+
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+
+    if (!isEmailValid || !isPasswordValid) {
+        console.error('Ошибка валидации');
         return;
     }
 
-    this.classList.add('was-validated');
-    event.preventDefault();
+    console.log(email.value, ' ', password.value);
 
+    // Если валидация успешна, выполняем запрос
     fetch('/login', {
         method: 'POST',
         body: JSON.stringify({
@@ -27,36 +30,50 @@ function handleSignIn(event) {
             'Accept': 'application/json'
         }
     })
-        .then(response => response.json())
+        .then(response => {
+            // Проверяем статус ответа
+            if (!response.ok) {
+                throw new Error('Ошибка сети: ' + response.statusText);
+            }
+
+            // Проверяем, если тело пустое, не пытаемся его парсить
+            return response.text().then(text => text ? JSON.parse(text) : {});
+        })
         .then(data => {
             if (data.ok) {
-                // Удаление листенера после отправки формы
-                document.getElementById(modalSignIn.formId).removeEventListener('submit', handleSignIn);
+                console.log('Успешный вход в систему');
+                form.reset();
+                form.removeEventListener('submit', handleSignIn);
             } else {
-                console.error('Login failed');
+                console.error('Ошибка входа:', data.message);
             }
         })
         .catch(error => {
-            console.error('Error during login:', error);
+            console.error('Ошибка при запросе на вход:', error);
         });
 }
 
-document.getElementById(modalSignIn.formId).addEventListener('submit', handleSignIn);
+export function handleSignUp(event) {
+    event.preventDefault(); // Предотвращаем отправку формы
 
-function handleSignUp(event) {
-    const username = document.getElementById('username');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
+    const form = event.target;
+    const username = form.querySelector('[name="username"]');
+    const email = form.querySelector('[name="email"]');
+    const password = form.querySelector('[name="password"]');
+    const errorMsg = document.getElementById('errors');
 
-    if (!(validateUsername(username) && validateEmail(email) && validatePassword(password)) ) {
-        event.preventDefault();
-        event.stopPropagation();
+    // Валидация полей
+    const isUsernameValid = validateUsername(username);
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+
+    if (!isUsernameValid || !isEmailValid || !isPasswordValid) {
+        console.error('Ошибка валидации');
+        errorMsg.textContent = 'Проверьте правильность данных'; // Сообщение об ошибке
         return;
     }
 
-    this.classList.add('was-validated');
-    event.preventDefault();
-
+    // Если валидация успешна, выполняем запрос
     fetch('/signup', {
         method: 'POST',
         body: JSON.stringify({
@@ -72,14 +89,16 @@ function handleSignUp(event) {
         .then(response => response.json())
         .then(data => {
             if (data.ok) {
-                document.getElementById(modalSignUp.formId).removeEventListener('submit', handleSignUp);
+                console.log('Регистрация прошла успешно');
+                form.reset(); // Очищаем форму после успешной регистрации
+                form.removeEventListener('submit', handleSignUp);
             } else {
-                console.error('Registration failed:', data.message);
+                errorMsg.textContent = 'Ошибка регистрации: ' + (data.message || 'неизвестная ошибка');
+                console.error('Ошибка регистрации:', data.message);
             }
         })
         .catch(error => {
-            console.error('Error during registration:', error);
+            console.error('Ошибка при запросе на регистрацию:', error);
+            errorMsg.textContent = 'Ошибка подключения. Попробуйте позже.';
         });
 }
-
-document.getElementById(modalSignUp.formId).addEventListener('submit', handleSignUp);

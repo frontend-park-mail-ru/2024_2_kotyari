@@ -60,16 +60,15 @@ export function buildModalWithContent(user, triggerElement, template, rootId, mo
 
 export function validateEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const emailError = document.getElementById('emailError');
     let isValid = true;
-
-    emailError.textContent = '';
+    const errorElement = document.getElementById(email.dataset.errorId);
 
     if (!emailRegex.test(email.value)) {
-        emailError.textContent = 'Invalid email address.';
+        errorElement.textContent = 'Неверный формат почты.';
         email.classList.add('is-invalid');
         isValid = false;
     } else {
+        errorElement.textContent = '';
         email.classList.remove('is-invalid');
     }
 
@@ -78,21 +77,19 @@ export function validateEmail(email) {
 
 export function validatePassword(password) {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d@$%*?&#]{9,}$/;
-    const passwordError = document.getElementById('passwordError');
     let isValid = true;
-
-    passwordError.textContent = ''; // Clear previous error
+    const errorElement = document.getElementById(password.dataset.errorId);
 
     if (!passwordRegex.test(password.value)) {
         if (password.value.length < 8) {
-            passwordError.textContent = 'The password must be at least 8 characters long';
+            errorElement.textContent = 'Пароль должен содержать не менее 8 символов.';
         } else {
-            // Пароль должен содержать
-            passwordError.textContent = 'Password must include uppercase, lowercase, number, and special character @$%*?&#.';
+            errorElement.textContent = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
         }
         password.classList.add('is-invalid');
         isValid = false;
     } else {
+        errorElement.textContent = '';
         password.classList.remove('is-invalid');
     }
 
@@ -100,27 +97,23 @@ export function validatePassword(password) {
 }
 
 export function validateUsername(username) {
-    const usernameRegex = /^[a-zA-Z0-9_]+$/; // Разрешены только буквы, цифры и _
-    const usernameError = document.getElementById('usernameError');
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
     let isValid = true;
+    const errorElement = document.getElementById(username.dataset.errorId);
+    const user = username.value;
 
-    usernameError.textContent = '';
-
-    // Проверка длины
-    if (username.value.length < 4 || username.value.length > 20) {
-        usernameError.textContent = 'The length of the name must be at least 4 characters and not exceed 20';
+    if (user.length < 4 || user.length > 20) {
+        errorElement.textContent = 'Имя должно быть от 4 до 20 символов.';
         username.classList.add('is-invalid');
         isValid = false;
-    }
-    // Проверка на запрещённые символы
-    else if (!usernameRegex.test(username.value)) {
-        usernameError.textContent = 'The name can contain letters, numbers, and underscores';
+    } else if (!usernameRegex.test(username)) {
+        errorElement.textContent = 'Имя может содержать только буквы, цифры и _.';
         username.classList.add('is-invalid');
         isValid = false;
     } else {
+        errorElement.textContent = '';
         username.classList.remove('is-invalid');
     }
 
     return isValid;
 }
-
