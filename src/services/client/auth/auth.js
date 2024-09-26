@@ -1,4 +1,4 @@
-import {validateUsername, validatePassword, validateEmail} from "../../scripts/components/modalAuth.js";
+import {validateUsername, validatePassword, validateEmail} from "../../../scripts/components/modal-auth/modal-auth.js";
 
 
 export function handleSignIn(event) {
@@ -60,16 +60,17 @@ export function handleSignUp(event) {
     const username = form.querySelector('[name="username"]');
     const email = form.querySelector('[name="email"]');
     const password = form.querySelector('[name="password"]');
+    const password_repeat = form.querySelector('[name="password_repeat"]');
+
     const errorMsg = document.getElementById('errors');
 
     // Валидация полей
     const isUsernameValid = validateUsername(username);
     const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
+    const isPasswordValid = validatePassword(password, password_repeat);
 
     if (!isUsernameValid || !isEmailValid || !isPasswordValid) {
         console.error('Ошибка валидации');
-        errorMsg.textContent = 'Проверьте правильность данных'; // Сообщение об ошибке
         return;
     }
 
@@ -90,10 +91,9 @@ export function handleSignUp(event) {
         .then(data => {
             if (data.ok) {
                 console.log('Регистрация прошла успешно');
-                form.reset(); // Очищаем форму после успешной регистрации
+                form.reset();
                 form.removeEventListener('submit', handleSignUp);
             } else {
-                errorMsg.textContent = 'Ошибка регистрации: ' + (data.message || 'неизвестная ошибка');
                 console.error('Ошибка регистрации:', data.message);
             }
         })

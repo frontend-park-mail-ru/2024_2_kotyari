@@ -9,14 +9,16 @@ export const modalSignUp = {
             label: 'Ваше имя',
             type: 'text',
             name: 'username',
+            placeholder: 'Иван',
             error_id: "signup_nicknameError",
             required: true
         },
         {
             id: 'signup_email',
             label: 'Почта',
-            type: 'email',
+            type: 'text',
             name: 'email',
+            placeholder: 'myemail@example.com',
             error_id: "signup_emailError",
             required: true
         },
@@ -25,7 +27,17 @@ export const modalSignUp = {
             label: 'Пароль',
             type: 'password',
             name: 'password',
+            placeholder: 'Пароль',
             error_id: "signup_passwordError",
+            required: true
+        },
+        {
+            id: 'signup_password',
+            label: 'Повторите пароль',
+            type: 'password',
+            name: 'password_repeat',
+            placeholder: 'Повтор пароля',
+            error_id: "signup_passwordRepeatError",
             required: true
         },
     ],
@@ -46,8 +58,9 @@ export const modalSignIn = {
         {
             id: 'login_email',
             label: 'Почта',
-            type: 'email',
+            type: 'text',
             name: 'email',
+            placeholder: 'myemail@example.com',
             error_id: "login_emailError",
             required: true
         },
@@ -56,6 +69,7 @@ export const modalSignIn = {
             label: 'Пароль',
             type: 'password',
             name: 'password',
+            placeholder: '',
             error_id: "login_passwordError",
             required: true
         },

@@ -7,7 +7,8 @@
             <span class="errors__feedback" id="error"></span>
             {{#each fields as |field|}}
                 <label for="{{field.id}}">{{field.label}}:</label>
-                <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" data-error-id="{{field.error_id}}" {{#if field.required}}required{{/if}} />
+                <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" placeholder="{{placeholder}}"
+                       data-error-id="{{field.error_id}}" {{#if field.required}}required{{/if}} />
                 <span class="errors__feedback" id="{{field.error_id}}"></span>
             {{/each}}
             <button type="submit">{{submitText}}</button>

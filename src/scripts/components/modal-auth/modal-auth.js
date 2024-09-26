@@ -1,5 +1,5 @@
-import {templatize} from "../constprograms/shablon.js";
-import {errors} from "../errors/errors.js";
+import {templatize} from "../../constprograms/shablon.js";
+import {errors} from "../../errors/errors.js";
 
 
 export function buildModalWithContent(user, triggerElement, template, rootId, modalID, data) {
@@ -63,56 +63,73 @@ export function validateEmail(email) {
     let isValid = true;
     const errorElement = document.getElementById(email.dataset.errorId);
 
+    removeInputError(email, errorElement);
+
     if (!emailRegex.test(email.value)) {
-        errorElement.textContent = 'Неверный формат почты.';
-        email.classList.add('is-invalid');
+        addInputError(email, errorElement, 'Неверный формат почты.')
         isValid = false;
     } else {
-        errorElement.textContent = '';
-        email.classList.remove('is-invalid');
+        removeInputError(email, errorElement);
     }
 
     return isValid;
 }
 
-export function validatePassword(password) {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d@$%*?&#]{9,}$/;
+function removeInputError(element, errorElement) {
+    errorElement.textContent = '';
+    element.classList.remove('invalid__input');
+}
+
+function addInputError(element, errorElement, msg) {
+    errorElement.textContent = msg;
+    element.classList.add('invalid__input');
+}
+
+export function validatePassword(password, passwordRepeat) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d@$%*?&#]{8,}$/;
     let isValid = true;
     const errorElement = document.getElementById(password.dataset.errorId);
+    const errorRepeatElement = document.getElementById(passwordRepeat.dataset.errorId);
 
-    if (!passwordRegex.test(password.value)) {
+    removeInputError(password, errorElement);
+    removeInputError(passwordRepeat, errorRepeatElement);
+
+    if (password.value !== passwordRepeat.value) {
+        addInputError(passwordRepeat, errorRepeatElement, 'Пароли должны совпадать');
+        isValid = false;
+    } else if (!passwordRegex.test(password.value)) {
+        let errorMsg;
         if (password.value.length < 8) {
-            errorElement.textContent = 'Пароль должен содержать не менее 8 символов.';
+            errorMsg = 'Пароль должен содержать не менее 8 символов.'
         } else {
-            errorElement.textContent = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
+            errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
         }
-        password.classList.add('is-invalid');
+        addInputError(password, errorElement, errorMsg);
         isValid = false;
     } else {
-        errorElement.textContent = '';
-        password.classList.remove('is-invalid');
+        removeInputError(password, errorElement);
+        removeInputError(passwordRepeat, errorRepeatElement);
     }
 
     return isValid;
 }
 
 export function validateUsername(username) {
-    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+    const usernameRegex = /^[a-zа-яё][a-z0-9_а-яё]*$/i;
     let isValid = true;
     const errorElement = document.getElementById(username.dataset.errorId);
     const user = username.value;
 
+    removeInputError(username, errorElement);
+
     if (user.length < 4 || user.length > 20) {
-        errorElement.textContent = 'Имя должно быть от 4 до 20 символов.';
-        username.classList.add('is-invalid');
+        addInputError(username, errorElement, 'Имя должно быть от 4 до 20 символов.')
         isValid = false;
-    } else if (!usernameRegex.test(username)) {
-        errorElement.textContent = 'Имя может содержать только буквы, цифры и _.';
-        username.classList.add('is-invalid');
+    } else if (!usernameRegex.test(user)) {
+        addInputError(username, errorElement, 'Имя может содержать только буквы, цифры и _.')
         isValid = false;
     } else {
-        errorElement.textContent = '';
-        username.classList.remove('is-invalid');
+        removeInputError(username, errorElement);
     }
 
     return isValid;

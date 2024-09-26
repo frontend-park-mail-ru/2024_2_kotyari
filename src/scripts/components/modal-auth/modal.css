@@ -28,7 +28,7 @@
     padding: 30px 60px 60px;
 }
 
-.close__btn {
+.btn__close {
     position: absolute;
     top: 5px;
     right: 10px;
@@ -84,7 +84,7 @@ button[type="submit"]:hover {
     margin-bottom: 1em;
 }
 
-input.is-invalid, textarea.is-invalid {
+input.invalid__input, textarea.invalid__input {
     border-color: red;
     background-color: #ffe6e6;
 }
