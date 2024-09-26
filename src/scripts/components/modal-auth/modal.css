@@ -1,0 +1,98 @@
+.modal__main {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    cursor: pointer;
+    display: none;
+    top: 20%;
+    left: 50%;
+    z-index: 2;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.modal__container {
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    position: relative;
+    max-width: 700px;
+    background-color: #fff;
+    margin: auto;
+    color: #000;
+    border-radius: 16px;
+    padding: 30px 60px 60px;
+}
+
+.btn__close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 40px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+}
+
+input {
+    margin-top: 2px;
+
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: oklch(0.49 0.25 299.6);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+
+.modal__link {
+    padding-top: 15px;
+}
+
+.modal__title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 1em;
+}
+
+input.invalid__input, textarea.invalid__input {
+    border-color: red;
+    background-color: #ffe6e6;
+}
+
+.errors__feedback {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
+    display: block;
+}
+
