@@ -18,13 +18,13 @@
                     <span class="icon-label-hidden">{{name}}</span>
                     <div class="icon-dropdown">
                         <a href="#">Личный кабинет</a>
-                        <a href="#">Выход</a>
+                        <a href="/logout" router="stability-active">Выход</a>
                     </div>
                 {{else}}
                     <span class="icon-label-hidden">Аватар</span>
                     <div class="icon-dropdown">
-                        <a href="#">Вход</a>
-                        <a href="#">Регистрация</a>
+                        <a href="/login" router="stability-active">Вход</a>
+                        <a href="/signup" router="stability-active">Регистрация</a>
                     </div>
                 {{/if}}
             </div>

@@ -1,4 +1,4 @@
-import {templatize} from "../../constprograms/shablon.js";
+import {templatize} from "../../constprograms/shablon/shablon.js";
 
 const tmpURL = 'src/scripts/components/auth-menu/menu.hbs'
 

@@ -57,8 +57,8 @@ app.get('/*', (req, res) => {
             case '/src/services/cookie/cookie.js':
                 res.sendFile(path.join(cookiePath, '../cookie/cookie.js'));
                 break;
-            case '/src/services/server/settings.js':
-                res.sendFile(path.join(cookiePath, '../server/settings.js'));
+            case '/src/services/router/settings.js':
+                res.sendFile(path.join(cookiePath, '../router/settings.js'));
                 break;
             default:
                 // Если это файл, возвращаем error (если файл не найден)

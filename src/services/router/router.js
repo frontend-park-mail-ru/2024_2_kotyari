@@ -1,7 +1,9 @@
-import {buildBody} from "../../scripts/layouts/body.js";
+import {buildBody, handleLogout} from "../../scripts/layouts/body.js";
 import {buildCards} from "../../scripts/components/card/card.js";
 import {errorPage} from "../../scripts/components/custom-messages/error/error.js";
 import {soon} from "../../scripts/components/custom-messages/soon/soon.js";
+import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
+import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
 
 /**
  * @typedef {Object} User
@@ -13,7 +15,8 @@ import {soon} from "../../scripts/components/custom-messages/soon/soon.js";
  * Текущий пользователь.
  * @type {User}
  */
-const user = {
+
+export let user = {
     name: 'Василий',
     city: 'Москва'
 };
@@ -31,6 +34,9 @@ const ROUTES = {
     FAVORITE: '/favorite',
     PRODUCT: '/catalog/product/:id',
     ERROR: '/error/:err',
+    LOGOUT: '/logout',
+    LOGIN: '/login',
+    SIGNUP: '/signup',
 };
 
 /**
@@ -54,6 +60,7 @@ const urlAttribute = 'href';
  * @property {RegExp} PARAMS - Регулярное выражение для параметров в маршруте.
  * @property {function(string): RegExp} ANY_ROUTE - Функция для создания регулярного выражения для маршрута с параметрами.
  */
+
 const REGEX = {
     PARAMS: /:\w+/g,
     ANY_ROUTE: (route) => new RegExp('^' + route.replace(REGEX.PARAMS, '(\\w+)') + '$')
@@ -79,15 +86,16 @@ const removeAllHandlers = () => {
     }
 };
 
-/**
- * Класс для маршрутизации на клиентской стороне.
- * @namespace Router
- */
+// Функция для пустых страниц
+function clearPage() {
+    document.getElementById('main').innerHTML = '<h2>Пустая страничка :)</h2>';
+    return Promise.resolve();
+}
+
+// Класс Router для маршрутизации на клиенте
 const Router = {
-    /**
-     * Карта маршрутов и соответствующих обработчиков.
-     * @type {Object}
-     */
+
+    // Маршруты и обработчики
     routes: {
         [ROUTES.HOME]: 'catalog',
         [ROUTES.CATALOG]: 'catalog',
@@ -96,6 +104,9 @@ const Router = {
         [ROUTES.BASKET]: 'basket',
         [ROUTES.FAVORITE]: 'favorites',
         [ROUTES.PRODUCT]: 'product',
+        [ROUTES.LOGOUT]: 'logout',
+        [ROUTES.SIGNUP]: 'signup',
+        [ROUTES.LOGIN]: 'login',
         [ROUTES.ERROR]: 'error'
     },
 
@@ -168,7 +179,7 @@ const Router = {
 
             setTimeout(function() {
                 main.classList.remove('invisible');
-            }, 200); // Небольшая задержка для срабатывания transition
+            }, 100); // Небольшая задержка для срабатывания transition
 
             main.classList.remove('show');
         });
@@ -229,8 +240,22 @@ const Router = {
         return this.body(() => soon());
     },
 
+    logout: function () {
+        this.navigate(ROUTES.LOGOUT);  // Изменяем URL
+        return this.body(() =>  handleLogout());
+    },
+
+    login: function (){
+        this.navigate(ROUTES.LOGIN);  // Изменяем URL
+        return this.body(() => buildAuthMenu(menuSignIn));
+    },
+
+    signup: function (){
+        this.navigate(ROUTES.SIGNUP);  // Изменяем URL
+        return this.body(() => this.body(() =>  buildAuthMenu(menuSignUp)))
+    },
+
     error: function (err) {
-        console.log('sdf')
         return this.body(() => errorPage(err));
     }
 };
