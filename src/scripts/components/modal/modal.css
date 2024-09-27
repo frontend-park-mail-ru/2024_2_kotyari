@@ -1,0 +1,33 @@
+.modal__main {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    cursor: pointer;
+    display: none;
+    top: 20%;
+    left: 50%;
+    z-index: 2;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.btn__close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 40px;
+    color: #333;
+}
+
+.modal__container {
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    border-radius: 16px;
+    padding: 30px 60px 60px;
+}
