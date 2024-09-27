@@ -8,12 +8,9 @@ const PORT = 3000;
 const publicPath = path.join(__dirname, '../../../public');
 const scriptsPath = path.join(__dirname, '../../scripts');
 const cssPath = path.join(__dirname, '../../css');
-<<<<<<< Updated upstream:src/services/router/server.js
-=======
 const routerPath = path.join(__dirname, './');
 const cookiePath = path.join(__dirname, '../cookie');
 const imgPath = path.join(__dirname, '../../assets/img');
->>>>>>> Stashed changes:src/services/server/server.js
 
 // Используем middleware для статики
 app.use(express.static(publicPath));
@@ -44,11 +41,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-<<<<<<< Updated upstream:src/services/router/server.js
-// Обработка 404 ошибки для всех остальных запросов
-app.use((req, res) => {
-    res.status(404).send('<h1>404 Not Found</h1>');
-=======
 // Добавляем обработчик, который перехватывает любые запросы, кроме статических файлов
 app.get('/*', (req, res) => {
     const extension = path.extname(req.url);
@@ -73,7 +65,6 @@ app.get('/*', (req, res) => {
                 res.status(404).send('<h1>error Not Found</h1>');
         }
     }
->>>>>>> Stashed changes:src/services/server/server.js
 });
 
 // Запуск сервера на указанном порту

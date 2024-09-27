@@ -176,13 +176,10 @@ header {
     transform: translateX(-50%) translateY(-10px);
 }
 
-<<<<<<< Updated upstream:src/css/basic.css
-=======
 [router] {
     cursor: pointer;
 }
 
->>>>>>> Stashed changes:src/scripts/layouts/header/header.css
 @media (max-width: 1100px) {
     .catalog-button span {
         display: none;

@@ -2,10 +2,6 @@
 
 <div class="catalog">
     {{#each products}}
-<<<<<<< Updated upstream:src/scripts/components/card.hbs
-        <div class="card" data-link="{{url}}">
-            <div class="card-image" style="background-image: url('{{image}}');"></div>
-=======
         <div class="card" href="{{url}}" router="changed-active">
             <div class="card-image">
                 <img
@@ -15,12 +11,11 @@
                         onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"
                 />
             </div>
->>>>>>> Stashed changes:src/scripts/components/card/card.hbs
             <div class="card-info">
                 <div class="price">
-                    <span class="current-price">{{currentPrice}} ₽</span>
+                    <span class="current-price">{{currentPrice}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
                     {{#if oldPrice}}
-                        <span class="old-price">{{oldPrice}} ₽</span>
+                        <span class="old-price">{{oldPrice}} {{currency}}</span>
                     {{/if}}
                     {{#if discount}}
                         <span class="discount">-{{discount}}%</span>
