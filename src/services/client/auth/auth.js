@@ -1,6 +1,15 @@
-import {validateUsername, validatePassword, validateEmail} from "../../../scripts/components/auth-menu/auth.js";
+import {
+    validateUsername,
+    validatePassword,
+    validateEmail,
+    validatePasswordLogin
+} from "../../../scripts/components/auth-menu/auth.js";
+import {backurl} from "../../router/settings.js";
+import {Router} from "../../router/router.js";
+import {COOKIEEXPIRATION, setCookie} from "../../cookie/cookie.js";
 
 export function handleSignIn(event) {
+    console.log(1)
     event.preventDefault();
 
     const form = event.target;
@@ -8,7 +17,7 @@ export function handleSignIn(event) {
     const password = form.querySelector('[name="password"]');
 
     const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
+    const isPasswordValid = validatePasswordLogin(password);
 
     if (!isEmailValid || !isPasswordValid) {
         console.error('Ошибка валидации');
@@ -18,7 +27,7 @@ export function handleSignIn(event) {
     console.log(email.value, ' ', password.value);
 
     // Если валидация успешна, выполняем запрос
-    fetch('/login', {
+    fetch(  backurl + 'login', {
         method: 'POST',
         body: JSON.stringify({
             email: email.value,
@@ -53,6 +62,7 @@ export function handleSignIn(event) {
 }
 
 export function handleSignUp(event) {
+    console.log(222);
     event.preventDefault(); // Предотвращаем отправку формы
 
     const form = event.target;
@@ -74,26 +84,29 @@ export function handleSignUp(event) {
     }
 
     // Если валидация успешна, выполняем запрос
-    fetch('/signup', {
+    fetch(backurl + 'signup', {
         method: 'POST',
         body: JSON.stringify({
             username: username.value,
             email: email.value,
-            password: password.value
+            password: password.value,
+            repeat_password: password_repeat.value
         }),
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
+        .then(response => {
+            if (response.ok) {
                 console.log('Регистрация прошла успешно');
                 form.reset();
                 form.removeEventListener('submit', handleSignUp);
+
+                // Переходим на страницу авторизации без перезагрузки
+                Router.navigate('/');
             } else {
-                console.error('Ошибка регистрации:', data.message);
+                console.error('Ошибка регистрации:', response.json());
             }
         })
         .catch(error => {

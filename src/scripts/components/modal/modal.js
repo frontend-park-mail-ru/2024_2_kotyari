@@ -1,4 +1,4 @@
-import {templatize} from "../../constprograms/shablon.js";
+import {templatize} from "../../constprograms/shablon/shablon.js";
 import {errors} from "../../errors/errors.js";
 
 

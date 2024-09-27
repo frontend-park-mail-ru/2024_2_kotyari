@@ -1,13 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-}
-
 header {
     background-color: oklch(0.95 0 0);
     padding-bottom: 15px;
@@ -78,7 +68,6 @@ header {
 .catalog-button span {
     margin-left: 5px;
     font-size: 16px;
-
 }
 
 .catalog-button:hover {
@@ -86,33 +75,6 @@ header {
     background-color: oklch(0.49 0.25 299.6);
     border-radius: 5px;
     padding: 5px;
-}
-
-.search-container {
-    flex: 0 0 50%;
-    display: flex;
-    position: relative;
-}
-
-.search-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-
-.search-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: oklch(0.49 0.25 299.6);
-    border: none;
-    color: oklab(0.93 0.03 -0.04);
-    font-size: 18px;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
 }
 
 .icons {
@@ -171,7 +133,7 @@ header {
     background-color: #fff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    z-index: 1;
+    z-index: 1000;
     min-width: 150px;
     padding: 10px;
     opacity: 0;
@@ -214,7 +176,7 @@ header {
     transform: translateX(-50%) translateY(-10px);
 }
 
-.body-url {
+[router] {
     cursor: pointer;
 }
 

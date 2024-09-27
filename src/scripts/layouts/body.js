@@ -1,6 +1,6 @@
-import { templatize } from '../constprograms/shablon.js';
+import {templatize} from '../constprograms/shablon/shablon.js'
 import { user } from '../../services/router/router.js';
-// Функция для рендеринга тела страницы
+
 export function buildBody(data) {
     return templatize(document.body, '/src/scripts/layouts/body.hbs', data).then(() => {
         handleLogout();

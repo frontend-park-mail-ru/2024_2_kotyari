@@ -1,5 +1,3 @@
-
-
 export function validateEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let isValid = true;
@@ -52,6 +50,29 @@ export function validatePassword(password, passwordRepeat) {
     } else {
         removeInputError(password, errorElement);
         removeInputError(passwordRepeat, errorRepeatElement);
+    }
+
+    return isValid;
+}
+
+export function validatePasswordLogin(password) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d@$%*?&#]{8,}$/;
+    let isValid = true;
+    const errorElement = document.getElementById(password.dataset.errorId);
+
+    removeInputError(password, errorElement);
+
+    if (!passwordRegex.test(password.value)) {
+        let errorMsg;
+        if (password.value.length < 8) {
+            errorMsg = 'Пароль должен содержать не менее 8 символов.'
+        } else {
+            errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
+        }
+        addInputError(password, errorElement, errorMsg);
+        isValid = false;
+    } else {
+        removeInputError(password, errorElement);
     }
 
     return isValid;
