@@ -1,18 +1,16 @@
-<<<<<<< Updated upstream
+<link rel="stylesheet" href="src/scripts/layouts/header/header.css">
+
 <header>
     <!-- Первая строка -->
     <div class="header-top">
-        <span>{{city}}. <a href="#">Изменить город</a></span>
+        <span>{{city}}. <a href="/changeSity" router="stability-active">Изменить город</a></span>
     </div>
 
     <!-- Вторая строка -->
     <div class="header-bottom">
-        <div class="logo">Оксик</div>
-        <button class="catalog-button">&#8801;<span>Каталог</span></button>
-        <div class="search-container">
-            <input type="search" placeholder="Поиск по оксик" class="search-input">
-            <button class="search-button"><span class="material-icons">search</span></button>
-        </div>
+        <div class="logo" id="logo" href="/catalog" router="stability-active">Оксик</div>
+        <button class="catalog-button" title="Каталог" href="/catalog" router="stability-active">&#8801;<span>Каталог</span></button>
+        {{> searcher }}
         <div class="icons">
             <div class="icon">
                 <span class="material-icons">account_circle</span>
@@ -30,26 +28,18 @@
                     </div>
                 {{/if}}
             </div>
-            <div class="icon">
+            <div router="stability-active" class="icon" href="/basket" title="Корзина">
                 <span class="material-icons">shopping_cart</span>
                 <span class="icon-label">Корзина</span>
             </div>
-            <div class="icon">
+            <div router="stability-active" class="icon" href="/favorite" title="Избранное">
                 <span class="material-icons">favorite_border</span>
                 <span class="icon-label">Избранное</span>
             </div>
-            <div class="icon">
+            <div router="stability-active" class="icon" href="/records" title="Заказы">
                 <span class="material-icons">receipt_long</span>
                 <span class="icon-label">Заказы</span>
             </div>
         </div>
     </div>
 </header>
-<main id="main"></main>
-<footer></footer>
-=======
-{{> header}}
-<main id="main">
-</main>
-{{> footer}}
->>>>>>> Stashed changes
