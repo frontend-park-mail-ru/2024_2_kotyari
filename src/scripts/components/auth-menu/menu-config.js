@@ -11,7 +11,6 @@ export const modalSignUp = {
             name: 'username',
             placeholder: 'Иван',
             error_id: "signup_nicknameError",
-            required: true
         },
         {
             id: 'signup_email',
@@ -20,31 +19,28 @@ export const modalSignUp = {
             name: 'email',
             placeholder: 'myemail@example.com',
             error_id: "signup_emailError",
-            required: true
         },
         {
             id: 'signup_password',
             label: 'Пароль',
             type: 'password',
             name: 'password',
-            placeholder: 'Пароль',
+            placeholder: 'Введите ваш пароль',
             error_id: "signup_passwordError",
-            required: true
         },
         {
-            id: 'signup_password',
+            id: 'signup_password_repeat',
             label: 'Повторите пароль',
             type: 'password',
             name: 'password_repeat',
             placeholder: 'Повторите пароль',
             error_id: "signup_passwordRepeatError",
-            required: true
         },
     ],
     submitText: 'Регистрация',
     link: {
+        id: 'to_signin__btn',
         text: 'Есть аккаунт?',
-        href: '/sign_in',
         label: 'Войти',
     },
 };
@@ -62,22 +58,20 @@ export const modalSignIn = {
             name: 'email',
             placeholder: 'myemail@example.com',
             error_id: "login_emailError",
-            required: true
         },
         {
             id: 'login_password',
             label: 'Пароль',
             type: 'password',
             name: 'password',
-            placeholder: '',
+            placeholder: 'Введите ваш пароль',
             error_id: "login_passwordError",
-            required: true
         },
     ],
     submitText: 'Войти',
     link: {
+        id: 'to_signup__btn',
         text: 'Нет аккаунта?',
-        href: '/sign_up',
         label: 'Зарегистрироваться',
     },
 };
