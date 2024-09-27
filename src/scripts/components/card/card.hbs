@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/src/scripts/components/card/katalog.css">
+
+<div class="catalog">
+    {{#each products}}
+        <div class="card" href="{{url}}" router="changed-active">
+            <div class="card-image">
+                <img
+                        src="{{#if image}}{{image}}{{else}}https://via.placeholder.com/150{{/if}}"
+                        alt="{{shortDescription}}"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"
+                />
+            </div>
+            <div class="card-info">
+                <div class="price">
+                    <span class="current-price">{{currentPrice}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
+                    {{#if oldPrice}}
+                        <span class="old-price">{{oldPrice}} {{currency}}</span>
+                    {{/if}}
+                    {{#if discount}}
+                        <span class="discount">-{{discount}}%</span>
+                    {{/if}}
+                </div>
+                <div class="description" title="{{description}}">
+                    {{shortDescription}}
+                </div>
+                <button class="buy-button">Купить</button>
+            </div>
+        </div>
+    {{/each}}
+</div>

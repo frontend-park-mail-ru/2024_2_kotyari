@@ -1,0 +1,38 @@
+:root {
+    /* Цветовая палитра */
+    --background-color: #f9f9f9;
+    --card-background-color: #fff;
+    --card-border-color: #ddd;
+    --card-shadow-color: rgba(0, 0, 0, 0.1);
+    --image-placeholder-color: #c4c4c4;
+    --text-color: #333;
+    --old-price-color: #888;
+    --discount-color: oklch(0.68 0.24 27.98);
+
+    /* Отступы */
+    --gap: 16px;
+    --mini-gap: 12px;
+    --padding: 16px;
+    --mini-padding: 12px;
+
+    /* Размеры */
+    --card-border-radius: 8px;
+    --mini-card-border-radius: 6px;
+    --card-image-height: 150px;
+    --mini-card-image-height: 115px;
+    --card-width: 220px; /* Фиксированная ширина карточки */
+    --mini-card-width: 170px;
+    --card-height: 250px; /* Фиксированная высота карточки */
+    --mini-card-height: 185px;
+    --description-max-height: 20px;
+    --mini-description-max-height: 12px;
+    --description-expanded-height: 40px; /* Максимум на 2 строки */
+    --mini-description-expanded-height: 32px; /* Максимум на 2 строки */
+
+    /* Сеточные параметры */
+    --grid-column-min-width: 220px;
+    --mini-grid-column-min-width: 170px;
+
+    /* Текстовые параметры */
+    --min-font-size: 12px;
+}

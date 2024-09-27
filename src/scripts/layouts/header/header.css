@@ -1,0 +1,268 @@
+header {
+    background-color: oklch(0.95 0 0);
+    padding-bottom: 15px;
+}
+
+.header-top {
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+    background-color: inherit;
+    margin-left: 7px;
+    font-weight: bold;
+}
+
+.header-top a {
+    color: oklch(0.49 0.25 299.6);
+    text-decoration: none;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.header-top a:hover {
+    text-decoration: underline;
+}
+
+.header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    flex-wrap: nowrap;
+    background-color: inherit;
+}
+
+.logo {
+    flex: 0 0 13%;
+    color: oklch(0.49 0.25 299.6);
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.logo-part {
+    display: inline-block;
+    transition: all 0.5s ease;
+}
+
+.catalog-button {
+    flex: 0 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: oklch(0.49 0.25 299.6);
+    background-color: #ffffff00;
+    border: none;
+    border-radius: 5px;
+    font-size: 35px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.catalog-button span {
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.catalog-button:hover {
+    color: oklab(0.93 0.03 -0.04);
+    background-color: oklch(0.49 0.25 299.6);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.icons {
+    flex: 0 0 27%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon {
+    text-align: center;
+    position: relative;
+    margin: 0 10px;
+}
+
+.icon .material-icons {
+    font-size: 30px;
+    color: oklch(0.49 0.25 299.6);
+}
+
+.icon-label, .icon-label-hidden {
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+.icon:hover .icon-label {
+    visibility: visible;
+}
+
+.icon:hover .icon-label-hidden {
+    visibility: hidden;
+}
+
+.icon:hover::after {
+    content: attr(alt);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: oklch(0.49 0.25 299.6);
+    color: oklab(0.93 0.03 -0.04);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.icon-dropdown {
+    display: none;
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+    min-width: 150px;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.icon-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 10px 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+.icon-dropdown a {
+    display: block;
+    padding: 8px 12px;
+    color: oklch(0.49 0.25 299.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.icon-dropdown a:hover {
+    background-color: oklch(0.49 0.25 299.6);
+    color: oklab(0.93 0.03 -0.04);
+    border-radius: 3px;
+}
+
+.icon:hover .icon-dropdown {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.icon-dropdown {
+    transform: translateX(-50%) translateY(-10px);
+}
+
+[router] {
+    cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+    .catalog-button span {
+        display: none;
+    }
+
+    .icons {
+        flex-wrap: nowrap;
+    }
+
+    .icon-label, .icon-label-hidden {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-bottom {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .logo {
+        flex: 0 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .catalog-button {
+        margin-bottom: 10px;
+        width: 100%;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: oklab(0.93 0.03 -0.04);
+        background-color: oklch(0.49 0.25 299.6);
+        border: none;
+        border-radius: 5px;
+        font-size: 35px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-right: 20px;
+        padding: 5px;
+    }
+
+    .catalog-button span {
+        margin-left: 5px;
+        font-size: 16px;
+    }
+
+    .catalog-button:hover {
+        color: oklch(0.49 0.25 299.6);
+        background-color: #ffffff00;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .search-container {
+        flex: 0 0 auto;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .icons {
+        flex-direction: row;
+        flex: 0 0 auto;
+        margin-top: 10px;
+        justify-content: space-between;
+    }
+
+    .icon-label, .icon-label-hidden {
+        display: block;
+    }
+
+    .catalog-button span {
+        display: block;
+    }
+
+    .icon-dropdown {
+        left: +70px;
+        transform: translateX(0);
+    }
+
+    .icon-dropdown::before {
+        left: +19px;
+        transform: translateX(0);
+    }
+}
