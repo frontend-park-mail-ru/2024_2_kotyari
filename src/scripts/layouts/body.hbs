@@ -19,7 +19,7 @@
                     <span class="icon-label-hidden">{{name}}</span>
                     <div class="icon-dropdown">
                         <a href="#">Личный кабинет</a>
-                        <a href="/logout">Выход</a>
+                        <a class="body-url" id="logout-button" href="/logout">Выход</a>
                     </div>
                 {{else}}
                     <span class="icon-label-hidden">Войти</span>
@@ -44,8 +44,5 @@
         </div>
     </div>
 </header>
-<main>
-    <div id="main"></div>
-    <div id="sign_in__modal"></div>
-    <div id="sign_up__modal"></div>
-</main>
+<main id="main"></main>
+<footer></footer>

@@ -1,8 +1,8 @@
-import {buildBody} from "../../scripts/layouts/body.js";
+import {buildBody, handleLogout} from "../../scripts/layouts/body.js";
 import {buildCards} from "../../scripts/components/card.js";
 import {COOKIEEXPIRATION, setCookie, getCookie} from '../cookie/cookie.js'
 
-const user = {
+export let user = {
     name: 'Василий',
     city: 'Москва'
 }
@@ -16,6 +16,7 @@ const ROUTES = {
     BASKET: '/api/basket',
     FAVORITE: '/api/favorite',
     PRODUCT: '/api/catalog/product/:id',
+    LOGOUT: '/api/logout',
 };
 
 const CLICKCLASSESES = {
@@ -67,6 +68,7 @@ const Router = {
         [ROUTES.BASKET]: 'basket',
         [ROUTES.FAVORITE]: 'favorites',
         [ROUTES.PRODUCT]: 'product',
+        [ROUTES.LOGOUT]: 'logout'
     },
 
     // Инициализация маршрутов
@@ -146,7 +148,11 @@ const Router = {
         setCookie('lastUrl', ROUTES.PRODUCT.replace(':id', id), COOKIEEXPIRATION);
         console.log('Продукт с id = ', id);
         return this.body(() =>  clearPage());
-    }
+    },
+
+    logout: function () {
+        return this.body(() =>  handleLogout());
+    },
 };
 
 buildBody(user).then(() => {
