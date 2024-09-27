@@ -29,12 +29,34 @@ body {
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     aspect-ratio: 4 / 5; /* Сохранение пропорций карточки */
+    will-change: transform;
+    position: relative;
+    max-height: 300px; /* Задаем фиксированную максимальную высоту карточки */
+    z-index: 1; /* Устанавливаем карточке позицию и z-index */
+    overflow: hidden; /* Предотвращаем "разбухание" карточки */
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* Предусматриваем небольшое пространство вокруг карточки */
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    transition: all 0.3s ease; /* Эффект увеличения */
+    z-index: -1;
 }
 
 /* Эффект при наведении */
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Увеличиваем карточку, но не меняем её фактический размер */
     box-shadow: 0 4px 10px var(--card-shadow-color);
+    z-index: 2; /* Повышаем z-index при увеличении карточки */
+}
+
+.card:hover::before {
+    box-shadow: 0 8px 20px var(--card-shadow-color);
+    z-index: -1;
 }
 
 /* Изображение товара */
@@ -45,6 +67,9 @@ body {
     margin-bottom: 10px;
     overflow: hidden;
     border-radius: 8px; /* Закругляем углы */
+    background-image: url('https://via.placeholder.com/150'); /* Устанавливаем фоновое изображение */
+    background-size: cover; /* Покрываем всю область контейнера */
+    background-position: center;
 }
 
 .card-image img {
@@ -132,41 +157,4 @@ body {
 /* Убираем изменение размеров карточки при наведении на кнопку */
 .buy-button:focus, .buy-button:hover {
     transform: none;
-}
-
-/* Адаптивные стили */
-@media (max-width: 900px) {
-    .catalog {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 700px) {
-    .catalog {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 520px) {
-    .catalog {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-
-    .card {
-        padding: 0.75rem;
-    }
-
-    .price {
-        font-size: 14px;
-    }
-
-    .description {
-        font-size: 12px;
-    }
-
-    .buy-button {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
 }

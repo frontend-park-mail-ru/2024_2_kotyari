@@ -168,7 +168,7 @@ const Router = {
 
             setTimeout(function() {
                 main.classList.remove('invisible');
-            }, 100); // Небольшая задержка для срабатывания transition
+            }, 200); // Небольшая задержка для срабатывания transition
 
             main.classList.remove('show');
         });
@@ -230,6 +230,7 @@ const Router = {
     },
 
     error: function (err) {
+        console.log('sdf')
         return this.body(() => errorPage(err));
     }
 };
