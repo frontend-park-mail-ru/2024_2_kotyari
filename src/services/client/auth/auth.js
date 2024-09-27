@@ -1,5 +1,4 @@
-import {validateUsername, validatePassword, validateEmail} from "../../../scripts/components/modal-auth/modal-auth.js";
-
+import {validateUsername, validatePassword, validateEmail} from "../../../scripts/components/auth-menu/auth.js";
 
 export function handleSignIn(event) {
     event.preventDefault();
