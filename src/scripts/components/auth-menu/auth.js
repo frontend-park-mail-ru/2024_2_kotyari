@@ -47,6 +47,7 @@ export function validatePassword(password, passwordRepeat) {
             errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
         }
         addInputError(password, errorElement, errorMsg);
+        addInputError(passwordRepeat, errorRepeatElement, '');
         isValid = false;
     } else {
         removeInputError(password, errorElement);

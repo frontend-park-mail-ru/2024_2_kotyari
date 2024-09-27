@@ -1,9 +1,12 @@
 import {buildBody, handleLogout} from "../../scripts/layouts/body.js";
 import {buildCards} from "../../scripts/components/card.js";
 import {COOKIEEXPIRATION, setCookie, getCookie} from '../cookie/cookie.js'
+import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
+import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
+
 
 export let user = {
-    name: 'Василий',
+    // name: 'Василий',
     city: 'Москва'
 }
 
@@ -17,6 +20,8 @@ const ROUTES = {
     FAVORITE: '/api/favorite',
     PRODUCT: '/api/catalog/product/:id',
     LOGOUT: '/api/logout',
+    LOGIN: '/api/login',
+    SIGNUP: '/api/signup',
 };
 
 const CLICKCLASSESES = {
@@ -68,7 +73,9 @@ const Router = {
         [ROUTES.BASKET]: 'basket',
         [ROUTES.FAVORITE]: 'favorites',
         [ROUTES.PRODUCT]: 'product',
-        [ROUTES.LOGOUT]: 'logout'
+        [ROUTES.LOGOUT]: 'logout',
+        [ROUTES.SIGNUP]: 'signup',
+        [ROUTES.LOGIN]: 'login',
     },
 
     // Инициализация маршрутов
@@ -152,6 +159,14 @@ const Router = {
 
     logout: function () {
         return this.body(() =>  handleLogout());
+    },
+
+    login: function (){
+        return this.body(() => buildAuthMenu(menuSignIn));
+    },
+
+    signup: function (){
+        return this.body(() => this.body(() =>  buildAuthMenu(menuSignUp)))
     },
 };
 

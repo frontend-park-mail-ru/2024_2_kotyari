@@ -1,4 +1,4 @@
-export const modalSignUp = {
+export const menuSignUp = {
     id: "modal__signup",
     logo: 'ОКСИК',
     title: 'Регистрация',
@@ -39,13 +39,13 @@ export const modalSignUp = {
     ],
     submitText: 'Регистрация',
     link: {
-        id: 'to_signin__btn',
+        href: 'login',
         text: 'Есть аккаунт?',
         label: 'Войти',
     },
 };
 
-export const modalSignIn = {
+export const menuSignIn = {
     id: "modal__login",
     logo: 'ОКСИК',
     title: 'Вход',
@@ -70,7 +70,7 @@ export const modalSignIn = {
     ],
     submitText: 'Войти',
     link: {
-        id: 'to_signup__btn',
+        href: 'signup',
         text: 'Нет аккаунта?',
         label: 'Зарегистрироваться',
     },
