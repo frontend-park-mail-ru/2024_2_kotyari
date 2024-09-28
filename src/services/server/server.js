@@ -10,7 +10,7 @@ const scriptsPath = path.join(__dirname, '../../scripts');
 const cssPath = path.join(__dirname, '../../css');
 const routerPath = path.join(__dirname, './');
 const cookiePath = path.join(__dirname, '../cookie');
-const imgPath = path.join(__dirname, '../../assets/img');
+const imgPath = path.join(__dirname, '../../assets');
 
 // Используем middleware для статики
 app.use(express.static(publicPath));
@@ -27,7 +27,7 @@ app.get('/src/scripts/*', (req, res) => {
 });
 
 // Универсальный обработчик маршрутов для картинок
-app.get('/src/assets/img/*', (req, res) => {
+app.get('/src/assets/*', (req, res) => {
     const filePath = path.join(imgPath, req.params[0]); // динамически вычисляем путь к файлу
     res.sendFile(filePath, (err) => {
         if (err) {

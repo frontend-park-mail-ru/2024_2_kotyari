@@ -7,9 +7,9 @@ import {
 import {backurl} from "../../router/settings.js";
 import {Router} from "../../router/router.js";
 import {COOKIEEXPIRATION, setCookie} from "../../cookie/cookie.js";
+import {signInUpdate} from "../../../scripts/layouts/header/header.js";
 
 export function handleSignIn(event) {
-    console.log(1)
     event.preventDefault();
 
     const form = event.target;
@@ -23,8 +23,6 @@ export function handleSignIn(event) {
         console.error('Ошибка валидации');
         return;
     }
-
-    console.log(email.value, ' ', password.value);
 
     // Если валидация успешна, выполняем запрос
     fetch(backurl + 'login', {
@@ -40,12 +38,8 @@ export function handleSignIn(event) {
     })
         .then(async response => {
             if (response.ok) {
-                console.log('Регистрация прошла успешно');
                 form.reset();
                 form.removeEventListener('submit', handleSignUp);
-
-                // Переходим на страницу авторизации без перезагрузки
-                Router.navigate('/');
             }
 
             if (response.status === 401) {
@@ -64,13 +58,19 @@ export function handleSignIn(event) {
             return response.text().then(text => text ? JSON.parse(text) : {});
         })
         .then(data => {
-            if (data) {
+            if (!data) {
                 console.error('Ошибка входа:', data);
                 addGlobalError(data); // Выводим сообщение об ошибке
             } else {
-                console.log('Успешный вход в систему');
                 form.reset();
                 form.removeEventListener('submit', handleSignIn);
+
+                setCookie('user', {city: 'Москва', name: data.username}, COOKIEEXPIRATION);
+
+                signInUpdate(data.username);
+
+                // Переходим на страницу авторизации без перезагрузки
+                Router.navigate('/');
             }
         })
         .catch(error => {
@@ -80,11 +80,10 @@ export function handleSignIn(event) {
 }
 
 export function handleSignUp(event) {
-    console.log(222);
     event.preventDefault(); // Предотвращаем отправку формы
 
     const form = event.target;
-    const username = form.querySelector('[name="username"]');
+    let username = form.querySelector('[name="username"]');
     const email = form.querySelector('[name="email"]');
     const password = form.querySelector('[name="password"]');
     const password_repeat = form.querySelector('[name="password_repeat"]');
@@ -121,8 +120,18 @@ export function handleSignUp(event) {
                 form.reset();
                 form.removeEventListener('submit', handleSignUp);
 
-                // Переходим на страницу авторизации без перезагрузки
-                Router.navigate('/');
+                response.json().then((data) => {
+                        let usernames =  data.username;
+
+                        setCookie('user', {city: 'Москва', name: usernames}, COOKIEEXPIRATION);
+
+                        signInUpdate(usernames);
+
+                        // Переходим на страницу авторизации без перезагрузки
+                        Router.navigate('/');
+                    }).catch((err) => {
+                        console.log(err);
+                    })
             } else {
                 const err = await response.json()
                 addGlobalError(err.error_message)

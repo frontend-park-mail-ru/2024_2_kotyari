@@ -15,14 +15,14 @@
             <div class="icon">
                 <span class="material-icons">account_circle</span>
                 {{#if name}}
-                    <span class="icon-label-hidden catalog-link">{{name}}</span>
-                    <div class="icon-dropdown">
+                    <span class="icon-label-hidden catalog-link" id="name">{{name}}</span>
+                    <div class="icon-dropdown" id="avatar">
                         <a href="#" router="stability-active" class="catalog-link">Личный кабинет</a>
                         <a href="/logout" router="stability-active" class="catalog-link">Выход</a>
                     </div>
                 {{else}}
-                    <span class="icon-label-hidden catalog-link" >Аватар</span>
-                    <div class="icon-dropdown">
+                    <span class="icon-label-hidden catalog-link" id="name">Аватар</span>
+                    <div class="icon-dropdown" id="avatar">
                         <a href="/login" router="stability-active" class="catalog-link">Вход</a>
                         <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>
                     </div>

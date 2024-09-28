@@ -5,20 +5,7 @@ import {soon} from "../../scripts/components/custom-messages/soon/soon.js";
 import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
 import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
 import {handleSignIn, handleSignUp} from "../client/auth/auth.js";
-
-/**
- * @typedef {Object} User
- * @property {string} name - Имя пользователя.
- * @property {string} city - Город пользователя.
- */
-
-/**
- * Текущий пользователь.
- * @type {User}
- */
-export let user = {
-    city: 'Москва'
-};
+import {getCookie} from "../cookie/cookie.js";
 
 /**
  * Собираемые для переработки пути.
@@ -66,7 +53,7 @@ const REGEX = {
 };
 
 // обработчик нажатий на ссылки
-const handler = event =>  {
+export const handler = event =>  {
     let url = new URL(event.currentTarget.getAttribute(urlAttribute), window.location.origin);
 
     Router.dispatch(url.pathname);
@@ -164,8 +151,6 @@ export const Router = {
 
         removeAllHandlers(); // Удаляем все события перед рендером новой страницы
 
-        console.log(1)
-
         return mainPart().then(() => {
             let anchors = document.querySelectorAll(`[router=${CLICKCLASSESES.overrideable}]`);
             for (let anchor of anchors) {
@@ -238,11 +223,19 @@ export const Router = {
     },
 
     logout: function () {
+        if (getCookie('user') === null) {
+            Router.navigate('/');
+            return;  // Прерываем выполнение, чтобы не продолжать загружать страницу logout
+        }
         this.navigate(ROUTES.LOGOUT);  // Изменяем URL
         return this.body(() =>  handleLogout());
     },
 
     login: function () {
+        if (getCookie('user') !== null) {
+            Router.navigate('/');  // Перенаправляем на главную страницу
+            return;  // Прерываем выполнение, чтобы не продолжать загружать страницу login
+        }
         this.navigate(ROUTES.LOGIN);  // Изменяем URL
 
         return this.body(() => buildAuthMenu(menuSignIn))
@@ -255,6 +248,10 @@ export const Router = {
     },
 
     signup: function () {
+        if (getCookie('user') !== null) {
+            Router.navigate('/catalog');
+            return;  // Прерываем выполнение, чтобы не продолжать загружать страницу signup
+        }
         this.navigate(ROUTES.SIGNUP);  // Изменяем URL
         return this.body(() => this.body(() => buildAuthMenu(menuSignUp)))
             .then(() => {
@@ -272,12 +269,27 @@ export const Router = {
     }
 };
 
-// Инициализация страницы после загрузки тела
+// обработчик нажатий на ссылки
+export const handlerLogout = event =>  {
+    let url = new URL('/logout', window.location.origin);
+
+    Router.dispatch(url.pathname);
+
+    event.preventDefault();
+}
+
+let user = getCookie('user');
+if (user === null) {
+    user = {
+        city: 'Москва'
+    }
+}
+
 buildBody(user).then(() => {
     let anchors = document.querySelectorAll(`[router=${CLICKCLASSESES.stability}]`);
     for (let anchor of anchors) anchor.onclick = handler;
 
-    // инициализируем роутер
+    // Инициализируем роутер
     Router.init();
 
     if (Object.values(ROUTES).includes(window.location.pathname)) {
