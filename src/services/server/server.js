@@ -16,9 +16,16 @@ const imgPath = path.join(__dirname, '../../assets');
 app.use(express.static(publicPath));
 app.use('/src/css', express.static(cssPath));
 
-// Универсальный обработчик маршрутов для скриптов
+/**
+ * Универсальный обработчик маршрутов для скриптов.
+ * Отправляет запрашиваемые файлы скриптов из папки scripts.
+ * Если файл не найден, возвращает 404 ошибку.
+ *
+ * @param {Object} req - Объект запроса
+ * @param {Object} res - Объект ответа
+ */
 app.get('/src/scripts/*', (req, res) => {
-    const filePath = path.join(scriptsPath, req.params[0]); // динамически вычисляем путь к файлу
+    const filePath = path.join(scriptsPath, req.params[0]); // Динамически вычисляем путь к файлу
     res.sendFile(filePath, (err) => {
         if (err) {
             res.status(404).send('<h1>error Not Found</h1>');
@@ -26,9 +33,16 @@ app.get('/src/scripts/*', (req, res) => {
     });
 });
 
-// Универсальный обработчик маршрутов для картинок
+/**
+ * Универсальный обработчик маршрутов для изображений.
+ * Отправляет запрашиваемые файлы изображений из папки assets.
+ * Если файл не найден, возвращает 404 ошибку.
+ *
+ * @param {Object} req - Объект запроса
+ * @param {Object} res - Объект ответа
+ */
 app.get('/src/assets/*', (req, res) => {
-    const filePath = path.join(imgPath, req.params[0]); // динамически вычисляем путь к файлу
+    const filePath = path.join(imgPath, req.params[0]); // Динамически вычисляем путь к файлу
     res.sendFile(filePath, (err) => {
         if (err) {
             res.status(404).send('<h1>error Not Found</h1>');
@@ -36,16 +50,30 @@ app.get('/src/assets/*', (req, res) => {
     });
 });
 
-// Маршрут для главной страницы
+/**
+ * Маршрут для главной страницы.
+ * Отправляет файл index.html из папки public.
+ *
+ * @param {Object} req - Объект запроса
+ * @param {Object} res - Объект ответа
+ */
 app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-// Добавляем обработчик, который перехватывает любые запросы, кроме статических файлов
+/**
+ * Обработчик для перехвата любых запросов, кроме статических файлов.
+ * Если в запросе нет расширения, отправляет файл index.html.
+ * Если запрашивается определённый файл, возвращает его.
+ * В противном случае возвращает 404 ошибку.
+ *
+ * @param {Object} req - Объект запроса
+ * @param {Object} res - Объект ответа
+ */
 app.get('/*', (req, res) => {
     const extension = path.extname(req.url);
 
-    // Проверяем наличие расширения в URL, если есть — это файл, и обрабатываем его как обычный запрос
+    // Проверяем наличие расширения в URL
     if (!extension) {
         // Если это не файл (нет расширения), отправляем index.html
         res.sendFile(path.join(publicPath, 'index.html'));
@@ -64,13 +92,17 @@ app.get('/*', (req, res) => {
                 res.sendFile(path.join(cookiePath, '../client/auth/auth.js'));
                 break;
             default:
-                // Если это файл, возвращаем error (если файл не найден)
+                // Возвращаем 404 ошибку, если файл не найден
                 res.status(404).send('<h1>error Not Found</h1>');
         }
     }
 });
 
-// Запуск сервера на указанном порту
+/**
+ * Запуск сервера на указанном порту.
+ *
+ * @param {number} PORT - Порт, на котором будет запущен сервер
+ */
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

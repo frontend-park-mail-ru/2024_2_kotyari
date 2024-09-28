@@ -1,14 +1,9 @@
-import {
-    validateUsername,
-    validatePassword,
-    validateEmail,
-    validatePasswordLogin
-} from "../../../scripts/components/auth-menu/auth.js";
-import {backurl} from "../../router/settings.js";
-import {Router} from "../../router/router.js";
-import {COOKIEEXPIRATION, setCookie} from "../../cookie/cookie.js";
-import {signInUpdate} from "../../../scripts/layouts/header/header.js";
-
+/**
+ * Обработчик для входа в систему (Sign In).
+ * Выполняет валидацию полей формы и отправляет запрос на сервер для входа.
+ *
+ * @param {Event} event - Событие отправки формы.
+ */
 export function handleSignIn(event) {
     event.preventDefault();
 
@@ -24,7 +19,6 @@ export function handleSignIn(event) {
         return;
     }
 
-    // Если валидация успешна, выполняем запрос
     fetch(backurl + 'login', {
         method: 'POST',
         body: JSON.stringify({
@@ -44,9 +38,6 @@ export function handleSignIn(event) {
 
             if (response.status === 401) {
                 throw new Error('Пользователя не существует');
-                // Если статус 401, перенаправляем на страницу регистрации
-                // window.location.href = '/signup';
-                // return;
             }
 
             if (!response.ok) {
@@ -54,13 +45,12 @@ export function handleSignIn(event) {
                 throw new Error(errorText || 'Произошла ошибка на сервере.');
             }
 
-            // Проверяем, если тело пустое, не пытаемся его парсить
             return response.text().then(text => text ? JSON.parse(text) : {});
         })
         .then(data => {
             if (!data) {
                 console.error('Ошибка входа:', data);
-                addGlobalError(data); // Выводим сообщение об ошибке
+                addGlobalError(data);
             } else {
                 form.reset();
                 form.removeEventListener('submit', handleSignIn);
@@ -69,7 +59,6 @@ export function handleSignIn(event) {
 
                 signInUpdate(data.username);
 
-                // Переходим на страницу авторизации без перезагрузки
                 Router.navigate('/');
             }
         })
@@ -79,8 +68,14 @@ export function handleSignIn(event) {
         });
 }
 
+/**
+ * Обработчик для регистрации пользователя (Sign Up).
+ * Выполняет валидацию полей формы и отправляет запрос на сервер для регистрации.
+ *
+ * @param {Event} event - Событие отправки формы.
+ */
 export function handleSignUp(event) {
-    event.preventDefault(); // Предотвращаем отправку формы
+    event.preventDefault();
 
     const form = event.target;
     let username = form.querySelector('[name="username"]');
@@ -90,7 +85,6 @@ export function handleSignUp(event) {
 
     const errorMsg = document.getElementById('errors');
 
-    // Валидация полей
     const isUsernameValid = validateUsername(username);
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password, password_repeat);
@@ -100,7 +94,6 @@ export function handleSignUp(event) {
         return;
     }
 
-    // Если валидация успешна, выполняем запрос
     fetch(backurl + 'signup', {
         method: 'POST',
         body: JSON.stringify({
@@ -121,20 +114,19 @@ export function handleSignUp(event) {
                 form.removeEventListener('submit', handleSignUp);
 
                 response.json().then((data) => {
-                        let usernames =  data.username;
+                    let usernames =  data.username;
 
-                        setCookie('user', {city: 'Москва', name: usernames}, COOKIEEXPIRATION);
+                    setCookie('user', {city: 'Москва', name: usernames}, COOKIEEXPIRATION);
 
-                        signInUpdate(usernames);
+                    signInUpdate(usernames);
 
-                        // Переходим на страницу авторизации без перезагрузки
-                        Router.navigate('/');
-                    }).catch((err) => {
-                        console.log(err);
-                    })
+                    Router.navigate('/');
+                }).catch((err) => {
+                    console.log(err);
+                });
             } else {
-                const err = await response.json()
-                addGlobalError(err.error_message)
+                const err = await response.json();
+                addGlobalError(err.error_message);
                 console.error('Ошибка регистрации:', response.json());
             }
         })
@@ -144,28 +136,32 @@ export function handleSignUp(event) {
         });
 }
 
-
+/**
+ * Очищает все сообщения об ошибках на странице.
+ */
 function clearErrors() {
-    // Скрыть глобальные ошибки
     const globalError = document.getElementById('global_error');
     globalError.style.display = 'none';
     globalError.querySelector('#global_error_message').innerText = '';
 
-    // Очистить ошибки для каждого поля
     document.querySelectorAll('.errors__feedback').forEach(function (element) {
         element.innerText = '';
     });
 }
 
+/**
+ * Отображает ошибки на форме.
+ *
+ * @param {Object} errors - Объект с ошибками для каждого поля формы.
+ * @param {string} [errors.global] - Сообщение о глобальной ошибке.
+ */
 function displayErrors(errors) {
-    // Если есть глобальная ошибка
     if (errors['global']) {
         const globalError = document.getElementById('global_error');
         globalError.style.display = 'block';
         globalError.querySelector('#global_error_message').innerText = errors['global'];
     }
 
-    // Показываем ошибки для каждого поля
     for (let fieldId in errors) {
         if (fieldId !== 'global') {
             const errorElement = document.getElementById(`${fieldId}_error`);
@@ -177,28 +173,29 @@ function displayErrors(errors) {
 }
 
 /**
- * Функция для добавления глобальной ошибки
- * @param {string} message - Сообщение об ошибке
+ * Добавляет глобальную ошибку на страницу.
+ *
+ * @param {string} message - Текст сообщения об ошибке.
  */
 function addGlobalError(message) {
     const globalError = document.getElementById('global_error');
     const globalErrorMessage = document.getElementById('global_error_message');
 
     if (globalError && globalErrorMessage) {
-        globalErrorMessage.innerText = message; // Устанавливаем текст ошибки
-        globalError.style.display = 'block'; // Делаем блок с ошибкой видимым
+        globalErrorMessage.innerText = message;
+        globalError.style.display = 'block';
     }
 }
 
 /**
- * Функция для очистки глобальных ошибок
+ * Очищает глобальное сообщение об ошибке на странице.
  */
 function clearGlobalError() {
     const globalError = document.getElementById('global_error');
     const globalErrorMessage = document.getElementById('global_error_message');
 
     if (globalError && globalErrorMessage) {
-        globalErrorMessage.innerText = ''; // Очищаем текст ошибки
-        globalError.style.display = 'none'; // Скрываем блок с ошибкой
+        globalErrorMessage.innerText = '';
+        globalError.style.display = 'none';
     }
 }
