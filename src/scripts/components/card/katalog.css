@@ -158,3 +158,49 @@ body {
 .buy-button:focus, .buy-button:hover {
     transform: none;
 }
+
+/* Центрирование и стили для сообщения ожидания */
+.center-container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+/* Оформление текста */
+h1, p {
+    color: oklch(0.49 0.25 299.6);
+}
+
+/* Центрирование и стили для сообщения ожидания */
+.center-container {
+    text-align: center;
+    margin-top: 20%;
+
+}
+
+/* Оформление текста */
+h1, p {
+    color: oklch(0.49 0.25 299.6);
+}
+
+/* Убираем скачки, оставляем базовые стили текста */
+.loading-text {
+    font-size: 16px;
+    color: oklch(0.49 0.25 299.6);
+    margin: 10px 0;
+}
+
+/* Спиннер для ожидания */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid oklch(0.49 0.25 299.6);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,6 +1,12 @@
 <link rel="stylesheet" href="/src/scripts/components/card/katalog.css">
 
-<div class="catalog">
+<div id="loading-placeholder" class="center-container">
+    <div class="spinner"></div>
+    <h1 class="loading-text">Скоро</h1>
+    <p class="loading-text">Товары будут добавлены позже.</p>
+</div>
+
+<div class="catalog" id="cards">
     {{#each products}}
         <div class="card" href="{{url}}" router="changed-active">
             <div class="card-image">
