@@ -1,7 +1,21 @@
 import {templatize} from "../../constprograms/shablon/shablon.js";
 import {errors} from "../../errors/errors.js";
 
-
+/**
+ * Создает и отображает модальное окно с заданным контентом.
+ *
+ * Эта функция генерирует модальное окно, используя предоставленный шаблон и данные.
+ * Если имя пользователя пустое, функция завершает выполнение.
+ * После рендеринга модального окна устанавливается контроллер для управления его открытием и закрытием.
+ *
+ * @param {Object} user - Объект пользователя.
+ * @param {string} triggerElement - Идентификатор элемента, который открывает модальное окно при клике.
+ * @param {string} template - Путь к шаблону модального окна.
+ * @param {string} rootId - Идентификатор корневого элемента для вставки модального окна.
+ * @param {string} modalID - Идентификатор модального окна.
+ * @param {Object} data - Данные для передачи в шаблон.
+ * @returns {Promise|undefined} Промис, который разрешается после успешного отображения модального окна, или undefined, если имя пользователя пустое.
+ */
 export function buildModalWithContent(user, triggerElement, template, rootId, modalID, data) {
     if (user.name === "") {
         return;
