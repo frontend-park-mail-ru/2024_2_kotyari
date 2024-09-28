@@ -21,8 +21,7 @@ input {
 }
 
 input:focus {
-    border-color: oklch(0.49 0.25 299.6);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Подсвечиваем инпут при фокусе */
+    outline: none;
 }
 
 button[type="submit"] {
@@ -79,7 +78,7 @@ input.invalid__input, textarea.invalid__input {
     position: relative;
     background-color: oklch(0.95 0 0);
     max-width: 60%;
-    margin: 3% auto 10% 3%;
+    margin: 3% auto 10%;
     color: #000;
     border-radius: 16px;
     padding: 30px 60px 30px;

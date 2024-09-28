@@ -3,8 +3,7 @@ import {handler, Router} from "../../../services/router/router.js";
 export function logoutUpdate() {
     document.getElementById('avatar').innerHTML = `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
                         <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>`
-
-
+    document.getElementById('name').innerHTML = `<span class="icon-label-hidden catalog-link" id="name">Аватар</span>`
 
     // Переходим на страницу авторизации без перезагрузки
     Router.navigate('/');

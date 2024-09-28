@@ -1,13 +1,14 @@
 import {templatize} from "../../constprograms/shablon/shablon.js";
 import {backurl} from "../../../services/router/settings.js";
 import {errors} from "../../errors/errors.js";
+import {Router} from "../../../services/router/router.js";
 
 function cardSettings (data) {
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
             const link = card.getAttribute('data-link');
             if (link) {
-                window.location.href = link;
+                Router.navigate(link);
             }
         });
     });
@@ -33,7 +34,6 @@ async function getCards() {
     }
 
     const data = Object.values(await response.json())
-
     return templatize(document.getElementById('main'), '/src/scripts/components/card/card.hbs', {products: data}).then(() => {
         cardSettings(data);
     });

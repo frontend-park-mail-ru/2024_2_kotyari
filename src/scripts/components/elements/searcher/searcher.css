@@ -6,6 +6,10 @@
     border-radius: 5px 0 0 5px;
 }
 
+.search-input:focus {
+    outline: none;
+}
+
 .search-button {
     display: flex;
     align-items: center;

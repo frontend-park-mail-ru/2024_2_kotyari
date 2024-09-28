@@ -1,18 +1,15 @@
 export function validateEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    let isValid = true;
     const errorElement = document.getElementById(email.dataset.errorId);
 
     removeInputError(email, errorElement);
 
     if (!emailRegex.test(email.value)) {
         addInputError(email, errorElement, 'Неверный формат почты.')
-        isValid = false;
-    } else {
-        removeInputError(email, errorElement);
+        return false;
     }
 
-    return isValid;
+    return true;
 }
 
 function removeInputError(element, errorElement) {

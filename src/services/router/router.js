@@ -65,16 +65,10 @@ export const handler = event =>  {
 const removeAllHandlers = () => {
     let anchors = document.querySelectorAll(CLICKCLASSESES.overrideable);
 
-    for (let anchor of anchors) {
-        anchor.onclick = null;  // Удаляем обработчик
-    }
+    anchors.forEach((anchor) => {
+        anchor.onclick = null;
+    })
 };
-
-// Функция для пустых страниц
-function clearPage() {
-    document.getElementById('main').innerHTML = '<h2>Пустая страничка :)</h2>';
-    return Promise.resolve();
-}
 
 // Класс Router для маршрутизации на клиенте
 export const Router = {
