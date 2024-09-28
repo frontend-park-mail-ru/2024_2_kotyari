@@ -88,6 +88,9 @@ export const Router = {
 
     /**
      * Инициализация маршрутов.
+     *
+     * Эта функция создает массив маршрутов, который связывает паттерны URL с соответствующими методами обработчика.
+     * Также настраивает обработчик события изменения состояния истории для навигации назад и вперед.
      */
     init: function() {
         this._routes = [];
@@ -105,6 +108,7 @@ export const Router = {
             this.dispatch(path);  // Отправляем маршрут на обработку
         };
     },
+
 
     /**
      * Обработка маршрута по пути.
@@ -216,21 +220,36 @@ export const Router = {
         return this.body(() => soon());
     },
 
+    /**
+     * Метод для обработки выхода пользователя.
+     * Если пользователь не авторизован, перенаправляет на главную страницу.
+     * Если авторизован, изменяет URL на страницу выхода и выполняет логику выхода.
+     *
+     * @returns {Promise<void>} - Возвращает Promise, который разрешается после выполнения выхода.
+     */
     logout: function () {
         if (getCookie('user') === null) {
             Router.navigate('/');
-            return;  // Прерываем выполнение, чтобы не продолжать загружать страницу logout
+            return;  // Прерываем выполнение, если пользователь не авторизован
         }
-        this.navigate(ROUTES.LOGOUT);  // Изменяем URL
-        return this.body(() =>  handleLogout());
+        this.navigate(ROUTES.LOGOUT);  // Изменяем URL на страницу выхода
+        return this.body(() => handleLogout());  // Выполняем выход пользователя
     },
 
+
+    /**
+     * Метод для обработки входа пользователя.
+     * Если пользователь уже авторизован, перенаправляет на главную страницу.
+     * Если пользователь не авторизован, изменяет URL на страницу входа и загружает форму для авторизации.
+     *
+     * @returns {Promise<void>} - Возвращает Promise, который разрешается после загрузки формы входа.
+     */
     login: function () {
         if (getCookie('user') !== null) {
             Router.navigate('/');  // Перенаправляем на главную страницу
-            return;  // Прерываем выполнение, чтобы не продолжать загружать страницу login
+            return;  // Прерываем выполнение, если пользователь уже авторизован
         }
-        this.navigate(ROUTES.LOGIN);  // Изменяем URL
+        this.navigate(ROUTES.LOGIN);  // Изменяем URL на страницу входа
 
         return this.body(() => buildAuthMenu(menuSignIn))
             .then(() => {
@@ -241,12 +260,21 @@ export const Router = {
             });
     },
 
+
+    /**
+     * Метод для обработки регистрации пользователя.
+     * Если пользователь уже авторизован, перенаправляет на страницу каталога.
+     * Если пользователь не авторизован, изменяет URL на страницу регистрации и загружает форму для регистрации.
+     *
+     * @returns {Promise<void>} - Возвращает Promise, который разрешается после загрузки формы регистрации.
+     */
     signup: function () {
         if (getCookie('user') !== null) {
-            Router.navigate('/catalog');
-            return;  // Прерываем выполнение, чтобы не продолжать загружать страницу signup
+            Router.navigate('/catalog'); // Перенаправляем на страницу каталога
+            return; // Прерываем выполнение, если пользователь уже авторизован
         }
-        this.navigate(ROUTES.SIGNUP);  // Изменяем URL
+        this.navigate(ROUTES.SIGNUP); // Изменяем URL на страницу регистрации
+
         return this.body(() => this.body(() => buildAuthMenu(menuSignUp)))
             .then(() => {
                 document.getElementById(menuSignUp.formId).addEventListener('submit', handleSignUp);
@@ -255,22 +283,35 @@ export const Router = {
                 err => {
                     console.log(err);
                 }
-            )
+            );
     },
 
+    /**
+     * Метод для обработки ошибок и отображения страницы ошибки.
+     *
+     * @param {string} err - Сообщение об ошибке, которое будет передано для отображения на странице ошибки.
+     * @returns {Promise<void>} - Возвращает Promise, который разрешается после загрузки страницы ошибки.
+     */
     error: function (err) {
         return this.body(() => errorPage(err));
-    }
+    },
+
 };
 
-// обработчик нажатий на ссылки
+/**
+ * Обработчик клика на ссылку выхода пользователя.
+ * Выполняет перенаправление на страницу выхода и предотвращает стандартное поведение ссылки.
+ *
+ * @param {Event} event - Событие клика на ссылку.
+ */
 export const handlerLogout = event =>  {
     let url = new URL('/logout', window.location.origin);
 
     Router.dispatch(url.pathname);
 
     event.preventDefault();
-}
+};
+
 
 let user = getCookie('user');
 if (user === null) {
@@ -279,6 +320,12 @@ if (user === null) {
     }
 }
 
+/**
+ * Функция для инициализации тела страницы и маршрутизатора.
+ *
+ * @param {Object} user - Объект пользователя, содержащий информацию о пользователе.
+ * @returns {Promise<void>} - Возвращает Promise, который разрешается после завершения построения тела страницы.
+ */
 buildBody(user).then(() => {
     let anchors = document.querySelectorAll(`[router=${CLICKCLASSESES.stability}]`);
     for (let anchor of anchors) anchor.onclick = handler;
@@ -292,3 +339,4 @@ buildBody(user).then(() => {
         Router.dispatch('/error/404');
     }
 });
+
