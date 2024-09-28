@@ -1,6 +1,6 @@
 export const menuSignUp = {
     id: "modal__signup",
-    logo: 'ОКСИК',
+    logo: 'Оксик',
     title: 'Регистрация',
     formId: 'register__form',
     fields: [
@@ -47,7 +47,7 @@ export const menuSignUp = {
 
 export const menuSignIn = {
     id: "modal__login",
-    logo: 'ОКСИК',
+    logo: 'Оксик',
     title: 'Вход',
     formId: 'login__form',
     fields: [

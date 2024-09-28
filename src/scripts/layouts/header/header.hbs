@@ -9,36 +9,36 @@
     <!-- Вторая строка -->
     <div class="header-bottom">
         <div class="logo" id="logo" href="/catalog" router="stability-active">Оксик</div>
-        <button class="catalog-button" title="Каталог" href="/catalog" router="stability-active">&#8801;<span>Каталог</span></button>
+        <button class="catalog-link catalog-button" title="Каталог" href="/catalog" router="stability-active">&#8801;<span>Каталог</span></button>
         {{> searcher }}
         <div class="icons">
             <div class="icon">
                 <span class="material-icons">account_circle</span>
                 {{#if name}}
-                    <span class="icon-label-hidden">{{name}}</span>
+                    <span class="icon-label-hidden catalog-link">{{name}}</span>
                     <div class="icon-dropdown">
-                        <a href="#" router="stability-active">Личный кабинет</a>
-                        <a href="/logout" router="stability-active">Выход</a>
+                        <a href="#" router="stability-active" class="catalog-link">Личный кабинет</a>
+                        <a href="/logout" router="stability-active" class="catalog-link">Выход</a>
                     </div>
                 {{else}}
-                    <span class="icon-label-hidden">Аватар</span>
+                    <span class="icon-label-hidden catalog-link" >Аватар</span>
                     <div class="icon-dropdown">
-                        <a href="/login" router="stability-active">Вход</a>
-                        <a href="/signup" router="stability-active">Регистрация</a>
+                        <a href="/login" router="stability-active" class="catalog-link">Вход</a>
+                        <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>
                     </div>
                 {{/if}}
             </div>
             <div router="stability-active" class="icon" href="/basket" title="Корзина">
                 <span class="material-icons">shopping_cart</span>
-                <span class="icon-label">Корзина</span>
+                <span class="icon-label catalog-link">Корзина</span>
             </div>
             <div router="stability-active" class="icon" href="/favorite" title="Избранное">
                 <span class="material-icons">favorite_border</span>
-                <span class="icon-label">Избранное</span>
+                <span class="icon-label catalog-link">Избранное</span>
             </div>
             <div router="stability-active" class="icon" href="/records" title="Заказы">
                 <span class="material-icons">receipt_long</span>
-                <span class="icon-label">Заказы</span>
+                <span class="icon-label catalog-link">Заказы</span>
             </div>
         </div>
     </div>
