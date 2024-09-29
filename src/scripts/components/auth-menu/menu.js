@@ -8,7 +8,7 @@ const tmpURL = 'src/scripts/components/auth-menu/menu.hbs';
  * @param {Event} event - Событие клика по иконке для переключения пароля.
  */
 function togglePassword(event) {
-    const icon = event.target;
+    const icon = event.currentTarget;
     const fieldId = icon.getAttribute('data-field-id');
     const passwordInput = document.getElementById(fieldId);
 

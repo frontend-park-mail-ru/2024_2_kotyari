@@ -1,7 +1,8 @@
+@import '/src/css/parametrs/parametrs.css';
+
 header {
     background-color: oklch(0.95 0 0);
     padding-bottom: 15px;
-
 }
 
 .catalog-link{
@@ -89,10 +90,8 @@ header {
 }
 
 .catalog-button:hover {
-    color: oklab(0.93 0.03 -0.04);
-    background-color: oklch(0.49 0.25 299.6);
-    border-radius: 5px;
-    padding: 5px;
+    color: oklch(0.35 0.16 303.3); /* Более темный оттенок для текста */
+    background-color: #ffffff00; /* Оставляем прозрачный фон */
 }
 
 .icons {
@@ -109,8 +108,11 @@ header {
 }
 
 .icon .material-icons {
-    font-size: 30px;
     color: oklch(0.49 0.25 299.6);
+}
+
+.icon:hover .material-icons {
+    color: oklch(0.35 0.16 303.3); /* Затемняем цвет иконки */
 }
 
 #name {
@@ -118,12 +120,9 @@ header {
     width: 50px; /* Максимальная ширина для имени */
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    visibility: visible;
     transition: opacity 0.3s ease;
     opacity: 1;
     text-align: center;
-    margin-top: 0;
 }
 
 .icon-label, .icon-label-hidden {
@@ -145,18 +144,7 @@ header {
 }
 
 .icon:hover::after {
-    content: attr(alt);
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: oklch(0.49 0.25 299.6);
-    color: oklab(0.93 0.03 -0.04);
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 12px;
-    visibility: visible;
-    transition: all 0.3s ease;
+    content: none;
 }
 
 .icon-dropdown {
@@ -234,7 +222,6 @@ header {
     content: attr(data-fullname); /* Используем атрибут для полного имени */
     position: absolute;
     white-space: nowrap;
-    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
     background-color: oklch(0.49 0.25 299.6);
@@ -274,7 +261,7 @@ txt {
     }
 }
 
-@media (max-width: 783px) {
+@media (max-width: 840px) {
     .header-bottom {
         flex-direction: column;
         align-items: stretch;
@@ -342,7 +329,7 @@ txt {
     }
 
     .icon-dropdown::before {
-        left: +15px;
+        left: +19px;
         transform: translateX(0);
     }
 }

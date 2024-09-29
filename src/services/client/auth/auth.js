@@ -32,6 +32,7 @@ export function handleSignIn(event) {
 
     fetch(backurl + 'login', {
         method: 'POST',
+        credentials: 'include',
         body: JSON.stringify({
             email: email.value,
             password: password.value
@@ -107,6 +108,7 @@ export function handleSignUp(event) {
 
     fetch(backurl + 'signup', {
         method: 'POST',
+        credentials: 'include',
         body: JSON.stringify({
             username: username.value,
             email: email.value,
@@ -235,7 +237,7 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
     })
         .then(response => {
             if (response.ok) {
-                this.navigate(routeTo)
+                Router.navigate(routeTo)
                 return renderFunction();
             } else if (response.status === 401) {
                 Router.navigate(redirectLink);

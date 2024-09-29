@@ -11,12 +11,15 @@
         <span class="errors__feedback" id="error"></span>
         {{#each fields as |field|}}
             <div class="input_container">
-                <label for="{{field.id}}">{{field.label}}:</label>
+                <label for="{{field.id}}">{{field.label}}</label>
                 <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" placeholder="{{placeholder}}"
                        data-error-id="{{field.error_id}}" />
                 {{#if (eq field.type 'password')}}
                     <span class="toggle-password" data-field-id="{{field.id}}">
-                        &#128065;
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#8A2BE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye" width="24" height="24">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
                     </span>
                 {{/if}}
             </div>

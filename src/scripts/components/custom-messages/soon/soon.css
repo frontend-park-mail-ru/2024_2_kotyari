@@ -1,3 +1,6 @@
+@import '/src/css/parametrs/parametrs.css';
+@import '/src/css/parametrs/animations.css';
+
 .center-container {
     text-align: center;
     margin-top: 20%;
@@ -8,18 +11,6 @@ h1, p {
 }
 
 .bounce-text {
-    animation: bounce 2s ease-in;
+    animation: bounce var(--long-time) ease-in;
     will-change: transform;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
 }

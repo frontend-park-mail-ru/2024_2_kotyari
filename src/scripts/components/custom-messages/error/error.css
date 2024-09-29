@@ -1,24 +1,16 @@
+@import '/src/css/parametrs/parametrs.css';
+@import '/src/css/parametrs/animations.css';
+
 .center-container {
     text-align: center;
     margin-top: 20%;
 }
 
 h1, p {
-    color: oklch(0.49 0.25 299.6);
+    color: var(--text-another-color);
 }
 
 .fade-in-text {
     opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    animation: fadeIn var(--one-time) ease-in forwards;
 }
