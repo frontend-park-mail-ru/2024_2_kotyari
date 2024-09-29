@@ -1,10 +1,12 @@
-import {templatize} from "../../constprograms/shablon/shablon.js";
-import {menuSignUp} from "./menu-config.js";
-import {handleSignUp} from "../../../services/client/auth/auth.js";
+import { templatize } from "../../constprograms/shablon/shablon.js";
 
-const tmpURL = 'src/scripts/components/auth-menu/menu.hbs'
+const tmpURL = 'src/scripts/components/auth-menu/menu.hbs';
 
-// Функция для переключения типа input и состояния иконки
+/**
+ * Функция для переключения типа поля ввода пароля и состояния иконки.
+ *
+ * @param {Event} event - Событие клика по иконке для переключения пароля.
+ */
 function togglePassword(event) {
     const icon = event.target;
     const fieldId = icon.getAttribute('data-field-id');
@@ -24,11 +26,26 @@ function togglePassword(event) {
     }
 }
 
-export async function buildAuthMenu(data){
+/**
+ * Функция для построения меню авторизации с динамическим рендерингом данных
+ * и установкой обработчиков событий для переключения видимости пароля.
+ *
+ * @async
+ * @function
+ * @param {Object} data - Данные для рендеринга шаблона меню авторизации.
+ * @returns {Promise<void>} Возвращает промис, который разрешается после рендеринга и назначения обработчиков событий.
+ *
+ * Пример использования:
+ *
+ * ```js
+ * buildAuthMenu({ userName: 'John Doe', isLoggedIn: true });
+ * ```
+ */
+export async function buildAuthMenu(data) {
     return templatize(document.getElementById('main'), tmpURL, data).then(() => {
         // Назначаем обработчик события для всех иконок с классом 'toggle-password'
         document.querySelectorAll('.toggle-password').forEach(item => {
             item.addEventListener('click', togglePassword);
         });
-    })
+    });
 }
