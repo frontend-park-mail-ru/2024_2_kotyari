@@ -7,11 +7,11 @@
     cursor: pointer;
     display: none;
     top: 20%;
-    left: 50%;
+    left: var(--left-center);
     z-index: var(--card-z-index_on);
     inset: 0;
     background-color: var(--background-color-modal);
-    padding: 30px;
+    padding: var(--big-padding);
     overflow-y: auto;
 }
 
@@ -20,8 +20,8 @@
     top: 5px;
     right: 10px;
     cursor: pointer;
-    font-size: 40px;
-    color: #333;
+    font-size: var(--mega-font-size);
+    color: var(--text-color);
 }
 
 .modal__container {
@@ -30,6 +30,6 @@
     flex-direction: column;
     justify-content: center;
     margin: auto;
-    border-radius: 16px;
-    padding: 30px 60px 60px;
+    border-radius: var(--conteiner-border-radius);
+    padding: var(--m-group-padding);
 }

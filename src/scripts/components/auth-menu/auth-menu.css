@@ -40,16 +40,16 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: oklch(0.41 0.19 301.59); /* Более темный фон при наведении */
-    color: white;
-    border: 2px solid oklch(0.41 0.19 301.59);
+    background-color: var(--background-color-site-gray); /* Более темный фон при наведении */
+    color: var(--text-inv);
+    border: 2px solid var(--background-color-site-gray);
     transform: scale(var(--big-scale));
 }
 
 button[type="submit"]:active {
-    background-color: oklch(0.33 0.15 303.45); /* Самый темный фон при нажатии */
-    color: white;
-    border: 2px solid oklch(0.33 0.15 303.45);
+    background-color: var(--background-color-site-black); /* Самый темный фон при нажатии */
+    color: var(--text-inv);
+    border: 2px solid var(--background-color-site-black);
 }
 
 input.invalid__input, textarea.invalid__input {
@@ -155,7 +155,7 @@ input[type="password"] {
     position: absolute;
     top: 45%;
     left: 0;
-    width: 100%;
+    width: var(--width-max);
     height: 2px;
     background-color: var(--background-color-site);
     transform: rotate(45deg) translateY(-50%); /* Поворачиваем черту на глазике */
@@ -167,7 +167,7 @@ input[type="password"] {
 }
 
 /* Стили для мобильных устройств */
-@media (max-width: 768px) {
+@media (max-width: var(--phone)) {
     .auth_menu_container {
         max-width: var(--proc-max-width-full);
         padding: var(--padding15);

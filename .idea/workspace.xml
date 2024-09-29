@@ -11,9 +11,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/css/parametrs/parametrs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/parametrs/parametrs.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scripts/components/auth-menu/auth-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/auth-menu/auth-menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/custom-messages/soon/soon.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/custom-messages/soon/soon.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scripts/components/modal/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/modal/modal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/body.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/body.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/footer/footer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +91,7 @@
       <workItem from="1727455573125" duration="5352000" />
       <workItem from="1727461121537" duration="13574000" />
       <workItem from="1727498299602" duration="52003000" />
-      <workItem from="1727601753734" duration="29964000" />
+      <workItem from="1727601753734" duration="36304000" />
     </task>
     <task id="LOCAL-00001" summary="[fix] подключен бек и подправлены основные ошибки">
       <option name="closed" value="true" />
@@ -171,7 +173,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727631388497</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="[fix] css поправлен весь (без выноса переменных)">
+      <option name="closed" value="true" />
+      <created>1727633661627</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727633661627</updated>
+    </task>
+    <task id="LOCAL-00012" summary="для сливания">
+      <option name="closed" value="true" />
+      <created>1727634033015</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727634033015</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +206,8 @@
     <MESSAGE value="[fix] Слито старое и новое" />
     <MESSAGE value="[fix] 60% покрытия переменными" />
     <MESSAGE value="[fix] Убранаанимация под иконками :(" />
-    <option name="LAST_COMMIT_MESSAGE" value="[fix] Убранаанимация под иконками :(" />
+    <MESSAGE value="[fix] css поправлен весь (без выноса переменных)" />
+    <MESSAGE value="для сливания" />
+    <option name="LAST_COMMIT_MESSAGE" value="для сливания" />
   </component>
 </project>

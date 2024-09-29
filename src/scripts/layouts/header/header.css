@@ -1,8 +1,28 @@
 @import '/src/css/parametrs/parametrs.css';
 
+/* Закрепляем хедер */
 header {
-    background-color: oklch(0.95 0 0);
-    padding-bottom: 15px;
+    position: fixed;
+    top: var(--zero);
+    left: var(--zero);
+    right: var(--zero);
+    z-index: var(--header-z-index);
+    background-color: var(--header-background);
+    padding-bottom: var(--padding15);
+    width: var(--width-max); /* Чтобы хедер растягивался на всю ширину */
+}
+
+/* Плейсхолдер с динамической высотой */
+.header-placeholder {
+    height: 140px; /* Это значение можно обновить через JS для динамической высоты */
+    width: var(--width-max);
+}
+
+/* Для мобильных устройств или разных экранов можно адаптировать */
+@media (max-width: var(--phone-header)) {
+    .header-placeholder {
+        height: auto; /* Можно указать другую высоту или оставить авто */
+    }
 }
 
 .catalog-link{
@@ -14,16 +34,16 @@ header {
 }
 
 .header-top {
-    padding: 10px;
+    padding: var(--litle-padding);
     text-align: left;
-    font-size: 14px;
+    font-size: var(--font-size_label);
     background-color: inherit;
-    margin-left: 7px;
+    margin-left: var(--litle-margin-left);
     font-weight: bold;
 }
 
 .header-top a {
-    color: oklch(0.49 0.25 299.6);
+    color: var(--text-another-color);
     text-decoration: none;
     font-weight: normal;
     white-space: nowrap;
@@ -49,9 +69,9 @@ header {
 
 .logo {
     flex: 0 0 13%;
-    color: oklch(0.49 0.25 299.6);
-    font-size: 40px;
-    max-font-size: 50px;
+    color: var(--text-another-color);
+    font-size: var(--mega-font-size);
+    max-font-size: var(--max-font-size);
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -64,7 +84,7 @@ header {
 
 .logo-part {
     display: inline-block;
-    transition: all 0.5s ease;
+    transition: all var(--long-time) ease;
 }
 
 .catalog-button {
@@ -72,26 +92,26 @@ header {
     display: flex;
     align-items: center; /* Выравнивание по центру */
     justify-content: center;
-    color: oklch(0.49 0.25 299.6);
-    background-color: #ffffff00;
+    color: var(--text-another-color);
+    background-color: var(--background-color-catalog-button);
     border: none;
-    border-radius: 5px;
-    font-size: 35px;
+    border-radius: var(--button-border-radius);
+    font-size: var(--big-font-size_another);
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    margin-right: 20px;
-    padding: 5px;
+    margin-right: var(--big-margin-right);
+    padding: var(--micro-padding);
 }
 
 .catalog-button span {
-    margin-left: 5px;
-    font-size: 16px;
+    margin-left: var(--micro-margin-left);
+    font-size: var(--loading-text-font-size);
     line-height: 1; /* Выравнивание текста */
 }
 
 .catalog-button:hover {
-    color: oklch(0.35 0.16 303.3); /* Более темный оттенок для текста */
-    background-color: #ffffff00; /* Оставляем прозрачный фон */
+    color: var(--background-color-site-new); /* Более темный оттенок для текста */
+    background-color: var(--background-color-catalog-button); /* Оставляем прозрачный фон */
 }
 
 .icons {
@@ -112,7 +132,7 @@ header {
 }
 
 .icon:hover .material-icons {
-    color: oklch(0.35 0.16 303.3); /* Затемняем цвет иконки */
+    color: var(--background-color-site-new); /* Затемняем цвет иконки */
 }
 
 #name {
@@ -120,15 +140,15 @@ header {
     width: 50px; /* Максимальная ширина для имени */
     white-space: nowrap;
     overflow: hidden;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--litle-time) ease;
     opacity: 1;
     text-align: center;
 }
 
 .icon-label, .icon-label-hidden {
-    font-size: 12px;
+    font-size: var(--min-font-size);
     display: block;
-    margin-top: 5px;
+    margin-top: var(--midle-margin-top);
 }
 
 .icon:hover .icon-label {
@@ -331,5 +351,11 @@ txt {
     .icon-dropdown::before {
         left: +19px;
         transform: translateX(0);
+    }
+
+    /* Плейсхолдер с динамической высотой */
+    .header-placeholder {
+        height: 310px; /* Это значение можно обновить через JS для динамической высоты */
+        width: var(--width-max);
     }
 }

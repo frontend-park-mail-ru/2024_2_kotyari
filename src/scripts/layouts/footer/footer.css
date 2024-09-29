@@ -1,7 +1,9 @@
+@import '/src/css/parametrs/parametrs.css';
+
 .footer {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
-    height: 80px;
+    width: var(--width-max);
+    height: var(--footer-height);
 }
