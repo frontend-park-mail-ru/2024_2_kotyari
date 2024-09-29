@@ -1,3 +1,16 @@
+import {
+    validateEmail,
+    validatePassword,
+    validatePasswordLogin,
+    validateUsername
+} from "../../../scripts/components/auth-menu/auth.js";
+import {backurl} from "../../router/settings.js";
+import {Router} from "../../router/router.js";
+import {signInUpdate} from "../../../scripts/layouts/header/header.js";
+import {setCookie} from "../../cookie/cookie.js";
+import {buildAuthMenu} from "../../../scripts/components/auth-menu/menu.js";
+import {menuSignIn} from "../../../scripts/components/auth-menu/menu-config.js";
+
 /**
  * Обработчик для входа в систему (Sign In).
  * Выполняет валидацию полей формы и отправляет запрос на сервер для входа.
@@ -136,10 +149,11 @@ export function handleSignUp(event) {
         });
 }
 
+
 /**
  * Очищает все сообщения об ошибках на странице.
  */
-function clearErrors() {
+export function clearErrors() {
     const globalError = document.getElementById('global_error');
     globalError.style.display = 'none';
     globalError.querySelector('#global_error_message').innerText = '';
@@ -155,7 +169,7 @@ function clearErrors() {
  * @param {Object} errors - Объект с ошибками для каждого поля формы.
  * @param {string} [errors.global] - Сообщение о глобальной ошибке.
  */
-function displayErrors(errors) {
+export function displayErrors(errors) {
     if (errors['global']) {
         const globalError = document.getElementById('global_error');
         globalError.style.display = 'block';
@@ -177,7 +191,7 @@ function displayErrors(errors) {
  *
  * @param {string} message - Текст сообщения об ошибке.
  */
-function addGlobalError(message) {
+export function addGlobalError(message) {
     const globalError = document.getElementById('global_error');
     const globalErrorMessage = document.getElementById('global_error_message');
 
@@ -190,7 +204,7 @@ function addGlobalError(message) {
 /**
  * Очищает глобальное сообщение об ошибке на странице.
  */
-function clearGlobalError() {
+export function clearGlobalError() {
     const globalError = document.getElementById('global_error');
     const globalErrorMessage = document.getElementById('global_error_message');
 
@@ -198,4 +212,45 @@ function clearGlobalError() {
         globalErrorMessage.innerText = '';
         globalError.style.display = 'none';
     }
+}
+
+
+/**
+ * Выполняет GET-запрос по указанному маршруту и обрабатывает ответ.
+ * Если ответ с кодом 200, рендерит страницу с использованием переданной функции рендера.
+ * Если ответ с кодом 401, перенаправляет на страницу входа.
+ * Логирует любые другие ошибки в консоль.
+ *
+ * @param {string} route - URL-адрес, на который отправляется запрос.
+ * @param redirectLink - URL-адрес для переадресации в случае 401
+ * @param {Function} renderFunction - Функция, которая вызывается для рендеринга страницы при успешном запросе.
+ * @returns {Promise<void>} - Промис, который разрешается, когда запрос обработан.
+ */
+export function fetchAndRender(route, redirectLink, renderFunction) {
+    return fetch(backurl + route, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return renderFunction();
+            } else if (response.status === 401) {
+                console.log('401 Unauthorized: Перенаправляем на страницу входа');
+                addGlobalError('Пожалуйста, войдите в аккаунт, чтобы просмотреть избранное.');
+                Router.navigate(redirectLink);
+                return Promise.resolve();
+            } else {
+                return response.text().then(errorText => {
+                    console.error('Ошибка при получении данных:', errorText || 'Неизвестная ошибка');
+                    addGlobalError(errorText || 'Произошла ошибка на сервере.');
+                });
+            }
+        })
+        .catch(err => {
+            console.error('Ошибка сети или сервера:', err);
+            addGlobalError('Ошибка сети или сервера. Попробуйте позже.');
+        });
 }
