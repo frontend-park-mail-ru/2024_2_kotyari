@@ -31,6 +31,7 @@ export async function handleLogout() {
     try {
         const response = await fetch(backurl + 'logout', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
