@@ -7,7 +7,7 @@ import {
 import {backurl} from "../../router/settings.js";
 import {Router} from "../../router/router.js";
 import {signInUpdate} from "../../../scripts/layouts/header/header.js";
-import {setCookie} from "../../cookie/cookie.js";
+import {setCookie, COOKIEEXPIRATION} from "../../cookie/cookie.js";
 import {buildAuthMenu} from "../../../scripts/components/auth-menu/menu.js";
 import {menuSignIn} from "../../../scripts/components/auth-menu/menu-config.js";
 
@@ -238,19 +238,16 @@ export function fetchAndRender(route, redirectLink, renderFunction) {
             if (response.ok) {
                 return renderFunction();
             } else if (response.status === 401) {
-                console.log('401 Unauthorized: Перенаправляем на страницу входа');
                 addGlobalError('Пожалуйста, войдите в аккаунт, чтобы просмотреть избранное.');
                 Router.navigate(redirectLink);
                 return Promise.resolve();
             } else {
                 return response.text().then(errorText => {
-                    console.error('Ошибка при получении данных:', errorText || 'Неизвестная ошибка');
                     addGlobalError(errorText || 'Произошла ошибка на сервере.');
                 });
             }
         })
         .catch(err => {
-            console.error('Ошибка сети или сервера:', err);
             addGlobalError('Ошибка сети или сервера. Попробуйте позже.');
         });
 }

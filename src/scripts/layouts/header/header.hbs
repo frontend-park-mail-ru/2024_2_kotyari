@@ -9,15 +9,15 @@
     <!-- Вторая строка -->
     <div class="header-bottom">
         <div class="logo" id="logo" href="/catalog" router="stability-active">Оксик</div>
-        <button class="catalog-link catalog-button" title="Каталог" href="/catalog" router="stability-active">&#8801;<span>Каталог</span></button>
+        <button class="catalog-link catalog-button" title="Каталог" href="/catalog" router="stability-active"><txt class="catalog-simbol">&#8801;</txt><span>Каталог</span></button>
         {{> searcher }}
         <div class="icons">
-            <div class="icon">
+            <div class="icon" id="avatar-icon">
                 <span class="material-icons">account_circle</span>
                 {{#if name}}
                     <span class="icon-label-hidden catalog-link" id="name">{{name}}</span>
                     <div class="icon-dropdown" id="avatar">
-                        <a href="/" router="stability-active" class="catalog-link">Личный кабинет</a>
+                        <a href="/account" router="stability-active" class="catalog-link">Личный кабинет</a>
                         <a href="/logout" router="stability-active" class="catalog-link">Выход</a>
                     </div>
                 {{else}}

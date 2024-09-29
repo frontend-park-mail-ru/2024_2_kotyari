@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="326a8acd-13e3-42f4-a151-84c10b13ad36" name="Changes" comment="" />
+    <list default="true" id="326a8acd-13e3-42f4-a151-84c10b13ad36" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/css/parametrs/animations.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/parametrs/parametrs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/parametrs/parametrs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/card/katalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/card/katalog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/client/auth/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/client/auth/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/router/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/router/router.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -33,22 +46,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "javascript.nodejs.core.library.configured.version": "21.2.0",
-    "javascript.nodejs.core.library.typings.version": "22.7.3",
-    "last_opened_file_path": "C:/Users/DimaK/untitled/2024_2_kotyari/src/assets/img/static",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;21.2.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.7.3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DimaK/untitled/2024_2_kotyari/src/assets/img/static&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\DimaK\untitled\2024_2_kotyari\src\assets\img\static" />
@@ -74,7 +87,8 @@
       <updated>1727455572065</updated>
       <workItem from="1727455573125" duration="5352000" />
       <workItem from="1727461121537" duration="13574000" />
-      <workItem from="1727498299602" duration="51660000" />
+      <workItem from="1727498299602" duration="52003000" />
+      <workItem from="1727601753734" duration="7303000" />
     </task>
     <task id="LOCAL-00001" summary="[fix] подключен бек и подправлены основные ошибки">
       <option name="closed" value="true" />
@@ -116,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727573236415</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[fix] Правильные настройки фронта">
+      <option name="closed" value="true" />
+      <created>1727573588881</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727573588881</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,6 +150,7 @@
     <MESSAGE value="[fix] Исправлен" />
     <MESSAGE value="[fix] Добавлен глазик для паролей" />
     <MESSAGE value="Слитие и jsDoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Слитие и jsDoc" />
+    <MESSAGE value="[fix] Правильные настройки фронта" />
+    <option name="LAST_COMMIT_MESSAGE" value="[fix] Правильные настройки фронта" />
   </component>
 </project>

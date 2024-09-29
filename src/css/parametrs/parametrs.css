@@ -8,12 +8,20 @@
     --text-color: #333;
     --old-price-color: #888;
     --discount-color: oklch(0.68 0.24 27.98);
+    --button-text-color: oklch(0.49 0.25 299.6);
+    --spinner-border-color: rgba(0, 0, 0, 0.1);
+    --spinner-top-border-color: oklch(0.49 0.25 299.6);
 
     /* Отступы */
     --gap: 16px;
     --mini-gap: 12px;
+    --one-padding: 1px;
     --padding: 16px;
     --mini-padding: 12px;
+    --button-margin-bottom: 15px;
+    --description-margin-bottom: 10px;
+    --margin-zero: 0;
+    --card-box-shadow: 0 2px 5px;
 
     /* Размеры */
     --card-border-radius: 8px;
@@ -28,11 +36,29 @@
     --mini-description-max-height: 12px;
     --description-expanded-height: 40px; /* Максимум на 2 строки */
     --mini-description-expanded-height: 32px; /* Максимум на 2 строки */
-
-    /* Сеточные параметры */
-    --grid-column-min-width: 220px;
-    --mini-grid-column-min-width: 170px;
+    --button-padding: 10px 15px;
+    --button-border-radius: 5px;
+    --button-font-weight: bold;
+    --card-aspect-ratio: 4 / 5;
 
     /* Текстовые параметры */
+    --font-family: Arial, sans-serif;
+    --price-font-size: 16px;
+    --description-font-size: 12px;
     --min-font-size: 12px;
+    --loading-text-font-size: 16px;
+
+    /* Расположение */
+    --catalog-justify-content: center;
+    --card-justify-content: space-between;
+    --card-allign-items: center;
+    --card-text-align: center;
+    --card-z-index: 1;
+    --before-card-z-index: -1;
+    --before-card-tlrb: -10px;
+
+    /* Анимация */
+    --spinner-size: 40px;
+    --spinner-border-width: 4px;
+    --transition-duration: 0.3s;
 }

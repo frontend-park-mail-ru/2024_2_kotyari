@@ -7,6 +7,7 @@ import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-co
 import {fetchAndRender, handleSignIn, handleSignUp} from "../client/auth/auth.js";
 import {getCookie} from "../cookie/cookie.js";
 import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
+import {AddDropDown} from "../../scripts/layouts/header/header.js";
 
 /**
  * Собираемые для переработки пути.
@@ -24,6 +25,7 @@ const ROUTES = {
     LOGOUT: '/logout',
     LOGIN: '/login',
     SIGNUP: '/signup',
+    PERSONALACCOUNT: '/account',
 };
 
 /**
@@ -95,7 +97,8 @@ export const Router = {
         [ROUTES.LOGOUT]: 'logout',
         [ROUTES.SIGNUP]: 'signup',
         [ROUTES.LOGIN]: 'login',
-        [ROUTES.ERROR]: 'error'
+        [ROUTES.ERROR]: 'error',
+        [ROUTES.PERSONALACCOUNT]: 'personalAccount',
     },
 
     /**
@@ -213,8 +216,6 @@ export const Router = {
     favorites: function () {
         this.navigate(ROUTES.FAVORITE);
 
-        const errAuth = 'Пожалуйста, войдите в аккаунт, чтобы просмотреть избранное.'
-
         return fetchAndRender(ROUTES.FAVORITE, ROUTES.LOGIN, () => this.body(() => soon()));
     },
 
@@ -226,6 +227,17 @@ export const Router = {
         this.navigate(ROUTES.CHANGESITY);  // Изменяем URL
         return this.body(() => soon());
     },
+
+    /**
+     * Страница дичного кабинета.
+     * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
+     */
+    personalAccount: function () {
+        this.navigate(ROUTES.CHANGESITY);  // Изменяем URL
+
+        return fetchAndRender(ROUTES.PERSONALACCOUNT, ROUTES.LOGIN, () => this.body(() => soon()));
+    },
+
 
     /**
      * Страница конкретного продукта.
@@ -357,6 +369,8 @@ if (user === null) {
 buildBody(user).then(() => {
     let anchors = document.querySelectorAll(`[router=${CLICKCLASSESES.stability}]`);
     for (let anchor of anchors) anchor.onclick = handler;
+
+    AddDropDown();
 
     // Инициализируем роутер
     Router.init();

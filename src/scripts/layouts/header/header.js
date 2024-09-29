@@ -36,3 +36,54 @@ export function signInUpdate(name) {
     // Переходим на страницу авторизации без перезагрузки
     Router.navigate('/');
 }
+
+/**
+ * Добавляет функциональность выпадающего меню для иконки аватара.
+ *
+ * Функция обеспечивает открытие/закрытие выпадающего меню при клике на иконку аватара,
+ * скрытие меню при клике вне области меню, а также добавляет задержку перед скрытием меню
+ * при наведении курсора мыши вне иконки.
+ *
+ * Функциональность:
+ * - Выпадающее меню открывается и закрывается по клику на иконку аватара.
+ * - Когда меню открыто, надпись под иконкой (label) скрывается.
+ * - Меню закрывается при клике вне иконки или меню.
+ * - Закрытие меню с небольшой задержкой при уходе курсора с иконки.
+ *
+ * @function AddDropDown
+ *
+ * @example
+ * // Пример использования
+ * document.addEventListener("DOMContentLoaded", function() {
+ *   AddDropDown();
+ * });
+ */
+export function AddDropDown() {
+    const avatarIcon = document.getElementById("avatar-icon");
+    const dropdown = avatarIcon.querySelector(".icon-dropdown");
+
+    // Открытие и закрытие по клику
+    avatarIcon.addEventListener("click", function (event) {
+        dropdown.classList.toggle("show");
+        avatarIcon.classList.toggle("show"); // Добавляем или убираем класс для иконки
+        event.stopPropagation();
+    });
+
+    // Закрытие при клике вне элемента
+    document.addEventListener("click", function () {
+        if (dropdown.classList.contains("show")) {
+            dropdown.classList.remove("show");
+            avatarIcon.classList.remove("show"); // Убираем класс для иконки
+        }
+    });
+
+    // Оставляем задержку перед скрытием при наведении
+    avatarIcon.addEventListener("mouseleave", function () {
+        setTimeout(() => {
+            if (!dropdown.classList.contains("show")) {
+                dropdown.classList.remove("show");
+                avatarIcon.classList.remove("show"); // Убираем класс для иконки
+            }
+        }, 500); // Задержка исчезновения
+    });
+}
