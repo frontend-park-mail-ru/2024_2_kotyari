@@ -224,7 +224,7 @@ export function clearGlobalError() {
  * @param {string} route - URL-адрес, на который отправляется запрос.
  * @param redirectLink - URL-адрес для переадресации в случае 401
  * @param {Function} renderFunction - Функция, которая вызывается для рендеринга страницы при успешном запросе.
- * @returns {Promise<void>} - Промис, который разрешается, когда запрос обработан.
+ * @returns {Promise<Response>} - Промис, который разрешается, когда запрос обработан.
  */
 export function fetchAndRender(route, redirectLink, renderFunction) {
     return fetch(backurl + route, {
@@ -238,7 +238,6 @@ export function fetchAndRender(route, redirectLink, renderFunction) {
             if (response.ok) {
                 return renderFunction();
             } else if (response.status === 401) {
-                addGlobalError('Пожалуйста, войдите в аккаунт, чтобы просмотреть избранное.');
                 Router.navigate(redirectLink);
                 return Promise.resolve();
             } else {
@@ -247,7 +246,4 @@ export function fetchAndRender(route, redirectLink, renderFunction) {
                 });
             }
         })
-        .catch(err => {
-            addGlobalError('Ошибка сети или сервера. Попробуйте позже.');
-        });
 }
