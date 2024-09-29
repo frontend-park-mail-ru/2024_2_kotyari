@@ -1,8 +1,11 @@
-const express = require('express');
-const path = require('path');
+import express from "express";
+
+import path from "path";
 
 const app = express();
 const PORT = 3000;
+
+const __dirname = path.resolve();
 
 // Определяем папки для статических файлов
 const publicPath = path.join(__dirname, '../../../public');

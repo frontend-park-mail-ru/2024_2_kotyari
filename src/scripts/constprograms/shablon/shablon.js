@@ -30,6 +30,7 @@ async function registerPartials(partialList) {
     // Регистрируем все переданные partials
     const partialPromises = partialList.map(async (partial) => {
         const partialContent = await loadPartial(partial.partial);
+        // eslint-disable-next-line no-undef
         Handlebars.registerPartial(partial.name, partialContent);
 
         // Проверяем, есть ли вложенные partials для текущего partial
@@ -54,6 +55,7 @@ async function registerPartials(partialList) {
  * @returns {Promise<void>} - Возвращает промис, который рендерит шаблон с переданными данными.
  * @throws {Error} - Ошибка при загрузке и рендеринге шаблона.
  */
+
 export async function templatize(root, url, data) {
     try {
         if (url in partials) {
@@ -66,6 +68,7 @@ export async function templatize(root, url, data) {
         const templateSource = await response.text();
 
         // Компилируем и рендерим шаблон
+        // eslint-disable-next-line no-undef
         const template = Handlebars.compile(templateSource);
         root.innerHTML = template(data);
     } catch (err) {

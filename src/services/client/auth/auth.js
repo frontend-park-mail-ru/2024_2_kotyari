@@ -8,8 +8,6 @@ import {backurl} from "../../router/settings.js";
 import {Router} from "../../router/router.js";
 import {signInUpdate} from "../../../scripts/layouts/header/header.js";
 import {setCookie, COOKIEEXPIRATION} from "../../cookie/cookie.js";
-import {buildAuthMenu} from "../../../scripts/components/auth-menu/menu.js";
-import {menuSignIn} from "../../../scripts/components/auth-menu/menu-config.js";
 
 /**
  * Обработчик для входа в систему (Sign In).

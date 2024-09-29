@@ -24,6 +24,7 @@ export function registrFunctions () {
      * @param {*} b - Второе значение для сравнения.
      * @returns {boolean} Возвращает true, если значения равны, иначе false.
      */
+    // eslint-disable-next-line no-undef
     Handlebars.registerHelper('eq', function (a, b) {
         return a === b;
     });
