@@ -1,5 +1,5 @@
 @import "../../../css/parametrs/parametrs.css";
-@import "../../../css/parametrs/animations.css";
+@import "/src/css/";
 
 body {
     margin: var(--margin-zero);
