@@ -3,6 +3,12 @@ import {backurl} from "../../../services/router/settings.js";
 import {errors} from "../../errors/errors.js";
 import {Router} from "../../../services/router/router.js";
 
+/**
+ * Инициализирует настройки для карточек, включая добавление обработчиков событий для переходов.
+ *
+ * @function cardSettings
+ * @param {Array<Object>} data - Данные для карточек.
+ */
 function cardSettings (data) {
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
@@ -24,6 +30,14 @@ function cardSettings (data) {
     }
 }
 
+/**
+ * Выполняет запрос на получение карточек и рендерит их с использованием шаблона.
+ *
+ * @async
+ * @function getCards
+ * @returns {Promise<void>} - Возвращает промис, который рендерит карточки и инициализирует их настройки.
+ * @throws {Error} - Если запрос завершился ошибкой.
+ */
 async function getCards() {
     const response = await fetch(backurl + 'catalog/products', {
         method: 'GET',
@@ -39,6 +53,12 @@ async function getCards() {
     });
 }
 
+/**
+ * Строит карточки, запрашивая их данные с сервера и обрабатывая ошибки.
+ *
+ * @function buildCards
+ * @returns {Promise<void>} - Возвращает промис, который обрабатывает данные карточек или выводит ошибку.
+ */
 export function buildCards() {
     return getCards().catch(err => {
         errors.GetCardsError(err);
