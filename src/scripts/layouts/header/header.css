@@ -1,7 +1,8 @@
+@import '/src/css/parametrs/parametrs.css';
+
 header {
     background-color: oklch(0.95 0 0);
     padding-bottom: 15px;
-
 }
 
 .catalog-link{
@@ -119,12 +120,9 @@ header {
     width: 50px; /* Максимальная ширина для имени */
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    visibility: visible;
     transition: opacity 0.3s ease;
     opacity: 1;
     text-align: center;
-    margin-top: 0;
 }
 
 .icon-label, .icon-label-hidden {
@@ -224,7 +222,6 @@ header {
     content: attr(data-fullname); /* Используем атрибут для полного имени */
     position: absolute;
     white-space: nowrap;
-    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
     background-color: oklch(0.49 0.25 299.6);
@@ -264,7 +261,7 @@ txt {
     }
 }
 
-@media (max-width: 783px) {
+@media (max-width: 840px) {
     .header-bottom {
         flex-direction: column;
         align-items: stretch;
@@ -332,7 +329,7 @@ txt {
     }
 
     .icon-dropdown::before {
-        left: +15px;
+        left: +19px;
         transform: translateX(0);
     }
 }
