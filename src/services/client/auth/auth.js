@@ -223,10 +223,11 @@ export function clearGlobalError() {
  *
  * @param {string} route - URL-адрес, на который отправляется запрос.
  * @param redirectLink - URL-адрес для переадресации в случае 401
+ * @param routeTo - URL-адрес куда пользователь хочет перейти
  * @param {Function} renderFunction - Функция, которая вызывается для рендеринга страницы при успешном запросе.
  * @returns {Promise<Response>} - Промис, который разрешается, когда запрос обработан.
  */
-export function fetchAndRender(route, redirectLink, renderFunction) {
+export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
     return fetch(backurl + route, {
         method: 'GET',
         credentials: 'include',
@@ -236,6 +237,7 @@ export function fetchAndRender(route, redirectLink, renderFunction) {
     })
         .then(response => {
             if (response.ok) {
+                this.navigate(routeTo)
                 return renderFunction();
             } else if (response.status === 401) {
                 Router.navigate(redirectLink);

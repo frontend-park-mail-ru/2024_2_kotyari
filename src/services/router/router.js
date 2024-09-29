@@ -191,32 +191,26 @@ export const Router = {
 
     /**
      * Страница с заказами.
-     * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
+     * @returns {Promise<Response>} - Возвращает Promise после загрузки страницы.
      */
     records: function () {
-        this.navigate(ROUTES.RECORDS);  // Изменяем URL
-
-        return fetchAndRender(ROUTES.RECORDS, ROUTES.LOGIN, () => this.body(() => soon()));
+        return fetchAndRender(ROUTES.RECORDS, ROUTES.LOGIN, ROUTES.RECORDS, () => this.body(() => soon()));
     },
 
     /**
      * Страница корзины.
-     * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
+     * @returns {Promise<Response>} - Возвращает Promise после загрузки страницы.
      */
     basket: function () {
-        this.navigate(ROUTES.BASKET);  // Изменяем URL
-
-        return fetchAndRender(ROUTES.BASKET, ROUTES.LOGIN, () => this.body(() => soon()));
+        return fetchAndRender(ROUTES.BASKET, ROUTES.LOGIN, ROUTES.BASKET, () => this.body(() => soon()));
     },
 
     /**
      * Страница избранного.
-     * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
+     * @returns {Promise<Response>} - Возвращает Promise после загрузки страницы.
      */
     favorites: function () {
-        this.navigate(ROUTES.FAVORITE);
-
-        return fetchAndRender(ROUTES.FAVORITE, ROUTES.LOGIN, () => this.body(() => soon()));
+        return fetchAndRender(ROUTES.FAVORITE, ROUTES.LOGIN, ROUTES.FAVORITE,() => this.body(() => soon()));
     },
 
     /**
