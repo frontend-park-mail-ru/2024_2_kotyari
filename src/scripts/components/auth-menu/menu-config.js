@@ -21,7 +21,7 @@
  */
 export const menuSignUp = {
     id: "modal__signup",
-    logo: 'Оксик',
+    logo: 'oxic',
     title: 'Регистрация',
     formId: 'register__form',
     fields: [
@@ -90,7 +90,7 @@ export const menuSignUp = {
  */
 export const menuSignIn = {
     id: "modal__login",
-    logo: 'Оксик',
+    logo: 'oxic',
     title: 'Вход',
     formId: 'login__form',
     error_msg: '',
