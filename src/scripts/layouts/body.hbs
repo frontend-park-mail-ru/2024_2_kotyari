@@ -1,48 +1,8 @@
-<header>
-    <!-- Первая строка -->
-    <div class="header-top">
-        <span>{{city}}. <a href="/api/changeSity" class="body-url">Изменить город</a></span>
-    </div>
+{{> header}}
+<div class="header-placeholder"></div>
 
-    <!-- Вторая строка -->
-    <div class="header-bottom">
-        <div class="logo body-url" href="/">Оксик</div>
-        <button class="catalog-button body-url" title="Каталог" href="/api/catalog">&#8801;<span>Каталог</span></button>
-        <div class="search-container">
-            <input type="search" placeholder="Поиск по оксик" class="search-input">
-            <button class="search-button"><span class="material-icons">search</span></button>
-        </div>
-        <div class="icons">
-            <div class="icon">
-                <span class="material-icons">account_circle</span>
-                {{#if name}}
-                    <span class="icon-label-hidden">{{name}}</span>
-                    <div class="icon-dropdown">
-                        <a href="#">Личный кабинет</a>
-                        <a class="body-url" id="logout-button" href="/logout">Выход</a>
-                    </div>
-                {{else}}
-                    <span class="icon-label-hidden">Войти</span>
-                    <div class="icon-dropdown">
-                        <a id="btn__sign_in">Вход</a>
-                        <a id="btn__sign_up">Регистрация</a>
-                    </div>
-                {{/if}}
-            </div>
-            <div class="icon body-url" href="/api/basket" title="Корзина">
-                <span class="material-icons">shopping_cart</span>
-                <span class="icon-label">Корзина</span>
-            </div>
-            <div class="icon body-url" href="/api/favorite" title="Избранное">
-                <span class="material-icons">favorite_border</span>
-                <span class="icon-label">Избранное</span>
-            </div>
-            <div class="icon body-url" href="/api/records" title="Заказы">
-                <span class="material-icons">receipt_long</span>
-                <span class="icon-label">Заказы</span>
-            </div>
-        </div>
-    </div>
-</header>
-<main id="main"></main>
-<footer></footer>
+<main>
+    <div id="main"></div>
+
+</main>
+{{> footer}}

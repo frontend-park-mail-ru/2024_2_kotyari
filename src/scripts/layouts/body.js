@@ -1,50 +1,52 @@
-import { templatize } from '../constprograms/shablon.js';
-import { user } from '../../services/router/router.js';
-// Функция для рендеринга тела страницы
+import {templatize} from '../constprograms/shablon/shablon.js'
+import {logoutUpdate} from "./header/header.js";
+import {backurl} from "../../services/router/settings.js";
+import {deleteCookie} from "../../services/cookie/cookie.js";
+import {Router} from "../../services/router/router.js";
+
+/**
+ * Функция для рендеринга основного содержимого страницы.
+ *
+ * Использует функцию `templatize` для вставки шаблона в элемент body на странице.
+ *
+ * @function
+ * @param {Object} data - Данные, которые будут переданы в шаблон для рендеринга.
+ * @returns {Promise<void>} Возвращает промис, который разрешается после завершения рендеринга.
+ */
 export function buildBody(data) {
-    return templatize(document.body, '/src/scripts/layouts/body.hbs', data).then(() => {
-        handleLogout();
-    });
+    return templatize(document.body, '/src/scripts/layouts/body.hbs', data);
 }
 
-export function handleLogout() {
-    const logoutButton = document.getElementById('logout-button');
-
-    if (logoutButton) {
-        console.log("'Выход' найден, привязываем обработчик");
-        logoutButton.addEventListener('click', async function(event) {
-            // event.preventDefault();
-            console.log('Клик по кнопке "Выход"');
-
-            simulateLogoutUI();
-
-            try {
-                const response = await fetch('/logout', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    console.log('Выход успешен, перенаправляем на главную страницу');
-                    window.location.href = '/'; // Перенаправляем на главную страницу
-                } else {
-                    console.error('Ошибка при выходе:', response.status);
-                    alert('Не удалось выполнить выход. Попробуйте снова.');
-                }
-            } catch (error) {
-                console.error('Произошла ошибка сети.', error);
-                alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
-            }
+/**
+ * Обрабатывает процесс выхода пользователя из системы.
+ *
+ * Отправляет POST-запрос на сервер для выполнения выхода, удаляет cookie пользователя,
+ * перенаправляет на главную страницу и вызывает обновление интерфейса.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} Возвращает промис, который разрешается после выполнения операции выхода.
+ */
+export async function handleLogout() {
+    try {
+        const response = await fetch(backurl + 'logout', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
-    } else {
-        console.log("'Выход' не найден. Проверьте шаблон.");
+
+        if (response.status === 204) {
+            Router.navigate('/'); // Перенаправление на главную страницу при успешном выходе
+        } else {
+            alert('Не удалось выполнить выход. Попробуйте снова.');
+        }
+    } catch (error) {
+        console.log(error)
     }
-}
 
-function simulateLogoutUI() {
-    console.log('Обновляем интерфейс для неавторизованного пользователя...');
+    deleteCookie('user'); // Удаление cookie с именем 'user'
 
-    delete user.name;
+    logoutUpdate(); // Обновление интерфейса после выхода
 }

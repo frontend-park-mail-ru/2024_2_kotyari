@@ -1,0 +1,28 @@
+@import '/src/css/parametrs/parametrs.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-size-adjust: none;
+}
+
+body {
+    height: 100%;
+    font-family: var(--font-family);
+}
+
+html {
+    height: 100%;
+}
+
+.invisible {
+    opacity: 0;
+    transition: opacity var(--one-time) ease-in-out; /* Переход на изменение opacity */
+    visibility: hidden; /* Элемент скрыт */
+}
+
+.invisible.show {
+    opacity: 1;
+    visibility: visible; /* Показываем элемент */
+}
