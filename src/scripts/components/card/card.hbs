@@ -11,8 +11,7 @@
         <div class="card" href="{{url}}" router="changed-active">
             <div class="card-image">
                 <img
-                        src="{{#if image}}{{image}}{{else}}https://via.placeholder.com/150{{/if}}"
-                        alt="{{shortDescription}}"
+                        data-src="{{#if image}}{{image}}{{else}}https://via.placeholder.com/150{{/if}}"
                         loading="lazy"
                         onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"
                 />

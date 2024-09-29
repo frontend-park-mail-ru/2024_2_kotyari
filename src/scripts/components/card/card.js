@@ -28,6 +28,19 @@ function cardSettings (data) {
         document.getElementById('loading-placeholder').style.display = 'none';
         document.getElementById('cards').style.display = 'grid';
     }
+
+    setTimeout(() => {
+        // Найдем все изображения, которые должны быть загружены после построения карточек
+        const images = document.querySelectorAll(".card-image img");
+
+        images.forEach(img => {
+            const dataSrc = img.getAttribute("data-src"); // используем data-src вместо src для отложенной загрузки
+            if (dataSrc) {
+                // Устанавливаем реальный src после загрузки всех карточек
+                img.setAttribute("src", dataSrc);
+            }
+        });
+    }, 500);
 }
 
 /**

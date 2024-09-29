@@ -158,6 +158,8 @@ export const Router = {
      * @returns {Promise<void>} - Возвращает Promise, который разрешается после загрузки и рендеринга.
      */
     body: function (mainPart) {
+        let anchors = document.querySelectorAll(`[router=${CLICKCLASSESES.stability}]`);
+        for (let anchor of anchors) anchor.onclick = null;
         const main = document.getElementById('main')
 
         main.classList.add('invisible');
@@ -174,7 +176,9 @@ export const Router = {
 
             setTimeout(function () {
                 main.classList.remove('invisible');
-            }, 200); // Небольшая задержка для срабатывания transition
+                anchors = document.querySelectorAll(`[router=${CLICKCLASSESES.stability}]`);
+                for (let anchor of anchors) anchor.onclick = handler;
+            }, 500); // Небольшая задержка для срабатывания transition
 
             main.classList.remove('show');
         });
