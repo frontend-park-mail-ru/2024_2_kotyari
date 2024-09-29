@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="326a8acd-13e3-42f4-a151-84c10b13ad36" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/img/static/Syncopate-Bold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/components/elements/searcher/searcher.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/elements/searcher/searcher.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/RedOctober-Fat.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/parametrs/animations.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/parametrs/animations.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/parametrs/parametrs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/parametrs/parametrs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/auth-menu/auth-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/auth-menu/auth-menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/auth-menu/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/card/katalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/card/katalog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/custom-messages/error/error.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/custom-messages/error/error.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/custom-messages/soon/soon.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/custom-messages/soon/soon.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/elements/searcher/searcher.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/elements/searcher/searcher.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/components/modal/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/components/modal/modal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/layouts/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/layouts/header/header.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,22 +55,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;21.2.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.7.3&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DimaK/untitled/2024_2_kotyari/src/assets/img/static&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "21.2.0",
+    "javascript.nodejs.core.library.typings.version": "22.7.3",
+    "last_opened_file_path": "C:/Users/DimaK/untitled/2024_2_kotyari/src/assets/img/static",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\DimaK\untitled\2024_2_kotyari\src\assets\img\static" />
@@ -84,7 +101,7 @@
       <workItem from="1727455573125" duration="5352000" />
       <workItem from="1727461121537" duration="13574000" />
       <workItem from="1727498299602" duration="52003000" />
-      <workItem from="1727601753734" duration="8937000" />
+      <workItem from="1727601753734" duration="26421000" />
     </task>
     <task id="LOCAL-00001" summary="[fix] подключен бек и подправлены основные ошибки">
       <option name="closed" value="true" />
@@ -142,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727609612187</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="[fix] Слито старое и новое">
+      <option name="closed" value="true" />
+      <created>1727610925108</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727610925108</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +181,7 @@
     <MESSAGE value="Слитие и jsDoc" />
     <MESSAGE value="[fix] Правильные настройки фронта" />
     <MESSAGE value="[fix] Исправление верстки: убраны неточности в местах нахождения элемента. Добавлена задержка на подсказке аватара при нажатии. Добавлена обработка длинных имен." />
-    <option name="LAST_COMMIT_MESSAGE" value="[fix] Исправление верстки: убраны неточности в местах нахождения элемента. Добавлена задержка на подсказке аватара при нажатии. Добавлена обработка длинных имен." />
+    <MESSAGE value="[fix] Слито старое и новое" />
+    <option name="LAST_COMMIT_MESSAGE" value="[fix] Слито старое и новое" />
   </component>
 </project>

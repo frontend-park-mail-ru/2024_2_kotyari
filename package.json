@@ -1,6 +1,7 @@
 {
   "name": "2024_2_kotyari",
   "version": "1.0.0",
-  "dependencies": {
+  "devDependencies": {
+    "eslint": "^9.11.1"
   }
 }

@@ -28,7 +28,7 @@ body {
     justify-content: var(--card-justify-content);
     align-items: var(--card-allign-items);
     text-align: var(--card-text-align);
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+    transition: transform var(--litle-time) ease, box-shadow var(--litle-time) ease;
     aspect-ratio: var(--card-aspect-ratio);
     will-change: transform;
     position: relative;
@@ -44,13 +44,13 @@ body {
     left: var(--before-card-tlrb);
     right: var(--before-card-tlrb);
     bottom: var(--before-card-tlrb);
-    transition: all var(--transition-duration) ease;
+    transition: all var(--litle-time) ease;
     z-index: var(--before-card-z-index);
 }
 
 /* Эффект при наведении */
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(var(--big-scale));
     box-shadow: 0 4px 10px var(--card-shadow-color);
     z-index: 2;
 }
@@ -99,16 +99,19 @@ body {
     color: var(--discount-color);
     font-weight: bold;
     margin-right: var(--mini-padding);
+    white-space: nowrap;
 }
 
 .old-price {
     color: var(--old-price-color);
     text-decoration: line-through;
     margin-right: var(--mini-padding);
+    white-space: nowrap;
 }
 
 .discount {
     color: var(--discount-color);
+    white-space: nowrap;
 }
 
 /* Описание товара */
@@ -119,7 +122,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: max-height var(--transition-duration) ease, white-space var(--transition-duration) ease;
+    transition: max-height var(--litle-time) ease, white-space var(--litle-time) ease;
     margin-bottom: var(--description-margin-bottom);
     width: 100%;
 }
@@ -140,7 +143,7 @@ body {
     border-color: var(--button-text-color);
     border-radius: var(--button-border-radius);
     cursor: pointer;
-    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+    transition: background-color var(--litle-time) ease, color var(--litle-time) ease;
     padding: var(--button-padding);
     margin-top: auto;
     width: 100%;
@@ -149,7 +152,7 @@ body {
 }
 
 .buy-button:hover {
-    color: oklab(0.93 0.03 -0.04);
+    color: var(--text-buy-color);
     background-color: var(--button-text-color);
 }
 
@@ -166,7 +169,7 @@ body {
 
 /* Оформление текста */
 h1, p {
-    color: oklch(0.49 0.25 299.6);
+    color: var(--text-another-color);
 }
 
 /* Убираем скачки, оставляем базовые стили текста */
