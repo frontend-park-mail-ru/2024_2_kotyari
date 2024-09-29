@@ -42,8 +42,8 @@ header {
 }
 
 @font-face {
-    font-family: 'RedOctober-Fat';
-    src: url('/src/scripts/layouts/header/RedOctober-Fat.ttf');
+    font-family: 'Syncopate-Bold';
+    src: url('/src/assets/img/static/Syncopate-Bold.ttf');
 }
 
 .logo {
@@ -57,8 +57,7 @@ header {
     align-items: center;
     position: relative;
     cursor: pointer;
-    font-family: 'a_DexterOtlSpUp', serif;
-    /*font-size: 58px;*/
+    font-family: 'Syncopate-Bold', sans-serif;
     font-stretch: extra-expanded;
 }
 
