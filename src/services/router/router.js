@@ -6,6 +6,7 @@ import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
 import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
 import {handleSignIn, handleSignUp} from "../client/auth/auth.js";
 import {getCookie} from "../cookie/cookie.js";
+import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
 
 /**
  * Собираемые для переработки пути.
@@ -312,6 +313,7 @@ export const handlerLogout = event =>  {
     event.preventDefault();
 };
 
+registrFunctions();
 
 let user = getCookie('user');
 if (user === null) {

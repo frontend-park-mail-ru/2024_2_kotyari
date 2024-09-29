@@ -10,10 +10,17 @@
     <form id="{{formId}}" action="{{action}}" method="post">
         <span class="errors__feedback" id="error"></span>
         {{#each fields as |field|}}
-            <label for="{{field.id}}">{{field.label}}:</label>
-            <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" placeholder="{{placeholder}}"
-                   data-error-id="{{field.error_id}}"/>
-            <span class="errors__feedback" id="{{field.error_id}}"></span>
+            <div class="input_container">
+                <label for="{{field.id}}">{{field.label}}:</label>
+                <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" placeholder="{{placeholder}}"
+                       data-error-id="{{field.error_id}}" />
+                {{#if (eq field.type 'password')}}
+                    <span class="toggle-password" data-field-id="{{field.id}}">
+                        &#128065;
+                    </span>
+                {{/if}}
+                <span class="errors__feedback" id="{{field.error_id}}"></span>
+            </div>
         {{/each}}
         <button type="submit">{{submitText}}</button>
     </form>
