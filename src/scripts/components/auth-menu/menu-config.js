@@ -50,6 +50,7 @@ export const menuSignIn = {
     logo: 'Оксик',
     title: 'Вход',
     formId: 'login__form',
+    error_msg: '',
     fields: [
         {
             id: 'login_email',
