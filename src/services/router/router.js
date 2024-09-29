@@ -4,8 +4,9 @@ import {errorPage} from "../../scripts/components/custom-messages/error/error.js
 import {soon} from "../../scripts/components/custom-messages/soon/soon.js";
 import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
 import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
-import {handleSignIn, handleSignUp} from "../client/auth/auth.js";
+import {fetchAndRender, handleSignIn, handleSignUp} from "../client/auth/auth.js";
 import {getCookie} from "../cookie/cookie.js";
+import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
 
 /**
  * Собираемые для переработки пути.
@@ -52,22 +53,33 @@ const REGEX = {
     ANY_ROUTE: (route) => new RegExp('^' + route.replace(REGEX.PARAMS, '(\\w+)') + '$')
 };
 
-// обработчик нажатий на ссылки
-export const handler = event =>  {
+/**
+ * Обработчик нажатий на ссылки.
+ * Перехватывает нажатие на ссылку, предотвращает стандартное поведение
+ * и передает управление роутеру для обработки маршрута.
+ *
+ * @param {Event} event - Событие клика на ссылку.
+ */
+export const handler = event => {
     let url = new URL(event.currentTarget.getAttribute(urlAttribute), window.location.origin);
 
     Router.dispatch(url.pathname);
 
-    event.preventDefault();
+    event.preventDefault(); // Предотвращает стандартную навигацию браузера
 }
 
-// Функция для удаления всех событий
+/**
+ * Удаляет все обработчики событий клика на ссылки с классом, указанным в `CLICKCLASSESES.overrideable`.
+ *
+ * Эта функция находит все ссылки в документе с классом, указанным в `CLICKCLASSESES.overrideable`,
+ * и снимает с них обработчики событий клика.
+ */
 const removeAllHandlers = () => {
     let anchors = document.querySelectorAll(CLICKCLASSESES.overrideable);
 
     anchors.forEach((anchor) => {
-        anchor.onclick = null;
-    })
+        anchor.onclick = null; // Удаляем обработчики событий
+    });
 };
 
 // Класс Router для маршрутизации на клиенте
@@ -92,7 +104,7 @@ export const Router = {
      * Эта функция создает массив маршрутов, который связывает паттерны URL с соответствующими методами обработчика.
      * Также настраивает обработчик события изменения состояния истории для навигации назад и вперед.
      */
-    init: function() {
+    init: function () {
         this._routes = [];
         for (let route in this.routes) {
             let method = this.routes[route];
@@ -114,7 +126,7 @@ export const Router = {
      * Обработка маршрута по пути.
      * @param {string} path - Путь для маршрутизации.
      */
-    dispatch: function(path) {
+    dispatch: function (path) {
         let i = this._routes.length;
         while (i--) {
             let args = path.match(this._routes[i].pattern);
@@ -129,7 +141,7 @@ export const Router = {
      * Изменяет URL без перезагрузки страницы и вызывает обработчик маршрута.
      * @param {string} path - Новый путь.
      */
-    navigate: function(path) {
+    navigate: function (path) {
         if (path !== window.location.pathname) {
             history.pushState(null, null, path); // Изменяем URL без перезагрузки
 
@@ -142,7 +154,7 @@ export const Router = {
      * @param {Function} mainPart - Функция, возвращающая Promise для загрузки основной части страницы.
      * @returns {Promise<void>} - Возвращает Promise, который разрешается после загрузки и рендеринга.
      */
-    body: function(mainPart) {
+    body: function (mainPart) {
         const main = document.getElementById('main')
 
         main.classList.add('invisible');
@@ -157,7 +169,7 @@ export const Router = {
 
             main.classList.add('show');
 
-            setTimeout(function() {
+            setTimeout(function () {
                 main.classList.remove('invisible');
             }, 200); // Небольшая задержка для срабатывания transition
 
@@ -169,7 +181,7 @@ export const Router = {
      * Страница каталога товаров.
      * @returns {Promise<void>} - Возвращает Promise после загрузки каталога.
      */
-    catalog: function() {
+    catalog: function () {
         this.navigate(ROUTES.CATALOG);  // Изменяем URL и обрабатываем маршрут
         return this.body(() => buildCards());  // Загружаем карточки
     },
@@ -178,34 +190,39 @@ export const Router = {
      * Страница с заказами.
      * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
      */
-    records: function() {
+    records: function () {
         this.navigate(ROUTES.RECORDS);  // Изменяем URL
-        return this.body(() => soon());
+
+        return fetchAndRender(ROUTES.RECORDS, ROUTES.LOGIN, () => this.body(() => soon()));
     },
 
     /**
      * Страница корзины.
      * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
      */
-    basket: function() {
+    basket: function () {
         this.navigate(ROUTES.BASKET);  // Изменяем URL
-        return this.body(() => soon());
+
+        return fetchAndRender(ROUTES.BASKET, ROUTES.LOGIN, () => this.body(() => soon()));
     },
 
     /**
      * Страница избранного.
      * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
      */
-    favorites: function() {
-        this.navigate(ROUTES.FAVORITE);  // Изменяем URL
-        return this.body(() => soon());
+    favorites: function () {
+        this.navigate(ROUTES.FAVORITE);
+
+        const errAuth = 'Пожалуйста, войдите в аккаунт, чтобы просмотреть избранное.'
+
+        return fetchAndRender(ROUTES.FAVORITE, ROUTES.LOGIN, () => this.body(() => soon()));
     },
 
     /**
      * Страница изменения города.
      * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
      */
-    changeSity: function() {
+    changeSity: function () {
         this.navigate(ROUTES.CHANGESITY);  // Изменяем URL
         return this.body(() => soon());
     },
@@ -215,7 +232,7 @@ export const Router = {
      * @param {string} id - Идентификатор продукта.
      * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
      */
-    product: function(id) {
+    product: function (id) {
         this.navigate(ROUTES.PRODUCT.replace(':id', id));  // Изменяем URL с параметром
         return this.body(() => soon());
     },
@@ -229,11 +246,15 @@ export const Router = {
      */
     logout: function () {
         if (getCookie('user') === null) {
-            Router.navigate('/');
-            return;  // Прерываем выполнение, если пользователь не авторизован
+            Router.navigate(ROUTES.HOME);
+            return Promise.resolve();
         }
-        this.navigate(ROUTES.LOGOUT);  // Изменяем URL на страницу выхода
-        return this.body(() => handleLogout());  // Выполняем выход пользователя
+
+        this.navigate(ROUTES.LOGOUT);
+
+        return this.body(() => {
+            return handleLogout();
+        });
     },
 
 
@@ -244,19 +265,26 @@ export const Router = {
      *
      * @returns {Promise<void>} - Возвращает Promise, который разрешается после загрузки формы входа.
      */
+    /**
+     * Handles user login. If the user is already logged in, redirects to the home page.
+     * Otherwise, navigates to the login page, builds the login form, and attaches the sign-in handler.
+     *
+     * @returns {Promise<void>} - A promise that resolves when the login process is complete.
+     */
     login: function () {
         if (getCookie('user') !== null) {
-            Router.navigate('/');  // Перенаправляем на главную страницу
-            return;  // Прерываем выполнение, если пользователь уже авторизован
+            Router.navigate(ROUTES.HOME);
+            return Promise.resolve();
         }
-        this.navigate(ROUTES.LOGIN);  // Изменяем URL на страницу входа
+
+        this.navigate(ROUTES.LOGIN);
 
         return this.body(() => buildAuthMenu(menuSignIn))
             .then(() => {
                 document.getElementById(menuSignIn.formId).addEventListener('submit', handleSignIn);
             })
             .catch(err => {
-                console.log(err);
+                console.error('Login error:', err);
             });
     },
 
@@ -270,20 +298,19 @@ export const Router = {
      */
     signup: function () {
         if (getCookie('user') !== null) {
-            Router.navigate('/catalog'); // Перенаправляем на страницу каталога
-            return; // Прерываем выполнение, если пользователь уже авторизован
+            Router.navigate(ROUTES.CATALOG);
+            return Promise.resolve();
         }
-        this.navigate(ROUTES.SIGNUP); // Изменяем URL на страницу регистрации
 
-        return this.body(() => this.body(() => buildAuthMenu(menuSignUp)))
+        this.navigate(ROUTES.SIGNUP);
+
+        return this.body(() => buildAuthMenu(menuSignUp))
             .then(() => {
                 document.getElementById(menuSignUp.formId).addEventListener('submit', handleSignUp);
             })
-            .catch(
-                err => {
-                    console.log(err);
-                }
-            );
+            .catch(err => {
+                console.error('Signup error:', err);
+            });
     },
 
     /**
@@ -304,7 +331,7 @@ export const Router = {
  *
  * @param {Event} event - Событие клика на ссылку.
  */
-export const handlerLogout = event =>  {
+export const handlerLogout = event => {
     let url = new URL('/logout', window.location.origin);
 
     Router.dispatch(url.pathname);
@@ -312,6 +339,7 @@ export const handlerLogout = event =>  {
     event.preventDefault();
 };
 
+registrFunctions();
 
 let user = getCookie('user');
 if (user === null) {
