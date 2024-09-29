@@ -89,10 +89,8 @@ header {
 }
 
 .catalog-button:hover {
-    color: oklab(0.93 0.03 -0.04);
-    background-color: oklch(0.49 0.25 299.6);
-    border-radius: 5px;
-    padding: 5px;
+    color: oklch(0.35 0.16 303.3); /* Более темный оттенок для текста */
+    background-color: #ffffff00; /* Оставляем прозрачный фон */
 }
 
 .icons {
@@ -109,8 +107,11 @@ header {
 }
 
 .icon .material-icons {
-    font-size: 30px;
     color: oklch(0.49 0.25 299.6);
+}
+
+.icon:hover .material-icons {
+    color: oklch(0.35 0.16 303.3); /* Затемняем цвет иконки */
 }
 
 #name {
@@ -145,15 +146,7 @@ header {
 }
 
 .icon:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 3px;
-    background-color: oklch(0.49 0.25 299.6);
-    border-radius: 3px;
+    content: none;
 }
 
 .icon-dropdown {
