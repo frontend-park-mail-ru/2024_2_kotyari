@@ -173,14 +173,14 @@ header {
     top: 45px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    background-color: var(--card-background-color);
+    box-shadow: 0 4px 8px var(--card-shadow-color);
+    border-radius: var(--button-border-radius);
     z-index: 1000;
     min-width: 150px;
-    padding: 10px;
+    padding: var(--litle-padding);
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.5s; /* Задержка исчезновения */
+    transition: opacity var(--litle-time) ease, transform var(--litle-time) ease, visibility 0s var(--midle-time); /* Задержка исчезновения */
 }
 
 .icon-dropdown.show {
@@ -188,33 +188,33 @@ header {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
     visibility: visible;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity var(--litle-time) ease, transform var(--litle-time) ease;
 }
 
 .icon-dropdown::before {
     content: '';
     position: absolute;
-    top: -10px;
+    top: var(--before-icon-dropdown);
     left: 50%;
     transform: translateX(-50%);
-    border-width: 0 10px 10px 10px;
+    border-width: var(--icon-dropdown-border-width);
     border-style: solid;
     border-color: transparent transparent #fff transparent;
 }
 
 .icon-dropdown a {
     display: block;
-    padding: 8px 12px;
-    color: oklch(0.49 0.25 299.6);
+    padding: var(--icon-dropdown-padding);
+    color: var(--button-text-color);
     text-decoration: none;
-    font-size: 14px;
+    font-size: var(--font-size_label);
     font-weight: normal;
 }
 
 .icon-dropdown a:hover {
-    background-color: oklch(0.49 0.25 299.6);
-    color: oklab(0.93 0.03 -0.04);
-    border-radius: 3px;
+    background-color: var(--button-text-color);
+    color: var(--text-buy-color);
+    border-radius: var(--icon-dropdown-border-radius);
 }
 
 .icon:hover .icon-dropdown {
@@ -224,7 +224,7 @@ header {
 }
 
 .icon-dropdown {
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(var(--y-coord-mid));
 }
 
 /* Скрываем label, когда окно открыто */
@@ -244,14 +244,14 @@ header {
     white-space: nowrap;
     left: 50%;
     transform: translateX(-50%);
-    background-color: oklch(0.49 0.25 299.6);
-    color: oklab(0.93 0.03 -0.04);
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 12px;
+    background-color: var(--button-text-color);
+    color: var(--name-buy-color);
+    padding: var(--name-padding);
+    border-radius: var(--button-border-radius);
+    font-size: var(--min-font-size);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity var(--litle-time) ease, visibility var(--litle-time) ease;
 }
 
 #name:hover::after {
@@ -264,7 +264,7 @@ header {
 }
 
 txt {
-    transform: translateY(-4px);
+    transform: translateY(var(--y-coord-min));
 }
 
 @media (max-width: 1150px) {
@@ -289,49 +289,47 @@ txt {
 
     .logo {
         flex: 0 0 auto;
-        margin-bottom: 10px;
+        margin-bottom: var(--midle-button-margin-bottom);
     }
 
     .catalog-button {
-        margin-bottom: 10px;
-        width: 100%;
+        margin-bottom: var(--midle-button-margin-bottom);
+        width: var(--proc-full-width);
         flex: 0 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: oklab(0.93 0.03 -0.04);
-        background-color: oklch(0.49 0.25 299.6);
+        color: var(--text-buy-color);
+        background-color: var(--text-another-color);
         border: none;
-        border-radius: 5px;
-        font-size: 35px;
+        border-radius: var(--button-border-radius);
+        font-size: var(--font-size-catalog-button);
         cursor: pointer;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        margin-right: 20px;
-        padding: 5px;
+        transition: background-color var(--litle-time) ease, color var(--litle-time) ease;
+        margin-right: var(--margin-right-catalog-btn);
+        padding: var(--midle-margin-top);
     }
 
     .catalog-button span {
-        margin-left: 5px;
-        font-size: 16px;
+        margin-left: var(--midle-margin-left);
+        font-size: var(--font-size-span-catalog-button);
     }
 
     .catalog-button:hover {
-        color: oklch(0.49 0.25 299.6);
-        background-color: #ffffff00;
-        border-radius: 5px;
-        padding: 5px;
+        color: var(--button-text-color);
+        background-color: var(--background-color-catalog-button);
     }
 
     .search-container {
         flex: 0 0 auto;
-        margin-top: 10px;
-        width: 100%;
+        margin-top: var(--normal-margin-top);
+        width: var(--proc-full-width);
     }
 
     .icons {
         flex-direction: row;
         flex: 0 0 auto;
-        margin-top: 10px;
+        margin-top: var(--normal-margin-top);
         justify-content: space-between;
     }
 
@@ -344,12 +342,12 @@ txt {
     }
 
     .icon-dropdown {
-        left: +70px;
+        left: var(--left-coord);
         transform: translateX(0);
     }
 
     .icon-dropdown::before {
-        left: +19px;
+        left: var(--left-coord-min);
         transform: translateX(0);
     }
 

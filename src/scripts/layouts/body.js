@@ -43,7 +43,7 @@ export async function handleLogout() {
             alert('Не удалось выполнить выход. Попробуйте снова.');
         }
     } catch (error) {
-        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+        console.log(error)
     }
 
     deleteCookie('user'); // Удаление cookie с именем 'user'

@@ -34,6 +34,7 @@
     --text-buy-color: oklab(0.93 0.03 -0.04);
     --text-inv: white;
     --header-background: oklch(0.95 0 0);
+    --name-buy-color: oklab(0.93 0.03 -0.04);
 
     /* Отступы */
     --gap: 16px;
@@ -54,15 +55,20 @@
     --description-margin-bottom: 10px;
     --midle-button-margin-bottom: 10px;
     --midle-margin-top: 5px;
+    --midle-margin-left: 5px;
     --litle-margin-top: 2px;
     --micro-margin-left: 5px;
     --litle-margin-left: 7px;
     --big-margin-right: 20px;
+    --normal-margin-top: 10px;
     --one-margin-botton: 1 px;
     --margin-zero: 0;
     --card-box-shadow: 0 2px 5px;
     --m-group-padding: 30px 60px 60px;
     --zero: 0;
+    --icon-dropdown-padding: 8px 12px;
+    --name-padding: 5 px;
+    --margin-right-catalog-btn: 20px;
 
     /* Размеры */
     --card-border-radius: 8px;
@@ -88,7 +94,11 @@
     --input-border-radius: 6px;
     --auth-button-border-radius: 6px;
     --conteiner-border-radius: 16px;
+    --icon-dropdown-border-radius: 3px;
     --one-border: 1px;
+    --icon-dropdown-border-width: 0 10px 10px 10px;
+    --max-width-px-long: 1150px;
+    --max-width-px-mid: 840px;
 
     --proc-min-width: 30%;
     --proc-max-width: 60%;
@@ -96,6 +106,7 @@
     --width-max: 100%;
 
     --left-center: 50%;
+    --proc-full-width: 100%;
 
     /* Текстовые параметры */
     --font-family: Arial, sans-serif;
@@ -108,7 +119,9 @@
     --description-font-size: 12px;
     --min-font-size: 12px;
     --loading-text-font-size: 16px;
+    --font-size-catalog-button: 35px;
     --font-size_label: 14px;
+    --font-size-span-catalog-button: 16px;
     --font-size: 18px;
     --font-size20: 20px;
     --big-font-size: 28px;
@@ -118,6 +131,7 @@
     --error-font-size: 0.875em;
     --litle-font-weight: 400;
     --midle-font-weight: 550;
+
 
     /* Расположение */
     --catalog-justify-content: center;
@@ -129,6 +143,11 @@
     --header-z-index: 9999;
     --before-card-z-index: -1;
     --before-card-tlrb: -10px;
+    --before-icon-dropdown: -10px;
+    --y-coord-min: -4px;
+    --y-coord-mid: -10px;
+    --left-coord: +70px;
+    --left-coord-min: +19px;
 
     /* Анимация */
     --spinner-size: 40px;
