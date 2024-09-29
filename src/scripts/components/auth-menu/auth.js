@@ -88,7 +88,7 @@ export function validatePassword(password, passwordRepeat) {
  * @returns {boolean} - Returns true if the password is valid, otherwise false.
  */
 export function validatePasswordLogin(password) {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d@$%*?&#]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"№()><`@$%*?&#])[A-Za-z\d!"№()><`@$%*?&#]{8,}$/;
     let isValid = true;
     const errorElement = document.getElementById(password.dataset.errorId);
 
@@ -99,7 +99,7 @@ export function validatePasswordLogin(password) {
         if (password.value.length < 8) {
             errorMsg = 'Пароль должен содержать не менее 8 символов.'
         } else {
-            errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
+            errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ.';
         }
         addInputError(password, errorElement, errorMsg);
         isValid = false;
@@ -125,8 +125,8 @@ export function validateUsername(username) {
 
     removeInputError(username, errorElement);
 
-    if (user.length < 4 || user.length > 20) {
-        addInputError(username, errorElement, 'Имя должно быть от 4 до 20 символов.')
+    if (user.length < 2 || user.length > 40) {
+        addInputError(username, errorElement, 'Имя должно быть от 2 до 40 символов.')
         isValid = false;
     } else if (!usernameRegex.test(user)) {
         addInputError(username, errorElement, 'Имя может содержать только буквы, цифры и _.')
