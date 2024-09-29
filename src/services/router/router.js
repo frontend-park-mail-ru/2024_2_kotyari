@@ -231,9 +231,7 @@ export const Router = {
      * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
      */
     personalAccount: function () {
-        this.navigate(ROUTES.CHANGESITY);  // Изменяем URL
-
-        return fetchAndRender(ROUTES.PERSONALACCOUNT, ROUTES.LOGIN, () => this.body(() => soon()));
+        return fetchAndRender(ROUTES.PERSONALACCOUNT, ROUTES.LOGIN, ROUTES.PERSONALACCOUNT,() => this.body(() => soon()));
     },
 
 
