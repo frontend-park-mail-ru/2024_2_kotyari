@@ -7,7 +7,7 @@ import {
 import {backurl} from "../../router/settings.js";
 import {Router} from "../../router/router.js";
 import {signInUpdate} from "../../../scripts/layouts/header/header.js";
-import {setCookie, COOKIEEXPIRATION} from "../../cookie/cookie.js";
+import {setCookie, COOKIEEXPIRATION, fetchUserDataAndSetCookie} from "../../cookie/cookie.js";
 
 /**
  * Обработчик для входа в систему (Sign In).
@@ -237,6 +237,16 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
     })
         .then(response => {
             if (response.ok) {
+                const data = response.json();
+                const name = data.username;
+                if (name === ""){
+                    Router.navigate(redirectLink);
+                    return Promise.resolve();
+                } else {
+                    setCookie('user', {city: 'Москва', name: data.username},
+                        COOKIEEXPIRATION);
+                }
+
                 Router.navigate(routeTo)
                 return renderFunction();
             } else if (response.status === 401) {
