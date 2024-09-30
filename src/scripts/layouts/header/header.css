@@ -1,4 +1,5 @@
 @import '/src/css/parametrs/parametrs.css';
+@import '/src/scripts/components/elements/searcher/searcher.css';
 
 /* Закрепляем хедер */
 header {

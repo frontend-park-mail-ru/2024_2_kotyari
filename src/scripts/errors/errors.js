@@ -25,5 +25,22 @@ export const errors = {
      */
     GetCardsError: (error) => {
         console.error('Не удалось получить товары с сервера:', error);
+    },
+
+    /**
+     * Функция для обработки ошибки, если имя пользователя не найдено в ответе.
+     * @function
+     */
+    GetUsername: () => {
+        console.error('Ошибка: username не найден в ответе');
+    },
+
+    /**
+     * Функция для обработки ошибок при выполнении запроса.
+     * @function
+     * @param {Error} error - Ошибка, возникшая при выполнении запроса.
+     */
+    BadGet: (error) => {
+        console.error('Ошибка при выполнении запроса:', error);
     }
 }
