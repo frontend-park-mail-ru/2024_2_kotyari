@@ -356,10 +356,6 @@ if (user === null) {
     }
 }
 
-window.onload(() => {
-    fetchUserDataAndSetCookie();
-});
-
 /**
  * Функция для инициализации тела страницы и маршрутизатора.
  *
