@@ -167,7 +167,7 @@ input[type="password"] {
 }
 
 /* Стили для мобильных устройств */
-@media (max-width: var(--phone)) {
+@media (max-width: 768px) {
     .auth_menu_container {
         max-width: var(--proc-max-width-full);
         padding: var(--padding15);
