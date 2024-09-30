@@ -245,6 +245,7 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
                 } else {
                     setCookie('user', {city: 'Москва', name: data.username},
                         COOKIEEXPIRATION);
+                    signInUpdate(data.username);
                 }
 
                 Router.navigate(routeTo)

@@ -1,5 +1,6 @@
 import {backurl} from "../router/settings.js";
 import {errors} from "../../scripts/errors/errors.js";
+import {signInUpdate} from "../../scripts/layouts/header/header.js";
 
 /**
  * Константа времени жизни cookie в миллисекундах (20 минут).
@@ -46,7 +47,7 @@ export const deleteCookie = (name) => {
  */
 export const fetchUserDataAndSetCookie = async () => {
     try {
-        const response = await fetch(backurl + '');
+        const response = await fetch(backurl);
 
         if (response.ok) {
             const data = await response.json(); // Парсим JSON из ответа
@@ -55,6 +56,7 @@ export const fetchUserDataAndSetCookie = async () => {
             if (data.username) {
                 // Устанавливаем cookie с именем пользователя и городом 'Москва'
                 setCookie('user', { city: 'Москва', name: data.username }, COOKIEEXPIRATION);
+                signInUpdate(data.username);
             } else {
                 errors.GetUsername();
             }
