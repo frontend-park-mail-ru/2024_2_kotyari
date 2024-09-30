@@ -5,7 +5,7 @@ import {soon} from "../../scripts/components/custom-messages/soon/soon.js";
 import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
 import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
 import {fetchAndRender, handleSignIn, handleSignUp} from "../client/auth/auth.js";
-import {getCookie} from "../cookie/cookie.js";
+import {fetchUserDataAndSetCookie, getCookie} from "../cookie/cookie.js";
 import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
 import {AddDropDown} from "../../scripts/layouts/header/header.js";
 
