@@ -237,19 +237,8 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
     })
         .then(response => {
             if (response.ok) {
-                const data = response.json();
-                const name = data.username;
-                if (name === ""){
-                    Router.navigate(redirectLink);
-                    return Promise.resolve();
-                } else {
-                    setCookie('user', {city: 'Москва', name: data.username},
-                        COOKIEEXPIRATION);
-                }
-
-                Router.navigate(routeTo)
-                return renderFunction();
-            } else if (response.status === 401) {
+                return response.json();
+            }else if (response.status === 401) {
                 Router.navigate(redirectLink);
                 return Promise.resolve();
             } else {
@@ -258,4 +247,20 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
                 });
             }
         })
+        .then(data => { // Handle the data here
+            if (data) {
+                const name = data.username;
+                if (name === "") {
+                    Router.navigate(redirectLink);
+                    return Promise.resolve();
+                } else {
+                    setCookie('user', { city: 'Москва', name: data.username }, COOKIEEXPIRATION);
+                }
+                Router.navigate(routeTo);
+                return renderFunction();
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
 }
