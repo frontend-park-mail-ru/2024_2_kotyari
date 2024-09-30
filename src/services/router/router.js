@@ -356,7 +356,9 @@ if (user === null) {
     }
 }
 
-fetchUserDataAndSetCookie();
+window.onload(() => {
+    fetchUserDataAndSetCookie();
+});
 
 /**
  * Функция для инициализации тела страницы и маршрутизатора.
