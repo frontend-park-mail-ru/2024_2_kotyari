@@ -1,7 +1,6 @@
 import {
     validateEmail,
     validatePassword,
-    validatePasswordLogin,
     validateUsername
 } from "../../../scripts/components/auth-menu/auth.js";
 import {backurl} from "../../router/settings.js";
@@ -21,14 +20,6 @@ export function handleSignIn(event) {
     const form = event.target;
     const email = form.querySelector('[name="email"]');
     const password = form.querySelector('[name="password"]');
-
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePasswordLogin(password);
-
-    if (!isEmailValid || !isPasswordValid) {
-        console.error('Ошибка валидации');
-        return;
-    }
 
     fetch(backurl + 'login', {
         method: 'POST',
@@ -76,7 +67,7 @@ export function handleSignIn(event) {
         })
         .catch(error => {
             console.error('Ошибка при запросе:', error.message);
-            addGlobalError(error.message);
+            addGlobalError(`Неверный пароль или email`);
         });
 }
 
