@@ -51,66 +51,44 @@ function addInputError(element, errorElement, msg) {
  * @param {HTMLInputElement} passwordRepeat - The password confirmation input element.
  * @returns {boolean} - Returns true if the password and confirmation are valid, otherwise false.
  */
-export function validatePassword(password, passwordRepeat) {
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d!@#$%^:&?*.]{8,}$/;
-  let isValid = true;
-  const errorElement = document.getElementById(password.dataset.errorId);
-  const errorRepeatElement = document.getElementById(passwordRepeat.dataset.errorId);
+export function validatePasswordMatch(password, passwordRepeat) {
+    let isValid = true;
+    const errorRepeatElement = document.getElementById(passwordRepeat.dataset.errorId);
 
-  removeInputError(password, errorElement);
-  removeInputError(passwordRepeat, errorRepeatElement);
-
-  if (password.value !== passwordRepeat.value) {
-    addInputError(passwordRepeat, errorRepeatElement, 'Пароли должны совпадать');
-    isValid = false;
-  } else if (!passwordRegex.test(password.value)) {
-    let errorMsg;
-
-    if (password.value.length < 8) {
-      errorMsg = 'Пароль должен содержать не менее 8 символов.';
-    } else {
-      errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
-    }
-    addInputError(password, errorElement, errorMsg);
-    addInputError(passwordRepeat, errorRepeatElement, '');
-    isValid = false;
-  } else {
-    removeInputError(password, errorElement);
     removeInputError(passwordRepeat, errorRepeatElement);
-  }
+    const passwordValue = password.value
+    const passwordRepeatValue = passwordRepeat.value
+    if (passwordValue !== passwordRepeatValue || passwordValue === '' && passwordRepeatValue === '') {
+        addInputError(passwordRepeat, errorRepeatElement, 'Пароли должны совпадать');
+        isValid = false;
+    } else {
+        removeInputError(passwordRepeat, errorRepeatElement);
+    }
 
-  return isValid;
+    return isValid;
 }
 
-/**
- * Validates the password for login by checking length and character complexity.
- * Displays an error message if invalid.
- *
- * @param {HTMLInputElement} password - The password input element to validate.
- * @returns {boolean} - Returns true if the password is valid, otherwise false.
- */
-export function validatePasswordLogin(password) {
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"№()><`@$%*?&#])[A-Za-z\d!"№()><`@$%*?&#]{8,}$/;
-  let isValid = true;
-  const errorElement = document.getElementById(password.dataset.errorId);
+export function validatePassword(password) {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d!@#$%^:&?*.]{8,}$/;
+        let isValid = true;
+        const errorElement = document.getElementById(password.dataset.errorId);
 
-  removeInputError(password, errorElement);
+        removeInputError(password, errorElement);
 
-  if (!passwordRegex.test(password.value)) {
-    let errorMsg;
+        if (!passwordRegex.test(password.value)) {
+            let errorMsg;
+            if (password.value.length < 8) {
+                errorMsg = 'Пароль должен содержать не менее 8 символов.'
+            } else {
+                errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
+            }
+            addInputError(password, errorElement, errorMsg);
+            isValid = false;
+        } else {
+            removeInputError(password, errorElement);
+        }
 
-    if (password.value.length < 8) {
-      errorMsg = 'Пароль должен содержать не менее 8 символов.';
-    } else {
-      errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ.';
-    }
-    addInputError(password, errorElement, errorMsg);
-    isValid = false;
-  } else {
-    removeInputError(password, errorElement);
-  }
-
-  return isValid;
+        return isValid;
 }
 
 /**
