@@ -1,5 +1,5 @@
-import {errors} from "../../errors/errors.js";
-import {partials} from "./partials.js";
+import { errors } from '../../errors/errors.js';
+import { partials } from './partials.js';
 
 /**
  * Загружает partial-шаблон по указанному URL.
@@ -10,11 +10,11 @@ import {partials} from "./partials.js";
  * @throws {Error} - Ошибка при загрузке partial-шаблона.
  */
 function loadPartial(url) {
-    return fetch(url)
-        .then(response => response.text())
-        .catch(err => {
-            throw new Error(`Ошибка загрузки partial: ${url} - ${err}`);
-        });
+  return fetch(url)
+    .then((response) => response.text())
+    .catch((err) => {
+      throw new Error(`Ошибка загрузки partial: ${url} - ${err}`);
+    });
 }
 
 /**
@@ -27,22 +27,21 @@ function loadPartial(url) {
  * @throws {Error} - Ошибка при регистрации partial-шаблонов.
  */
 async function registerPartials(partialList) {
-    // Регистрируем все переданные partials
-    const partialPromises = partialList.map(async (partial) => {
-        const partialContent = await loadPartial(partial.partial);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerPartial(partial.name, partialContent);
+  // Регистрируем все переданные partials
+  const partialPromises = partialList.map(async (partial) => {
+    const partialContent = await loadPartial(partial.partial);
 
-        // Проверяем, есть ли вложенные partials для текущего partial
-        if (partial.partial in partials) {
-            // Рекурсивно загружаем вложенные partials
-            await registerPartials(partials[partial.partial]);
-        }
-    });
+    Handlebars.registerPartial(partial.name, partialContent);
 
-    return Promise.all(partialPromises);
+    // Проверяем, есть ли вложенные partials для текущего partial
+    if (partial.partial in partials) {
+      // Рекурсивно загружаем вложенные partials
+      await registerPartials(partials[partial.partial]);
+    }
+  });
+
+  return Promise.all(partialPromises);
 }
-
 
 /**
  * Основная функция для загрузки и рендеринга Handlebars-шаблона.
@@ -57,22 +56,23 @@ async function registerPartials(partialList) {
  */
 
 export async function templatize(root, url, data) {
-    try {
-        if (url in partials) {
-            // Регистрируем partials
-            await registerPartials(partials[url]);
-        }
-
-        // Загружаем основной шаблон через AJAX
-        const response = await fetch(url);
-        const templateSource = await response.text();
-
-        // Компилируем и рендерим шаблон
-        // eslint-disable-next-line no-undef
-        const template = Handlebars.compile(templateSource);
-        root.innerHTML = template(data);
-    } catch (err) {
-        // Обработка ошибок
-        errors.ShablonError(err);
+  try {
+    if (url in partials) {
+      // Регистрируем partials
+      await registerPartials(partials[url]);
     }
+
+    // Загружаем основной шаблон через AJAX
+    const response = await fetch(url);
+    const templateSource = await response.text();
+
+    // Компилируем и рендерим шаблон
+
+    const template = Handlebars.compile(templateSource);
+
+    root.innerHTML = template(data);
+  } catch (err) {
+    // Обработка ошибок
+    errors.ShablonError(err);
+  }
 }
