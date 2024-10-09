@@ -6,8 +6,8 @@ export default [
   {
     languageOptions: {
       globals: {
-        ...globals.browser,  // Сохраните существующие глобальные переменные
-        Handlebars: 'readonly',  // Добавьте Handlebars как только для чтения
+        ...globals.browser,
+        Handlebars: 'readonly',
       },
     },
 

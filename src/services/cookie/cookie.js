@@ -1,6 +1,6 @@
-import {backurl} from "../router/settings.js";
-import {errors} from "../../scripts/errors/errors.js";
-import {signInUpdate} from "../../scripts/layouts/header/header.js";
+import { backurl } from '../router/settings.js';
+import { errors } from '../../scripts/errors/errors.js';
+import { signInUpdate } from '../../scripts/layouts/header/header.js';
 
 /**
  * Константа времени жизни cookie в миллисекундах (20 минут).
@@ -16,9 +16,10 @@ export const COOKIEEXPIRATION = 20 * 60 * 1000;
  * @param {number} expirationTime - Время жизни cookie в миллисекундах.
  */
 export const setCookie = (name, value, expirationTime) => {
-    let date = new Date();
-    date.setTime(date.getTime() + expirationTime);
-    document.cookie = `${name}=${JSON.stringify(value)};expires=${date.toUTCString()};path=/`;
+  let date = new Date();
+
+  date.setTime(date.getTime() + expirationTime);
+  document.cookie = `${name}=${JSON.stringify(value)};expires=${date.toUTCString()};path=/`;
 };
 
 /**
@@ -28,9 +29,11 @@ export const setCookie = (name, value, expirationTime) => {
  * @returns {Object|null} - Значение cookie, если оно существует, или null, если cookie не найдено.
  */
 export const getCookie = (name) => {
-    let result = document.cookie.match(new RegExp(name + '=([^;]+)'));
-    result && (result = JSON.parse(result[1]));
-    return result;
+  let result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+
+  result && (result = JSON.parse(result[1]));
+
+  return result;
 };
 
 /**
@@ -39,29 +42,29 @@ export const getCookie = (name) => {
  * @param {string} name - Имя cookie, которое нужно удалить.
  */
 export const deleteCookie = (name) => {
-    document.cookie = `${name}=; Max-Age=-99999999;path=/`;
+  document.cookie = `${name}=; Max-Age=-99999999;path=/`;
 };
 
 /**
  * Отправляет GET запрос на бекенд и при успешном ответе устанавливает cookie 'user'.
  */
 export const fetchUserDataAndSetCookie = async () => {
-    try {
-        const response = await fetch(backurl);
+  try {
+    const response = await fetch(backurl);
 
-        if (response.ok) {
-            const data = await response.json(); // Парсим JSON из ответа
+    if (response.ok) {
+      const data = await response.json(); // Парсим JSON из ответа
 
-            // Проверяем наличие поля username в ответе
-            if (data.username) {
-                // Устанавливаем cookie с именем пользователя и городом 'Москва'
-                setCookie('user', { city: 'Москва', name: data.username }, COOKIEEXPIRATION);
-                signInUpdate(data.username);
-            } else {
-                errors.GetUsername();
-            }
-        }
-    } catch (err) {
-        errors.BadGet(err);
+      // Проверяем наличие поля username в ответе
+      if (data.username) {
+        // Устанавливаем cookie с именем пользователя и городом 'Москва'
+        setCookie('user', { city: 'Москва', name: data.username }, COOKIEEXPIRATION);
+        signInUpdate(data.username);
+      } else {
+        errors.GetUsername();
+      }
     }
+  } catch (err) {
+    errors.BadGet(err);
+  }
 };
