@@ -1,4 +1,4 @@
-@import '/src/css/parametrs/parametrs.css';
+@import '/src/css/parametrs/parameters.css';
 @import '/src/scripts/components/elements/searcher/searcher.css';
 
 /* Закрепляем хедер */
@@ -35,11 +35,11 @@ header {
 }
 
 .header-top {
-    padding: var(--litle-padding);
+    padding: var(--small-padding);
     text-align: left;
     font-size: var(--font-size_label);
     background-color: inherit;
-    margin-left: var(--litle-margin-left);
+    margin-left: calc(var(--small-margin) + 2);
     font-weight: bold;
 }
 
@@ -85,7 +85,7 @@ header {
 
 .logo-part {
     display: inline-block;
-    transition: all var(--long-time) ease;
+    transition: all var(--two-seconds-duration) ease;
 }
 
 .catalog-button {
@@ -100,12 +100,12 @@ header {
     font-size: var(--big-font-size_another);
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    margin-right: var(--big-margin-right);
+    margin-right: var(--big-margin);
     padding: var(--micro-padding);
 }
 
 .catalog-button span {
-    margin-left: var(--micro-margin-left);
+    margin-left: var(--middle-margin);
     font-size: var(--loading-text-font-size);
     line-height: 1; /* Выравнивание текста */
 }
@@ -141,7 +141,7 @@ header {
     width: 50px; /* Максимальная ширина для имени */
     white-space: nowrap;
     overflow: hidden;
-    transition: opacity var(--litle-time) ease;
+    transition: opacity var(--short-duration) ease;
     opacity: 1;
     text-align: center;
 }
@@ -179,9 +179,9 @@ header {
     border-radius: var(--button-border-radius);
     z-index: 1000;
     min-width: 150px;
-    padding: var(--litle-padding);
+    padding: var(--small-padding);
     opacity: 0;
-    transition: opacity var(--litle-time) ease, transform var(--litle-time) ease, visibility 0s var(--midle-time); /* Задержка исчезновения */
+    transition: opacity var(--short-duration) ease, transform var(--short-duration) ease, visibility 0s var(--middle-duration); /* Задержка исчезновения */
 }
 
 .icon-dropdown.show {
@@ -189,7 +189,7 @@ header {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
     visibility: visible;
-    transition: opacity var(--litle-time) ease, transform var(--litle-time) ease;
+    transition: opacity var(--short-duration) ease, transform var(--short-duration) ease;
 }
 
 .icon-dropdown::before {
@@ -252,7 +252,7 @@ header {
     font-size: var(--min-font-size);
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--litle-time) ease, visibility var(--litle-time) ease;
+    transition: opacity var(--short-duration) ease, visibility var(--short-duration) ease;
 }
 
 #name:hover::after {
@@ -290,11 +290,11 @@ txt {
 
     .logo {
         flex: 0 0 auto;
-        margin-bottom: var(--midle-button-margin-bottom);
+        margin-bottom: var(--middle-button-margin-bottom);
     }
 
     .catalog-button {
-        margin-bottom: var(--midle-button-margin-bottom);
+        margin-bottom: var(--middle-button-margin-bottom);
         width: var(--proc-full-width);
         flex: 0 0 auto;
         display: flex;
@@ -306,13 +306,13 @@ txt {
         border-radius: var(--button-border-radius);
         font-size: var(--font-size-catalog-button);
         cursor: pointer;
-        transition: background-color var(--litle-time) ease, color var(--litle-time) ease;
+        transition: background-color var(--short-duration) ease, color var(--short-duration) ease;
         margin-right: var(--margin-right-catalog-btn);
         padding: var(--midle-margin-top);
     }
 
     .catalog-button span {
-        margin-left: var(--midle-margin-left);
+        margin-left: var(--middle-margin);
         font-size: var(--font-size-span-catalog-button);
     }
 
@@ -323,14 +323,14 @@ txt {
 
     .search-container {
         flex: 0 0 auto;
-        margin-top: var(--normal-margin-top);
+        margin-top: var(--default-margin);
         width: var(--proc-full-width);
     }
 
     .icons {
         flex-direction: row;
         flex: 0 0 auto;
-        margin-top: var(--normal-margin-top);
+        margin-top: var(--default-margin);
         justify-content: space-between;
     }
 

@@ -6,8 +6,10 @@ import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
 import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
 import {fetchAndRender, handleSignIn, handleSignUp} from "../client/auth/auth.js";
 import {fetchUserDataAndSetCookie, getCookie} from "../cookie/cookie.js";
-import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
+import {registrFunctions} from "../../scripts/constprograms/templatizer/commands.js";
 import {AddDropDown} from "../../scripts/layouts/header/header.js";
+import {buildOrderList} from "../../scripts/components/order-list/order-list.js";
+import {orderList} from "../../scripts/components/order-list/order-list-config.js";
 
 /**
  * Собираемые для переработки пути.
@@ -26,6 +28,7 @@ const ROUTES = {
     LOGIN: '/login',
     SIGNUP: '/signup',
     PERSONALACCOUNT: '/account',
+    ORDER_LIST: '/order_list'
 };
 
 /**
@@ -99,6 +102,7 @@ export const Router = {
         [ROUTES.LOGIN]: 'login',
         [ROUTES.ERROR]: 'error',
         [ROUTES.PERSONALACCOUNT]: 'personalAccount',
+        [ROUTES.ORDER_LIST]: 'order_list',
     },
 
     /**
@@ -296,6 +300,10 @@ export const Router = {
             });
     },
 
+    order_list: function () {
+        this.navigate(ROUTES.ORDER_LIST);
+        this.body(() => buildOrderList(orderList));
+    },
 
     /**
      * Метод для обработки регистрации пользователя.

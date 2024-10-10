@@ -6,6 +6,9 @@
     "eslint": "^9.11.1",
     "globals": "^15.9.0"
   },
+  "scripts": {
+    "start": "node ./src/services/server/server.js"
+  },
   "type": "module",
   "dependencies": {
     "express": "^4.21.0"
