@@ -15,20 +15,19 @@
     --button-text-color: oklch(0.49 0.25 299.6);
     --spinner-border-color: rgba(0, 0, 0, 0.1);
     --spinner-top-border-color: oklch(0.49 0.25 299.6);
-    --background-color-site: oklch(0.49 0.25 299.6);
-    --background-color-site-gray: oklch(0.41 0.19 301.59);
-    --background-color-site-black: oklch(0.33 0.15 303.45);
+    --base-background-color: oklch(0.49 0.25 299.6);
+    --darker-background-color: oklch(0.41 0.19 301.59);
+    --darkest-background-color: oklch(0.33 0.15 303.45);
     --background-color-site-new: oklch(0.35 0.16 303.3);
     --background-color-modal: rgba(0, 0, 0, 0.5);
-    --invizible-color: oklch(0.49 0.25 299.6 / 0);
-    --hover-button-collor: oklch(0.95 0 0);
-    --conteiner-background-collor: oklch(0.95 0 0);
+    --hover-button-color: oklch(0.95 0 0);
+    --container-background-color: oklch(0.95 0 0);
     --error-color: red;
     --global-error-color: #721c24;
-    --error-background: #ffe6e6;
-    --global-error-background: #f8d7da;
+    --error-background-color: #ffe6e6;
+    --global-error-background-color: #f8d7da;
     --global-error-border-color: #f5c6cb;
-    --text: #000;
+    --default-text-color: #000;
     --text-another-color: oklch(0.49 0.25 299.6);
     --text-password-color: oklch(0.47 0.23 300.73);
     --text-buy-color: oklab(0.93 0.03 -0.04);
@@ -44,30 +43,26 @@
     --padding: 16px;
     --padding15: 15px;
     --mini-padding: 12px;
-    --litle-padding: 10px;
+    --small-padding: 10px;
     --micro-padding: 5px;
     --one-padding: 1px;
-    --one-padding-botton: 1 px;
-    --midle-padding-top: 15px;
+    --middle-padding-top: 15px;
     --xl-margin-bottom: 1em;
     --big-margin-bottom: 20px;
     --button-margin-bottom: 15px;
     --description-margin-bottom: 10px;
-    --midle-button-margin-bottom: 10px;
-    --midle-margin-top: 5px;
-    --midle-margin-left: 5px;
-    --litle-margin-top: 2px;
-    --micro-margin-left: 5px;
-    --litle-margin-left: 7px;
-    --big-margin-right: 20px;
-    --normal-margin-top: 10px;
-    --one-margin-botton: 1 px;
+    --middle-button-margin-bottom: 10px;
+    --big-margin: 20px;
+    --middle-margin: 5px;
+    --small-margin: 2px;
+    --default-margin: 10px;
+    --one-px-margin: 1px;
     --margin-zero: 0;
     --card-box-shadow: 0 2px 5px;
     --m-group-padding: 30px 60px 60px;
     --zero: 0;
     --icon-dropdown-padding: 8px 12px;
-    --name-padding: 5 px;
+    --name-padding: 5px;
     --margin-right-catalog-btn: 20px;
 
     /* Размеры */
@@ -86,14 +81,14 @@
     --description-expanded-height: 40px; /* Максимум на 2 строки */
     --mini-description-expanded-height: 32px; /* Максимум на 2 строки */
     --button-padding: 10px 15px;
-    --conteiner-padding: 30px 60px 30px;
+    --container-padding: 30px 60px 30px;
     --button-border-radius: 5px;
     --button-border-radius4: 4px;
     --button-font-weight: bold;
     --card-aspect-ratio: 4 / 5;
     --input-border-radius: 6px;
     --auth-button-border-radius: 6px;
-    --conteiner-border-radius: 16px;
+    --container-border-radius: 16px;
     --icon-dropdown-border-radius: 3px;
     --one-border: 1px;
     --icon-dropdown-border-width: 0 10px 10px 10px;
@@ -157,10 +152,10 @@
     --big-scale: 1.05;
 
     /* Время */
-    --litle-time: 0.3s;
-    --midle-time: 0.5s;
-    --one-time: 1s;
-    --long-time: 2s;
+    --short-duration: 0.3s;
+    --middle-duration: 0.5s;
+    --one-second-duration: 1s;
+    --two-seconds-duration: 2s;
 
     /* Позиции смены */
     --phone: 768px;

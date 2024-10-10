@@ -1,0 +1,26 @@
+<div id="order-list-container" class="order-list-container">
+    <h2 class="order-list-title">Мои заказы</h2>
+    {{#each orders as |order|}}
+        <div class="order-card">
+            <div class="order-header">
+                <span class="order-date">Заказ от {{order.date}}</span>
+                <span class="order-total">оплачено {{order.total}}₽</span>
+
+            </div>
+            <div class="order-details">
+                <span class="order-status">{{order.status}}</span>
+
+            </div>
+            <div class="order-footer">
+                <button class="review-button">Оцените товары</button>
+                <div class="order-items">
+                    {{#each order.items as |item|}}
+                        <div class="order-item">
+                            <img src="{{item.image}}" alt="{{item.name}}" class="order-item-image"/>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

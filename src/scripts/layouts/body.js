@@ -1,4 +1,4 @@
-import {templatize} from '../constprograms/shablon/shablon.js'
+import {templatize} from '../constprograms/templatizer/templatizer.js'
 import {logoutUpdate} from "./header/header.js";
 import {backurl} from "../../services/router/settings.js";
 import {deleteCookie} from "../../services/cookie/cookie.js";

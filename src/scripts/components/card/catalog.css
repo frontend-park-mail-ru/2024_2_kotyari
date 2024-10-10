@@ -1,4 +1,4 @@
-@import "../../../css/parametrs/parametrs.css";
+@import "../../../css/parametrs/parameters.css";
 @import "/src/css/";
 
 body {
@@ -28,7 +28,7 @@ body {
     justify-content: var(--card-justify-content);
     align-items: var(--card-allign-items);
     text-align: var(--card-text-align);
-    transition: transform var(--litle-time) ease, box-shadow var(--litle-time) ease;
+    transition: transform var(--short-duration) ease, box-shadow var(--short-duration) ease;
     aspect-ratio: var(--card-aspect-ratio);
     will-change: transform;
     position: relative;
@@ -45,7 +45,7 @@ body {
     left: var(--before-card-tlrb);
     right: var(--before-card-tlrb);
     bottom: var(--before-card-tlrb);
-    transition: all var(--litle-time) ease;
+    transition: all var(--short-duration) ease;
     z-index: var(--before-card-z-index);
 }
 
@@ -125,7 +125,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    transition: max-height var(--litle-time) ease, white-space var(--litle-time) ease;
+    transition: max-height var(--short-duration) ease, white-space var(--short-duration) ease;
     margin-bottom: var(--description-margin-bottom);
     width: 100%;
 }
@@ -146,7 +146,7 @@ body {
     border-color: var(--button-text-color);
     border-radius: var(--button-border-radius);
     cursor: pointer;
-    transition: background-color var(--litle-time) ease, color var(--litle-time) ease;
+    transition: background-color var(--short-duration) ease, color var(--short-duration) ease;
     padding: var(--button-padding);
     margin-top: auto;
     width: 100%;

@@ -1,5 +1,5 @@
 import {errorsDescriptions} from "./errors.js";
-import {templatize} from "../../../constprograms/shablon/shablon.js";
+import {templatize} from "../../../constprograms/templatizer/templatizer.js";
 
 const returnPage = '/';
 
