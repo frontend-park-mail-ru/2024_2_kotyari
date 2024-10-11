@@ -10,29 +10,29 @@ export class RouteHandler {
     this.renderer = renderer; // Рендерер передаётся в конструктор
   }
 
-  catalog= () =>{
+  catalog = () => {
     return this.renderer.renderWithHandlers(() => buildCards()); // Вызываем buildCards для каталога
-  }
+  };
 
-  records=() =>{
+  records = () => {
     return this.renderer.renderWithHandlers(() => soon()); // Заглушка "в разработке"
-  }
+  };
 
-  basket =() =>{
+  basket = () => {
     return this.renderer.renderWithHandlers(() => soon()); // Заглушка для корзины
-  }
+  };
 
-  favorites =() => {
+  favorites = () => {
     return this.renderer.renderWithHandlers(() => soon()); // Заглушка для избранного
-  }
+  };
 
-  changeCity = () =>{
+  changeCity = () => {
     return this.renderer.renderWithHandlers(() => soon()); // Изменение города
-  }
+  };
 
-  product =(id) =>{
+  product = (id) => {
     return this.renderer.renderWithHandlers(() => soon()); // Страница товара
-  }
+  };
 
   signup = () => {
     return this.renderer
@@ -43,7 +43,7 @@ export class RouteHandler {
       .catch((err) => {
         console.error('Signup error:', err);
       });
-  }
+  };
 
   login = () => {
     return this.renderer
@@ -54,17 +54,17 @@ export class RouteHandler {
       .catch((err) => {
         console.error('Login error:', err);
       });
-  }
+  };
 
   personalAccount = () => {
     return this.renderer.renderWithHandlers(() => soon()); // Личный кабинет
-  }
+  };
 
   logout = () => {
     return this.renderer.renderWithHandlers(() => handleLogout()); // Выход пользователя
-  }
+  };
 
   error = (message) => {
     return this.renderer.renderWithHandlers(() => `<h1>Error: ${message}</h1>`); // Страница ошибки
-  }
+  };
 }

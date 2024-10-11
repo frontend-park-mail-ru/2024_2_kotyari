@@ -1,4 +1,4 @@
-import {Route} from '../route-manager/route.js';
+import { Route } from '../route-manager/route.js';
 
 export class Router {
   constructor(routes, routeHandler, renderer, authService, historyManager) {
