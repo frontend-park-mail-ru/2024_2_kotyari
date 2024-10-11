@@ -16,16 +16,16 @@
  *
  * @function
  */
-export function registrFunctions () {
-    /**
-     * Хелпер 'eq' для сравнения двух значений.
-     *
-     * @param {*} a - Первое значение для сравнения.
-     * @param {*} b - Второе значение для сравнения.
-     * @returns {boolean} Возвращает true, если значения равны, иначе false.
-     */
-    // eslint-disable-next-line no-undef
-    Handlebars.registerHelper('eq', function (a, b) {
-        return a === b;
-    });
+export function registrFunctions() {
+  /**
+   * Хелпер 'eq' для сравнения двух значений.
+   *
+   * @param {*} a - Первое значение для сравнения.
+   * @param {*} b - Второе значение для сравнения.
+   * @returns {boolean} Возвращает true, если значения равны, иначе false.
+   */
+
+  Handlebars.registerHelper('eq', function (a, b) {
+    return a === b;
+  });
 }
