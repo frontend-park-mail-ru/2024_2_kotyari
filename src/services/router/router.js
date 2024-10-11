@@ -20,7 +20,7 @@ const ROUTES = {
   HOME: '/',
   CATALOG: '/catalog',
   RECORDS: '/records',
-  CHANGESITY: '/changeSity',
+  CHANGE_CITY: '/change_city',
   BASKET: '/basket',
   FAVORITE: '/favorite',
   PRODUCT: '/catalog/product/:id',
@@ -28,7 +28,7 @@ const ROUTES = {
   LOGOUT: '/logout',
   LOGIN: '/login',
   SIGNUP: '/signup',
-  PERSONALACCOUNT: '/account',
+  PERSONAL_ACCOUNT: '/account',
   ORDER_LIST: '/order_list',
   SINGLE_ORDER: '/single_order',
 };
@@ -95,7 +95,7 @@ export const Router = {
     [ROUTES.HOME]: 'catalog',
     [ROUTES.CATALOG]: 'catalog',
     [ROUTES.RECORDS]: 'records',
-    [ROUTES.CHANGESITY]: 'changeSity',
+    [ROUTES.CHANGE_CITY]: 'changeCity',
     [ROUTES.BASKET]: 'basket',
     [ROUTES.FAVORITE]: 'favorites',
     [ROUTES.PRODUCT]: 'product',
@@ -103,7 +103,7 @@ export const Router = {
     [ROUTES.SIGNUP]: 'signup',
     [ROUTES.LOGIN]: 'login',
     [ROUTES.ERROR]: 'error',
-    [ROUTES.PERSONALACCOUNT]: 'personalAccount',
+    [ROUTES.PERSONAL_ACCOUNT]: 'personalAccount',
     [ROUTES.ORDER_LIST]: 'order_list',
     [ROUTES.SINGLE_ORDER]: 'single_order',
   },
@@ -227,7 +227,7 @@ export const Router = {
    * Страница изменения города.
    * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
    */
-  changeSity: function () {
+  changeCity: function () {
     this.navigate(ROUTES.CHANGESITY); // Изменяем URL
     return this.body(() => soon());
   },
