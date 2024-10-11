@@ -112,20 +112,20 @@
     --price-font-size: 16px;
     --input-font-size: 16px;
     --description-font-size: 12px;
-    --min-font-size: 12px;
     --loading-text-font-size: 16px;
     --font-size-catalog-button: 35px;
     --font-size_label: 14px;
     --font-size-span-catalog-button: 16px;
-    --font-size: 18px;
+    --small-font-size: 12px;
+    --default-font-size: 18px;
     --font-size20: 20px;
     --big-font-size: 28px;
     --big-font-size_another: 35px;
     --mega-font-size: 40px;
     --max-font-size: 50px;
     --error-font-size: 0.875em;
-    --litle-font-weight: 400;
-    --midle-font-weight: 550;
+    --little-font-weight: 400;
+    --middle-font-weight: 550;
 
 
     /* Расположение */

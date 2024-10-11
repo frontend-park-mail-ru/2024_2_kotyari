@@ -1,0 +1,46 @@
+<div id="{{id}}" class="single-order-container">
+    <h2 class="single-order-title">Заказ № {{orderNumber}}</h2>
+
+    <div class="single-order-summary">
+        <div class="single-order-info">
+            <div class="single-order-status">
+                <p>Вы получили {{deliveryDate}}</p>
+                <span class="single-order-paid-status">заказ оплачен</span>
+            </div>
+            <div class="single-order-recipient">
+                <h4>Получатель</h4>
+                <div class="single-order-recipient-details">
+                    <p>{{recipientName}}</p>
+                    <p>{{recipientAddress}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="single-order-total">
+            <div class="total-header">
+                <span>Всего: {{totalItems}} товара</span>
+                <span>{{totalWeight}} кг</span>
+            </div>
+            <div class="total-footer">
+                <h2 class="total-label">Итого</h2>
+                <span class="total-amount">{{totalPrice}}₽</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-order-details">
+        <h3>Состав заказа</h3>
+        {{#each items as |item|}}
+            <div class="single-order-item">
+                <img src="{{item.image}}" alt="{{item.name}}" class="single-order-item-image"/>
+                <div class="single-order-item-info">
+                    <span class="item-name">{{item.name}}</span>
+                    <div class="item-price-and-quantity">
+                        <span class="item-price">{{item.price}}₽</span>
+                        <span class="item-quantity">{{item.quantity}} шт</span>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

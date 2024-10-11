@@ -147,7 +147,7 @@ header {
 }
 
 .icon-label, .icon-label-hidden {
-    font-size: var(--min-font-size);
+    font-size: var(--small-font-size);
     display: block;
     margin-top: var(--midle-margin-top);
 }
@@ -249,7 +249,7 @@ header {
     color: var(--name-buy-color);
     padding: var(--name-padding);
     border-radius: var(--button-border-radius);
-    font-size: var(--min-font-size);
+    font-size: var(--small-font-size);
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--short-duration) ease, visibility var(--short-duration) ease;

@@ -82,8 +82,8 @@
 }
 
 .order-total {
-    font-size: var(--font-size);
-    font-weight: var(--litle-font-weight);
+    font-size: var(--default-font-size);
+    font-weight: var(--little-font-weight);
 }
 
 .review-button {
