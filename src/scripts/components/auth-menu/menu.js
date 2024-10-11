@@ -1,6 +1,6 @@
 import { templatize } from '../../constprograms/templatizer/templatizer.js';
 
-const tmpURL = 'src/scripts/components/auth-menu/menu.hbs';
+const tmpURL = 'src/scripts/components/auth-manager-menu/menu.hbs';
 
 /**
  * Функция для переключения типа поля ввода пароля и состояния иконки.
