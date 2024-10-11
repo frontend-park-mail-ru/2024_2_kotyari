@@ -258,26 +258,18 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
     });
 }
 
+export const handlerLogout = (event) => {
+  let url = new URL('/logout', window.location.origin);
 
-export const handlerLogout = event => {
-    let url = new URL('/logout', window.location.origin);
+  Router.dispatch(url.pathname);
 
-    Router.dispatch(url.pathname);
-
-    event.preventDefault();
+  event.preventDefault();
 };
 
-
 export class AuthManager {
-    isAuthenticated = () => {
+  isAuthenticated = () => {};
 
-    }
+  login = () => {};
 
-    login = () => {
-
-    }
-
-    logout = () => {
-
-    }
+  logout = () => {};
 }
