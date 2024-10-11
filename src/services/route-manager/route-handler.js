@@ -1,4 +1,3 @@
-import { ROUTES } from './routes.js';
 import { buildCards } from '../../scripts/components/card/card.js';
 import { soon } from '../../scripts/components/custom-messages/soon/soon.js';
 import { buildAuthMenu } from '../../scripts/components/auth-menu/menu.js';
@@ -11,31 +10,31 @@ export class RouteHandler {
     this.renderer = renderer; // Рендерер передаётся в конструктор
   }
 
-  catalog() {
+  catalog= () =>{
     return this.renderer.renderWithHandlers(() => buildCards()); // Вызываем buildCards для каталога
   }
 
-  records() {
+  records=() =>{
     return this.renderer.renderWithHandlers(() => soon()); // Заглушка "в разработке"
   }
 
-  basket() {
+  basket =() =>{
     return this.renderer.renderWithHandlers(() => soon()); // Заглушка для корзины
   }
 
-  favorites() {
+  favorites =() => {
     return this.renderer.renderWithHandlers(() => soon()); // Заглушка для избранного
   }
 
-  changeСity() {
+  changeCity = () =>{
     return this.renderer.renderWithHandlers(() => soon()); // Изменение города
   }
 
-  product(id) {
+  product =(id) =>{
     return this.renderer.renderWithHandlers(() => soon()); // Страница товара
   }
 
-  signup() {
+  signup = () => {
     return this.renderer
       .renderWithHandlers(() => buildAuthMenu(menuSignUp))
       .then(() => {
@@ -46,7 +45,7 @@ export class RouteHandler {
       });
   }
 
-  login() {
+  login = () => {
     return this.renderer
       .renderWithHandlers(() => buildAuthMenu(menuSignIn))
       .then(() => {
@@ -57,15 +56,15 @@ export class RouteHandler {
       });
   }
 
-  personalAccount() {
+  personalAccount = () => {
     return this.renderer.renderWithHandlers(() => soon()); // Личный кабинет
   }
 
-  logout() {
+  logout = () => {
     return this.renderer.renderWithHandlers(() => handleLogout()); // Выход пользователя
   }
 
-  error(message) {
+  error = (message) => {
     return this.renderer.renderWithHandlers(() => `<h1>Error: ${message}</h1>`); // Страница ошибки
   }
 }
