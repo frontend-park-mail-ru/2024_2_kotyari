@@ -257,3 +257,27 @@ export function fetchAndRender(route, redirectLink, routeTo, renderFunction) {
       console.error('Error fetching data:', error);
     });
 }
+
+
+export const handlerLogout = event => {
+    let url = new URL('/logout', window.location.origin);
+
+    Router.dispatch(url.pathname);
+
+    event.preventDefault();
+};
+
+
+export class AuthManager {
+    isAuthenticated = () => {
+
+    }
+
+    login = () => {
+
+    }
+
+    logout = () => {
+
+    }
+}
