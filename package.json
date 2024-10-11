@@ -11,14 +11,12 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3"
   },
-  "scripts": {
-    "start": "node ./src/services/server/server.js"
-  },
   "type": "module",
   "dependencies": {
     "express": "^4.21.0"
   },
   "scripts": {
+    "start": "node ./src/services/server/server.js",
     "prepare": "husky",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
