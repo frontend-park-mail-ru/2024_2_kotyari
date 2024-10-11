@@ -1,4 +1,5 @@
 import { templatize } from '../../constprograms/templatizer/templatizer.js';
+import { validateEmail, validatePassword, validatePasswordMatch, validateUsername } from './auth.js';
 
 const tmpURL = 'src/scripts/components/auth-menu/menu.hbs';
 
@@ -28,7 +29,7 @@ function togglePassword(event) {
 
 /**
  * Функция для построения меню авторизации с динамическим рендерингом данных
- * и установкой обработчиков событий для переключения видимости пароля.
+ * и установкой обработчиков событий для переключения видимости пароля и валидации полей.
  *
  * @async
  * @function
@@ -38,7 +39,7 @@ function togglePassword(event) {
  * Пример использования:
  *
  * ```js
- * buildAuthMenu({ userName: 'John Doe', isLoggedIn: true });
+ * buildAuthMenu({userName: 'John Doe', isLoggedIn: true});
  * ```
  */
 export async function buildAuthMenu(data) {
@@ -46,6 +47,29 @@ export async function buildAuthMenu(data) {
     // Назначаем обработчик события для всех иконок с классом 'toggle-password'
     document.querySelectorAll('.toggle-password').forEach((item) => {
       item.addEventListener('click', togglePassword);
+    });
+
+    document.querySelectorAll('input[id^="signup"]').forEach((input) => {
+      input.addEventListener('focusout', () => {
+        const inputType = input.id;
+        switch (inputType) {
+          case 'signup_username':
+            validateUsername(input);
+            break;
+          case 'signup_email':
+            validateEmail(input);
+            break;
+          case 'signup_password':
+            validatePassword(input);
+            break;
+          case 'signup_password_repeat':
+            validatePasswordMatch(
+              document.getElementById('signup_password'),
+              document.getElementById('signup_password_repeat')
+            );
+            break;
+        }
+      });
     });
   });
 }

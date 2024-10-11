@@ -73,6 +73,6 @@ export async function templatize(root, url, data) {
     root.innerHTML = template(data);
   } catch (err) {
     // Обработка ошибок
-    errors.ShablonError(err);
+    errors.TemplatizerError(err);
   }
 }

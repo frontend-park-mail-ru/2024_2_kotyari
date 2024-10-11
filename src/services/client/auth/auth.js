@@ -1,13 +1,8 @@
-import {
-  validateEmail,
-  validatePassword,
-  validatePasswordLogin,
-  validateUsername,
-} from '../../../scripts/components/auth-menu/auth.js';
+import { validateEmail, validatePassword, validateUsername } from '../../../scripts/components/auth-menu/auth.js';
 import { backurl } from '../../router/settings.js';
 import { Router } from '../../router/router.js';
 import { signInUpdate } from '../../../scripts/layouts/header/header.js';
-import { setCookie, COOKIEEXPIRATION } from '../../cookie/cookie.js';
+import { setCookie, COOKIEEXPIRATION, fetchUserDataAndSetCookie } from '../../cookie/cookie.js';
 
 /**
  * Обработчик для входа в систему (Sign In).
@@ -21,15 +16,6 @@ export function handleSignIn(event) {
   const form = event.target;
   const email = form.querySelector('[name="email"]');
   const password = form.querySelector('[name="password"]');
-
-  const isEmailValid = validateEmail(email);
-  const isPasswordValid = validatePasswordLogin(password);
-
-  if (!isEmailValid || !isPasswordValid) {
-    console.error('Ошибка валидации');
-
-    return;
-  }
 
   fetch(backurl + 'login', {
     method: 'POST',
@@ -55,7 +41,6 @@ export function handleSignIn(event) {
 
       if (!response.ok) {
         const errorText = await response.text();
-
         throw new Error(errorText || 'Произошла ошибка на сервере.');
       }
 
@@ -78,7 +63,7 @@ export function handleSignIn(event) {
     })
     .catch((error) => {
       console.error('Ошибка при запросе:', error.message);
-      addGlobalError(error.message);
+      addGlobalError(`Неверный пароль или email`);
     });
 }
 
@@ -105,7 +90,6 @@ export function handleSignUp(event) {
 
   if (!isUsernameValid || !isEmailValid || !isPasswordValid) {
     console.error('Ошибка валидации');
-
     return;
   }
 
@@ -145,7 +129,6 @@ export function handleSignUp(event) {
           });
       } else {
         const err = await response.json();
-
         addGlobalError(err.error_message);
         console.error('Ошибка регистрации:', response.json());
       }
@@ -161,7 +144,6 @@ export function handleSignUp(event) {
  */
 export function clearErrors() {
   const globalError = document.getElementById('global_error');
-
   globalError.style.display = 'none';
   globalError.querySelector('#global_error_message').innerText = '';
 
@@ -179,7 +161,6 @@ export function clearErrors() {
 export function displayErrors(errors) {
   if (errors['global']) {
     const globalError = document.getElementById('global_error');
-
     globalError.style.display = 'block';
     globalError.querySelector('#global_error_message').innerText = errors['global'];
   }
@@ -187,7 +168,6 @@ export function displayErrors(errors) {
   for (let fieldId in errors) {
     if (fieldId !== 'global') {
       const errorElement = document.getElementById(`${fieldId}_error`);
-
       if (errorElement) {
         errorElement.innerText = errors[fieldId];
       }
