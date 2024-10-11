@@ -1,5 +1,5 @@
-import {errorsDescriptions} from "./errors.js";
-import {templatize} from "../../../constprograms/templatizer/templatizer.js";
+import { errorsDescriptions } from './errors.js';
+import { templatize } from '../../../constprograms/templatizer/templatizer.js';
 
 const returnPage = '/';
 
@@ -13,20 +13,20 @@ const returnPage = '/';
  * @param {string} name - Имя ошибки для отображения.
  * @returns {Promise} Промис, который разрешается после успешного отображения страницы ошибки.
  */
-export function errorPage (name) {
-    let config = {
-        name: '404',
-        description: errorsDescriptions['404'],
-        return: returnPage
-    }
+export function errorPage(name) {
+  let config = {
+    name: '404',
+    description: errorsDescriptions['404'],
+    return: returnPage,
+  };
 
-    if (name in errorsDescriptions) {
-        config = {
-            name: name,
-            description: errorsDescriptions[name],
-            return: returnPage
-        }
-    }
+  if (name in errorsDescriptions) {
+    config = {
+      name: name,
+      description: errorsDescriptions[name],
+      return: returnPage,
+    };
+  }
 
-    return templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/error/error.hbs', config)
+  return templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/error/error.hbs', config);
 }

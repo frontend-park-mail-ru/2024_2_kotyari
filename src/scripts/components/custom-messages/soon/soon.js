@@ -1,4 +1,4 @@
-import {templatize} from "../../../constprograms/templatizer/templatizer.js";
+import { templatize } from '../../../constprograms/templatizer/templatizer.js';
 
 const returnPage = '/';
 
@@ -10,7 +10,7 @@ const returnPage = '/';
  * @returns {Promise} Промис, который разрешается после успешного отображения шаблона.
  */
 export function soon() {
-    return templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/soon/soon.hbs', {
-        return: returnPage
-    })
+  return templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/soon/soon.hbs', {
+    return: returnPage,
+  });
 }

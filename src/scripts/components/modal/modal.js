@@ -1,5 +1,5 @@
-import {templatize} from "../../constprograms/templatizer/templatizer.js";
-import {errors} from "../../errors/errors.js";
+import { templatize } from '../../constprograms/templatizer/templatizer.js';
+import { errors } from '../../errors/errors.js';
 
 /**
  * Создает и отображает модальное окно с заданным контентом.
@@ -17,57 +17,56 @@ import {errors} from "../../errors/errors.js";
  * @returns {Promise|undefined} Промис, который разрешается после успешного отображения модального окна, или undefined, если имя пользователя пустое.
  */
 export function buildModalWithContent(user, triggerElement, template, rootId, modalID, data) {
-    if (user.name === "") {
-        return;
-    }
+  if (user.name === '') {
+    return;
+  }
 
-    const root = document.getElementById(rootId);
+  const root = document.getElementById(rootId);
 
-    return templatize(root, template, data).then(() => {
-        const modalController = ({modal, btnOpen, btnClose, time = 300}) => {
-            const btn = document.getElementById(btnOpen);
-            const modalElem = document.getElementById(modal);
+  return templatize(root, template, data)
+    .then(() => {
+      const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
+        const btn = document.getElementById(btnOpen);
+        const modalElem = document.getElementById(modal);
 
-            modalElem.style.cssText = `
+        modalElem.style.cssText = `
                     display: flex;
                     visibility: hidden;
                     opacity: 0;
                     transition: opacity ${time}ms ease-in-out;`;
 
-            const closeModal = event => {
-                const target = event.target;
+        const closeModal = (event) => {
+          const target = event.target;
 
-                if (target === modalElem ||
-                    (btnClose && target.closest(btnClose)) ||
-                    event.code === 'Escape') {
-                    modalElem.style.opacity = '0';
+          if (target === modalElem || (btnClose && target.closest(btnClose)) || event.code === 'Escape') {
+            modalElem.style.opacity = '0';
 
-                    setTimeout(() => {
-                        modalElem.style.visibility = 'hidden';
-                    }, time);
+            setTimeout(() => {
+              modalElem.style.visibility = 'hidden';
+            }, time);
 
-                    window.removeEventListener('keydown', closeModal);
-                }
-            };
-
-            const openModal = () => {
-                modalElem.style.visibility = 'visible';
-                modalElem.style.opacity = '1';
-                window.addEventListener('keydown', closeModal);
-            };
-
-            btn.addEventListener('click', openModal);
-
-            modalElem.addEventListener('click', closeModal);
+            window.removeEventListener('keydown', closeModal);
+          }
         };
 
-        modalController({
-            modal: modalID,
-            btnOpen: triggerElement,
-            btnClose: '.btn__close'
-        });
+        const openModal = () => {
+          modalElem.style.visibility = 'visible';
+          modalElem.style.opacity = '1';
+          window.addEventListener('keydown', closeModal);
+        };
+
+        btn.addEventListener('click', openModal);
+
+        modalElem.addEventListener('click', closeModal);
+      };
+
+      modalController({
+        modal: modalID,
+        btnOpen: triggerElement,
+        btnClose: '.btn__close',
+      });
     })
-        .catch(err => {
-            errors.ShablonError(err);
-        });
+    .catch((err) => {
+      errors.ShablonError(err);
+    });
 }
