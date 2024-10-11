@@ -12,7 +12,7 @@ export const errors = {
    * @memberof errors
    * @param {Error} error - Объект ошибки, которая возникла при загрузке шаблона.
    */
-  ShablonError: (error) => {
+  TemplatizerError: (error) => {
     console.error('Ошибка загрузки шаблона:', error);
   },
 

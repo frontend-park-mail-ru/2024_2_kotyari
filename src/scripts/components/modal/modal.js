@@ -67,6 +67,6 @@ export function buildModalWithContent(user, triggerElement, template, rootId, mo
       });
     })
     .catch((err) => {
-      errors.ShablonError(err);
+      errors.TemplatizerError(err);
     });
 }

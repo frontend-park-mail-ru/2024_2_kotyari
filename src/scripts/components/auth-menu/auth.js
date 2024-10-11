@@ -1,3 +1,5 @@
+import { clientErrors } from '../../errors/client-errors.js';
+
 /**
  * Validates the email field by checking if it matches the email format.
  * If invalid, displays an error message.
@@ -12,7 +14,7 @@ export function validateEmail(email) {
   removeInputError(email, errorElement);
 
   if (!emailRegex.test(email.value)) {
-    addInputError(email, errorElement, 'Неверный формат почты.');
+    addInputError(email, errorElement, clientErrors.wrongEmailFormat);
 
     return false;
   }
@@ -52,43 +54,43 @@ function addInputError(element, errorElement, msg) {
  * @returns {boolean} - Returns true if the password and confirmation are valid, otherwise false.
  */
 export function validatePasswordMatch(password, passwordRepeat) {
-    let isValid = true;
-    const errorRepeatElement = document.getElementById(passwordRepeat.dataset.errorId);
+  let isValid = true;
+  const errorRepeatElement = document.getElementById(passwordRepeat.dataset.errorId);
 
+  removeInputError(passwordRepeat, errorRepeatElement);
+  const passwordValue = password.value;
+  const passwordRepeatValue = passwordRepeat.value;
+  if (passwordValue !== passwordRepeatValue || (passwordValue === '' && passwordRepeatValue === '')) {
+    addInputError(passwordRepeat, errorRepeatElement, clientErrors.passwordsDoNotMatch);
+    isValid = false;
+  } else {
     removeInputError(passwordRepeat, errorRepeatElement);
-    const passwordValue = password.value
-    const passwordRepeatValue = passwordRepeat.value
-    if (passwordValue !== passwordRepeatValue || passwordValue === '' && passwordRepeatValue === '') {
-        addInputError(passwordRepeat, errorRepeatElement, 'Пароли должны совпадать');
-        isValid = false;
-    } else {
-        removeInputError(passwordRepeat, errorRepeatElement);
-    }
+  }
 
-    return isValid;
+  return isValid;
 }
 
 export function validatePassword(password) {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d!@#$%^:&?*.]{8,}$/;
-        let isValid = true;
-        const errorElement = document.getElementById(password.dataset.errorId);
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$%*?&#])[A-Za-z\d!@#$%^:&?*.]{8,}$/;
+  let isValid = true;
+  const errorElement = document.getElementById(password.dataset.errorId);
 
-        removeInputError(password, errorElement);
+  removeInputError(password, errorElement);
 
-        if (!passwordRegex.test(password.value)) {
-            let errorMsg;
-            if (password.value.length < 8) {
-                errorMsg = 'Пароль должен содержать не менее 8 символов.'
-            } else {
-                errorMsg = 'Пароль должен содержать заглавные, строчные буквы, цифру и специальный символ @$%*?&#.';
-            }
-            addInputError(password, errorElement, errorMsg);
-            isValid = false;
-        } else {
-            removeInputError(password, errorElement);
-        }
+  if (!passwordRegex.test(password.value)) {
+    let errorMsg;
+    if (password.value.length < 8) {
+      errorMsg = clientErrors.passwordTooShort;
+    } else {
+      errorMsg = clientErrors.passwordNoSpecialSymbols;
+    }
+    addInputError(password, errorElement, errorMsg);
+    isValid = false;
+  } else {
+    removeInputError(password, errorElement);
+  }
 
-        return isValid;
+  return isValid;
 }
 
 /**
@@ -107,10 +109,10 @@ export function validateUsername(username) {
   removeInputError(username, errorElement);
 
   if (user.length < 2 || user.length > 40) {
-    addInputError(username, errorElement, 'Имя должно быть от 2 до 40 символов.');
+    addInputError(username, errorElement, clientErrors.wrongUsernameLength);
     isValid = false;
   } else if (!usernameRegex.test(user)) {
-    addInputError(username, errorElement, 'Имя может содержать буквы, цифры, пробелы, а также "-" и "_"');
+    addInputError(username, errorElement, clientErrors.wrongUsernameLength);
     isValid = false;
   } else {
     removeInputError(username, errorElement);
