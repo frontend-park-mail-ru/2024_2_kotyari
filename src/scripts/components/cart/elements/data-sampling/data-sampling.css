@@ -1,0 +1,56 @@
+.cart-header {
+    display: flex;
+    justify-content: flex-start; /* Ориентируем элементы влево */
+    align-items: center;
+    gap: 20px; /* Отступ между элементами */
+    margin-bottom: 20px;
+}
+
+.cart-header .left-part {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.cart-header .left-part label {
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+    font-size: 14px; /* Задаем фиксированный размер шрифта */
+}
+
+.left-part #select-all {
+    margin-left: 10px;
+}
+
+.cart-header a.delete-selected {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: black;
+    font-size: 14px; /* Фиксированный размер шрифта */
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Чтобы текст не переносился */
+    margin-left: 20px;
+    flex-shrink: 0; /* Не сжимаем правую часть */
+}
+
+.cart-header a.delete-selected .icon {
+    color: #888888; /* Серый цвет для крестика */
+    font-size: 18px;
+    margin-right: 14px; /* Отступ между крестиком и текстом */
+    margin-left: 14px;
+}
+
+@media (max-width: 600px) {
+    .cart-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-header .left-part,
+    .cart-header a.delete-selected {
+        width: 100%;
+    }
+
+    .cart-header a.delete-selected {
+        margin-left: 0;
+    }
+}

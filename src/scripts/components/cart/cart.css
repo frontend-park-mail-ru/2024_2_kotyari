@@ -1,0 +1,79 @@
+@charset "UTF-8";
+@import '/src/scripts/components/cart/elements/data-sampling/data-sampling.css';
+@import '/src/scripts/components/cart/elements/lefr-cards/left-cards.css';
+@import '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.css';
+@import '/src/css/parametrs/parametrs.css';
+.cart-container {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.cart-container__title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.cart-container__content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cart-container__left {
+  width: 60%;
+}
+
+.cart-container__right {
+  width: 35%;
+}
+
+.cart-container__right-absolute {
+  position: fixed;
+  width: 31.5%;
+}
+
+.cart-item__checkbox {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px; /* Отступ между чекбоксом и текстом */
+}
+
+.cart-item__checkbox-input {
+  appearance: none;
+  width: 16px; /* Размер чекбокса равен размеру крестика */
+  height: 16px; /* Размер чекбокса равен размеру крестика */
+  background-color: #fff;
+  border: 2px solid #7A16D5;
+  border-radius: 3px; /* Чуть меньший радиус, чтобы соответствовать уменьшенному размеру */
+  cursor: pointer;
+  position: relative;
+}
+
+.cart-item__checkbox-input--checked {
+  color: #7A16D5;
+}
+
+.cart-item__checkbox-input--checked::after {
+  content: "✔";
+  position: absolute;
+  font-size: 12px; /* Уменьшенный размер галочки */
+  left: 1px;
+  top: -2px; /* Корректируем позиционирование галочки */
+}
+
+@media screen and (max-width: 858px) {
+  .cart-container__content {
+    flex-direction: column;
+  }
+  .cart-container__left, .cart-container__right {
+    width: 100%;
+  }
+  .cart-container__right-absolute {
+    position: relative;
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=cart.css.map */

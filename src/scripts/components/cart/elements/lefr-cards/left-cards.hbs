@@ -1,0 +1,30 @@
+<div class="cart-items">
+    {{#each items}}
+        <div class="cart-item">
+            <div class="item-checkbox">
+                <input type="checkbox" class="select-item">
+            </div>
+            <div class="item-image">
+                <img src="{{image}}" alt="{{name}}" onerror="this.src='https://via.placeholder.com/150'">
+            </div>
+            <div class="item-details">
+                <div class="item-title">{{name}}</div>
+                <div class="item-price">{{price}}</div>
+                <div class="item-info">
+                    <span class="delivery-date">Дата доставки:</span>
+                    <span class="delivery-date-right">{{deliveryDate}}</span>
+                </div>
+                <div class="item-quantity-wrapper">
+                    <div class="item-quantity">
+                        <button class="quantity-btn minus">{{#if isSingleItem}}&#128465;{{else}}-{{/if}}</button>
+                        <span class="quantity-count">{{quantity}} шт.</span>
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <span class="wishlist-icon material-icons">favorite</span>
+                </div>
+            </div>
+            <button class="remove-item">&#x2715;</button>
+        </div>
+    {{/each}}
+</div>
+
