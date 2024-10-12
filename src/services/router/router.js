@@ -8,6 +8,7 @@ import {fetchAndRender, handleSignIn, handleSignUp} from "../client/auth/auth.js
 import {fetchUserDataAndSetCookie, getCookie} from "../cookie/cookie.js";
 import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
 import {AddDropDown} from "../../scripts/layouts/header/header.js";
+import {cart} from "../../scripts/components/cart/cart.js";
 
 /**
  * Собираемые для переработки пути.
@@ -18,7 +19,7 @@ const ROUTES = {
     CATALOG: '/catalog',
     RECORDS: '/records',
     CHANGESITY: '/changeSity',
-    BASKET: '/basket',
+    CART: '/cart',
     FAVORITE: '/favorite',
     PRODUCT: '/catalog/product/:id',
     ERROR: '/error/:err',
@@ -91,7 +92,7 @@ export const Router = {
         [ROUTES.CATALOG]: 'catalog',
         [ROUTES.RECORDS]: 'records',
         [ROUTES.CHANGESITY]: 'changeSity',
-        [ROUTES.BASKET]: 'basket',
+        [ROUTES.CART]: 'cart',
         [ROUTES.FAVORITE]: 'favorites',
         [ROUTES.PRODUCT]: 'product',
         [ROUTES.LOGOUT]: 'logout',
@@ -205,8 +206,9 @@ export const Router = {
      * Страница корзины.
      * @returns {Promise<Response>} - Возвращает Promise после загрузки страницы.
      */
-    basket: function () {
-        return fetchAndRender(ROUTES.BASKET, ROUTES.LOGIN, ROUTES.BASKET, () => this.body(() => soon()));
+    cart: function () {
+        //return fetchAndRender(ROUTES.CART, ROUTES.LOGIN, ROUTES.CART, () => this.body(() => cart()));
+        return this.body(() => cart());
     },
 
     /**

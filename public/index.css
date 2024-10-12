@@ -6,6 +6,7 @@
 @import '/src/scripts/layouts/footer/footer.css';
 @import '/src/scripts/layouts/header/header.css';
 @import '/src/scripts/components/auth-menu/auth-menu.css';
+@import '/src/scripts/components/cart/cart.css';
 
 * {
     margin: 0;

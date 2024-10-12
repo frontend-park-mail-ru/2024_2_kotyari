@@ -1,56 +1,78 @@
+@charset "UTF-8";
 .cart-header {
-    display: flex;
-    justify-content: flex-start; /* Ориентируем элементы влево */
-    align-items: center;
-    gap: 20px; /* Отступ между элементами */
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--main-gap);
+  margin-bottom: var(--big-margin-bottom);
 }
-
-.cart-header .left-part {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+.cart-header__left-part {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-
-.cart-header .left-part label {
-    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
-    font-size: 14px; /* Задаем фиксированный размер шрифта */
+.cart-header__label {
+  white-space: nowrap;
+  font-size: var(--font-size_label);
+  margin-left: var(--lable-margin-left);
 }
-
-.left-part #select-all {
-    margin-left: 10px;
+.cart-header__delete-selected {
+  text-decoration: none;
+  color: black;
+  font-size: var(--font-size_label);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  margin-left: var(--delete-margin-left);
+  flex-shrink: 0;
 }
-
-.cart-header a.delete-selected {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: black;
-    font-size: 14px; /* Фиксированный размер шрифта */
-    display: flex;
-    align-items: center;
-    white-space: nowrap; /* Чтобы текст не переносился */
-    margin-left: 20px;
-    flex-shrink: 0; /* Не сжимаем правую часть */
+.cart-header__select-all {
+  margin-left: var(--checkbox-margin-left);
 }
-
-.cart-header a.delete-selected .icon {
-    color: #888888; /* Серый цвет для крестика */
-    font-size: 18px;
-    margin-right: 14px; /* Отступ между крестиком и текстом */
-    margin-left: 14px;
+.cart-header__icon {
+  color: var(--delete-color);
+  font-size: var(--font-size);
+  margin-right: var(--icon-margin-right);
+  margin-left: var(--icon-margin-left);
 }
-
 @media (max-width: 600px) {
-    .cart-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .cart-header .left-part,
-    .cart-header a.delete-selected {
-        width: 100%;
-    }
-
-    .cart-header a.delete-selected {
-        margin-left: 0;
-    }
+  .cart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cart-header__left-part, .cart-header__delete-selected {
+    width: var(--width-max);
+  }
+  .cart-header__delete-selected {
+    margin-left: 0;
+  }
 }
+.cart-header__checkbox {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-right: var(--checkbox-margin-right); /* Отступ между чекбоксом и текстом */
+}
+.cart-header__select-all {
+  appearance: none;
+  width: var(--checkbox-width); /* Размер чекбокса равен размеру крестика */
+  height: var(--checkbox-height); /* Размер чекбокса равен размеру крестика */
+  background-color: var(--card-background-color);
+  border: 2px solid var(--main-border-color);
+  border-radius: 3px; /* Чуть меньший радиус, чтобы соответствовать уменьшенному размеру */
+  cursor: pointer;
+  position: relative;
+  margin-left: var(--checkbox-margin-left);
+}
+.cart-header__select-all:checked {
+  color: var(--checkbox-text-color);
+}
+.cart-header__select-all:checked::after {
+  content: "✔";
+  position: absolute;
+  font-size: var(--min-font-size); /* Уменьшенный размер галочки */
+  left: 1px;
+  top: -2px; /* Корректируем позиционирование галочки */
+}
+
+/*# sourceMappingURL=data-sampling.css.map */

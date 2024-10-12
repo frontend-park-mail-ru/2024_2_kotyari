@@ -23,5 +23,15 @@ export const partials = {
     '/src/scripts/layouts/header/header.hbs': [{
         name: 'searcher',
         partial: '/src/scripts/components/elements/searcher/searcher.hbs'
+    }],
+    '/src/scripts/components/cart/cart.hbs': [{
+        name: 'data-sampling',
+        partial: '/src/scripts/components/cart/elements/data-sampling/data-sampling.hbs'
+    }, {
+        name: 'left-cards',
+        partial: '/src/scripts/components/cart/elements/lefr-cards/left-cards.hbs'
+    }, {
+        name: 'right-element-of-cart',
+        partial: '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.hbs'
     }]
 }

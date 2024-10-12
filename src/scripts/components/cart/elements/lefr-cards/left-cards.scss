@@ -1,0 +1,180 @@
+.cart-item {
+  display: flex;
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  margin-bottom: var(--card-margin-top);
+  padding: var(--litle-padding);
+  position: relative;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(var(--y-coord-min));
+  }
+
+  &__checkbox {
+    margin-top: 8px;
+  }
+
+  &__image {
+    width: var(--card-image-width);
+    padding: var(--micro-padding);
+    min-width: var(--min-card-image-width);
+
+    img {
+      width: var(--width-max);
+      height: auto;
+      border-radius: var(--card-border-radius);
+      min-height: var(--min-card-image-width);
+    }
+  }
+
+  &__details {
+    width: var(--details-width);
+    padding: var(--litle-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: var(--card-title-font-size);
+    margin-bottom: var(--card-title-margin-bottom);
+  }
+
+  &__price {
+    font-size: var(--card-price-font-size);
+    font-weight: var(--card-prise-font-weight);
+    color: var(--text-color);
+    margin-bottom: var(--card-price-margin-bottom);
+  }
+
+  &__current-price {
+    margin-right: var(--mini-padding);
+    white-space: nowrap;
+  }
+
+  &__old-price {
+    text-decoration: line-through;
+    margin-right: var(--mini-padding);
+    white-space: nowrap;
+  }
+
+  &__discount {
+    white-space: nowrap;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    margin-bottom: var(--info-margin-bottom);
+  }
+
+  &__delivery-date,
+  &__delivery-date-right {
+    font-size: var(--font-size-date-right);
+    color: var(--info-margin-bottom);
+  }
+
+  &__quantity-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color-site);
+    border-radius: var(--card-border-radius);
+    padding: 10px 20px;
+    height: var(--quantity-height);
+    width: var(--quantity-width); /* Ширина блока кнопок и количества */
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--background-color-site-gray);
+    }
+  }
+
+  &__quantity-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: var(--card-price-font-size);
+    cursor: pointer;
+    padding: var(--micro-padding);
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--text-hover-color);
+    }
+
+    &:active {
+      color: var(--text-actife-color);
+    }
+  }
+
+  &__quantity-count {
+    font-size: var(--quanity-font-size);
+    color: var(--text-inv);
+  }
+
+  &__btn-favorite {
+    background: none;
+    border-color: transparent;
+  }
+
+  &__wishlist-icon {
+    color: var(--text-another-color);
+    font-size: var(--card-icon-font-size);
+    cursor: pointer;
+  }
+
+  &__remove-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: var(--card-remove-font-size);
+    color: var(--text-another-color);
+    cursor: pointer;
+  }
+
+  // Чекбокс элемента товара
+  &__checkbox {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px; /* Отступ между чекбоксом и текстом */
+  }
+
+  // Сам чекбокс
+  &__select-item {
+    appearance: none;
+    width: var(--checkbox-width); /* Размер чекбокса равен размеру крестика */
+    height: var(--checkbox-height); /* Размер чекбокса равен размеру крестика */
+    background-color: var(--card-background-color);
+    border: 2px solid var(--main-border-color);
+    border-radius: 3px; /* Чуть меньший радиус, чтобы соответствовать уменьшенному размеру */
+    cursor: pointer;
+    position: relative;
+  }
+
+  // Состояние чекбокса при выборе
+  &__select-item:checked {
+    color: var(--checkbox-text-color);
+  }
+
+  // Отображение галочки при выборе чекбокса
+  &__select-item:checked::after {
+    content: "✔";
+    position: absolute;
+    font-size: var(--min-font-size); /* Уменьшенный размер галочки */
+    left: 1px;
+    top: -2px; /* Корректируем позиционирование галочки */
+  }
+}

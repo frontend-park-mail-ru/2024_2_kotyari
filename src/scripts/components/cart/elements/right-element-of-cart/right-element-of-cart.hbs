@@ -1,0 +1,25 @@
+<button class="checkout-btn">Оформить заказ</button>
+<div class="right-card">
+    <div class="right-card__summary">
+        <!-- Строка с количеством товаров, весом и ценой -->
+        <p class="right-card__total-items">
+            Всего: {{totalItems}} {{pluralize totalItems 'товар' 'товара' 'товаров'}}, {{totalWeight}}кг
+            <span class="right-card__total-price">{{totalPrice}}{{currency}}</span>
+        </p>
+
+        <!-- Горизонтальная линия -->
+        <hr class="right-card__divider">
+
+        <!-- Строка с информацией о выгоде -->
+        <p class="right-card__benefit">
+            Моя выгода:
+            <span class="right-card__benefit-price">{{benefitPrice}}{{currency}}</span>
+        </p>
+
+        <!-- Строка с итоговой ценой -->
+        <p class="right-card__grand-total">
+            <strong>Итого:</strong>
+            <span class="right-card__final-price">{{finalPrice}}{{currency}}</span>
+        </p>
+    </div>
+</div>

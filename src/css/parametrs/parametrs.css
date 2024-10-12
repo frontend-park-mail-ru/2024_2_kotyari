@@ -5,7 +5,10 @@
     --card-background-color: #fff;
     --card-border-color: #ddd;
     --input-border-color: #ccc;
-    --card-shadow-color: rgba(0, 0, 0, 0.1);
+    --disabled-background-color: #ccc;
+    --disabled-color: #999;
+    --main-border-color: oklch(0.49 0.25 299.6);
+    --card-shadow-color: rgba(0, 0, 0, 0.15);
     --hard-shadow-color: rgba(0, 0, 0, 0.2);
     --image-placeholder-color: #c4c4c4;
     --text-color: #333;
@@ -13,6 +16,7 @@
     --link-color: #555;
     --discount-color: oklch(0.68 0.24 27.98);
     --button-text-color: oklch(0.49 0.25 299.6);
+    --checkbox-text-color: oklch(0.49 0.25 299.6);
     --spinner-border-color: rgba(0, 0, 0, 0.1);
     --spinner-top-border-color: oklch(0.49 0.25 299.6);
     --background-color-site: oklch(0.49 0.25 299.6);
@@ -35,11 +39,17 @@
     --text-inv: white;
     --header-background: oklch(0.95 0 0);
     --name-buy-color: oklab(0.93 0.03 -0.04);
+    --delete-color: #888888;
+    --divider-color: #ACABAB;
+    --text-hover-color: #dcd3ef;
+    --text-actife-color: #b09ace;
 
     /* Отступы */
+    --main-gap: 20px;
     --gap: 16px;
     --mini-gap: 12px;
     --form-gap: 5px;
+    --card-padding: 20px;
     --big-padding: 16px;
     --padding: 16px;
     --padding15: 15px;
@@ -50,11 +60,26 @@
     --one-padding-botton: 1 px;
     --midle-padding-top: 15px;
     --xl-margin-bottom: 1em;
+    --benefit-margin-bottom: 40px;
     --big-margin-bottom: 20px;
+    --card-title-margin-bottom: 10px;
+    --card-price-margin-bottom: 20px;
+    --card-margin-top: 20px;
+    --conteiner-title-margin-bottom: 20px;
+    --divider-margin: 10px 0;
     --button-margin-bottom: 15px;
+    --info-margin-bottom: 15px;
     --description-margin-bottom: 10px;
+    --total-item-margin-bottom: 10px;
     --midle-button-margin-bottom: 10px;
     --midle-margin-top: 5px;
+    --delete-margin-left: 20px;
+    --container-margin: 20px auto;
+    --lable-margin-left: 15px;
+    --icon-margin-left: 14px;
+    --icon-margin-right: 14px;
+    --checkbox-margin-left: 10px;
+    --checkbox-margin-right: 10px;
     --midle-margin-left: 5px;
     --litle-margin-top: 2px;
     --micro-margin-left: 5px;
@@ -63,15 +88,16 @@
     --normal-margin-top: 10px;
     --one-margin-botton: 1 px;
     --margin-zero: 0;
-    --card-box-shadow: 0 2px 5px;
+    --card-box-shadow: 0 1px 6px;
     --m-group-padding: 30px 60px 60px;
     --zero: 0;
     --icon-dropdown-padding: 8px 12px;
     --name-padding: 5 px;
+    --chrckout-padding: 15px 40px;
     --margin-right-catalog-btn: 20px;
 
     /* Размеры */
-    --card-border-radius: 8px;
+    --card-border-radius: 25px;
     --mini-card-border-radius: 6px;
     --card-image-height: 150px;
     --mini-card-image-height: 115px;
@@ -84,6 +110,7 @@
     --description-max-height: 20px;
     --mini-description-max-height: 12px;
     --description-expanded-height: 40px; /* Максимум на 2 строки */
+    --quantity-height: 40px; /* Максимум на 2 строки */
     --mini-description-expanded-height: 32px; /* Максимум на 2 строки */
     --button-padding: 10px 15px;
     --conteiner-padding: 30px 60px 30px;
@@ -99,11 +126,21 @@
     --icon-dropdown-border-width: 0 10px 10px 10px;
     --max-width-px-long: 1150px;
     --max-width-px-mid: 840px;
+    --checkbox-width: 16px;
+    --checkbox-height: 16px;
+    --card-image-width: 23%;
+    --min-card-image-width: 155px;
+    --details-width: 70%;
 
     --proc-min-width: 30%;
     --proc-max-width: 60%;
     --proc-max-width-full: 90%;
     --width-max: 100%;
+    --container-width: 90%;
+
+    --left-width: 60%;
+    --quantity-width: 60%;
+    --right-width: 35%;
 
     --left-center: 50%;
     --proc-full-width: 100%;
@@ -114,23 +151,37 @@
     BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell,
     'Open Sans', 'Helvetica Neue', sans-serif;
+    --button-font-size: 18px;
     --price-font-size: 16px;
     --input-font-size: 16px;
+    --total-items-font-size: 15px;
+    --grand-total-items-font-size: 25px;
+    --benefit-font-size: 15px;
+    --quanity-font-size: 15px;
     --description-font-size: 12px;
     --min-font-size: 12px;
     --loading-text-font-size: 16px;
     --font-size-catalog-button: 35px;
     --font-size_label: 14px;
     --font-size-span-catalog-button: 16px;
+    --font-size-date-right: 14px;
     --font-size: 18px;
     --font-size20: 20px;
+    --card-title-font-size: 20px;
+    --card-price-font-size: 20px;
+    --card-icon-font-size: 20px;
+    --card-remove-font-size: 20px;
+    --strong-font-size: 25px;
     --big-font-size: 28px;
     --big-font-size_another: 35px;
     --mega-font-size: 40px;
     --max-font-size: 50px;
     --error-font-size: 0.875em;
     --litle-font-weight: 400;
+    --card-prise-font-weight: 500;
     --midle-font-weight: 550;
+    --container-title-font-weight: 600;
+    --grand-total-font-weight: 700;
 
 
     /* Расположение */

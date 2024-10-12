@@ -171,7 +171,7 @@ body {
 }
 
 /* Оформление текста */
-h1, p {
+.h1, .p {
     color: var(--text-another-color);
 }
 

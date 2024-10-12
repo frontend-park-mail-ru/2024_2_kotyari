@@ -1,0 +1,90 @@
+.cart-header {
+  display: flex;
+  justify-content: flex-start; // Ориентируем элементы влево
+  align-items: center;
+  gap: var(--main-gap); // Отступ между элементами
+  margin-bottom: var(--big-margin-bottom);
+
+  &__left-part {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    white-space: nowrap; // Запрещаем перенос текста на новую строку
+    font-size: var(--font-size_label); // Задаем фиксированный размер шрифта
+    margin-left: var(--lable-margin-left);
+  }
+
+  &__delete-selected {
+    text-decoration: none; // Убираем подчеркивание
+    color: black;
+    font-size: var(--font-size_label); // Фиксированный размер шрифта
+    display: flex;
+    align-items: center;
+    white-space: nowrap; // Чтобы текст не переносился
+    margin-left: var(--delete-margin-left);
+    flex-shrink: 0; // Не сжимаем правую часть
+  }
+
+  &__select-all {
+    margin-left: var(--checkbox-margin-left);
+  }
+
+  &__icon {
+    color: var(--delete-color); // Серый цвет для крестика
+    font-size: var(--font-size);
+    margin-right: var(--icon-margin-right); // Отступ между крестиком и текстом
+    margin-left: var(--icon-margin-left);
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__left-part,
+    &__delete-selected {
+      width: var(--width-max);
+    }
+
+    &__delete-selected {
+      margin-left: 0;
+    }
+  }
+
+  // Чекбокс элемента товара
+  &__checkbox {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    margin-right: var(--checkbox-margin-right); /* Отступ между чекбоксом и текстом */
+  }
+
+  // Сам чекбокс
+  &__select-all {
+    appearance: none;
+    width: var(--checkbox-width); /* Размер чекбокса равен размеру крестика */
+    height: var(--checkbox-height); /* Размер чекбокса равен размеру крестика */
+    background-color: var(--card-background-color);
+    border: 2px solid var(--main-border-color);
+    border-radius: 3px; /* Чуть меньший радиус, чтобы соответствовать уменьшенному размеру */
+    cursor: pointer;
+    position: relative;
+    margin-left: var(--checkbox-margin-left);
+  }
+
+  // Состояние чекбокса при выборе
+  &__select-all:checked {
+    color: var(--checkbox-text-color);
+  }
+
+  // Отображение галочки при выборе чекбокса
+  &__select-all:checked::after {
+    content: "✔";
+    position: absolute;
+    font-size: var(--min-font-size); /* Уменьшенный размер галочки */
+    left: 1px;
+    top: -2px; /* Корректируем позиционирование галочки */
+  }
+}

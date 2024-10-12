@@ -1,66 +1,35 @@
-@charset "UTF-8";
 @import '/src/scripts/components/cart/elements/data-sampling/data-sampling.css';
 @import '/src/scripts/components/cart/elements/lefr-cards/left-cards.css';
 @import '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.css';
 @import '/src/css/parametrs/parametrs.css';
 .cart-container {
-  width: 90%;
-  margin: 20px auto;
+  width: var(--container-width);
+  margin: var(--container-margin);
 }
 
 .cart-container__title {
-  font-size: 25px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: var(--strong-font-size);
+  font-weight: var(--container-title-font-weight);
+  margin-bottom: var(--conteiner-title-margin-bottom);
 }
 
 .cart-container__content {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: var(--main-gap);
 }
 
 .cart-container__left {
-  width: 60%;
+  width: var(--left-width);
 }
 
 .cart-container__right {
-  width: 35%;
+  width: var(--right-width);
 }
 
 .cart-container__right-absolute {
   position: fixed;
-  width: 31.5%;
-}
-
-.cart-item__checkbox {
-  width: auto;
-  display: flex;
-  justify-content: center;
-  margin-right: 10px; /* Отступ между чекбоксом и текстом */
-}
-
-.cart-item__checkbox-input {
-  appearance: none;
-  width: 16px; /* Размер чекбокса равен размеру крестика */
-  height: 16px; /* Размер чекбокса равен размеру крестика */
-  background-color: #fff;
-  border: 2px solid #7A16D5;
-  border-radius: 3px; /* Чуть меньший радиус, чтобы соответствовать уменьшенному размеру */
-  cursor: pointer;
-  position: relative;
-}
-
-.cart-item__checkbox-input--checked {
-  color: #7A16D5;
-}
-
-.cart-item__checkbox-input--checked::after {
-  content: "✔";
-  position: absolute;
-  font-size: 12px; /* Уменьшенный размер галочки */
-  left: 1px;
-  top: -2px; /* Корректируем позиционирование галочки */
+  width: calc(0.9 * var(--right-width));
 }
 
 @media screen and (max-width: 858px) {
@@ -68,11 +37,11 @@
     flex-direction: column;
   }
   .cart-container__left, .cart-container__right {
-    width: 100%;
+    width: var(--width-max);
   }
   .cart-container__right-absolute {
     position: relative;
-    width: 100%;
+    width: var(--width-max);
   }
 }
 

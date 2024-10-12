@@ -1,18 +1,18 @@
 @import "/src/css/parametrs/parametrs.css";
 
-form {
+.form {
     display: flex;
     flex-direction: column;
     gap: var(--form-gap);
 }
 
-label {
+.label {
     font-size: var(--font-size);
     margin-bottom: var(--one-margin-botton);
     padding-bottom: var(--one-padding-botton);
 }
 
-input {
+.input {
     margin-top: var(--one-margin-botton);
     padding: var(--mini-padding);
     font-size: var(--font-size);
@@ -22,7 +22,7 @@ input {
     transition: border-color var(--litle-time) ease, box-shadow var(--litle-time) ease; /* Плавный переход для инпутов */
 }
 
-input:focus {
+.input:focus {
     outline: none;
 }
 

@@ -5,12 +5,12 @@
         <span class="errors__feedback" id="global_error_message">{{error_msg}}</span>
     </div>
 
-    <form id="{{formId}}" action="{{action}}" method="post">
+    <form class="form" id="{{formId}}" action="{{action}}" method="post">
         <span class="errors__feedback" id="error"></span>
         {{#each fields as |field|}}
             <div class="input_container">
-                <label for="{{field.id}}">{{field.label}}</label>
-                <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" placeholder="{{placeholder}}"
+                <label class="label" for="{{field.id}}">{{field.label}}</label>
+                <input class="input" type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" placeholder="{{placeholder}}"
                        data-error-id="{{field.error_id}}" />
                 {{#if (eq field.type 'password')}}
                     <span class="toggle-password" data-field-id="{{field.id}}">
