@@ -1,6 +1,6 @@
 // todo вставка в хэдер
 
-export const ROUTES = {
+export const RouteConfig = {
   HOME: {
     route: '/',
     handler: 'catalog',
@@ -22,8 +22,8 @@ export const ROUTES = {
     isProtected: false,
   },
   BASKET: {
-    route: '/basket',
-    handler: 'basket',
+    route: '/cart',
+    handler: 'cart',
     isProtected: true,
   },
   FAVORITE: {
@@ -56,7 +56,7 @@ export const ROUTES = {
     handler: 'error',
     isProtected: false,
   },
-  PERSONAL_ACCOUNT: {
+  ACCOUNT: {
     route: '/account',
     handler: 'account',
     isProtected: true,

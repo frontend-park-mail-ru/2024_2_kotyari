@@ -13,7 +13,7 @@ const publicPath = path.join(__dirname, '../../../public');
 const scriptsPath = path.join(__dirname, '../../scripts');
 const cssPath = path.join(__dirname, '../../css');
 const routerPath = path.join(__dirname, './');
-const cookiePath = path.join(__dirname, '../cookie');
+const cookiePath = path.join(__dirname, '../storages');
 const imgPath = path.join(__dirname, '../../assets');
 
 // Используем middleware для статики
@@ -86,8 +86,8 @@ app.get('/*', (req, res) => {
       case '/src/services/router/router.js':
         res.sendFile(path.join(routerPath, '../router/router.js'));
         break;
-      case '/src/services/cookie/cookie.js':
-        res.sendFile(path.join(cookiePath, '../cookie/cookie.js'));
+      case '/src/services/storages/storages.js':
+        res.sendFile(path.join(cookiePath, '../storages/localStorage.js'));
         break;
       case '/src/services/router/settings.js':
         res.sendFile(path.join(cookiePath, '../router/settings.js'));
