@@ -10,6 +10,10 @@ import { registrFunctions } from '../../scripts/constprograms/templatizer/comman
 import { AddDropDown } from '../../scripts/layouts/header/header.js';
 import { buildOrderList } from '../../scripts/components/order-list/order-list.js';
 import { orderList } from '../../scripts/components/order-list/order-list-config.js';
+import { buildProductPage } from '../../scripts/components/product-page/product-page.js';
+import { productData } from '../../scripts/components/product-page/product-page-config.js';
+import { personalAccountData } from '../../scripts/components/personal-account/personal-account-config.js';
+import { personalAccount } from '../../scripts/components/personal-account/personal-account.js';
 
 /**
  * Собираемые для переработки пути.
@@ -233,8 +237,9 @@ export const Router = {
    * Страница дичного кабинета.
    * @returns {Promise<void>} - Возвращает Promise после загрузки страницы.
    */
+
   personalAccount: function () {
-    return fetchAndRender(ROUTES.PERSONALACCOUNT, ROUTES.LOGIN, ROUTES.PERSONALACCOUNT, () => this.body(() => soon()));
+    return this.body(() => personalAccount(personalAccountData));
   },
 
   /**
@@ -244,7 +249,7 @@ export const Router = {
    */
   product: function (id) {
     this.navigate(ROUTES.PRODUCT.replace(':id', id)); // Изменяем URL с параметром
-    return this.body(() => soon());
+    return this.body(() => buildProductPage(productData));
   },
 
   /**
