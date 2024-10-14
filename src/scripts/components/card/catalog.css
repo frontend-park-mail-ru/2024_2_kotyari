@@ -2,7 +2,7 @@
 
 body {
     margin: var(--margin-zero);
-    font-family: var(--font-family);
+    font-family: var(--font-family), sans-serif;
     background-color: var(--background-color);
 }
 

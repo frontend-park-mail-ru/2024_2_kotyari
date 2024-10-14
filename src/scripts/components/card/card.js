@@ -1,7 +1,6 @@
 import { templatize } from '../../constprograms/templatizer/templatizer.js';
 import { backurl } from '../../../services/router/settings.js';
 import { errors } from '../../errors/errors.js';
-import { Router } from '../../../services/router/router.js';
 
 /**
  * Инициализирует настройки для карточек, включая добавление обработчиков событий для переходов.
@@ -14,7 +13,7 @@ function cardSettings(data) {
     card.addEventListener('click', () => {
       const link = card.getAttribute('data-link');
       if (link) {
-        Router.navigate(link);
+        // Router.navigate(link);
       }
     });
   });

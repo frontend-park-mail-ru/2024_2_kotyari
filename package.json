@@ -16,7 +16,7 @@
     "express": "^4.21.0"
   },
   "scripts": {
-    "start": "node ./src/services/server/server.js",
+    "start": "node server/server.js",
     "prepare": "husky",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",

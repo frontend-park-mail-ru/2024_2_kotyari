@@ -1,16 +1,31 @@
-import RenderManager from '../router/render-manager.js';
-import { AuthManager } from '../client/auth/auth.js';
+import { CLICK_CLASSES, RenderManager } from '../router/render-manager.js';
+import { AuthManager } from '../client/auth.js';
 import HistoryManager from '../router/history.js';
 import { Router } from '../router/new-router.js';
-import { ROUTES } from '../route-manager/routes.js';
-import { RouteHandler } from '../route-manager/route-handler.js';
+import { RouteConfig } from '../router/route-config.js';
+import { RouteHandler } from '../router/route-handler.js';
+import { AddDropDown } from '../../scripts/layouts/header/header.js';
 
-const routeHandler = new RouteHandler();
-const renderer = new RenderManager('main');
-const authService = new AuthManager();
 const historyManager = new HistoryManager();
 
-const router = new Router(ROUTES, routeHandler, renderer, authService, historyManager);
+const authService = new AuthManager();
+const user = authService.isAuthenticated('');
 
-// Инициализируем роутер
-router.init();
+const renderer = new RenderManager('main');
+
+renderer.buildMain(await user)
+  .then(() => {
+    const routeHandler = new RouteHandler(renderer, authService);
+    const new_router = new Router(RouteConfig, routeHandler, authService, historyManager);
+
+    new_router.init();
+
+    let anchors = document.querySelectorAll(`[router=${CLICK_CLASSES.stability}]`);
+    for (let anchor of anchors) anchor.onclick = new_router.handler;
+
+  }).then(() => {
+    AddDropDown();
+  })
+  .catch((err) => {
+    console.error(err);
+  });

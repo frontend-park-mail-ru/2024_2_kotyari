@@ -9,33 +9,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Определяем папки для статических файлов
-const publicPath = path.join(__dirname, '../../../public');
-const scriptsPath = path.join(__dirname, '../../scripts');
-const cssPath = path.join(__dirname, '../../css');
-const routerPath = path.join(__dirname, './');
-const cookiePath = path.join(__dirname, '../storages');
-const imgPath = path.join(__dirname, '../../assets');
+const publicPath = path.join(__dirname, '../public');
+const cssPath = path.join(__dirname, '../src/css');
+const imgPath = path.join(__dirname, '../src/assets');
 
+const basePath = path.join(__dirname, '../');
 // Используем middleware для статики
+
 app.use(express.static(publicPath));
 app.use('/src/css', express.static(cssPath));
-
-/**
- * Универсальный обработчик маршрутов для скриптов.
- * Отправляет запрашиваемые файлы скриптов из папки scripts.
- * Если файл не найден, возвращает 404 ошибку.
- *
- * @param {Object} req - Объект запроса
- * @param {Object} res - Объект ответа
- */
-app.get('/src/scripts/*', (req, res) => {
-  const filePath = path.join(scriptsPath, req.params[0]); // Динамически вычисляем путь к файлу
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      res.status(404).send('<h1>error Not Found</h1>');
-    }
-  });
-});
+app.use(express.static(imgPath));
 
 /**
  * Универсальный обработчик маршрутов для изображений.
@@ -82,25 +65,14 @@ app.get('/*', (req, res) => {
     // Если это не файл (нет расширения), отправляем index.html
     res.sendFile(path.join(publicPath, 'index.html'));
   } else {
-    switch (req.url) {
-      case '/src/services/router/router.js':
-        res.sendFile(path.join(routerPath, '../router/router.js'));
-        break;
-      case '/src/services/storages/storages.js':
-        res.sendFile(path.join(cookiePath, '../storages/localStorage.js'));
-        break;
-      case '/src/services/router/settings.js':
-        res.sendFile(path.join(cookiePath, '../router/settings.js'));
-        break;
-      case '/src/services/client/auth/auth.js':
-        res.sendFile(path.join(cookiePath, '../client/auth/auth.js'));
-        break;
-      default:
-        // Возвращаем 404 ошибку, если файл не найден
-        res.status(404).send('<h1>error Not Found</h1>');
-    }
+    res.sendFile(path.join(basePath, req.url));
   }
 });
+
+app.get('/error', (req, res) => {
+  res.sendFile(path.join(publicPath, 'error.html'));
+})
+
 
 /**
  * Запуск сервера на указанном порту.
