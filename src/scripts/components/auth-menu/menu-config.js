@@ -20,7 +20,7 @@
  * @property {string} link.label - Лейбл, который будет отображаться рядом со ссылкой.
  */
 export const menuSignUp = {
-  id: 'modal__signup',
+  id: 'signup',
   logo: 'oxic',
   title: 'Регистрация',
   formId: 'register__form',
@@ -89,7 +89,7 @@ export const menuSignUp = {
  * @property {string} link.label - Лейбл, который будет отображаться рядом со ссылкой.
  */
 export const menuSignIn = {
-  id: 'modal__login',
+  id: 'login',
   logo: 'oxic',
   title: 'Вход',
   formId: 'login__form',

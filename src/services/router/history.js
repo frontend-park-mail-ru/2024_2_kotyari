@@ -1,3 +1,4 @@
+
 export default class HistoryManager {
   constructor() {
     // Подписка на событие изменения истории
