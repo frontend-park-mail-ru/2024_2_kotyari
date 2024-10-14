@@ -1,0 +1,84 @@
+<div class="container-personal-account">
+  <!-- Левая колонка -->
+  <div class="column-personal-account">
+    <div class="box-personal-account user-info">
+      <div class="user-details">
+        <img src="{{user.photoUrl}}" alt="User Photo" class="user-photo">
+        <h2 class="user-name">{{user.name}}</h2>
+        <div class="icons-personal-account">
+          {{#if user.notifications}}
+            <span class="material-icons">notifications_unread</span>
+          {{else}}
+            <span class="material-icons">notifications</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="user-details">
+        <div class="description-wrapper">
+          <div class="description-item">
+            <span class="description-key">Пол</span>: <span class="description-value">{{user.gender}}</span>
+          </div>
+          <div class="description-item">
+            <span class="description-key">Почта</span>: <span class="description-value">{{user.email}}</span>
+          </div>
+        </div>
+        <div class="icons-personal-account">
+          <span class="material-icons">edit</span>
+        </div>
+      </div>
+
+      <button class="logout-button-personal-account">Выйти</button>
+    </div>
+  </div>
+
+  <!-- Центральная колонка -->
+  <div class="column-personal-account">
+    <div class="box-personal-account delivery-info">
+      <div class="icon-personal-account">
+        <span class="material-icons local-shipping">local_shipping</span>
+      </div>
+      <div class="delivery-details">
+        <h3 class="delivery-title">Доставка</h3>
+        <p class="delivery-status">{{delivery.status}}</p>
+      </div>
+    </div>
+    <div class="box-personal-account address-info">
+      <div class="icon-personal-account">
+        <span class="material-icons pin-drop">pin_drop</span>
+      </div>
+      <div class="address-details">
+        <h3 class="address-title">Адрес доставки</h3>
+        <p class="address-description">{{address.description}}</p>
+      </div>
+      <div class="icons-personal-account">
+        <span class="material-icons">edit</span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Правая колонка -->
+  <div class="column-personal-account">
+    <div class="box-personal-account favorites-info">
+      <div class="icon-personal-account">
+        <span class="material-icons favorite">favorite_outline</span>
+      </div>
+      <div class="favorites-details">
+        <h3 class="favorites-title">Избранное</h3>
+        <p class="favorites-count">{{favorites.count}} товаров в наличии</p>
+      </div>
+    </div>
+    <div class="box-personal-account purchases-info">
+      <div class="icon-personal-account">
+        <span class="material-icons shopping-basket">shopping_basket</span>
+      </div>
+      <div class="purchases-details">
+        <h3 class="purchases-title">Покупки</h3>
+        <p class="purchases-status">{{purchases.status}}</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>
