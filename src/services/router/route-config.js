@@ -11,9 +11,9 @@ export const RouteConfig = {
     handler: 'catalog',
     isProtected: false,
   },
-  RECORDS: {
-    route: '/records',
-    handler: 'records',
+  ORDER_LIST: {
+    route: '/order_list',
+    handler: 'order_list',
     isProtected: true,
   },
   CHANGE_CITY: {
@@ -21,7 +21,7 @@ export const RouteConfig = {
     handler: 'changeCity',
     isProtected: false,
   },
-  BASKET: {
+  CART: {
     route: '/cart',
     handler: 'cart',
     isProtected: true,

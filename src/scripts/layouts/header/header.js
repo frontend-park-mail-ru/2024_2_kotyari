@@ -1,4 +1,3 @@
-import { handler, Router } from '../../../services/router/router.js';
 
 /**
  * Обновляет интерфейс после выхода пользователя из системы.
@@ -29,8 +28,6 @@ export function signInUpdate(name) {
     `<a href="#" router="stability-active" class="catalog-link">Личный кабинет</a>
     <a href="/logout" router="stability-active" id="logout" class="catalog-link">Выход</a>`;
   document.getElementById('name').innerHTML = `<span class="icon-label-hidden catalog-link" id="name">${name}</span>`;
-
-  document.getElementById('logout').onclick = handler;
 }
 
 /**

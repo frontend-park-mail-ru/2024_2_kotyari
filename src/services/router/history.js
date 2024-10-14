@@ -15,7 +15,9 @@ export default class HistoryManager {
 
   // Метод для изменения URL и добавления нового состояния в историю
   navigate(path) {
-    window.history.pushState({ path }, '', path);
-    this.handlePopState(path);
+    if (path !== window.location.pathname){
+      window.history.pushState(null, null, path);
+      this.handlePopState(path);
+    }
   }
 }
