@@ -42,12 +42,15 @@ app.get('/src/assets/*', (req, res) => {
   });
 });
 
-app.get('/index.html', (req, res) => {
+/**
+ * Маршрут для главной страницы.
+ * Отправляет файл index.html из папки public.
+ *
+ * @param {Object} req - Объект запроса
+ * @param {Object} res - Объект ответа
+ */
+app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
-});
-
-app.get('/error/index.css', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.css'));
 });
 
 /**
@@ -67,20 +70,24 @@ app.get('/*', (req, res) => {
     // Если это не файл (нет расширения), отправляем index.html
     res.sendFile(path.join(publicPath, 'index.html'));
   } else {
-    res.sendFile(path.join(basePath, req.url));
+    switch (req.url) {
+      case '/src/services/router/router.js':
+        res.sendFile(path.join(routerPath, '../router/router.js'));
+        break;
+      case '/src/services/storages/storages.js':
+        res.sendFile(path.join(cookiePath, '../storages/localStorage.js'));
+        break;
+      case '/src/services/router/settings.js':
+        res.sendFile(path.join(cookiePath, '../router/settings.js'));
+        break;
+      case '/src/services/client/auth/auth.js':
+        res.sendFile(path.join(cookiePath, '../client/auth/auth.js'));
+        break;
+      default:
+        // Возвращаем 404 ошибку, если файл не найден
+        res.status(404).send('<h1>error Not Found</h1>');
+    }
   }
-});
-
-/**
- * Маршрут для главной страницы.
- * Отправляет файл index.html из папки public.
- *
- * @param {Object} req - Объект запроса
- * @param {Object} res - Объект ответа
- */
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 /**

@@ -1,3 +1,5 @@
+import { handler, Router } from '../../../services/router/router.js';
+
 /**
  * Обновляет интерфейс после выхода пользователя из системы.
  *
