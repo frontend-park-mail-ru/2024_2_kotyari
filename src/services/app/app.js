@@ -15,7 +15,7 @@ const renderer = new RenderManager('main');
 
 renderer.buildMain(await user)
   .then(() => {
-    const routeHandler = new RouteHandler(renderer, authService);
+    const routeHandler = new RoucteHandler(renderer, authService);
     const new_router = new Router(RouteConfig, routeHandler, authService, historyManager);
 
     new_router.init();
