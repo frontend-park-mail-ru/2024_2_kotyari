@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { HandlebarManager } from "../../../../src/scripts/constprograms/handlebars/handlebars.js";
+import { HandlebarManager } from "../handlebars/handlebars.js";
 import { errors } from "../../../../src/scripts/errors/errors.js";
 import { partials } from "../../../../src/scripts/constprograms/shablon/partials.js";
 import { helpers } from "../../../../src/scripts/constprograms/shablon/helpers.js";

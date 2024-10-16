@@ -7,10 +7,7 @@ export class Helper {
      */
     static formatDate(dateStr) {
         const [year, month, day] = dateStr.split('-').map(Number);
-        if (!year || !month || !day || month < 1 || month > 12) {
-            throw new Error(`Invalid date format: ${dateStr}`);
-        }
-        const monthName = Helper.months[month - 1];
+        const monthName = this.months[month - 1]; // month в строке начинается с 1, а в массиве месяцев — с 0
         return `${day} ${monthName} ${year} г.`;
     }
     /**
