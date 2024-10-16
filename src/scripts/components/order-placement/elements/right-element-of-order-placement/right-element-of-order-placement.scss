@@ -1,0 +1,132 @@
+@import "/src/css/parametrs/parametrs.css";
+
+// Блок для карточки (корневая обертка)
+.right-element-card {
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-bottom: var(--main-gap);
+
+  &__total-items {
+    font-size: var(--total-items-font-size);
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--total-item-margin-bottom);
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--divider-color);
+    margin: var(--divider-margin);
+  }
+
+  &__benefit {
+    font-size: var(--benefit-font-size);
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--benefit-margin-bottom);
+  }
+
+  &__grand-total {
+    font-size: var(--grand-total-items-font-size);
+    font-weight: var(--grand-total-font-weight);
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--mini-gap); /* Небольшой отступ перед итогом */
+  }
+
+  &__promo-input {
+    background-color: #EEEEEE;
+    border: none;
+    border-radius: 25px;
+    color: var(--text-color);
+    padding: var(--chrckout-padding);
+    width: var(--width-max);
+    height: 48px; /* Должно соответствовать высоте кнопки */
+    font-size: var(--input-font-size);
+    padding-left: 15px; /* Отступ для placeholder ближе к левому краю */
+  }
+
+  &__promo-input::placeholder {
+    color: #888888; /* Цвет текста для placeholder */
+  }
+
+  &__payment-method {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 45%; /* Половина строки */
+    border: 2px solid #EEEEEE; /* Стандартная обводка */
+    border-radius: 25px;
+    padding: 15px;
+    cursor: pointer;
+    transition: border-color var(--litle-time) ease-in-out; /* Плавное изменение обводки */
+  }
+
+  &__payment-method:hover {
+    border-color: #888888; /* Более темная обводка при наведении */
+  }
+
+  &__payment-method--selected {
+    border-color: var(--background-color-site); /* Цвет обводки для выбранного метода */
+  }
+
+  /* Иконка внутри метода оплаты */
+  &__payment-method-icon {
+    font-size: 36px; /* Размер иконки */
+    color: var(--text-color);
+  }
+
+  /* Текст под иконкой */
+  &__payment-method-text {
+    margin-top: var(--mini-gap);
+    color: var(--text-color);
+    font-size: var(--font-size_label);
+  }
+
+  /* Контейнер для размещения двух иконок на одной строке */
+  &__payment-methods {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--main-gap); /* Разделение между иконками */
+    align-items: center; /* Иконки на одной высоте */
+  }
+}
+
+// Блок для кнопки
+.checkout-btn {
+  background-color: var(--background-color-site);
+  color: white;
+  border: none;
+  font-size: var(--button-font-size);
+  cursor: pointer;
+  border-radius: var(--card-border-radius);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+
+  &:hover {
+    background-color: var(--background-color-site-gray); // Более темный фон при наведении
+    color: var(--text-inv);
+  }
+
+  &:active {
+    background-color: var(--background-color-site-black); // Самый темный фон при нажатии
+    color: var(--text-inv);
+  }
+
+  &.disabled {
+    background-color: var(--disabled-background-color); // Серый фон для заблокированной кнопки
+    color: var(--disabled-color);            // Серый цвет текста
+    cursor: not-allowed;    // Иконка неактивности
+
+    &:hover {
+      background-color: var(--disabled-background-color); // Оставляем тот же цвет при наведении
+      color: var(--disabled-color);
+    }
+  }
+}

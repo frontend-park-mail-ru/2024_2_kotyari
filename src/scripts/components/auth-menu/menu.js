@@ -1,4 +1,4 @@
-import { templatize } from "../../constprograms/shablon/shablon.js";
+import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
 
 const tmpURL = 'src/scripts/components/auth-menu/menu.hbs';
 
@@ -42,7 +42,7 @@ function togglePassword(event) {
  * ```
  */
 export async function buildAuthMenu(data) {
-    return templatize(document.getElementById('main'), tmpURL, data).then(() => {
+    return TemplateManager.templatize(document.getElementById('main'), tmpURL, data).then(() => {
         // Назначаем обработчик события для всех иконок с классом 'toggle-password'
         document.querySelectorAll('.toggle-password').forEach(item => {
             item.addEventListener('click', togglePassword);

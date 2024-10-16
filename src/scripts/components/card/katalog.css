@@ -11,9 +11,11 @@ body {
 .catalog {
     display: grid;
     gap: var(--gap);
-    padding: var(--padding);
+    padding-top: var(--padding);
     justify-content: var(--catalog-justify-content);
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    width: 90%;
+    margin: auto;
 }
 
 /* Карточка товара */

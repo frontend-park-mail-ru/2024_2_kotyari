@@ -1,5 +1,5 @@
 import {errorsDescriptions} from "./errors.js";
-import {templatize} from "../../../constprograms/shablon/shablon.js";
+import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
 
 const returnPage = '/';
 
@@ -28,5 +28,5 @@ export function errorPage (name) {
         }
     }
 
-    return templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/error/error.hbs', config)
+    return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/error/error.hbs', config)
 }

@@ -1,4 +1,4 @@
-import {templatize} from "../../constprograms/shablon/shablon.js";
+import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
 import {cardsSetting, updateSelectedCount} from "./elements/lefr-cards/left-cards.js";
 import {calculateCartTotals} from "./elements/right-element-of-cart/calculate-cart-totals.js";
 import {cartData} from "./products.js";
@@ -12,7 +12,7 @@ import {cartData} from "./products.js";
  * @returns {Promise} Возвращает промис, который разрешается после полной инициализации корзины и всех её элементов.
  */
 export function cart() {
-    return templatize(document.getElementById('main'), '/src/scripts/components/cart/cart.hbs', cartData).then(() => {
+    return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/cart/cart.hbs', cartData).then(() => {
         const selectAllCheckbox = document.getElementById('select-all');
         const itemCheckboxes = document.querySelectorAll('.cart-item__select-item');
         const selectedCountElement = document.getElementById('selected-count'); // Элемент для отображения количества выбранных товаров

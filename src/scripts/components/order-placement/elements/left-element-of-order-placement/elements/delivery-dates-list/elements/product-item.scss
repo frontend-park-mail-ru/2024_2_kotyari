@@ -1,0 +1,35 @@
+@import "/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item.css";
+
+.product-item {
+  display: flex;
+  align-items: center; /* Выравниваем элементы вертикально */
+  margin-bottom: var(--item-margin-bottom);
+  gap: 12px; /* Добавляем отступ между элементами */
+  margin-top: var(--main-gap);
+
+  &__image {
+    width: 75px;
+    height: 75px;
+    border-radius: 25px;
+    margin-right: var(--main-gap);
+    object-fit: cover; /* Чтобы изображение заполняло квадрат */
+    padding-down: 10px;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Распределяем текст по высоте изображения */
+    height: 75px; /* Высота для выравнивания текста с изображением */
+  }
+
+  &__name {
+    font-size: var(--font-size_label);
+    margin-top: 4px; /* Чуть ниже верха изображения */
+  }
+
+  &__price {
+    font-size: var(--font-size_label);
+    margin-bottom: 4px; /* Чуть выше низа изображения */
+  }
+}

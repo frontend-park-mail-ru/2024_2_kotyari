@@ -10,6 +10,7 @@ const __dirname = path.resolve();
 // Определяем папки для статических файлов
 const publicPath = path.join(__dirname, '../../../public');
 const scriptsPath = path.join(__dirname, '../../scripts');
+const distPath = path.join(__dirname, '../../../dist/scripts')
 const cssPath = path.join(__dirname, '../../css');
 const routerPath = path.join(__dirname, './');
 const cookiePath = path.join(__dirname, '../cookie');
@@ -29,6 +30,15 @@ app.use('/src/css', express.static(cssPath));
  */
 app.get('/src/scripts/*', (req, res) => {
     const filePath = path.join(scriptsPath, req.params[0]); // Динамически вычисляем путь к файлу
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).send('<h1>error Not Found</h1>');
+        }
+    });
+});
+
+app.get('/dist/scripts/*', (req, res) => {
+    const filePath = path.join(distPath, req.params[0]); // Динамически вычисляем путь к файлу
     res.sendFile(filePath, (err) => {
         if (err) {
             res.status(404).send('<h1>error Not Found</h1>');

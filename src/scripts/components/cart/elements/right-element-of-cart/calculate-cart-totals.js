@@ -1,4 +1,4 @@
-import {pluralize} from "../../../../constprograms/shablon/helps/pluralize.js";
+import {Helper} from "../../../../../../dist/scripts/constprograms/shablon/helps/helper.js";
 import {cartData} from "../../products.js";
 
 /**
@@ -28,7 +28,7 @@ export function calculateCartTotals() {
         const currency = cartData.products[0].currency;  // Берём валюту у первого продукта
 
         document.querySelector('.right-card__total-items').innerHTML = `
-            Всего: ${totalItems} ${pluralize(totalItems, 'товар', 'товара', 'товаров')}, ${Math.round(totalWeight * 10) / 10}кг
+            Всего: ${totalItems} ${Helper.pluralize(totalItems, 'товар', 'товара', 'товаров')}, ${Math.round(totalWeight * 10) / 10}кг
             <span class="total-price">${totalPrice}${currency}</span>
         `;
 

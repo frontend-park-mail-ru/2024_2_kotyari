@@ -1,0 +1,116 @@
+@charset "UTF-8";
+@import "/src/css/parametrs/parametrs.css";
+.right-element-card {
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-bottom: var(--main-gap);
+  /* Иконка внутри метода оплаты */
+  /* Текст под иконкой */
+  /* Контейнер для размещения двух иконок на одной строке */
+}
+.right-element-card__total-items {
+  font-size: var(--total-items-font-size);
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--total-item-margin-bottom);
+}
+.right-element-card__divider {
+  border: none;
+  border-top: 1px solid var(--divider-color);
+  margin: var(--divider-margin);
+}
+.right-element-card__benefit {
+  font-size: var(--benefit-font-size);
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--benefit-margin-bottom);
+}
+.right-element-card__grand-total {
+  font-size: var(--grand-total-items-font-size);
+  font-weight: var(--grand-total-font-weight);
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--mini-gap); /* Небольшой отступ перед итогом */
+}
+.right-element-card__promo-input {
+  background-color: #EEEEEE;
+  border: none;
+  border-radius: 25px;
+  color: var(--text-color);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+  height: 48px; /* Должно соответствовать высоте кнопки */
+  font-size: var(--input-font-size);
+  padding-left: 15px; /* Отступ для placeholder ближе к левому краю */
+}
+.right-element-card__promo-input::placeholder {
+  color: #888888; /* Цвет текста для placeholder */
+}
+.right-element-card__payment-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 45%; /* Половина строки */
+  border: 2px solid #EEEEEE; /* Стандартная обводка */
+  border-radius: 25px;
+  padding: 15px;
+  cursor: pointer;
+  transition: border-color var(--litle-time) ease-in-out; /* Плавное изменение обводки */
+}
+.right-element-card__payment-method:hover {
+  border-color: #888888; /* Более темная обводка при наведении */
+}
+.right-element-card__payment-method--selected {
+  border-color: var(--background-color-site); /* Цвет обводки для выбранного метода */
+}
+.right-element-card__payment-method-icon {
+  font-size: 36px; /* Размер иконки */
+  color: var(--text-color);
+}
+.right-element-card__payment-method-text {
+  margin-top: var(--mini-gap);
+  color: var(--text-color);
+  font-size: var(--font-size_label);
+}
+.right-element-card__payment-methods {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--main-gap); /* Разделение между иконками */
+  align-items: center; /* Иконки на одной высоте */
+}
+
+.checkout-btn {
+  background-color: var(--background-color-site);
+  color: white;
+  border: none;
+  font-size: var(--button-font-size);
+  cursor: pointer;
+  border-radius: var(--card-border-radius);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+}
+.checkout-btn:hover {
+  background-color: var(--background-color-site-gray);
+  color: var(--text-inv);
+}
+.checkout-btn:active {
+  background-color: var(--background-color-site-black);
+  color: var(--text-inv);
+}
+.checkout-btn.disabled {
+  background-color: var(--disabled-background-color);
+  color: var(--disabled-color);
+  cursor: not-allowed;
+}
+.checkout-btn.disabled:hover {
+  background-color: var(--disabled-background-color);
+  color: var(--disabled-color);
+}
+
+/*# sourceMappingURL=right-element-of-order-placement.css.map */

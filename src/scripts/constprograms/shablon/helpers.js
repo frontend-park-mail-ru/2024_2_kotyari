@@ -1,4 +1,4 @@
-import {pluralize} from "./helps/pluralize.js";
+import { Helper } from '../../../../dist/scripts/constprograms/shablon/helps/helper.js';
 
 /**
  * Массив вспомогательных функций (хелперов), которые могут быть использованы в проекте.
@@ -19,5 +19,11 @@ import {pluralize} from "./helps/pluralize.js";
 
 export const helpers = [{
     name: 'pluralize',
-    function: pluralize,
+    function: Helper.pluralize,
+}, {
+    name: 'formatDate',
+    function: Helper.formatDate,
+}, {
+    name: 'eq',
+    function: Helper.eq,
 }]

@@ -6,9 +6,10 @@ import {buildAuthMenu} from "../../scripts/components/auth-menu/menu.js";
 import {menuSignIn, menuSignUp} from "../../scripts/components/auth-menu/menu-config.js";
 import {fetchAndRender, handleSignIn, handleSignUp} from "../client/auth/auth.js";
 import {fetchUserDataAndSetCookie, getCookie} from "../cookie/cookie.js";
-import {registrFunctions} from "../../scripts/constprograms/shablon/commands.js";
 import {AddDropDown} from "../../scripts/layouts/header/header.js";
 import {cart} from "../../scripts/components/cart/cart.js";
+import {orderPlacement} from "../../scripts/components/order-placement/order-placement.js";
+import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
 
 /**
  * Собираемые для переработки пути.
@@ -20,6 +21,7 @@ const ROUTES = {
     RECORDS: '/records',
     CHANGESITY: '/changeSity',
     CART: '/cart',
+    ORDER: '/order',
     FAVORITE: '/favorite',
     PRODUCT: '/catalog/product/:id',
     ERROR: '/error/:err',
@@ -93,6 +95,7 @@ export const Router = {
         [ROUTES.RECORDS]: 'records',
         [ROUTES.CHANGESITY]: 'changeSity',
         [ROUTES.CART]: 'cart',
+        [ROUTES.ORDER]: 'order',
         [ROUTES.FAVORITE]: 'favorites',
         [ROUTES.PRODUCT]: 'product',
         [ROUTES.LOGOUT]: 'logout',
@@ -207,8 +210,17 @@ export const Router = {
      * @returns {Promise<Response>} - Возвращает Promise после загрузки страницы.
      */
     cart: function () {
-        //return fetchAndRender(ROUTES.CART, ROUTES.LOGIN, ROUTES.CART, () => this.body(() => cart()));
+        //return fetchAndRender(ROUTES.CART, ROUTES.LOGIN, ROUTES.LOGIN, () => this.body(() => cart()));
         return this.body(() => cart());
+    },
+
+    /**
+     * Страница корзины.
+     * @returns {Promise<Response>} - Возвращает Promise после загрузки страницы.
+     */
+    order: function () {
+        //return fetchAndRender(ROUTES.CART, ROUTES.LOGIN, ROUTES.LOGIN, () => this.body(() => cart()));
+        return this.body(() => orderPlacement());
     },
 
     /**
@@ -349,7 +361,7 @@ export const handlerLogout = event => {
     event.preventDefault();
 };
 
-registrFunctions();
+TemplateManager.registerHelpers();
 
 let user = getCookie('user');
 if (user === null) {

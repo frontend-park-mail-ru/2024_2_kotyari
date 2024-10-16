@@ -12,7 +12,7 @@
                 <div class="cart-item__price">
                     <span class="cart-item__current-price">{{cost}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
                     {{#if old_cost}}
-                        <span class="cart-item__old-price">{{old_cost}} {{currency}}</span>
+                        <span class="cart-item__old-price">{{old_cost}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
                     {{/if}}
                     {{#if discount}}
                         <span class="cart-item__discount">-{{discount}}%</span>

@@ -33,5 +33,20 @@ export const partials = {
     }, {
         name: 'right-element-of-cart',
         partial: '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.hbs'
+    }],
+    '/src/scripts/components/order-placement/order-placement.hbs': [{
+        name: 'left-element-of-order-placement',
+        partial: '/src/scripts/components/order-placement/elements/left-element-of-order-placement/left-element-of-order-placement.hbs'
+    }, {
+        name: 'right-element-of-order-placement',
+        partial: '/src/scripts/components/order-placement/elements/right-element-of-order-placement/right-element-of-order-placement.hbs'
+    }],
+    '/src/scripts/components/order-placement/elements/left-element-of-order-placement/left-element-of-order-placement.hbs': [{
+        name: 'delivery-dates-list',
+        partial: '/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/delivery-dates-list.hbs'
+    }],
+    '/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/delivery-dates-list.hbs': [{
+        name: 'product-item',
+        partial: '/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item.hbs'
     }]
 }

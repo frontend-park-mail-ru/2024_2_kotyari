@@ -1,0 +1,56 @@
+// Импортируем нужные файлы
+@import '/src/scripts/components/order-placement/elements/right-element-of-order-placement/right-element-of-order-placement.css';
+@import '/src/scripts/components/order-placement/elements/left-element-of-order-placement/left-element-of-order-placement.css';
+@import '/src/css/parametrs/parametrs.css';
+
+.order-placement {
+  // Основной контейнер оформления
+  & {
+    width: var(--container-width);
+    margin: var(--container-margin);
+  }
+
+  // Заголовок оформления
+  &__title {
+    font-size: var(--strong-font-size);
+    font-weight: var(--container-title-font-weight);
+    margin-bottom: var(--conteiner-title-margin-bottom);
+  }
+
+  // Контент оформления
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--main-gap);
+  }
+
+  // Левая часть оформления (элемент слева)
+  &__left {
+    width: var(--left-width);
+  }
+
+  // Правая часть оформления (элемент справа)
+  &__right {
+    width: var(--right-width);
+  }
+
+  // Элемент с фиксированным позиционированием
+  &__right-absolute {
+    position: fixed;
+    width: calc(0.9*var(--right-width));
+  }
+
+  // Медиазапрос для мобильных устройств
+  @media screen and (max-width: 858px) {
+    &__content {
+      flex-direction: column;
+    }
+    &__left, .cart-container__right {
+      width: var(--width-max);
+    }
+    &__right-absolute {
+      position: relative;
+      width: var(--width-max);
+    }
+  }
+}

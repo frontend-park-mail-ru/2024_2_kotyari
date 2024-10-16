@@ -1,4 +1,4 @@
-import {templatize} from "../../constprograms/shablon/shablon.js";
+import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
 import {backurl} from "../../../services/router/settings.js";
 import {errors} from "../../errors/errors.js";
 import {Router} from "../../../services/router/router.js";
@@ -61,7 +61,7 @@ async function getCards() {
     }
 
     const data = Object.values(await response.json())
-    return templatize(document.getElementById('main'), '/src/scripts/components/card/card.hbs', {products: data}).then(() => {
+    return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/card/card.hbs', {products: data}).then(() => {
         cardSettings(data);
     });
 }

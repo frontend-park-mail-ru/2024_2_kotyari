@@ -1,0 +1,12 @@
+<div class="product-item">
+    <img
+            src="{{productImage}}"
+            alt="{{productName}}"
+            class="product-item__image"
+            onerror="this.src='https://via.placeholder.com/150'">
+
+    <div class="product-item__details">
+        <span class="product-item__name">{{name}}</span>
+        <span class="product-item__price">{{price}}{{#if currency}}{{currency}}{{else}}₽{{/if}}, {{quantity}} шт.</span>
+    </div>
+</div>

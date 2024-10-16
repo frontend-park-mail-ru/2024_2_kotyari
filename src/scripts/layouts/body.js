@@ -1,4 +1,4 @@
-import {templatize} from '../constprograms/shablon/shablon.js'
+import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
 import {logoutUpdate} from "./header/header.js";
 import {backurl} from "../../services/router/settings.js";
 import {deleteCookie} from "../../services/cookie/cookie.js";
@@ -14,7 +14,7 @@ import {Router} from "../../services/router/router.js";
  * @returns {Promise<void>} Возвращает промис, который разрешается после завершения рендеринга.
  */
 export function buildBody(data) {
-    return templatize(document.body, '/src/scripts/layouts/body.hbs', data);
+    return TemplateManager.templatize(document.body, '/src/scripts/layouts/body.hbs', data);
 }
 
 /**
