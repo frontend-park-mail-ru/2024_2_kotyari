@@ -302,7 +302,11 @@ export const Router = {
 
   order_list: function () {
     this.navigate(ROUTES.ORDER_LIST);
-    this.body(() => buildOrderList(orderList));
+    this.body(() => buildOrderList(orderList)).then(() => {
+      document.getElementById('review-button').addEventListener('click', () => {
+        soon();
+      });
+    });
   },
 
   single_order: function () {

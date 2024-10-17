@@ -1,102 +1,90 @@
+@charset "UTF-8";
 @import "/src/css/parametrs/parameters.css";
-
-.order-list-container {
-    /* в дальнейшем возможно вынесение в переменную */
-    max-width: 1081px;
-    margin: auto;
-
+.order-list {
+  /* Возможно вынесение в переменную */
+  max-width: 1081px;
+  margin: auto;
 }
-
-.order-list-title {
-    font-size: var(--big-font-size);
-    text-align: left;
-    margin-bottom: var(--big-margin-bottom);
-    margin-top: var(--big-margin-bottom);
+.order-list__title {
+  font-size: var(--big-font-size);
+  text-align: left;
+  margin-bottom: var(--big-margin-bottom);
+  margin-top: var(--big-margin-bottom);
 }
-
-.order-card {
-    background-color: var(--card-background-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: var(--container-border-radius);
-    box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
-    padding: var(--padding);
-    transition: transform var(--short-duration) ease;
-    /* в дальнейшем возможно вынесение в переменную */
-    height: 200px;
-    margin-bottom: var(--big-margin-bottom);
+.order-list__card {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--container-border-radius);
+  box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
+  padding: var(--padding);
+  transition: transform var(--short-duration) ease;
+  /* Возможно вынесение в переменную */
+  height: 200px;
+  margin-bottom: var(--big-margin-bottom);
 }
-
-.order-card:hover {
-    transform: scale(var(--litle-scale));
+.order-list__card:hover {
+  transform: scale(var(--litle-scale));
 }
-
-.order-footer {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--small-margin);
-    margin-top: 72px;
-
+.order-list__card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--small-margin);
 }
-.order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--small-margin);
+.order-list__card-date {
+  font-size: var(--font-size20);
+  color: var(--text-color);
 }
-
-.order-items {
-    flex-direction: row;
-    display: flex;
-    margin-left: 380px;
+.order-list__card-total {
+  font-size: var(--default-font-size);
+  font-weight: var(--little-font-weight);
 }
-
-.order-date {
-    font-size: var(--font-size20);
-    color: var(--text-color);
+.order-list__footer {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--small-margin);
+  margin-top: 72px;
 }
-
-.order-status {
-    font-size: 14px;
-    padding-top: 5px;
+.order-list__review-button {
+  padding: var(--button-padding);
+  font-size: var(--font-size_label);
+  background-color: var(--base-background-color);
+  color: var(--text-inv);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
 }
-
-.order-details {
-    display: flex;
-    gap: var(--gap);
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: var(--big-margin-bottom);
+.order-list__review-button:hover {
+  background-color: var(--darker-background-color);
+  transform: scale(var(--litle-scale));
 }
-
-.order-item {
-    text-align: center;
-    margin-right: 10px;
-    margin-left: 10px;
+.order-list__items {
+  flex-direction: row;
+  display: flex;
+  margin-left: 380px;
+}
+.order-list__items-item {
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.order-list__details {
+  display: flex;
+  gap: var(--gap);
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: var(--big-margin-bottom);
+}
+.order-list__details-status {
+  font-size: 14px;
+  padding-top: 5px;
 }
 
 .order-item-image {
-    /* в дальнейшем нужно вынесение в переменную */
-    width: 60px;
-    height: 50px;
-    border-radius: 50%;
+  /* Возможно вынесение в переменную */
+  width: 60px;
+  height: 50px;
+  border-radius: 50%;
 }
 
-.order-total {
-    font-size: var(--default-font-size);
-    font-weight: var(--little-font-weight);
-}
-
-.review-button {
-    padding: var(--button-padding);
-    font-size: var(--font-size_label);
-    background-color: var(--base-background-color);
-    color: var(--text-inv);
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-}
-
-.review-button:hover {
-    background-color: var(--darker-background-color);
-    transform: scale(var(--litle-scale));
-}
+/*# sourceMappingURL=order-list.css.map */
