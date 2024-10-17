@@ -1,0 +1,102 @@
+@import "/src/css/parametrs/parameters.css";
+
+.order-list {
+  /* Возможно вынесение в переменную */
+  max-width: 1081px;
+  margin: auto;
+
+  &__title {
+    font-size: var(--big-font-size);
+    text-align: left;
+    margin-bottom: var(--big-margin-bottom);
+    margin-top: var(--big-margin-bottom);
+  }
+
+  &__card {
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--container-border-radius);
+    box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
+    padding: var(--padding);
+    transition: transform var(--short-duration) ease;
+    /* Возможно вынесение в переменную */
+    height: 200px;
+    margin-bottom: var(--big-margin-bottom);
+
+    &:hover {
+      transform: scale(var(--litle-scale));
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--small-margin);
+    }
+
+    &-date {
+      font-size: var(--font-size20);
+      color: var(--text-color);
+    }
+
+    &-total {
+      font-size: var(--default-font-size);
+      font-weight: var(--little-font-weight);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--small-margin);
+    margin-top: 72px;
+
+  }
+
+  &__review-button {
+    padding: var(--button-padding);
+    font-size: var(--font-size_label);
+    background-color: var(--base-background-color);
+    color: var(--text-inv);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--darker-background-color);
+      transform: scale(var(--litle-scale));
+    }
+  }
+
+  &__items {
+    flex-direction: row;
+    display: flex;
+    margin-left: 380px;
+
+    &-item {
+      text-align: center;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+  }
+
+  &__details {
+    display: flex;
+    gap: var(--gap);
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: var(--big-margin-bottom);
+
+    &-status {
+      font-size: 14px;
+      padding-top: 5px;
+    }
+  }
+}
+
+.order-item-image {
+  /* Возможно вынесение в переменную */
+  width: 60px;
+  height: 50px;
+  border-radius: 50%;
+}

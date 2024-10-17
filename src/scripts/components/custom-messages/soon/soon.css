@@ -6,11 +6,11 @@
     margin-top: 20%;
 }
 
-h1, p {
+.soon-bounce-text h1 p {
     color: var(--base-background-color);
 }
 
-.bounce-text {
+.soon-bounce-text {
     animation: bounce var(--two-seconds-duration) ease-in;
     will-change: transform;
 }
