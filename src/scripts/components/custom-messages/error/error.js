@@ -15,8 +15,8 @@ const returnPage = '/';
  */
 export function errorPage(name) {
   let config = {
-    name: '404',
-    description: errorsDescriptions['404'],
+    name: name,
+    description: errorsDescriptions[name],
     return: returnPage,
   };
 
