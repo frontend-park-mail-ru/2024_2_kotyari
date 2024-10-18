@@ -1,4 +1,4 @@
-import { templatize } from '../../../constprograms/templatizer/templatizer.js';
+import { templatize } from '../../../constprograms/templatizer/new-templatizer.ts';
 
 const returnPage = '/';
 
