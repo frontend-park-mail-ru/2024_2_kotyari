@@ -1,4 +1,4 @@
-import { templatize } from '../../constprograms/templatizer/new-templatizer.js';
+import { templatize } from '../../constprograms/templatizer/templatizer.js';
 import { errors } from '../../errors/errors.js';
 
 /**

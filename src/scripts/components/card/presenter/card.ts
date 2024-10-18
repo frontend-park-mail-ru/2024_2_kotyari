@@ -6,7 +6,7 @@ export class CardPresenter {
   private api: CardApiInterface;
   private view: CardViewInterface;
 
-  constructor( api: CardApiInterface, view: CardViewInterface) {
+  constructor(api: CardApiInterface, view: CardViewInterface) {
     this.api = api;
     this.view = view;
   }
@@ -14,20 +14,21 @@ export class CardPresenter {
   init = () => {
     this.loadCards()
       .then(() => {
-        this.attachCardClickHandlers()
+        this.attachCardClickHandlers();
       })
-      .then(
-        document.getElementById()
-      );
+      .then(() => {
+        // todo листенеры добавить
+        // const elements = document.querySelectorAll('');
+      });
   };
 
   private loadCards = async () => {
     return this.api.fetchCards()
       .then(cardsData => {
-        this.view.render({products: cardsData})
+        this.view.render({ products: cardsData })
           .catch(err => {
             console.error(err);
-          })
+          });
       })
       .catch(err => {
         console.error(err);

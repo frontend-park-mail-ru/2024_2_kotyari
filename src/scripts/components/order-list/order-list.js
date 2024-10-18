@@ -1,4 +1,4 @@
-import { templatize } from '../../constprograms/templatizer/new-templatizer.js';
+import { templatize } from '../../constprograms/templatizer/templatizer.js';
 
 const orderListTemplateURL = '/src/scripts/components/order-list/order-list.hbs';
 
