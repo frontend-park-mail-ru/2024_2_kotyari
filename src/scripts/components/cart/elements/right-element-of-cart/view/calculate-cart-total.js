@@ -8,7 +8,7 @@ import {cartData} from "../../../api/products.js";
  *
  * @function
  */
-export function calculateCartTotals() {
+export function calculateCartTotal() {
     const selectedItems = cartData.products.filter(product => product.isSelected);  // Фильтруем выбранные товары
 
     const totalItems = selectedItems.reduce((acc, product) => acc + product.quantity, 0);

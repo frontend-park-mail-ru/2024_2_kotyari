@@ -1,7 +1,4 @@
-import {backurl} from "../../../services/router/settings.js";
-import {errors} from "../../errors/errors.js";
-import {Router} from "../../../services/router/router.js";
-import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
+import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
 import { backurl } from '../../../services/router/settings.js';
 import { errors } from '../../errors/errors.js';
 import { Router } from '../../../services/router/router.js';

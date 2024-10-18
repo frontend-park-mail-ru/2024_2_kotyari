@@ -1,6 +1,6 @@
 import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
-import {cardsSetting, updateSelectedCount} from "../elements/lefr-cards/view/left-cards.js";
-import {calculateCartTotals} from "../elements/right-element-of-cart/view/calculate-cart-totals.js";
+import {cardsSetting, updateSelectedCount} from "../elements/left-cards/view/left-cards.js";
+import {calculateCartTotal} from "../elements/right-element-of-cart/view/calculate-cart-total.js";
 import {cartData} from "../api/products.js";
 
 /**
@@ -10,8 +10,14 @@ import {cartData} from "../api/products.js";
  *
  * @function
  * @returns {Promise} Возвращает промис, который разрешается после полной инициализации корзины и всех её элементов.
+
+ куда этой логике был убран
+
+ return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/cart/view/cart.hbs', cartData).then(() => {
+
+который орисовывал тело страницы spa, на которое уже навесилось все что ты описал выше
  */
-export function cart() {
+export function carts() {
     return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/cart/view/cart.hbs', cartData).then(() => {
         const selectAllCheckbox = document.getElementById('select-all');
         const itemCheckboxes = document.querySelectorAll('.cart-item__select-item');
@@ -122,6 +128,6 @@ export function cart() {
         updateSelectAllCheckbox();
 
         cardsSetting();
-        calculateCartTotals();
+        calculateCartTotal();
     });
 }

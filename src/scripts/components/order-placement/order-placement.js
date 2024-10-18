@@ -1,4 +1,4 @@
-import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
+import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
 import {
     rightElementOfOrderPlacement
 } from "./elements/right-element-of-order-placement/right-element-of-order-placement.js";

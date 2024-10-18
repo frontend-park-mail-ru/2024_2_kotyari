@@ -1,7 +1,7 @@
 import {HandlebarManager} from "../../../../src/scripts/constprograms/handlebars/handlebars.js";
 import {errors} from "../../../../src/scripts/errors/errors.js";
-import {partials} from "../../../../src/scripts/constprograms/shablon/partials.js";
-import {helpers} from "../../../../src/scripts/constprograms/shablon/helpers.js";
+import {partials} from "../../../../src/scripts/constprograms/templatizer/partials.js";
+import {helpers} from "../../../../src/scripts/constprograms/templatizer/helpers.js";
 
 /**
  * Интерфейсы для типизации partial-шаблонов и хелперов.

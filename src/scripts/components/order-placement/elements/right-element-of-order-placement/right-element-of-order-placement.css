@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import "/src/css/parametrs/parametrs.css";
 .right-element-card {
   background-color: var(--card-background-color);
   border-radius: var(--card-border-radius);

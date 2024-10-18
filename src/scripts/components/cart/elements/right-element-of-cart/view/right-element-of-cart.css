@@ -8,7 +8,7 @@
 }
 .right-card__total-items {
   font-size: var(--total-items-font-size);
-  color: var(--text);
+  color: var(--default-text-color);
   display: flex;
   justify-content: space-between;
   margin-bottom: var(--total-item-margin-bottom);
@@ -20,7 +20,7 @@
 }
 .right-card__benefit {
   font-size: var(--benefit-font-size);
-  color: var(--text);
+  color: var(--default-text-color);
   display: flex;
   justify-content: space-between;
   margin-bottom: var(--benefit-margin-bottom);
@@ -30,10 +30,11 @@
   font-weight: var(--grand-total-font-weight);
   display: flex;
   justify-content: space-between;
+  color: var(--default-text-color);
 }
 
-.checkout-btn {
-  background-color: var(--background-color-site-new);
+.cart-checkout-btn {
+  background-color: var(--base-background-color);
   color: white;
   border: none;
   font-size: var(--button-font-size);
@@ -41,21 +42,22 @@
   border-radius: var(--card-border-radius);
   padding: var(--chrckout-padding);
   width: var(--width-max);
+  transition: background-color var(--short-duration) ease, color var(--short-duration);
 }
-.checkout-btn:hover {
-  background-color: var(--background-color-site-gray);
+.cart-checkout-btn:hover {
+  background-color: var(--darker-background-color);
   color: var(--text-inv);
 }
-.checkout-btn:active {
-  background-color: var(--background-color-site-black);
+.cart-checkout-btn:active {
+  background-color: var(--darkest-background-color);
   color: var(--text-inv);
 }
-.checkout-btn.disabled {
+.cart-checkout-btn.disabled {
   background-color: var(--disabled-background-color);
   color: var(--disabled-color);
   cursor: not-allowed;
 }
-.checkout-btn.disabled:hover {
+.cart-checkout-btn.disabled:hover {
   background-color: var(--disabled-background-color);
   color: var(--disabled-color);
 }

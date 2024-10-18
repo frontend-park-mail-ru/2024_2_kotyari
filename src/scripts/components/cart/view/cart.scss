@@ -1,55 +1,58 @@
 // Импортируем нужные файлы
-@import '/src/scripts/components/cart/elements/data-sampling/data-sampling.css';
-@import '/src/scripts/components/cart/elements/lefr-cards/left-cards.css';
-@import '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.css';
+@import '/src/scripts/components/cart/elements/data-sampling/view/data-sampling.css';
+@import '/src/scripts/components/cart/elements/left-cards/view/left-cards.css';
+@import '/src/scripts/components/cart/elements/right-element-of-cart/view/right-element-of-cart.css';
 @import '/src/css/parametrs/parameters.css';
 
 // Основной контейнер корзины
 .cart-container {
   width: var(--container-width);
   margin: var(--container-margin);
-}
 
-// Заголовок корзины
-.cart-container__title {
-  font-size: var(--strong-font-size);
-  font-weight: var(--container-title-font-weight);
-  margin-bottom: var(--conteiner-title-margin-bottom);
-}
+  // Заголовок корзины
+  &__title {
+    font-size: var(--strong-font-size);
+    font-weight: var(--container-title-font-weight);
+    margin-bottom: var(--conteiner-title-margin-bottom);
+    color: var(--default-text-color);
+  }
 
-// Контент корзины
-.cart-container__content {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--main-gap);
-}
+  // Контент корзины
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--main-gap);
+  }
 
-// Левая часть корзины (список товаров)
-.cart-container__left {
-  width: var(--left-width);
-}
+  // Левая часть корзины (список товаров)
+  &__left {
+    width: var(--left-width);
+  }
 
-// Правая часть корзины (элемент справа)
-.cart-container__right {
-  width: var(--right-width);
-}
+  // Правая часть корзины (элемент справа)
+  &__right {
+    width: var(--right-width);
+  }
 
-// Элемент с фиксированным позиционированием
-.cart-container__right-absolute {
-  position: fixed;
-  width: calc(0.9*var(--right-width));
+  // Элемент с фиксированным позиционированием
+  &__right-absolute {
+    position: fixed;
+    width: calc(0.9*var(--right-width));
+  }
 }
 
 // Медиазапрос для мобильных устройств
 @media screen and (max-width: 858px) {
-  .cart-container__content {
-    flex-direction: column;
-  }
-  .cart-container__left, .cart-container__right {
-    width: var(--width-max);
-  }
-  .cart-container__right-absolute {
-    position: relative;
-    width: var(--width-max);
+  .cart-container {
+    &__content {
+      flex-direction: column;
+    }
+    &__left, &__right {
+      width: var(--width-max);
+    }
+    &__right-absolute {
+      position: relative;
+      width: var(--width-max);
+    }
   }
 }

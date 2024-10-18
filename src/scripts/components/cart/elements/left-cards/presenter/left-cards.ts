@@ -1,101 +1,83 @@
-import { CartView } from '/dist/scripts/components/cart/view/cart.js';
-import { cartData } from '/src/scripts/components/cart/api/products.js';
-import { cardsSetting, updateSelectedCount } from '/dist/scripts/components/cart/elements/left-cards/view/left-cards.js';
-import { calculateCartTotals } from '/dist/scripts/components/cart/elements/right-element-of-cart/view/calculate-cart-totals.js';
+import { RightCartPresenter } from "../../right-element-of-cart/presenter/calculate-cart-totals.js";
+import { cartData } from "../../../api/products.js";
+import { CartProduct } from "../../../types/types";
+import { LeftCardsView } from "../view/left-cards.js";
+import {RightCartView} from "../../right-element-of-cart/view/calculate-cart-totals.js";
 
-export class CartPresenter {
-    private cartView: CartView;
+export class LeftCardsPresenter {
+    private view: LeftCardsView;
+    private rightCartPresenter: RightCartPresenter;
 
-    constructor(cartView: CartView) {
-        this.cartView = cartView;
+    constructor(view: LeftCardsView) {
+        this.view = view;
+
+        const rightCartView = new RightCartView();
+        this.rightCartPresenter = new RightCartPresenter(rightCartView);
+
+        this.view.onFavoriteToggle = this.handleFavoriteToggle.bind(this);
+        this.view.onQuantityChange = this.handleQuantityChange.bind(this);
+        this.view.onRemoveItem = this.handleRemoveItem.bind(this);
+        this.view.onSelectItem = this.handleSelectItem.bind(this);
     }
 
-    /**
-     * Инициализация работы с корзиной. Загружает состояние корзины и добавляет слушатели событий.
-     */
-    initializeCart() {
-        // Инициализируем чекбоксы на основе cartData
-        this.cartView.initializeCheckboxes(cartData.products);
-
-        // Инициализация состояния "select-all"
-        this.updateSelectAllCheckbox();
-
-        // Добавляем слушатели
-        this.cartView.onSelectAllChange(this.handleSelectAllChange.bind(this));
-        this.cartView.onItemCheckboxChange(this.handleItemCheckboxChange.bind(this));
-        this.cartView.onDeleteSelected(this.handleDeleteSelected.bind(this));
-
-        // Дополнительные настройки
-        cardsSetting();
-        calculateCartTotals();
+    // Метод для обновления количества выбранных товаров
+    updateSelectedCount(): void {
+        const selectedCount = cartData.products.filter((product: CartProduct) => product.isSelected).length;
+        this.view.updateSelectedCount(selectedCount);
+        this.rightCartPresenter.calculateCartTotals();
     }
 
-    /**
-     * Обработчик изменения состояния чекбокса "select-all".
-     * Выделяет или снимает выделение со всех товаров в корзине.
-     *
-     * @param checked булево значение: выделены ли все товары.
-     */
-    private handleSelectAllChange(checked: boolean) {
-        cartData.products = cartData.products.map(product => ({
-            ...product,
-            isSelected: checked
-        }));
-
-        this.cartView.initializeCheckboxes(cartData.products);  // Обновляем состояние чекбоксов
-        this.updateSelectedCount();  // Обновляем количество выбранных товаров
+    // Обработчик для переключения состояния "избранное"
+    private handleFavoriteToggle(productId: string): void {
+        const product = this.findProductById(productId);
+        if (product) {
+            product.is_liked = !product.is_liked;
+            this.view.updateFavoriteIcon(productId, product.is_liked);
+        }
     }
 
-    /**
-     * Обработчик изменения состояния отдельного чекбокса товара.
-     * Обновляет состояние товара в корзине.
-     *
-     * @param productId ID товара
-     * @param checked булево значение: выбран ли товар.
-     */
-    private handleItemCheckboxChange(productId: string, checked: boolean) {
-        cartData.products = cartData.products.map(product => {
-            if (product.id === productId) {
-                return {
-                    ...product,
-                    isSelected: checked
-                };
+    // Обработчик изменения количества товара
+    private handleQuantityChange(productId: string, action: 'increase' | 'decrease'): void {
+        const product = this.findProductById(productId);
+        if (product) {
+            if (action === 'increase') {
+                product.quantity++;
+            } else if (action === 'decrease' && product.quantity > 1) {
+                product.quantity--;
             }
-            return product;
-        });
 
-        this.updateSelectAllCheckbox();
+            this.view.updateQuantityDisplay(productId, product.quantity);
+
+            if (product.quantity === 1) {
+                this.view.switchMinusButtonToDelete(productId, true);
+                product.isSingleItem = true;
+            } else {
+                this.view.switchMinusButtonToDelete(productId, false);
+                product.isSingleItem = false;
+            }
+
+            this.rightCartPresenter.calculateCartTotals();
+        }
+    }
+
+    // Обработчик удаления товара
+    private handleRemoveItem(productId: string): void {
+        cartData.products = cartData.products.filter((product: CartProduct) => product.id !== productId);
+        this.view.removeItem(productId);
         this.updateSelectedCount();
     }
 
-    /**
-     * Обработчик удаления выбранных товаров.
-     * Удаляет выбранные товары из корзины и обновляет состояние.
-     */
-    private handleDeleteSelected() {
-        const selectedItems = this.cartView.getSelectedItems();
-        const selectedIds = selectedItems.map(item => item.id.split('-')[2]);
-
-        cartData.products = cartData.products.filter(product => !selectedIds.includes(product.id));
-        this.cartView.removeSelectedItems(selectedItems);
-        this.updateSelectAllCheckbox();
-        this.updateSelectedCount();
+    // Обработчик выбора товара
+    private handleSelectItem(productId: string, isSelected: boolean): void {
+        const product = this.findProductById(productId);
+        if (product) {
+            product.isSelected = isSelected;
+            this.updateSelectedCount();
+        }
     }
 
-    /**
-     * Обновляет состояние чекбокса "select-all" на основе состояния товаров в корзине.
-     */
-    private updateSelectAllCheckbox() {
-        const allChecked = cartData.products.every(product => product.isSelected);
-        this.cartView.updateSelectAllCheckbox(allChecked);
-    }
-
-    /**
-     * Обновляет количество выбранных товаров.
-     */
-    private updateSelectedCount() {
-        const selectedCount = cartData.products.filter(product => product.isSelected).length;
-        this.cartView.updateSelectedCount(selectedCount);
-        updateSelectedCount();  // Вызов сторонней функции для обновления UI
+    // Вспомогательный метод для поиска товара по id
+    private findProductById(productId: string): CartProduct | undefined {
+        return cartData.products.find((p: CartProduct) => p.id === productId);
     }
 }

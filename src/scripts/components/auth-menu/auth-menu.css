@@ -35,7 +35,7 @@ button[type="submit"] {
     border-width: 0;
     border-radius: var(--auth-button-border-radius);
     cursor: pointer;
-    margin-bottom: var(--middle-button-margin-bottom); /* Добавляем отступ снизу */
+    margin-bottom: var(--midle-button-margin-bottom); /* Добавляем отступ снизу */
     transition: background-color var(--middle-duration) ease, color var(--middle-duration) ease; /* Плавный переход для кнопки */
 }
 

@@ -23,15 +23,15 @@ export const partials = {
         name: 'searcher',
         partial: '/src/scripts/components/elements/searcher/searcher.hbs'
     }],
-    '/src/scripts/components/cart/cart.hbs': [{
+    '/src/scripts/components/cart/view/cart.hbs': [{
         name: 'data-sampling',
-        partial: '/src/scripts/components/cart/elements/data-sampling/data-sampling.hbs'
+        partial: '/src/scripts/components/cart/elements/data-sampling/view/data-sampling.hbs'
     }, {
         name: 'left-cards',
-        partial: '/src/scripts/components/cart/elements/lefr-cards/left-cards.hbs'
+        partial: '/src/scripts/components/cart/elements/left-cards/view/left-cards.hbs'
     }, {
         name: 'right-element-of-cart',
-        partial: '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.hbs'
+        partial: '/src/scripts/components/cart/elements/right-element-of-cart/view/right-element-of-cart.hbs'
     }],
     '/src/scripts/components/order-placement/order-placement.hbs': [{
         name: 'left-element-of-order-placement',

@@ -1,5 +1,5 @@
 // Обновление количества выбранных товаров
-import {calculateCartTotals} from "../../right-element-of-cart/view/calculate-cart-totals.js";
+import {calculateCartTotal} from "../../right-element-of-cart/view/calculate-cart-total.js";
 import {cartData} from "../../../api/products.js";
 
 /**
@@ -33,7 +33,7 @@ export function updateSelectedCount() {
         }
     });
 
-    calculateCartTotals();  // Пересчитываем итоговые значения корзины
+    calculateCartTotal();  // Пересчитываем итоговые значения корзины
 }
 
 /**
@@ -90,7 +90,7 @@ export function cardsSetting() {
                 updateSelectedCount(cartData);
             }
 
-            calculateCartTotals();
+            calculateCartTotal();
         });
 
         plusButton.addEventListener('click', () => {
@@ -107,7 +107,7 @@ export function cardsSetting() {
                 product.isSingleItem = false;
             }
 
-            calculateCartTotals();
+            calculateCartTotal();
         });
 
         // Удаление товара по иконке мусорки
@@ -120,7 +120,7 @@ export function cardsSetting() {
 
             item.remove();
             updateSelectedCount(cartData);
-            calculateCartTotals();
+            calculateCartTotal();
         });
     });
 }

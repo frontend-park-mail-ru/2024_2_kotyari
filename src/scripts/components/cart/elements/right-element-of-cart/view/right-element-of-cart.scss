@@ -9,7 +9,7 @@
 
   &__total-items {
     font-size: var(--total-items-font-size);
-    color: var(--text);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--total-item-margin-bottom);
@@ -23,7 +23,7 @@
 
   &__benefit {
     font-size: var(--benefit-font-size);
-    color: var(--text);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--benefit-margin-bottom);
@@ -34,12 +34,13 @@
     font-weight: var(--grand-total-font-weight);
     display: flex;
     justify-content: space-between;
+    color: var(--default-text-color);
   }
 }
 
 // Блок для кнопки
-.checkout-btn {
-  background-color: var(--background-color-site-new);
+.cart-checkout-btn {
+  background-color: var(--base-background-color);
   color: white;
   border: none;
   font-size: var(--button-font-size);
@@ -47,14 +48,15 @@
   border-radius: var(--card-border-radius);
   padding: var(--chrckout-padding);
   width: var(--width-max);
+  transition: background-color var(--short-duration) ease, color var(--short-duration);
 
   &:hover {
-    background-color: var(--background-color-site-gray); // Более темный фон при наведении
+    background-color: var(--darker-background-color); // Более темный фон при наведении
     color: var(--text-inv);
   }
 
   &:active {
-    background-color: var(--background-color-site-black); // Самый темный фон при нажатии
+    background-color: var(--darkest-background-color); // Самый темный фон при нажатии
     color: var(--text-inv);
   }
 

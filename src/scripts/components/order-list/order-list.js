@@ -1,4 +1,4 @@
-import { templatize } from '../../constprograms/templatizer/templatizer.js';
+import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
 
 const orderListTemplateURL = 'src/scripts/components/order-list/order-list.hbs';
 
@@ -9,5 +9,5 @@ const orderListTemplateURL = 'src/scripts/components/order-list/order-list.hbs';
  * @param {Object} data - Данные для рендеринга списка заказов.
  */
 export async function buildOrderList(data) {
-  return templatize(document.getElementById('main'), orderListTemplateURL, data);
+  return TemplateManager.templatize(document.getElementById('main'), orderListTemplateURL, data);
 }

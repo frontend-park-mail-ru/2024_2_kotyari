@@ -1,4 +1,4 @@
-import { Helper } from '../../../../dist/scripts/constprograms/shablon/helps/helper.js';
+import { Helper } from '../../../../dist/scripts/constprograms/templatizer/helps/helper.js';
 
 /**
  * Массив вспомогательных функций (хелперов), которые могут быть использованы в проекте.
@@ -16,7 +16,6 @@ import { Helper } from '../../../../dist/scripts/constprograms/shablon/helps/hel
  *
  * @exports helpers
  */
-
 export const helpers = [{
     name: 'pluralize',
     function: Helper.pluralize,
