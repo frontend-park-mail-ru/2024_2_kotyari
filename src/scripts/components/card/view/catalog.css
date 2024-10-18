@@ -1,4 +1,4 @@
-@import "../../../css/parametrs/parameters.css";
+@import "../../../../../src/css/parametrs/parameters.css";
 
 body {
     margin: var(--margin-zero);
@@ -167,6 +167,11 @@ body {
 .center-container {
     text-align: center;
     margin-top: 20%;
+}
+
+/* Оформление текста */
+h1, p {
+    color: var(--text-another-color);
 }
 
 /* Убираем скачки, оставляем базовые стили текста */

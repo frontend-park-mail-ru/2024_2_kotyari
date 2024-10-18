@@ -9,7 +9,7 @@ import { TemplateManager } from '../constprograms/templatizer/templatizer.js';
  * @param {Object} data - Данные, которые будут переданы в шаблон для рендеринга.
  * @returns {Promise<void>} Возвращает промис, который разрешается после завершения рендеринга.
  */
-export function buildBody(data) {
+export function buildBody(data: any):Promise<void> {
   return TemplateManager.templatize(document.body, '/src/scripts/layouts/body.hbs', data)
     .then(() => {
       console.log('успешно');
