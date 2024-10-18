@@ -1,4 +1,5 @@
-import {HandlebarManager} from '../handlebars/handlebars.js';
+// @ts-ignore
+import Handlebars from "handlebars";
 import {errors} from '../../errors/errors.js';
 
 import {helpers} from './helpers.js';
@@ -42,7 +43,7 @@ export class TemplateManager {
     const partialPromises = partialList.map(async (partial) => {
       if (!this.registeredPartials.has(partial.name)) {
         const partialContent = await this.loadPartial(partial.partial);
-        HandlebarManager.registerPartial(partial.name, partialContent);
+        Handlebars.registerPartial(partial.name, partialContent);
         this.registeredPartials.add(partial.name);
 
         // Проверяем вложенные partial-шаблоны
@@ -63,7 +64,7 @@ export class TemplateManager {
   public static registerHelpers(): void {
     helpers.forEach((helper) => {
       if (!this.registeredHelpers.has(helper.name)) {
-        HandlebarManager.registerHelper(helper.name, helper.function);
+        Handlebars.registerHelper(helper.name, helper.function);
         this.registeredHelpers.add(helper.name);
       }
     });
@@ -86,7 +87,7 @@ export class TemplateManager {
       const response = await fetch(url);
       const templateSource = await response.text();
 
-      const template = HandlebarManager.compile(templateSource);
+      const template = Handlebars.compile(templateSource);
       root.innerHTML = template(data);
     } catch (err) {
       errors.TemplatizerError(err as Error);

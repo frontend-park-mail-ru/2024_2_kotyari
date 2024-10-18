@@ -7,10 +7,10 @@ import { LoginPresenter } from '../../scripts/components/auth-menu/presenters/lo
 import { SignUpPresenter } from '../../scripts/components/auth-menu/presenters/signup.js';
 import { AuthValidate } from '../../scripts/components/auth-menu/presenters/auth-validate.js';
 import { AUTH_URLS } from '../../scripts/components/auth-menu/api/config.js';
-import { registerFunctions } from '../../scripts/constprograms/templatizer/commands.js';
 import { buildBody } from '../../scripts/layouts/new-body.js';
 import { CARD_URLS } from '../../scripts/components/card/api/config.js';
 import CardAPI from '../../scripts/components/card/api/card.js';
+import Handlebars from "handlebars";
 import { CardView } from '../../scripts/components/card/view/card.js';
 import { CardPresenter } from '../../scripts/components/card/presenter/card.js';
 import { menuSignIn, menuSignUp } from '../../scripts/components/auth-menu/views/configs.js';
@@ -24,6 +24,20 @@ export const buildMain = (user: { name: string; city: string }): Promise<void> =
 
   return buildBody({ name, city });
 };
+
+function registerFunctions():void {
+    /**
+     * Хелпер 'eq' для сравнения двух значений.
+     *
+     * @param {*} a - Первое значение для сравнения.
+     * @param {*} b - Второе значение для сравнения.
+     * @returns {boolean} Возвращает true, если значения равны, иначе false.
+     */
+
+    Handlebars.registerHelper('eq', function (a, b) {
+        return a === b;
+    });
+}
 
 registerFunctions();
 
