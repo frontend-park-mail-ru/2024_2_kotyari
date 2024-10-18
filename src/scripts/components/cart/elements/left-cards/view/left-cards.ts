@@ -43,6 +43,12 @@ export class LeftCardsView {
                 if (productId) this.onRemoveItem(productId);
             });
 
+            // Удаление товара
+            const deleteBtn = item.querySelector('.delete-btn');
+            deleteBtn?.addEventListener('click', () => {
+                if (productId) this.onRemoveItem(productId);
+            });
+
             // Выбор товара (чекбоксы)
             const itemCheckbox = item.querySelector('.cart-item__select-item') as HTMLInputElement;
             itemCheckbox?.addEventListener('change', () => {
@@ -60,7 +66,7 @@ export class LeftCardsView {
 
     // Обновить иконку избранного
     public updateFavoriteIcon(productId: string, isLiked: boolean): void {
-        const favoriteButton = document.querySelector(`#favorite-${productId} .cart-item__wishlist-icon`);
+        const favoriteButton = document.querySelector(`#btn-favorite-${productId} .cart-item__wishlist-icon`);
 
         if (favoriteButton) {
             favoriteButton.textContent = isLiked ? 'favorite' : 'favorite_border';
@@ -78,11 +84,24 @@ export class LeftCardsView {
 
     // Переключение кнопки "минус" на иконку удаления
     public switchMinusButtonToDelete(productId: string, isDelete: boolean): void {
-        const minusButton = document.querySelector(`#minus-${productId}`);
+        const minusButton = document.querySelector(`#cart-remove-${productId}`);
 
         if (minusButton) {
             minusButton.innerHTML = isDelete ? '&#128465;' : '-';
             minusButton.classList.toggle('delete-btn', isDelete);
+
+            // Вынести обработчик в отдельную функцию
+            const handleClick = () => {
+                if (productId) this.onRemoveItem(productId);
+            };
+
+            if (isDelete) {
+                // Добавляем обработчик
+                minusButton.addEventListener('click', handleClick);
+            } else {
+                // Удаляем обработчик, если кнопка перестала быть кнопкой удаления
+                minusButton.removeEventListener('click', handleClick);
+            }
         }
     }
 

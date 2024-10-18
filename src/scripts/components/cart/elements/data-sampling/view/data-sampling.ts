@@ -1,4 +1,4 @@
-export class CartView {
+export class DataSamplingView {
     private selectAllCheckbox: HTMLInputElement;
     private itemCheckboxes: NodeListOf<HTMLInputElement>;
     private selectedCountElement: HTMLElement;

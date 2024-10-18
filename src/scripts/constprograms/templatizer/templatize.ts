@@ -2,14 +2,7 @@ import {HandlebarManager} from "../../../../src/scripts/constprograms/handlebars
 import {errors} from "../../../../src/scripts/errors/errors.js";
 import {partials} from "../../../../src/scripts/constprograms/templatizer/partials.js";
 import {helpers} from "../../../../src/scripts/constprograms/templatizer/helpers.js";
-
-/**
- * Интерфейсы для типизации partial-шаблонов и хелперов.
- */
-interface Partial {
-    name: string;
-    partial: string;
-}
+import {HelperFunctions, Partials} from "../../../../src/scripts/constprograms/templatizer/types/types";
 
 export class TemplateManager {
     private static registeredPartials: Set<string> = new Set();
@@ -37,7 +30,7 @@ export class TemplateManager {
      * @param partialList - Список объектов partial-шаблонов для регистрации.
      * @returns {Promise<void>} - Промис, который завершится после регистрации всех partial-шаблонов.
      */
-    public static async registerPartials(partialList: Partial[]): Promise<void> {
+    public static async registerPartials(partialList: Partials[]): Promise<void> {
         const partialPromises = partialList.map(async (partial) => {
             if (!this.registeredPartials.has(partial.name)) {
                 const partialContent = await this.loadPartial(partial.partial);
@@ -61,9 +54,10 @@ export class TemplateManager {
      */
     public static registerHelpers(): void {
         helpers.forEach((helper) => {
-            if (!this.registeredHelpers.has(helper.name)) {
-                HandlebarManager.registerHelper(helper.name, helper.function);
-                this.registeredHelpers.add(helper.name);
+            const helperName = helper.name as keyof HelperFunctions;
+            if (!this.registeredHelpers.has(helperName)) {
+                HandlebarManager.registerHelper(helperName, helper.function);
+                this.registeredHelpers.add(helperName);
             }
         });
     }

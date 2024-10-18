@@ -7,7 +7,7 @@
 @import '/src/scripts/layouts/header/header.css';
 @import '/src/scripts/components/auth-menu/auth-menu.css';
 @import '/src/scripts/components/cart/view/cart.css';
-@import '/src/scripts/components/order-placement/order-placement.css';
+@import '/src/scripts/components/order-placement/view/order-placement.css';
 @import '/src/scripts/components/order-list/order-list.css';
 
 * {

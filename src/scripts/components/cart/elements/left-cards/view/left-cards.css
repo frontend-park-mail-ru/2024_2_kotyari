@@ -23,6 +23,7 @@
 .cart-item__image img {
   width: var(--width-max);
   height: auto;
+  aspect-ratio: 1/1;
   border-radius: var(--card-border-radius);
   min-height: var(--min-card-image-width);
 }

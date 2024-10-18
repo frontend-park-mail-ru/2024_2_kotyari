@@ -38,7 +38,7 @@ export class RightCartView {
                 <span class="total-price">${totalPrice}${currency}</span>
             `;
 
-            this.benefitPriceElement.innerText = `-${benefitPrice}${currency}`;
+            this.benefitPriceElement.innerText = `${benefitPrice}${currency}`;
             this.finalPriceElement.innerText = `${finalPrice}${currency}`;
         }
     }

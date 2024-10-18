@@ -39,6 +39,7 @@ export class LeftCardsPresenter {
     // Обработчик изменения количества товара
     private handleQuantityChange(productId: string, action: 'increase' | 'decrease'): void {
         const product = this.findProductById(productId);
+
         if (product) {
             if (action === 'increase') {
                 product.quantity++;
@@ -47,6 +48,8 @@ export class LeftCardsPresenter {
             }
 
             this.view.updateQuantityDisplay(productId, product.quantity);
+
+            console.log(product.quantity === 1)
 
             if (product.quantity === 1) {
                 this.view.switchMinusButtonToDelete(productId, true);

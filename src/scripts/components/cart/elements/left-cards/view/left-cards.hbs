@@ -5,7 +5,7 @@
                 <input type="checkbox" class="cart-item__select-item" id="cart-checkbox-{{id}}">
             </div>
             <div class="cart-item__image" href="{{url}}" router="changed-active" title="Перейти на страницу товара">
-                <img src="{{image}}" alt="{{name}}" onerror="this.src='https://via.placeholder.com/150'">
+                <img src="{{image_url}}" alt="{{name}}" onerror="this.src='https://via.placeholder.com/150'">
             </div>
             <div class="cart-item__details">
                 <div class="cart-item__title" href="{{url}}" router="changed-active" title="Перейти на страницу товара">{{name}}</div>
@@ -24,10 +24,10 @@
                 </div>
                 <div class="cart-item__quantity-wrapper">
                     <div class="cart-item__quantity">
-                        <button class="cart-item__quantity-btn cart-item__quantity-btn--minus" id="cart-remove-{{id}}">
+                        <button class="cart-item__quantity-btn cart-item__quantity-btn--minus {{#if isSingleItem}}delete-btn{{/if}}" id="cart-remove-{{id}}">
                             {{#if isSingleItem}}&#128465;{{else}}-{{/if}}
                         </button>
-                        <span class="cart-item__quantity-count">{{quantity}} шт.</span>
+                        <span class="cart-item__quantity-count" id="quantity-{{id}}">{{quantity}} шт.</span>
                         <button class="cart-item__quantity-btn cart-item__quantity-btn--plus">+</button>
                     </div>
                     <button class="cart-item__btn-favorite" id="btn-favorite-{{id}}">
