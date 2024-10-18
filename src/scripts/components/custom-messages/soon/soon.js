@@ -12,5 +12,5 @@ const returnPage = '/';
 export function soon() {
     return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/soon/soon.hbs', {
         return: returnPage
-    })
+    });
 }

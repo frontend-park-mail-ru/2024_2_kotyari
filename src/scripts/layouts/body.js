@@ -1,4 +1,4 @@
-import {TemplateManager} from "/dist/scripts/constprograms/shablon/templatize.js";
+import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
 import {logoutUpdate} from "./header/header.js";
 import {backurl} from "../../services/router/settings.js";
 import {deleteCookie} from "../../services/cookie/cookie.js";
@@ -28,25 +28,25 @@ export function buildBody(data) {
  * @returns {Promise<void>} Возвращает промис, который разрешается после выполнения операции выхода.
  */
 export async function handleLogout() {
-    try {
-        const response = await fetch(backurl + 'logout', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+  try {
+    const response = await fetch(backurl + 'logout', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-        if (response.status === 204) {
-            Router.navigate('/'); // Перенаправление на главную страницу при успешном выходе
-        } else {
-            alert('Не удалось выполнить выход. Попробуйте снова.');
-        }
-    } catch (error) {
-        console.log(error)
+    if (response.status === 204) {
+      Router.navigate('/'); // Перенаправление на главную страницу при успешном выходе
+    } else {
+      alert('Не удалось выполнить выход. Попробуйте снова.');
     }
+  } catch (error) {
+    console.log(error);
+  }
 
-    deleteCookie('user'); // Удаление cookie с именем 'user'
+  deleteCookie('user'); // Удаление cookie с именем 'user'
 
-    logoutUpdate(); // Обновление интерфейса после выхода
+  logoutUpdate(); // Обновление интерфейса после выхода
 }

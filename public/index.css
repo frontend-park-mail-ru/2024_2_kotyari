@@ -1,5 +1,5 @@
-@import '/src/css/parametrs/parametrs.css';
-@import '/src/scripts/components/card/katalog.css';
+@import '/src/css/parametrs/parameters.css';
+@import '/src/scripts/components/card/catalog.css';
 @import '/src/scripts/components/custom-messages/error/error.css';
 @import '/src/scripts/components/custom-messages/soon/soon.css';
 @import '/src/scripts/components/modal/modal.css';
@@ -8,6 +8,7 @@
 @import '/src/scripts/components/auth-menu/auth-menu.css';
 @import '/src/scripts/components/cart/cart.css';
 @import '/src/scripts/components/order-placement/order-placement.css';
+@import '/src/scripts/components/order-list/order-list.css';
 
 * {
     margin: 0;
@@ -27,7 +28,7 @@ html {
 
 .invisible {
     opacity: 0;
-    transition: opacity var(--one-time) ease-in-out; /* Переход на изменение opacity */
+    transition: opacity var(--one-second-duration) ease-in-out; /* Переход на изменение opacity */
     visibility: hidden; /* Элемент скрыт */
 }
 

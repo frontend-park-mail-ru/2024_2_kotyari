@@ -5,9 +5,9 @@
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-box-shadow) var(--card-shadow-color);
   margin-bottom: var(--card-margin-top);
-  padding: var(--litle-padding);
+  padding: var(--small-padding);
   position: relative;
-  transition: transform 0.3s ease;
+  transition: transform var(--short-duration) ease;
 }
 .cart-item:hover {
   transform: translateY(var(--y-coord-min));
@@ -28,7 +28,7 @@
 }
 .cart-item__details {
   width: var(--details-width);
-  padding: var(--litle-padding);
+  padding: var(--small-padding);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -74,15 +74,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--background-color-site);
+  background-color: var(--base-background-color);
   border-radius: var(--card-border-radius);
   padding: 10px 20px;
   height: var(--quantity-height);
   width: var(--quantity-width); /* Ширина блока кнопок и количества */
-  transition: background-color 0.3s ease;
+  transition: background-color var(--short-duration) ease;
 }
 .cart-item__quantity:hover {
-  background-color: var(--background-color-site-gray);
+  background-color: var(--darker-background-color);
 }
 .cart-item__quantity-btn {
   background-color: transparent;
@@ -91,7 +91,7 @@
   font-size: var(--card-price-font-size);
   cursor: pointer;
   padding: var(--micro-padding);
-  transition: color 0.3s ease;
+  transition: color var(--short-duration) ease;
 }
 .cart-item__quantity-btn:hover {
   color: var(--text-hover-color);

@@ -1,7 +1,7 @@
 @import '/src/scripts/components/cart/elements/data-sampling/data-sampling.css';
 @import '/src/scripts/components/cart/elements/lefr-cards/left-cards.css';
 @import '/src/scripts/components/cart/elements/right-element-of-cart/right-element-of-cart.css';
-@import '/src/css/parametrs/parametrs.css';
+@import '/src/css/parametrs/parameters.css';
 .cart-container {
   width: var(--container-width);
   margin: var(--container-margin);

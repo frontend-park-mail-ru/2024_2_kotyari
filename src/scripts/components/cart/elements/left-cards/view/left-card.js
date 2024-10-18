@@ -1,6 +1,6 @@
 // Обновление количества выбранных товаров
-import {calculateCartTotals} from "../right-element-of-cart/calculate-cart-totals.js";
-import {cartData} from "../../products.js";
+import {calculateCartTotals} from "../../right-element-of-cart/view/calculate-cart-totals.js";
+import {cartData} from "../../../api/products.js";
 
 /**
  * Обновляет количество выбранных товаров и пересчитывает данные корзины.

@@ -1,5 +1,5 @@
-import {Helper} from "../../../../../../dist/scripts/constprograms/shablon/helps/helper.js";
-import {cartData} from "../../products.js";
+import {Helper} from "../../../../../../../dist/scripts/constprograms/templatizer/helps/helper.js";
+import {cartData} from "../../../api/products.js";
 
 /**
  * Рассчитывает итоговые данные корзины, включая количество товаров, общий вес, полную стоимость, выгоду, и финальную стоимость.
@@ -52,7 +52,7 @@ export function calculateCartTotals() {
  * @function
  */
 export function handleCheckoutButton() {
-    const checkoutButton = document.querySelector('.checkout-btn');
+    const checkoutButton = document.querySelector('.cart-checkout-btn');
     const selectedItems = cartData.products.filter(product => product.isSelected);  // Фильтруем выбранные товары
 
     if (selectedItems.length === 0) {

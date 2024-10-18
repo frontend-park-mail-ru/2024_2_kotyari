@@ -1,4 +1,4 @@
-@import '/src/css/parametrs/parametrs.css';
+@import '/src/css/parametrs/parameters.css';
 @import '/src/css/parametrs/animations.css';
 
 .center-container {
@@ -12,5 +12,5 @@
 
 .fade-in-text {
     opacity: 0;
-    animation: fadeIn var(--one-time) ease-in forwards;
+    animation: fadeIn var(--one-second-duration) ease-in forwards;
 }

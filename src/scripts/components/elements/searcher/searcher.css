@@ -1,8 +1,8 @@
-@import '/src/css/parametrs/parametrs.css';
+@import '/src/css/parametrs/parameters.css';
 
 .search-input {
     width: 100%;
-    padding: var(--litle-padding);
+    padding: var(--small-padding);
     font-size: var(--input-font-size);
     border: var(--one-border) solid var(--input-border-color);
     border-radius: 5px 0 0 5px;
@@ -16,8 +16,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--litle-padding);
-    background-color: var(--background-color-site);
+    padding: var(--small-padding);
+    background-color: var(--base-background-color);
     border: none;
     color: var(--text-buy-color);
     font-size: var(--font-size);
