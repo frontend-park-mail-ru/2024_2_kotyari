@@ -16,9 +16,9 @@ export class CardPresenter {
       .then(() => {
         this.attachCardClickHandlers()
       })
-      .then(
-        document.getElementById()
-      );
+      // .then(
+      //   document.getElementById()
+      // );
   };
 
   private loadCards = async () => {
