@@ -1,5 +1,4 @@
-@import "../../../css/parametrs/parameters.css";
-@import "/src/css/";
+@import "../../../../../src/css/parametrs/parameters.css";
 
 body {
     margin: var(--margin-zero);

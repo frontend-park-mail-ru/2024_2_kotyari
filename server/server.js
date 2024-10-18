@@ -8,7 +8,6 @@ const PORT = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Определяем папки для статических файлов
 const publicPath = path.join(__dirname, '../public');
 const cssPath = path.join(__dirname, '../src/css');
 const imgPath = path.join(__dirname, '../src/assets');
@@ -16,9 +15,15 @@ const imgPath = path.join(__dirname, '../src/assets');
 const basePath = path.join(__dirname, '../');
 // Используем middleware для статики
 
-app.use(express.static(publicPath));
-app.use('/src/css', express.static(cssPath));
 app.use(express.static(imgPath));
+app.use(express.static(publicPath));
+app.use(express.static(cssPath));
+
+// app.get('/src/css/*', (req, res) => {
+//   if (req.url.endsWith('.css')) {
+//     res.sendFile(path.join(basePath, req.url));
+//   }
+// })
 
 /**
  * Универсальный обработчик маршрутов для изображений.
@@ -37,15 +42,12 @@ app.get('/src/assets/*', (req, res) => {
   });
 });
 
-/**
- * Маршрут для главной страницы.
- * Отправляет файл index.html из папки public.
- *
- * @param {Object} req - Объект запроса
- * @param {Object} res - Объект ответа
- */
-app.get('/', (req, res) => {
+app.get('/index.html', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+app.get('/error/index.css', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.css'));
 });
 
 /**
@@ -69,10 +71,17 @@ app.get('/*', (req, res) => {
   }
 });
 
-app.get('/error', (req, res) => {
-  res.sendFile(path.join(publicPath, 'error.html'));
-})
+/**
+ * Маршрут для главной страницы.
+ * Отправляет файл index.html из папки public.
+ *
+ * @param {Object} req - Объект запроса
+ * @param {Object} res - Объект ответа
+ */
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 /**
  * Запуск сервера на указанном порту.

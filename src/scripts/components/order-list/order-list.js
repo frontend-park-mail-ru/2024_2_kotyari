@@ -1,6 +1,6 @@
-import { templatize } from '../../constprograms/templatizer/templatizer.js';
+import { templatize } from '../../constprograms/templatizer/new-templatizer.js';
 
-const orderListTemplateURL = 'src/scripts/components/order-list/order-list.hbs';
+const orderListTemplateURL = '/src/scripts/components/order-list/order-list.hbs';
 
 /**
  * Функция для рендеринга списка заказов.

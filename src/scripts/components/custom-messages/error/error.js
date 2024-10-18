@@ -1,5 +1,5 @@
 import { errorsDescriptions } from './errors.js';
-import { templatize } from '../../../constprograms/templatizer/templatizer.js';
+import { templatize } from '../../../constprograms/templatizer/new-templatizer.js';
 
 const returnPage = '/';
 
@@ -15,8 +15,8 @@ const returnPage = '/';
  */
 export function errorPage(name) {
   let config = {
-    name: '404',
-    description: errorsDescriptions['404'],
+    name: name,
+    description: errorsDescriptions[name],
     return: returnPage,
   };
 

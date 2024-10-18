@@ -1,11 +1,11 @@
 @import '/src/css/parametrs/parameters.css';
-@import '/src/scripts/components/card/catalog.css';
+@import '/src/scripts/components/card/view/catalog.css';
 @import '/src/scripts/components/custom-messages/error/error.css';
 @import '/src/scripts/components/custom-messages/soon/soon.css';
 @import '/src/scripts/components/modal/modal.css';
 @import '/src/scripts/layouts/footer/footer.css';
 @import '/src/scripts/layouts/header/header.css';
-@import '/src/scripts/components/auth-menu/auth-menu.css';
+@import '/src/scripts/components/auth-menu/views/auth.css';
 @import '/src/scripts/components/order-list/order-list.css';
 * {
     margin: 0;
