@@ -7,7 +7,7 @@ form {
 }
 
 label {
-    font-size: var(--font-size);
+    font-size: var(--default-font-size);
     margin-bottom: var(--one-px-margin);
     padding-bottom: var(--one-padding);
 }
@@ -15,7 +15,7 @@ label {
 input {
     margin-top: var(--one-px-margin);
     padding: var(--mini-padding);
-    font-size: var(--font-size);
+    font-size: var(--default-font-size);
     border-radius: var(--input-border-radius);
     border: 1px solid #ccc;
     box-shadow: 0 1px 3px var(--card-shadow-color); /* Добавляем мягкую тень для объема */
@@ -28,7 +28,7 @@ input:focus {
 
 button[type="submit"] {
     padding: var(--mini-padding);
-    font-size: var(--font-size);
+    font-size: var(--default-font-size);
     font-weight: bold;
     background-color: var(--base-background-color);
     color: white;
@@ -66,14 +66,14 @@ input.invalid__input, textarea.invalid__input {
 
 .title {
     text-align: center;
-    font-weight: var(--midle-font-weight);
+    font-weight: var(--middle-font-weight);
     font-size: var(--big-font-size);
     margin-bottom: var(--xl-margin-bottom);
 }
 
 .auth_menu_container {
     font-family: var(--mega-font-family);
-    font-weight: var(--litle-font-weight);
+    font-weight: var(--little-font-weight);
     cursor: default;
     display: flex;
     flex-direction: column;
@@ -136,7 +136,7 @@ input.invalid__input, textarea.invalid__input {
     right: 12px;
     top: 50%;
     cursor: pointer;
-    font-size: var(--font-size);
+    font-size: var(--default-font-size);
     color: var(--text-another-color);
     transition: color var(--short-duration) ease, transform var(--short-duration) ease;
 }

@@ -7,6 +7,8 @@
 @import '/src/scripts/layouts/header/header.css';
 @import '/src/scripts/components/auth-menu/auth-menu.css';
 @import '/src/scripts/components/order-list/order-list.css';
+@import '/src/scripts/components/single-order/single-order.css';
+
 * {
     margin: 0;
     padding: 0;
