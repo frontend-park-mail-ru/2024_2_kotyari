@@ -35,24 +35,39 @@ export default class AuthView implements AuthViewInterface {
       });
   };
 
-  update = (userName: string): void => {
+  updateAfterAuth = (username: string): void => {
     const avatarElement = document.getElementById('avatar');
     const nameElement = document.getElementById('name');
 
     if (avatarElement) {
       // Обновляем ссылки в блоке avatar
       avatarElement.innerHTML = `
-      <a href="#" router="stability-active" class="catalog-link">Личный кабинет</a>
+      <a href="/profile" router="stability-active" class="catalog-link">Личный кабинет</a>
       <a href="/logout" router="stability-active" id="logout" class="catalog-link">Выход</a>
     `;
     }
 
     if (nameElement) {
       // Обновляем отображение имени
-      nameElement.textContent = userName;
+      nameElement.textContent = username;
       nameElement.classList.add('icon-label-hidden', 'catalog-link');
     }
   };
+
+  updateAfterLogout = ():void => {
+    const avatarElement = document.getElementById('avatar');
+    const nameElement = document.getElementById('name');
+
+    if (avatarElement) {
+      avatarElement.innerHTML = `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
+                        <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>`;
+    }
+
+    if (nameElement) {
+      nameElement.textContent = 'Вход';
+      nameElement.classList.add('icon-label-hidden', 'catalog-link');
+    }
+  }
 
   displayBackError = (message: string) => {
     const errorElement = document.getElementById('global_error');
@@ -114,5 +129,3 @@ export default class AuthView implements AuthViewInterface {
     }
   };
 }
-
-// let s = new SignUpView('main', '123', menuSignUp);

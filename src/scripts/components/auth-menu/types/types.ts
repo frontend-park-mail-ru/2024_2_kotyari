@@ -34,13 +34,15 @@ export interface errorViewInterface {
 }
 
 export interface AuthViewInterface {
-  render(): Promise<void>;
+  updateAfterAuth (username: string): void ;
+  render(): Promise<void>
 
-  update(userName: string): void;
+  updateAfterLogout(): void;
 }
 
 export interface SignInAPI {
   login(credentials: LoginCredentials): Promise<response>;
+  logout():Promise<boolean>;
 }
 
 export interface SignUpAPI {

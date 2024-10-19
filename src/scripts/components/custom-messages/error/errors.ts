@@ -4,6 +4,6 @@
  * @namespace errorsDescriptions
  * @property {string} '404' - Описание ошибки 404 (Не найдено), отображаемое при попытке обращения к несуществующему адресу.
  */
-export const errorsDescriptions = {
-  404: 'Вы обращаетесь на несуществующий адрес.',
+export const errorsDescriptions: { [key: string]: string } = {
+  404: 'Вы обращаетесь на несуществующему адресу.',
 };

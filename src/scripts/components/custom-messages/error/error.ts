@@ -1,5 +1,5 @@
 import { errorsDescriptions } from './errors.js';
-import { templatize } from '../../../constprograms/templatizer/new-templatizer.js';
+import { TemplateManager } from '../../../constprograms/templatizer/templatizer.js';
 
 const returnPage = '/';
 
@@ -13,7 +13,7 @@ const returnPage = '/';
  * @param {string} name - Имя ошибки для отображения.
  * @returns {Promise} Промис, который разрешается после успешного отображения страницы ошибки.
  */
-export function errorPage(name) {
+export function errorPage(name: string):Promise<any> {
   let config = {
     name: name,
     description: errorsDescriptions[name],
@@ -28,5 +28,9 @@ export function errorPage(name) {
     };
   }
 
-  return templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/error/error.hbs', config);
+  const main =  document.getElementById('main') as HTMLElement;
+  if (main)
+  return TemplateManager.templatize(main, '/src/scripts/components/custom-messages/error/error.hbs', config);
+
+  return Promise.reject(Error('ошибка загрузки страницы ошибки'));
 }

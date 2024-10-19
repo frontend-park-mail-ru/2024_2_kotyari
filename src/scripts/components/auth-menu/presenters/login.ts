@@ -26,7 +26,6 @@ export class LoginPresenter {
     this.view.render()
       .then(() => {
         this.attachLoginHandler();
-        this.attachLinkNavigationHandler();
         this.attachValidateHandler();
       })
       .catch(err => {
@@ -37,62 +36,53 @@ export class LoginPresenter {
   private attachLoginHandler = () => {
     const loginButton = document.getElementById(menuSignIn.formId);
     if (loginButton) {
-      loginButton.addEventListener('click', this.handleLogin);
+      console.log(loginButton);
+      loginButton.addEventListener('submit', this.handleLogin);
     }
   };
 
-  private handleLogin = (event: Event) => {
+  logout = ():void => {
+    this.api.logout()
+      .then(() =>{
+        this.view.updateAfterLogout();
+        router.navigate('/');
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  private handleLogin = (event: SubmitEvent) => {
     event.preventDefault();
 
-    const emailInput = (document.getElementById('email') as HTMLInputElement).value;
-    const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
+    const emailInput = document.getElementById(menuSignIn.fields[0].id) as HTMLInputElement;
+    const passwordInput = document.getElementById(menuSignIn.fields[1].id) as HTMLInputElement;
+
+    if (
+      !this.validate.validateEmail(emailInput) ||
+      !this.validate.validatePassword(passwordInput)
+    ) {
+      return;
+    }
 
     const credentials: LoginCredentials = {
-      email: emailInput,
-      password: passwordInput,
+      email: emailInput.value,
+      password: passwordInput.value,
     };
 
     this.api.login(credentials)
       .then((response) => {
         if (response.ok) {
-          this.removeEventListeners();
-          this.view.update(credentials.email); // Обновляем UI с именем пользователя
+          this.view.updateAfterAuth(credentials.email); // Обновляем UI с именем пользователя
 
           router.navigate('/');
         }
       })
       .catch((error) => {
         console.error('Ошибка при логине:', error);
-        this.errorView.displayBackError(error)
+        this.errorView.displayBackError(error);
         this.errorView.displayBackError(error);
       });
-  };
-
-  private attachLinkNavigationHandler = () => {
-    const signupLink = document.querySelector('a[router="changed-active"]');
-    if (signupLink) {
-      signupLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        router.navigate(menuSignIn.link.href);
-      });
-    }
-  };
-
-  private removeEventListeners = () => {
-    const loginButton = document.getElementById(menuSignIn.formId);
-    if (loginButton) {
-      loginButton.removeEventListener('click', this.handleLogin);
-    }
-
-    const emailInput = document.getElementById('email') as HTMLInputElement;
-    const passwordInput = document.getElementById('password') as HTMLInputElement;
-
-    if (emailInput) {
-      emailInput.removeEventListener('focusout', this.validate.validateEmail.bind(this.validate, emailInput));
-    }
-    if (passwordInput) {
-      passwordInput.removeEventListener('focusout', this.validate.validatePassword.bind(this.validate, passwordInput));
-    }
   };
 
   private attachValidateHandler = () => {

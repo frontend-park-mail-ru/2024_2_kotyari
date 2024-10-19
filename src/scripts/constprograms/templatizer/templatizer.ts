@@ -1,5 +1,5 @@
 import {HandlebarManager} from '../handlebars/handlebars.js';
-import {errors} from '../../errors/errors.js';
+import {errors} from '../../errors/error.js';
 
 import {helpers} from './helpers.js';
 import { partials } from './partilals.js';

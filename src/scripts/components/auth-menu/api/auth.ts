@@ -1,9 +1,10 @@
 import { AUTH_URLS } from './config.js';
 import { LoginCredentials, response, SignUpCredentials } from '../types/types.js';
+import { backurl } from '../../../../services/configs/config.js';
 
 export default class AuthAPI {
   private config = AUTH_URLS;
-  private backUrl: string;
+  private readonly backUrl: string;
 
   constructor(backUrl: string) {
     this.backUrl = backUrl;
@@ -38,7 +39,17 @@ export default class AuthAPI {
   };
 
   signup = (credentials: SignUpCredentials): Promise<response> => {
-    return fetch(this.backUrl + this.config.SIGNUP.route, {
+    const url = this.backUrl + this.config.SIGNUP.route;
+
+    console.log('Отправка запроса на:', url);
+    console.log('Тело запроса:', JSON.stringify({
+      username: credentials.username,
+      email: credentials.email,
+      password: credentials.password,
+      repeat_password: credentials.repeat_password,
+    }));
+
+    return fetch(url, {
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -67,5 +78,26 @@ export default class AuthAPI {
         console.error('Ошибка при запросе:', err.message);
         return { ok: false, errorMsg: err.message };
       });
+  };
+
+  logout = ():Promise<boolean> => {
+    return fetch(backurl + '/logout', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res =>{
+        if (res.status === 204) {
+          return true;
+        }
+
+        throw Error(`ошибка сервера ${res.status}`);
+      })
+      .catch(err =>{
+        console.log(err);
+        return false;
+      })
   };
 }

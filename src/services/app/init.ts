@@ -14,6 +14,7 @@ import CardAPI from '../../scripts/components/card/api/card.js';
 import { CardView } from '../../scripts/components/card/view/card.js';
 import { CardPresenter } from '../../scripts/components/card/presenter/card.js';
 import { menuSignIn, menuSignUp } from '../../scripts/components/auth-menu/views/configs.js';
+import { errorPage } from '../../scripts/components/custom-messages/error/error.js';
 
 export const buildMain = (user: { name: string; city: string }): Promise<void> => {
   if (!user) {
@@ -27,27 +28,32 @@ export const buildMain = (user: { name: string; city: string }): Promise<void> =
 
 registerFunctions();
 
-export const isAuth = (_: string): Promise<User> => {
-  return fetch(backurl + '/', {
+export const isAuth = (): Promise<User> => {
+  return fetch(backurl, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-
   })
     .then(res => {
+      console.log(res.status);
+
       if (res.ok) {
-        res.json().then((data) => {
-            return { name: data.userame, city: 'Москва' };
-          },
-        );
+        return res.json()
+          .then((data) => {
+            console.log(data);
+              return { name: data.username, city: 'Москва' };
+            },
+          );
       }
 
       if (res.status === 401) {
         return { name: '', city: 'Москва' };
       }
 
-      throw Error('Внутренняя ошибка сервера');
+      throw Error(`Внутренняя ошибка сервера ${res.status}`);
     })
     .catch(err => {
       console.error(err);
@@ -55,11 +61,13 @@ export const isAuth = (_: string): Promise<User> => {
     });
 };
 
+
+
 export const router = new Router('/login', isAuth, 'main');
 
 const authAPI = new AuthAPI(backurl);
 const SignUpView = new AuthView(menuSignUp);
-const LoginView = new AuthView(menuSignIn);
+export const LoginView = new AuthView(menuSignIn);
 
 const signUpValidate = new AuthValidate(SignUpView);
 const loginValidate = new AuthValidate(LoginView);
@@ -94,7 +102,7 @@ router.addRoute(
   new RegExp('^\/$'),
   false,
   false,
-)
+);
 
 router.addRoute(
   CARD_URLS.CATALOG.route,
@@ -102,5 +110,19 @@ router.addRoute(
   new RegExp('^/catalog$'),
   false,
   false,
-)
+);
 
+router.addRoute(
+  '/error/404',
+  () => errorPage('404'),
+  new RegExp('^/error/404$'),
+);
+
+
+router.addRoute(
+  '/logout',
+  () => loginPresenter.logout(),
+  new RegExp('^/logout$'),
+  true,
+  false,
+)
