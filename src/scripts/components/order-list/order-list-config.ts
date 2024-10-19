@@ -14,7 +14,7 @@
  * @property {Object} reviewButton - Объект, описывающий кнопку для оценки товаров.
  * @property {string} reviewButton.text - Текст кнопки.
  */
-export const orderList = {
+export const orderList:any = {
   id: 'order-list-container',
   title: 'Мои заказы',
   orders: [
