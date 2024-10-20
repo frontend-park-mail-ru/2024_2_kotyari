@@ -7,8 +7,8 @@
 }
 
 .column-personal-account {
-  width: var(--proc-min-width);
-  margin: 0 10px;
+  flex: 1;
+  margin: 0 var(--default-margin);
 }
 
 .box-personal-account {
@@ -84,13 +84,8 @@
   cursor: pointer;
 }
 
-.notification-icon.active {
-  color: red;
-}
-
-.column-personal-account {
-  flex: 1;
-  margin: 0 var(--default-margin);
+.material-icons.notification{
+  color: var(--base-background-color);
 }
 
 .delivery-info,
@@ -146,11 +141,8 @@
   margin-right: var(--padding15);
 }
 
-.edit-link {
-  display: block;
-  margin-top: var(--default-margin);
-  color: var(--link-color);
-  cursor: pointer;
+.material-icons.edit{
+  color: var(--base-background-color);
 }
 
 .delivery-details,

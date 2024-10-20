@@ -1,33 +1,29 @@
 <div class="product-container">
   <div class="carousel-slider-container">
-  <div id="carousel" class="carousel">
-    <div class="product-page__arrow-button">
-    <button class="arrow prev"><span class="material-icons">keyboard_arrow_up</span></button>
+    <div id="carousel" class="carousel">
+      <div class="product-page__arrow-button">
+        <button class="arrow prev"><span class="material-icons">keyboard_arrow_up</span></button>
+      </div>
+      <div class="gallery">
+        <ul>
+          {{#each images}}
+            <li>
+              <img src="{{this}}" alt="Миниатюра" class="thumbnail" onclick="selectImage('{{this}}')">
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="product-page__arrow-button">
+        <button class="arrow next"><span class="material-icons">keyboard_arrow_down</span></button>
+      </div>
     </div>
-    <div class="gallery">
-    <ul>
-      {{#each images}}
-        <li>
-          <img src="{{this}}" alt="Миниатюра" class="thumbnail" onclick="selectImage('{{this}}')">
-        </li>
-      {{/each}}
-    </ul>
-    </div>
-    <div class="product-page__arrow-button">
-      <button class="arrow next"><span class="material-icons">keyboard_arrow_down</span></button>
-    </div>
-  </div>
 
     <div class="slider">
-      <div class="product-page__arrow-button">
-        <button id="prev-button" class="slider-button"><span class="material-icons">chevron_left</span></button>
-      </div>
+      <button id="prev-button" class="slider-button"><span class="material-icons">chevron_left</span></button>
       {{#each images}}
         <img src="{{this}}" alt="Изображение" class="slide">
       {{/each}}
-      <div class="product-page__arrow-button">
-        <button id="next-button" class="slider-button"><span class="material-icons">chevron_right</span></button>
-      </div>
+      <button id="next-button" class="slider-button"><span class="material-icons">chevron_right</span></button>
     </div>
   </div>
 
@@ -44,17 +40,19 @@
       {{brand.name}}
     </div>
 
-    <div class="condition">
-      Состояние товара:
-      <div class="condition-buttons">
-        <button class="condition-new {{#if isNewSelected}}selected{{/if}}" data-price="{{newPrice}}">
-          <span class="condition-text">Новые <br> <span class="price-condition">{{newPrice}} ₽</span></span>
-        </button>
-        <button class="condition-used {{#if isUsedSelected}}selected{{/if}}" data-price="{{usedPrice}}">
-          <span class="condition-text">Уцененные <br> <span class="price-condition">{{usedPrice}} ₽</span></span>
-        </button>
+    {{#if isUsedAvailable}}
+      <div class="condition">
+        Состояние товара:
+        <div class="condition-buttons">
+          <button class="condition-new {{#if isNewSelected}}selected{{/if}}" data-price="{{newPrice}}">
+            <span class="condition-text">Новые <br> <span class="price-condition">{{newPrice}} ₽</span></span>
+          </button>
+          <button class="condition-used {{#if isUsedSelected}}selected{{/if}}" data-price="{{usedPrice}}">
+            <span class="condition-text">Уцененные <br> <span class="price-condition">{{usedPrice}} ₽</span></span>
+          </button>
+        </div>
       </div>
-    </div>
+    {{/if}}
 
     <div class="colors">
       {{#each colors}}
@@ -78,7 +76,7 @@
 
   <div class="purchase-info">
     <div class="rating">
-      <span class="text-article">Артикул: {{article}}</span>  <a href="#" class="share-link">Поделиться</a>
+      <span class="text-article">Артикул: {{article}}</span>  <span class="share-link">Поделиться</span>
     </div>
     <div class="price-box">
       <div class="current-price-product-page">{{currentPrice}} ₽</div>
