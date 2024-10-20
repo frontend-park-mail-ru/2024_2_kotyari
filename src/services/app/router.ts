@@ -3,15 +3,14 @@ import { User } from '../types/types.js';
 import { AUTH_URLS } from '../../scripts/components/auth-menu/api/config.js';
 import { CLICK_CLASSES, urlAttribute } from './config.js';
 
-
 export default class Router {
   public routes: Route[] = [];
   readonly root: string;
-  readonly isAuth: (path: string) => Promise<User>;
+  readonly isAuth: () => User;
   private readonly containerId: string;
   private container: HTMLElement | null = null;
 
-  constructor(root: string, isAuth: (path: string) => Promise<User>, containerId: string) {
+  constructor(root: string, isAuth: () => User, containerId: string) {
     this.root = root || '/';
     this.isAuth = isAuth;
     this.containerId = containerId;
@@ -26,23 +25,10 @@ export default class Router {
 
   private onPopState(event: PopStateEvent): void {
     const path = event.state ? event.state.page : window.location.pathname;
-    this.resolveRoute(path)
-      .then(() => {
-
-        console.log('State restored:', path);
-      })
-      .catch((error) => {
-        console.error('State restoration error', error);
-      });
+    this.resolveRoute(path);
   }
 
-  addRoute(
-    path: string,
-    handler: () => void,
-    pattern: RegExp,
-    loginRequired = false,
-    logoutRequired = false,
-  ): void {
+  addRoute(path: string, handler: () => void, pattern: RegExp, loginRequired = false, logoutRequired = false): void {
     const route = new Route(path, handler, pattern, loginRequired, logoutRequired);
     this.routes.push(route);
   }
@@ -54,31 +40,34 @@ export default class Router {
       history.pushState({ page: url }, '', url);
     }
 
-    this.resolveRoute(url)
-      .then(() => {
-        console.log('Navigation successful');
-      })
-      .catch((error) => {
-        console.error('Navigation error', error);
-      });
+    this.clearContainer();
+    this.resolveRoute(url);
+    this.addHandlers();
   }
 
   private addHandlers = () => {
-    let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
+    const checkDOMAndAddListeners = () => {
+      let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
 
-    routes.forEach(route => {
-      let href = route.getAttribute(urlAttribute);
-      if (href) {
-        route.addEventListener('click', event => {
-          event.preventDefault();
-          if (href)
-            this.navigate(href, true);
-        });
-      }
-    });
-  }
+      routes.forEach((route) => {
+        let href = route.getAttribute(urlAttribute);
+        if (href && !route.hasAttribute('data-listener-added')) {
+          route.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (href) {
+              this.navigate(href, true);
+            }
+          });
 
-  private async resolveRoute(url: string): Promise<void> {
+          route.setAttribute('data-listener-added', 'true');
+        }
+      });
+    };
+
+    setInterval(checkDOMAndAddListeners, 50);
+  };
+
+  private resolveRoute(url: string): void {
     const route = this.routes.find((route) => route.matches(url));
 
     if (!route) {
@@ -87,36 +76,32 @@ export default class Router {
       return;
     }
 
+    console.log(route);
     if (route.loginRequired) {
-      const user = await this.isAuth(url);
-      if (!user) {
+      const user = this.isAuth();
+      if (user.name === '') {
         console.error('Пользователь не авторизован, перенаправление на /login');
-        this.navigate(AUTH_URLS.LOGIN.route, true); // Переход на страницу логина с пушем состояния
+        this.navigate(AUTH_URLS.LOGIN.route, true);
         return;
       }
     }
 
     if (route.logoutRequired) {
-      const user = await this.isAuth(url);
-      console.log(user);
-      if (user.name) {
+      const user = this.isAuth();
+      console.log(`USER ${user.name}`);
+
+      if (user.name !== '') {
         console.log('Пользователь вошел в аккаунт');
         history.back();
         return;
       }
     }
 
-    this.clearContainer();
-
     route.handler();
-
-    setTimeout(() => {
-      this.addHandlers();
-    }, 100);
   }
 
   private listen(): void {
-    window.addEventListener('popstate', this.onPopState.bind(this)); // Слушаем popstate для кнопок назад/вперед
+    window.addEventListener('popstate', this.onPopState.bind(this));
   }
 
   private getFormattedURL(path: string): string {
@@ -136,13 +121,12 @@ export default class Router {
   private removeHandlers() {
     let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
 
-    routes.forEach(route => {
+    routes.forEach((route) => {
       let href = route.getAttribute(urlAttribute);
       if (href) {
-        route.removeEventListener('click', event => {
+        route.removeEventListener('click', (event) => {
           event.preventDefault();
-          if (href)
-            this.navigate(href, true);
+          if (href) this.navigate(href, true);
         });
       }
     });

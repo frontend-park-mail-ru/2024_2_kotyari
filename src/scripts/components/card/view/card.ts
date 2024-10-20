@@ -1,34 +1,34 @@
-import { TemplateManager } from '../../../constprograms/templatizer/templatizer.js';
+import card from './card.hbs?raw';
+import { rootId } from '@/services/app/config';
+import Handlebars from 'handlebars';
 
-const defaultPath = '/src/scripts/components/card/view/card.hbs';
-const defaultRootId = 'main';
-
-export interface CardViewInterface{
-  render(data: { products: any[] }): Promise<void>;
+export interface CardViewInterface {
+  render(data: { products: any[] }): void;
 }
 
 export class CardView implements CardViewInterface {
-  private rootId: string = defaultRootId;
-  private readonly tmpPath: string;
+  private readonly compiled: any;
 
-  constructor(tmpPath: string = defaultPath) {
-    this.tmpPath = tmpPath;
+  constructor() {
+    this.compiled = Handlebars.compile(card);
   }
 
-  render = (data: { products: any[] }): Promise<void> => {
-    const rootElement = document.getElementById(this.rootId);
+  private _render = (data: { products: any[] }): void => {
+    const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      return Promise.reject(new Error(`Element ID = ${this.rootId} not found`));
+      console.log(`ошибка rooElement ${rootElement} -- rootId ${rootId}`);
+      return;
     }
 
-    return TemplateManager.templatize(rootElement, this.tmpPath, data)
-      .then(() =>{
-        if (!rootElement) {
-          return Promise.reject(new Error(`Element ID = ${this.rootId} not found`));
-        }
-      })
-      .catch(err => {
-        console.error('[CardView.render] ', err);
-      })
+    console.log('123', data);
+
+    rootElement.innerHTML = '';
+    const templateElement = document.createElement('div');
+    templateElement.innerHTML = this.compiled(data);
+    rootElement.appendChild(templateElement);
+  };
+
+  render = (data: { products: any[] }): void => {
+    this._render(data);
   };
 }

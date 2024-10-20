@@ -1,38 +1,37 @@
-import { TemplateManager } from '../../../constprograms/templatizer/templatizer.js';
 import { AuthViewInterface } from '../types/types.js';
-
-const defaultPath = '/src/scripts/components/auth-menu/views/auth.hbs';
-const defaultRootId = 'main';
-
+import form from './auth.hbs?raw';
+import Handlebars from 'handlebars';
+import { rootId } from '@/services/app/config';
 
 export default class AuthView implements AuthViewInterface {
-  private config: {};
-  private readonly rootId: string = defaultRootId;
-  private tmpPath: string;
+  private readonly config: {};
+  private compiled: any = null;
 
-  constructor(config: {}, rootId: string = defaultRootId, tmpPath: string = defaultPath) {
-    this.rootId = rootId;
-    this.tmpPath = tmpPath;
+  constructor(config: {}) {
     this.config = config;
+    this.compiled = null;
   }
 
-  render = (): Promise<void> => {
-    const rootElement = document.getElementById(this.rootId);
+  private _render = () => {
+    if (this.compiled === null) this.compiled = Handlebars.compile(form);
 
+    const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      return Promise.reject(new Error(`Элемент ID =  ${this.rootId} не найден`));
+      return console.error(`Элемент ID =  ${rootId} не найден`);
     }
 
-    return TemplateManager.templatize(rootElement, this.tmpPath, this.config)
-      .then(() => {
-        document.querySelectorAll('.toggle-password')
-          .forEach((item) => {
-            item.addEventListener('click', this.togglePassword as EventListener);
-          });
-      })
-      .then(err => {
-        console.error('[AuthView.render] ', err);
-      });
+    rootElement.innerHTML = '';
+    const templateElement = document.createElement('div');
+    templateElement.innerHTML = this.compiled(this.config);
+    rootElement.appendChild(templateElement);
+  };
+
+  render = (): void => {
+    this._render();
+
+    document.querySelectorAll('.input-container__toggle-password').forEach((item) => {
+      item.addEventListener('click', this.togglePassword as EventListener);
+    });
   };
 
   updateAfterAuth = (username: string): void => {
@@ -40,7 +39,6 @@ export default class AuthView implements AuthViewInterface {
     const nameElement = document.getElementById('name');
 
     if (avatarElement) {
-      // Обновляем ссылки в блоке avatar
       avatarElement.innerHTML = `
       <a href="/profile" router="stability-active" class="catalog-link">Личный кабинет</a>
       <a href="/logout" router="stability-active" id="logout" class="catalog-link">Выход</a>
@@ -48,13 +46,12 @@ export default class AuthView implements AuthViewInterface {
     }
 
     if (nameElement) {
-      // Обновляем отображение имени
       nameElement.textContent = username;
       nameElement.classList.add('icon-label-hidden', 'catalog-link');
     }
   };
 
-  updateAfterLogout = ():void => {
+  updateAfterLogout = (): void => {
     const avatarElement = document.getElementById('avatar');
     const nameElement = document.getElementById('name');
 
@@ -67,7 +64,7 @@ export default class AuthView implements AuthViewInterface {
       nameElement.textContent = 'Вход';
       nameElement.classList.add('icon-label-hidden', 'catalog-link');
     }
-  }
+  };
 
   displayBackError = (message: string) => {
     const errorElement = document.getElementById('global_error');
@@ -101,7 +98,6 @@ export default class AuthView implements AuthViewInterface {
     errorElement.textContent = msg;
     element.classList.add('invalid__input');
   };
-
 
   /**
    * Функция для переключения типа поля ввода пароля и состояния иконки.

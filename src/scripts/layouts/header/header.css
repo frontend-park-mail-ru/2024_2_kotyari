@@ -1,4 +1,4 @@
-@import '/src/css/parametrs/parameters.css';
+@import '/public/css/parametrs/parameters.css';
 @import '/src/scripts/components/elements/searcher/searcher.css';
 
 /* Закрепляем хедер */
@@ -65,7 +65,7 @@ header {
 
 @font-face {
     font-family: 'Syncopate-Bold';
-    src: url('/src/assets/img/static/Syncopate-Bold.ttf');
+    src: url('/public/assets/img/static/Syncopate-Bold.ttf');
 }
 
 .logo {
@@ -358,3 +358,5 @@ txt {
         width: var(--width-max);
     }
 }
+
+

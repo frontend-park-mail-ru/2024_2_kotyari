@@ -1,6 +1,6 @@
 import { AUTH_URLS } from './config.js';
 import { LoginCredentials, response, SignUpCredentials } from '../types/types.js';
-import { backurl } from '../../../../services/configs/config.js';
+import { backurl } from '@/services/app/config.ts';
 
 export default class AuthAPI {
   private config = AUTH_URLS;
@@ -23,16 +23,16 @@ export default class AuthAPI {
         password: credentials.password,
       }),
     })
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
           return { ok: true };
         } else if (res.status === 401) {
           return { ok: false, errorMsg: 'Пользователя не существует' };
         } else {
-          return res.text().then(errorMsg => ({ ok: false, errorMsg }));
+          return res.text().then((errorMsg) => ({ ok: false, errorMsg }));
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Ошибка при запросе:', err.message);
         return { ok: false, errorMsg: err };
       });
@@ -40,14 +40,6 @@ export default class AuthAPI {
 
   signup = (credentials: SignUpCredentials): Promise<response> => {
     const url = this.backUrl + this.config.SIGNUP.route;
-
-    console.log('Отправка запроса на:', url);
-    console.log('Тело запроса:', JSON.stringify({
-      username: credentials.username,
-      email: credentials.email,
-      password: credentials.password,
-      repeat_password: credentials.repeat_password,
-    }));
 
     return fetch(url, {
       credentials: 'include',
@@ -63,24 +55,23 @@ export default class AuthAPI {
         repeat_password: credentials.repeat_password,
       }),
     })
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
-          console.log('Регистрация прошла успешно');
           return { ok: true };
         }
 
-        return res.json().then(resJSON => {
+        return res.json().then((resJSON) => {
           console.error('Ошибка регистрации:', resJSON.error_message);
           return { ok: false, errorMsg: resJSON.error_message };
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Ошибка при запросе:', err.message);
         return { ok: false, errorMsg: err.message };
       });
   };
 
-  logout = ():Promise<boolean> => {
+  logout = (): Promise<boolean> => {
     return fetch(backurl + '/logout', {
       method: 'POST',
       credentials: 'include',
@@ -88,16 +79,16 @@ export default class AuthAPI {
         'Content-Type': 'application/json',
       },
     })
-      .then(res =>{
+      .then((res) => {
         if (res.status === 204) {
           return true;
         }
 
         throw Error(`ошибка сервера ${res.status}`);
       })
-      .catch(err =>{
+      .catch((err) => {
         console.log(err);
         return false;
-      })
+      });
   };
 }

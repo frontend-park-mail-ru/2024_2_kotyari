@@ -8,7 +8,6 @@ import {
 } from '../types/types.js';
 import { menuSignIn } from '../views/configs.js';
 
-
 export class LoginPresenter {
   private api: SignInAPI;
   private view: AuthViewInterface;
@@ -23,14 +22,9 @@ export class LoginPresenter {
   }
 
   init = () => {
-    this.view.render()
-      .then(() => {
-        this.attachLoginHandler();
-        this.attachValidateHandler();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    this.view.render();
+    this.attachLoginHandler();
+    this.attachValidateHandler();
   };
 
   private attachLoginHandler = () => {
@@ -41,16 +35,17 @@ export class LoginPresenter {
     }
   };
 
-  logout = ():void => {
-    this.api.logout()
-      .then(() =>{
+  logout = (): void => {
+    this.api
+      .logout()
+      .then(() => {
         this.view.updateAfterLogout();
         router.navigate('/');
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-      })
-  }
+      });
+  };
 
   private handleLogin = (event: SubmitEvent) => {
     event.preventDefault();
@@ -58,10 +53,7 @@ export class LoginPresenter {
     const emailInput = document.getElementById(menuSignIn.fields[0].id) as HTMLInputElement;
     const passwordInput = document.getElementById(menuSignIn.fields[1].id) as HTMLInputElement;
 
-    if (
-      !this.validate.validateEmail(emailInput) ||
-      !this.validate.validatePassword(passwordInput)
-    ) {
+    if (!this.validate.validateEmail(emailInput) || !this.validate.validatePassword(passwordInput)) {
       return;
     }
 
@@ -70,11 +62,11 @@ export class LoginPresenter {
       password: passwordInput.value,
     };
 
-    this.api.login(credentials)
+    this.api
+      .login(credentials)
       .then((response) => {
         if (response.ok) {
           this.view.updateAfterAuth(credentials.email); // Обновляем UI с именем пользователя
-
           router.navigate('/');
         }
       })

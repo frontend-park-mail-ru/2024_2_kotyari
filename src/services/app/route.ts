@@ -1,6 +1,6 @@
 export class Route {
   public readonly route: string;
-  public readonly handler: any;
+  public readonly handler: () => void;
   public readonly loginRequired: boolean;
   public readonly logoutRequired: boolean;
   public readonly pattern: RegExp;
@@ -15,7 +15,7 @@ export class Route {
 
   matches = (url: string) => {
     return this.pattern.test(url);
-  }
+  };
 
   // matches = (url: string): { [key: string]: string } | null => {
   //   const match = this.pattern.exec(url);
@@ -29,5 +29,4 @@ export class Route {
   //   }
   //   return null;
   // }
-
 }
