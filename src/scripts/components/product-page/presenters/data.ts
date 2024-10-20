@@ -1,4 +1,6 @@
-export const productData = {
+import { Product } from '../types/types.js'; // Путь к файлу с интерфейсом может варьироваться
+
+export const productData: Product = {
   name: 'Футболка MICONIC с минипигом',
   images: [
     'https://ir.ozone.ru/s3/multimedia-q/wc1000/6623687078.jpg',
@@ -16,6 +18,7 @@ export const productData = {
     name: 'MICONIC',
     logo: 'https://static-basket-01.wbbasket.ru/vol1/sellers/brands/3C22B6B92AA62185.webp',
   },
+  isUsedAvailable: true,
   isNewSelected: true,
   newPrice: 555,
   usedPrice: 444,
@@ -33,7 +36,6 @@ export const productData = {
     { key: 'Покров', value: 'Прямой' },
     { key: 'Уход за вещами', value: 'Деликатная стирка' },
   ],
-
   article: '123456',
   currentPrice: 555,
   oldPrice: 1111,
