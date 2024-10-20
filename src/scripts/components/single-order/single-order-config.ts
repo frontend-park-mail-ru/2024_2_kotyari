@@ -1,4 +1,4 @@
-export const singleOrder = {
+export const singleOrder: any = {
   id: 'single-order-container',
   orderNumber: '123456',
   deliveryDate: '9 октября',

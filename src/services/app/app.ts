@@ -1,9 +1,42 @@
-import { router, buildMain, isAuth, LoginView } from './init.js';
-import { CLICK_CLASSES, urlAttribute } from './config.js';
+import { buildMain, LoginView, router } from './init.js';
+import { backurl, CLICK_CLASSES, urlAttribute } from './config.ts';
+import { storageUser } from '../storage/user';
 
 document.addEventListener('DOMContentLoaded', () => {
-  isAuth()
-    .then(user => {
+  return fetch(backurl, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+    .then((res) => {
+      console.log(res.status);
+
+      if (res.ok) {
+        return res.json().then((data) => {
+          console.log(data);
+          return { name: data.username, city: 'Москва' };
+        });
+      }
+
+      if (res.status === 401) {
+        return { name: '', city: 'Москва' };
+      }
+
+      throw Error(`Внутренняя ошибка сервера ${res.status}`);
+    })
+    .catch((err) => {
+      console.error(err);
+      return { name: '', city: 'Москва' };
+    })
+    .then((user) => {
+      storageUser.saveUserData(user);
+
+      return user;
+    })
+    .then((user) => {
       console.log(user);
       LoginView.updateAfterAuth(user.name);
       return buildMain({ name: user.name, city: user.city });
@@ -13,13 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
 
-      routes.forEach(route => {
+      routes.forEach((route) => {
         let href = route.getAttribute(urlAttribute);
         if (href) {
-          route.addEventListener('click', event => {
+          route.addEventListener('click', (event) => {
             event.preventDefault();
-            if (href)
-              router.navigate(href, true);
+            if (href) router.navigate(href, true);
           });
         }
       });

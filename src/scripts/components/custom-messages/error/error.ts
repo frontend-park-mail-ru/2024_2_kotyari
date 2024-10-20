@@ -1,8 +1,9 @@
 import { errorsDescriptions } from './errors.js';
-import { TemplateManager } from '../../../constprograms/templatizer/templatizer.js';
+import { rootId } from '../../../../services/app/config';
+import errorTmp from './error.hbs?raw';
+import Handlebars from 'handlebars';
 
-const returnPage = '/';
-
+const returnPage = '/catalog';
 /**
  * Отображает страницу ошибки с указанным именем.
  *
@@ -13,24 +14,24 @@ const returnPage = '/';
  * @param {string} name - Имя ошибки для отображения.
  * @returns {Promise} Промис, который разрешается после успешного отображения страницы ошибки.
  */
-export function errorPage(name: string):Promise<any> {
+export function errorPage(name: string): void {
   let config = {
     name: name,
     description: errorsDescriptions[name],
     return: returnPage,
   };
 
-  if (name in errorsDescriptions) {
-    config = {
-      name: name,
-      description: errorsDescriptions[name],
-      return: returnPage,
-    };
+  const compiled = Handlebars.compile(errorTmp);
+
+  console.log(config);
+
+  const rootElement = document.getElementById(rootId) as HTMLElement;
+  if (!rootElement) {
+    console.error(`Element ID = ${rootId} not found`);
   }
 
-  const main =  document.getElementById('main') as HTMLElement;
-  if (main)
-  return TemplateManager.templatize(main, '/src/scripts/components/custom-messages/error/error.hbs', config);
-
-  return Promise.reject(Error('ошибка загрузки страницы ошибки'));
+  rootElement.innerHTML = '';
+  const templateElement = document.createElement('div');
+  templateElement.innerHTML = compiled(config);
+  rootElement.appendChild(templateElement);
 }

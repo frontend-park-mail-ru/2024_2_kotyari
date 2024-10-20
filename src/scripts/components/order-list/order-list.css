@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "/src/css/parametrs/parameters.css";
+@import "/public/css/parametrs/parameters.css";
 .order-list {
   /* Возможно вынесение в переменную */
   max-width: 1081px;

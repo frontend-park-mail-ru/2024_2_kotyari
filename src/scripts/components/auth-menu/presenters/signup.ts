@@ -1,12 +1,7 @@
-import {
-  SignUpAPI,
-  validateInterface,
-  errorViewInterface,
-  AuthViewInterface,
-} from '../types/types';
+import { AuthViewInterface, errorViewInterface, SignUpAPI, validateInterface } from '../types/types';
 import { menuSignIn, menuSignUp } from '../views/configs.js';
 import { router } from '../../../../services/app/init.js';
-
+import { storageUser } from '../../../../services/storage/user';
 
 export class SignUpPresenter {
   private api: SignUpAPI;
@@ -22,31 +17,22 @@ export class SignUpPresenter {
   }
 
   init = () => {
-    this.view.render()
-      .then(() => {
-        this.attachSignUpHandler();
-        this.attachValidateHandler();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    this.view.render();
+    this.attachSignUpHandler();
+    this.attachValidateHandler();
   };
 
   attachSignUpHandler = () => {
     const signUpForm = document.getElementById(menuSignUp.formId);
     if (signUpForm) {
-      console.log('Форма для регистрации найдена:', signUpForm);
       signUpForm.addEventListener('submit', this.handleSignUp);
     } else {
       console.warn('Форма для регистрации не найдена!');
     }
   };
 
-  private handleSignUp = (event : SubmitEvent) => {
-    console.log('до preventDefault')
+  private handleSignUp = (event: SubmitEvent) => {
     event.preventDefault();
-    console.log('Обработка события регистрации');
-
 
     const usernameInput = document.getElementById(menuSignUp.fields[0].id) as HTMLInputElement;
     const emailInput = document.getElementById(menuSignUp.fields[1].id) as HTMLInputElement;
@@ -69,21 +55,24 @@ export class SignUpPresenter {
       repeat_password: passwordRepeatInput.value,
     };
 
-    this.api.signup(credentials)
-      .then(response => {
+    this.api
+      .signup(credentials)
+      .then((response) => {
         if (response.ok) {
           router.navigate('/');
+
+          storageUser.saveUserData({ name: credentials.username, city: 'Москва' });
+          this.view.updateAfterAuth(credentials.username);
         } else {
           console.error('Signup error:', response.errorMsg);
           this.errorView.displayBackError(response.errorMsg ?? 'неизвестная ошибка');
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Ошибка при регистрации:', error);
         this.errorView.displayBackError(error);
         console.error('Error during signup:', error);
       });
-
   };
 
   private attachValidateHandler = () => {
@@ -103,8 +92,8 @@ export class SignUpPresenter {
             break;
           case menuSignIn.fields[3].id: // Для повторного пароля (если необходимо)
             this.validate.validatePasswordRepeat(
-              (document.getElementById(menuSignUp.fields[2].id) as HTMLInputElement),
-              (document.getElementById(menuSignUp.fields[3].id) as HTMLInputElement),
+              document.getElementById(menuSignUp.fields[2].id) as HTMLInputElement,
+              document.getElementById(menuSignUp.fields[3].id) as HTMLInputElement
             );
             break;
         }

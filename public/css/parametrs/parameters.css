@@ -1,4 +1,6 @@
 :root {
+    --card-align-items: center;
+
     /* Цветовая палитра */
     --background-color: #f9f9f9;
     --background-color-catalog-button: #ffffff00;

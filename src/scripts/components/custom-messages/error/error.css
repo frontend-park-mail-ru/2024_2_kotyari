@@ -1,5 +1,5 @@
-@import '/src/css/parametrs/parameters.css';
-@import '/src/css/parametrs/animations.css';
+@import '/public/css/parametrs/parameters.css';
+@import '/public/css/parametrs/animations.css';
 
 .center-container {
     text-align: center;
