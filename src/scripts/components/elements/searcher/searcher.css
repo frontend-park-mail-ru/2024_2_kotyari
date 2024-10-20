@@ -1,4 +1,4 @@
-@import '/src/css/parametrs/parameters.css';
+@import '/public/css/parametrs/parameters.css';
 
 .search-input {
     width: 100%;
@@ -20,7 +20,7 @@
     background-color: var(--base-background-color);
     border: none;
     color: var(--text-buy-color);
-    font-size: var(--font-size);
+    font-size: var(--default-font-size);
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 }

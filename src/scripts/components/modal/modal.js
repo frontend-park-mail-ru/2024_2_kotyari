@@ -1,4 +1,4 @@
-import { templatize } from '../../constprograms/templatizer/templatizer.js';
+import { templatize } from '../../constprograms/templatizer/new-templatizer.js';
 import { errors } from '../../errors/errors.js';
 
 /**
@@ -67,6 +67,6 @@ export function buildModalWithContent(user, triggerElement, template, rootId, mo
       });
     })
     .catch((err) => {
-      errors.ShablonError(err);
+      errors.TemplatizerError(err);
     });
 }

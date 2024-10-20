@@ -1,0 +1,165 @@
+:root {
+    --card-align-items: center;
+
+    /* Цветовая палитра */
+    --background-color: #f9f9f9;
+    --background-color-catalog-button: #ffffff00;
+    --card-background-color: #fff;
+    --card-border-color: #ddd;
+    --input-border-color: #ccc;
+    --card-shadow-color: rgba(0, 0, 0, 0.1);
+    --hard-shadow-color: rgba(0, 0, 0, 0.2);
+    --image-placeholder-color: #c4c4c4;
+    --text-color: #333;
+    --old-price-color: #888;
+    --link-color: #555;
+    --discount-color: oklch(0.68 0.24 27.98);
+    --button-text-color: oklch(0.49 0.25 299.6);
+    --spinner-border-color: rgba(0, 0, 0, 0.1);
+    --spinner-top-border-color: oklch(0.49 0.25 299.6);
+    --base-background-color: oklch(0.49 0.25 299.6);
+    --darker-background-color: oklch(0.41 0.19 301.59);
+    --darkest-background-color: oklch(0.33 0.15 303.45);
+    --background-color-site-new: oklch(0.35 0.16 303.3);
+    --background-color-modal: rgba(0, 0, 0, 0.5);
+    --hover-button-color: oklch(0.95 0 0);
+    --container-background-color: oklch(0.95 0 0);
+    --error-color: red;
+    --global-error-color: #721c24;
+    --error-background-color: #ffe6e6;
+    --global-error-background-color: #f8d7da;
+    --global-error-border-color: #f5c6cb;
+    --default-text-color: #000;
+    --text-another-color: oklch(0.49 0.25 299.6);
+    --text-password-color: oklch(0.47 0.23 300.73);
+    --text-buy-color: oklab(0.93 0.03 -0.04);
+    --text-inv: white;
+    --header-background: oklch(0.95 0 0);
+    --name-buy-color: oklab(0.93 0.03 -0.04);
+
+    /* Отступы */
+    --gap: 16px;
+    --mini-gap: 12px;
+    --form-gap: 5px;
+    --big-padding: 16px;
+    --padding: 16px;
+    --padding15: 15px;
+    --mini-padding: 12px;
+    --small-padding: 10px;
+    --micro-padding: 5px;
+    --one-padding: 1px;
+    --middle-padding-top: 15px;
+    --xl-margin-bottom: 1em;
+    --big-margin-bottom: 20px;
+    --button-margin-bottom: 15px;
+    --description-margin-bottom: 10px;
+    --middle-button-margin-bottom: 10px;
+    --big-margin: 20px;
+    --middle-margin: 5px;
+    --small-margin: 2px;
+    --default-margin: 10px;
+    --one-px-margin: 1px;
+    --margin-zero: 0;
+    --card-box-shadow: 0 2px 5px;
+    --m-group-padding: 30px 60px 60px;
+    --zero: 0;
+    --icon-dropdown-padding: 8px 12px;
+    --name-padding: 5px;
+    --margin-right-catalog-btn: 20px;
+
+    /* Размеры */
+    --card-border-radius: 8px;
+    --mini-card-border-radius: 6px;
+    --card-image-height: 150px;
+    --mini-card-image-height: 115px;
+    --card-width: 220px; /* Фиксированная ширина карточки */
+    --mini-card-width: 170px;
+    --min-width: 400px;
+    --card-height: 250px; /* Фиксированная высота карточки */
+    --mini-card-height: 185px;
+    --footer-height: 80px;
+    --description-max-height: 20px;
+    --mini-description-max-height: 12px;
+    --description-expanded-height: 40px; /* Максимум на 2 строки */
+    --mini-description-expanded-height: 32px; /* Максимум на 2 строки */
+    --button-padding: 10px 15px;
+    --container-padding: 30px 60px 30px;
+    --button-border-radius: 5px;
+    --button-border-radius4: 4px;
+    --button-font-weight: bold;
+    --card-aspect-ratio: 4 / 5;
+    --input-border-radius: 6px;
+    --auth-button-border-radius: 6px;
+    --container-border-radius: 16px;
+    --icon-dropdown-border-radius: 3px;
+    --one-border: 1px;
+    --icon-dropdown-border-width: 0 10px 10px 10px;
+    --max-width-px-long: 1150px;
+    --max-width-px-mid: 840px;
+
+    --proc-min-width: 30%;
+    --proc-max-width: 60%;
+    --proc-max-width-full: 90%;
+    --width-max: 100%;
+
+    --left-center: 50%;
+    --proc-full-width: 100%;
+
+    /* Текстовые параметры */
+    --font-family: Arial, sans-serif;
+    --mega-font-family: system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+    --price-font-size: 16px;
+    --input-font-size: 16px;
+    --description-font-size: 12px;
+    --loading-text-font-size: 16px;
+    --font-size-catalog-button: 35px;
+    --font-size_label: 14px;
+    --font-size-span-catalog-button: 16px;
+    --small-font-size: 12px;
+    --default-font-size: 18px;
+    --font-size20: 20px;
+    --big-font-size: 28px;
+    --big-font-size_another: 35px;
+    --mega-font-size: 40px;
+    --max-font-size: 50px;
+    --error-font-size: 0.875em;
+    --little-font-weight: 400;
+    --middle-font-weight: 550;
+
+
+    /* Расположение */
+    --catalog-justify-content: center;
+    --card-justify-content: space-between;
+    --card-allign-items: center;
+    --card-text-align: center;
+    --card-z-index_on: 2;
+    --card-z-index: 1;
+    --header-z-index: 9999;
+    --before-card-z-index: -1;
+    --before-card-tlrb: -10px;
+    --before-icon-dropdown: -10px;
+    --y-coord-min: -4px;
+    --y-coord-mid: -10px;
+    --left-coord: +70px;
+    --left-coord-min: +19px;
+
+    /* Анимация */
+    --spinner-size: 40px;
+    --spinner-border-width: 4px;
+    --litle-scale: 1.01;
+    --midle-scale: 1.02;
+    --big-scale: 1.05;
+
+    /* Время */
+    --short-duration: 0.3s;
+    --middle-duration: 0.5s;
+    --one-second-duration: 1s;
+    --two-seconds-duration: 2s;
+
+    /* Позиции смены */
+    --phone: 768px;
+    --phone-header: 840px;
+}
