@@ -26,6 +26,7 @@
   aspect-ratio: 1/1;
   border-radius: var(--card-border-radius);
   min-height: var(--min-card-image-width);
+  background: url("https://via.placeholder.com/150") center center/cover no-repeat;
 }
 .cart-item__details {
   width: var(--details-width);

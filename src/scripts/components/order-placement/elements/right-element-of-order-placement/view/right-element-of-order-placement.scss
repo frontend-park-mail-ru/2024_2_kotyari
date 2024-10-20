@@ -9,7 +9,7 @@
 
   &__total-items {
     font-size: var(--total-items-font-size);
-    color: var(--text);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--total-item-margin-bottom);
@@ -23,7 +23,7 @@
 
   &__benefit {
     font-size: var(--benefit-font-size);
-    color: var(--text);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--benefit-margin-bottom);
@@ -35,6 +35,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: var(--mini-gap); /* Небольшой отступ перед итогом */
+    color: var(--default-text-color);
   }
 
   &__promo-input {
@@ -63,7 +64,7 @@
     border-radius: 25px;
     padding: 15px;
     cursor: pointer;
-    transition: border-color var(--litle-time) ease-in-out; /* Плавное изменение обводки */
+    transition: border-color var(--short-duration) ease-in-out; /* Плавное изменение обводки */
   }
 
   &__payment-method:hover {
@@ -71,7 +72,7 @@
   }
 
   &__payment-method--selected {
-    border-color: var(--background-color-site); /* Цвет обводки для выбранного метода */
+    border-color: var(--base-background-color); /* Цвет обводки для выбранного метода */
   }
 
   /* Иконка внутри метода оплаты */
@@ -98,7 +99,7 @@
 
 // Блок для кнопки
 .checkout-btn {
-  background-color: var(--background-color-site);
+  background-color: var(--base-background-color);
   color: white;
   border: none;
   font-size: var(--button-font-size);
@@ -108,12 +109,12 @@
   width: var(--width-max);
 
   &:hover {
-    background-color: var(--background-color-site-gray); // Более темный фон при наведении
+    background-color: var(--darker-background-color); // Более темный фон при наведении
     color: var(--text-inv);
   }
 
   &:active {
-    background-color: var(--background-color-site-black); // Самый темный фон при нажатии
+    background-color: var(--darkest-background-color); // Самый темный фон при нажатии
     color: var(--text-inv);
   }
 

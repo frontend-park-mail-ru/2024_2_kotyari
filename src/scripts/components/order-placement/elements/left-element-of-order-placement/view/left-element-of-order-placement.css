@@ -8,8 +8,8 @@
   margin-bottom: var(--main-gap);
 }
 .recipient-card__title {
-  font-size: var(--main-title-size);
-  color: var(--text);
+  font-size: var(--card-title-font-size);
+  color: var(--default-text-color);
 }
 .recipient-card__divider {
   border: none;
@@ -20,10 +20,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--row-margin-bottom);
+  margin-bottom: var(--total-item-margin-bottom);
 }
 .recipient-card__label {
-  color: var(--text);
+  color: var(--default-text-color);
   font-size: var(--font-size_label);
 }
 .recipient-card__details {
@@ -31,7 +31,7 @@
   align-items: center;
 }
 .recipient-card__address, .recipient-card__name {
-  font-size: var(--font-size_input);
+  font-size: var(--input-font-size);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

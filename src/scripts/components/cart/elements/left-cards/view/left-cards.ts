@@ -1,6 +1,7 @@
 export class LeftCardsView {
     private readonly cartItems: NodeListOf<HTMLElement>;
     private readonly selectedCountElement: HTMLElement;
+    private readonly selectAllCheckbox: HTMLInputElement;
 
     public onFavoriteToggle: (productId: string) => void = () => {};
     public onQuantityChange: (productId: string, action: 'increase' | 'decrease') => void = () => {};
@@ -10,6 +11,7 @@ export class LeftCardsView {
     constructor() {
         this.cartItems = document.querySelectorAll('.cart-item') as NodeListOf<HTMLElement>;
         this.selectedCountElement = document.getElementById('selected-count') as HTMLElement;
+        this.selectAllCheckbox = document.querySelector('#select-all') as HTMLInputElement;
 
         if (this.cartItems.length > 0) {
             this.setupEventListeners();
@@ -62,6 +64,11 @@ export class LeftCardsView {
         if (this.selectedCountElement) {
             this.selectedCountElement.textContent = count.toString();
         }
+    }
+
+    public updateSelectAllCheckbox(allChecked: boolean, isIndeterminate: boolean): void {
+        this.selectAllCheckbox.checked = allChecked;
+        this.selectAllCheckbox.indeterminate = isIndeterminate;
     }
 
     // Обновить иконку избранного

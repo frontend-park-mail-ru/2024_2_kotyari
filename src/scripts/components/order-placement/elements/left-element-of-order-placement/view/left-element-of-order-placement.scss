@@ -9,8 +9,8 @@
   margin-bottom: var(--main-gap);
 
   &__title {
-    font-size: var(--main-title-size);
-    color: var(--text);
+    font-size: var(--card-title-font-size);
+    color: var(--default-text-color);
   }
 
   &__divider {
@@ -23,11 +23,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--row-margin-bottom);
+    margin-bottom: var(--total-item-margin-bottom);
   }
 
   &__label {
-    color: var(--text);
+    color: var(--default-text-color);
     font-size: var(--font-size_label);
   }
 
@@ -37,7 +37,7 @@
   }
 
   &__address, &__name {
-    font-size: var(--font-size_input);
+    font-size: var(--input-font-size);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

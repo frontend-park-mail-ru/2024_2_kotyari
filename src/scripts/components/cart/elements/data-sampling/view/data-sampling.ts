@@ -30,9 +30,18 @@ export class DataSamplingView {
      * Обновляет состояние чекбокса "select-all" в зависимости от выбора всех товаров.
      *
      * @param allChecked Булево значение: выбраны ли все товары.
+     * @param isIndeterminate
      */
-    updateSelectAllCheckbox(allChecked: boolean) {
+    updateSelectAllCheckbox(allChecked: boolean, isIndeterminate: boolean) {
         this.selectAllCheckbox.checked = allChecked;
+        this.selectAllCheckbox.indeterminate = isIndeterminate;
+
+        // Добавляем или убираем класс для состояния indeterminate
+        if (isIndeterminate) {
+            this.selectAllCheckbox.classList.add('cart-header__select-all--indeterminate');
+        } else {
+            this.selectAllCheckbox.classList.remove('cart-header__select-all--indeterminate');
+        }
     }
 
     /**

@@ -9,22 +9,6 @@ export class TemplateManager {
     private static registeredHelpers: Set<string> = new Set();
 
     /**
-     * Загружает partial-шаблон по указанному URL.
-     *
-     * @param url - URL для загрузки partial-шаблона.
-     * @returns {Promise<string>} - Промис с содержимым partial-шаблона.
-     * @throws {Error} - Если не удалось загрузить partial-шаблон.
-     */
-    private static async loadPartial(url: string): Promise<string> {
-        try {
-            const response = await fetch(url);
-            return await response.text();
-        } catch (err) {
-            throw new Error(`Ошибка загрузки partial: ${url} - ${err}`);
-        }
-    }
-
-    /**
      * Регистрирует partial-шаблоны, включая их вложенные partials.
      *
      * @param partialList - Список объектов partial-шаблонов для регистрации.
@@ -33,7 +17,7 @@ export class TemplateManager {
     public static async registerPartials(partialList: Partials[]): Promise<void> {
         const partialPromises = partialList.map(async (partial) => {
             if (!this.registeredPartials.has(partial.name)) {
-                const partialContent = await this.loadPartial(partial.partial);
+                const partialContent = partial.partial;
                 HandlebarManager.registerPartial(partial.name, partialContent);
                 this.registeredPartials.add(partial.name);
 
@@ -70,17 +54,14 @@ export class TemplateManager {
      * @param data - Данные для рендеринга шаблона.
      * @returns {Promise<void>} - Промис, который завершится после рендеринга шаблона.
      */
-    public static async templatize(root: HTMLElement, url: string, data: object): Promise<void> {
+    public static async templatize(root: HTMLElement, template: string, data: object): Promise<void> {
         try {
-            if (url in partials) {
-                await this.registerPartials(partials[url]);
+            if (template in partials) {
+                await this.registerPartials(partials[template]);
             }
 
-            const response = await fetch(url);
-            const templateSource = await response.text();
-
-            const template = HandlebarManager.compile(templateSource);
-            root.innerHTML = template(data);
+            const compiledTemplate = HandlebarManager.compile(template);
+            root.innerHTML = compiledTemplate(data);
         } catch (err) {
             errors.ShablonError(err);
         }

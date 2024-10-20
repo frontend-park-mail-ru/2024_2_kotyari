@@ -25,6 +25,18 @@ export class LeftCardsPresenter {
         const selectedCount = cartData.products.filter((product: CartProduct) => product.isSelected).length;
         this.view.updateSelectedCount(selectedCount);
         this.rightCartPresenter.calculateCartTotals();
+
+        // Пересчет состояния чекбокса "Выбрать все"
+        this.updateSelectAllCheckbox();
+    }
+
+    // Метод для обновления состояния чекбокса "Выбрать все"
+    updateSelectAllCheckbox(): void {
+        const selectedCount = cartData.products.filter((product: CartProduct) => product.isSelected).length;
+        const allChecked = selectedCount === cartData.products.length;
+        const isIndeterminate = selectedCount > 0 && selectedCount < cartData.products.length;
+
+        this.view.updateSelectAllCheckbox(allChecked, isIndeterminate);
     }
 
     // Обработчик для переключения состояния "избранное"

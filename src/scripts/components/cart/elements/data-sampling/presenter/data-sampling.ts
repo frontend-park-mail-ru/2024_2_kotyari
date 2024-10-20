@@ -89,9 +89,11 @@ export class DataSamplingPresenter {
      * Обновляет состояние чекбокса "select-all" на основе состояния товаров в корзине.
      */
     private updateSelectAllCheckbox() {
-        const allChecked = cartData.products.every(product => product.isSelected);
-        this.cartView.updateSelectAllCheckbox(allChecked);
+        const selectedCount = cartData.products.filter(product => product.isSelected).length;
+        const allChecked = selectedCount === cartData.products.length;
+        const isIndeterminate = selectedCount > 0 && selectedCount < cartData.products.length;
+
+        // Обновляем состояние select-all чекбокса
+        this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
     }
-
-
 }

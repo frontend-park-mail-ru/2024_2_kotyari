@@ -10,13 +10,15 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vite-plugin-string": "^1.2.3",
     "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4",
-    "typescript": "^5.6.3"
+    "webpack-cli": "^5.1.4"
   },
   "type": "module",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "sass": "^1.80.2"
   },
   "scripts": {
     "start": "node server/server.js",
