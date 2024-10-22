@@ -50,8 +50,6 @@
     background-color: var(--container-background-color);
 }
 
-/* Остальные стили остаются без изменений... */
-
 .form {
     display: flex;
     flex-direction: column;
@@ -116,7 +114,6 @@
     display: block;
 }
 
-/* Адаптивные стили */
 @media (max-width: 768px) {
     .modal__container {
         padding: 15px;

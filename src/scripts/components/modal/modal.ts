@@ -109,14 +109,14 @@ export async function buildModalWithContent({
 function updateUserInfo(updatedUser: { name: string; gender: string; email: string }, user: any) {
   Object.assign(user, updatedUser);
 
-  document.querySelector('.user-name')!.textContent = updatedUser.name;
+  document.querySelector('.account__user-name')!.textContent = updatedUser.name;
 
-  const genderElement = document.querySelector('.description-item .description-value.gender') as HTMLElement;
+  const genderElement = document.querySelector('.product-page__description-item .product-page__description-value.gender') as HTMLElement;
   if (genderElement) {
     genderElement.textContent = updatedUser.gender;
   }
 
-  const emailElement = document.querySelector('.description-item .description-value.email') as HTMLElement;
+  const emailElement = document.querySelector('.product-page__description-item .product-page__description-value.email') as HTMLElement;
   if (emailElement) {
     emailElement.textContent = updatedUser.email;
   }
@@ -125,7 +125,7 @@ function updateUserInfo(updatedUser: { name: string; gender: string; email: stri
 function updateAddress(updatedAddress: { address: string }, user: any) {
   user.address = updatedAddress.address;
 
-  const addressElement = document.querySelector('.address-details .address-text') as HTMLElement;
+  const addressElement = document.querySelector('.account__address-details .account__address-text') as HTMLElement;
   if (addressElement) {
     addressElement.textContent = updatedAddress.address;
   }

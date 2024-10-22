@@ -56,9 +56,9 @@ export class Carousel {
   thumbnailHeight: number;
 
   constructor() {
-    this.slides = document.querySelectorAll('.slide');
-    this.thumbnails = document.querySelectorAll('.thumbnail');
-    this.list = document.querySelector('.gallery ul')!;
+    this.slides = document.querySelectorAll('.product-page__slide');
+    this.thumbnails = document.querySelectorAll('.product-page__thumbnail');
+    this.list = document.querySelector('.product-page__gallery ul')!;
     this.carousel = document.getElementById('carousel')!;
     this.currentIndex = 0;
     this.position = 0;
@@ -80,12 +80,12 @@ export class Carousel {
       });
     });
 
-    document.getElementById('next-button')?.addEventListener('click', () => {
+    document.getElementById('product-page__next-button')?.addEventListener('click', () => {
       this.currentIndex = this.getNextIndex(this.currentIndex, this.slides.length);
       this.showSlide(this.currentIndex);
     });
 
-    document.getElementById('prev-button')?.addEventListener('click', () => {
+    document.getElementById('product-page__prev-button')?.addEventListener('click', () => {
       this.currentIndex = this.getPrevIndex(this.currentIndex, this.slides.length);
       this.showSlide(this.currentIndex);
     });
