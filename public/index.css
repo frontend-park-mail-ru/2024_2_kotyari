@@ -1,14 +1,19 @@
-@import '/src/css/parametrs/parameters.css';
-@import '/src/scripts/components/card/catalog.css';
+@import '/public/css/parametrs/parameters.css';
+@import '/src/scripts/components/card/view/catalog.css';
 @import '/src/scripts/components/custom-messages/error/error.css';
 @import '/src/scripts/components/custom-messages/soon/soon.css';
 @import '/src/scripts/components/modal/modal.css';
 @import '/src/scripts/layouts/footer/footer.css';
 @import '/src/scripts/layouts/header/header.css';
-@import '/src/scripts/components/auth-menu/auth-menu.css';
 @import '/src/scripts/components/cart/view/cart.css';
 @import '/src/scripts/components/order-placement/view/order-placement.css';
 @import '/src/scripts/components/order-list/order-list.css';
+@import '/src/scripts/components/single-order/single-order.css';
+@import '/src/scripts/components/auth-menu/views/container.css';
+@import '/src/scripts/components/auth-menu/views/error.css';
+@import '/src/scripts/components/auth-menu/views/form.css';
+@import '/src/scripts/components/auth-menu/views/toggle-password.css';
+@import '/src/scripts/components/elements/searcher/searcher.css';
 
 * {
     margin: 0;
@@ -19,7 +24,7 @@
 
 body {
     height: 100%;
-    font-family: var(--font-family);
+    font-family: var(--font-family), sans-serif;
 }
 
 html {

@@ -1,4 +1,4 @@
-import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
+import { TemplateManager } from '/dist/scripts/constprograms/templatizer/templatize.js';
 
 const returnPage = '/';
 
@@ -10,7 +10,11 @@ const returnPage = '/';
  * @returns {Promise} Промис, который разрешается после успешного отображения шаблона.
  */
 export function soon() {
-    return TemplateManager.templatize(document.getElementById('main'), '/src/scripts/components/custom-messages/soon/soon.hbs', {
-        return: returnPage
-    });
+  return TemplateManager.templatize(
+    document.getElementById('main'),
+    '/src/scripts/components/custom-messages/soon/soon.hbs',
+    {
+      return: returnPage,
+    }
+  );
 }

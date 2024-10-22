@@ -1,4 +1,4 @@
-import {TemplateManager} from "/dist/scripts/constprograms/templatizer/templatize.js";
+import { TemplateManager } from '/dist/scripts/constprograms/templatizer/templatize.js';
 
 const orderListTemplateURL = 'src/scripts/components/order-list/order-list.hbs';
 

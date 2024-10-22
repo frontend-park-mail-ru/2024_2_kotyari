@@ -1,0 +1,184 @@
+@import "/public/css/parametrs/parameters.css";
+
+body {
+    margin: var(--margin-zero);
+    font-family: var(--font-family), sans-serif;
+    background-color: var(--background-color);
+}
+
+/* Контейнер каталога */
+.catalog {
+    display: grid;
+    gap: var(--gap);
+    padding-top: var(--padding);
+    justify-content: var(--catalog-justify-content);
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    width: 90%;
+    margin: auto;
+}
+
+/* Карточка товара */
+.card {
+    background-color: var(--card-background-color);
+    border: var(--one-padding) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: var(--card-justify-content);
+    align-items: var(--card-allign-items);
+    text-align: var(--card-text-align);
+    transition: transform var(--short-duration) ease, box-shadow var(--short-duration) ease;
+    aspect-ratio: var(--card-aspect-ratio);
+    will-change: transform;
+    position: relative;
+    max-height: var(--card-height);
+    z-index: var(--card-z-index);
+    overflow: hidden;
+    max-width: 300px; /* Установите разумную ширину */
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: var(--before-card-tlrb);
+    left: var(--before-card-tlrb);
+    right: var(--before-card-tlrb);
+    bottom: var(--before-card-tlrb);
+    transition: all var(--short-duration) ease;
+    z-index: var(--before-card-z-index);
+}
+
+/* Эффект при наведении */
+.card:hover {
+    transform: scale(var(--big-scale));
+    box-shadow: 0 4px 10px var(--card-shadow-color);
+    z-index: 2;
+}
+
+.card:hover::before {
+    box-shadow: 0 8px 20px var(--card-shadow-color);
+    z-index: -1;
+}
+
+/* Изображение товара */
+.card-image {
+    width: 100%;
+    height: 200px;
+    aspect-ratio: 1;
+    margin-bottom: var(--description-margin-bottom);
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
+    background-image: url('https://via.placeholder.com/150');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 100%; /* Ограничение по высоте контейнера */
+    max-width: 100%;  /* Ограничение по ширине контейнера */
+}
+
+/* Информация о товаре */
+.card-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--mini-padding);
+}
+
+/* Цена, скидка и старая цена */
+.price {
+    font-size: var(--price-font-size);
+    margin-bottom: var(--mini-padding);
+    width: 100%;
+}
+
+.current-price {
+    color: var(--discount-color);
+    font-weight: bold;
+    margin-right: var(--mini-padding);
+    white-space: nowrap;
+}
+
+.old-price {
+    color: var(--old-price-color);
+    text-decoration: line-through;
+    margin-right: var(--mini-padding);
+    white-space: nowrap;
+}
+
+.discount {
+    color: var(--discount-color);
+    white-space: nowrap;
+}
+
+/* Описание товара */
+.description {
+    font-size: var(--description-font-size);
+    color: var(--text-color);
+    max-height: var(--description-max-height);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: max-height var(--short-duration) ease, white-space var(--short-duration) ease;
+    margin-bottom: var(--description-margin-bottom);
+    width: 100%;
+}
+
+.card:hover .description {
+    white-space: normal;
+    max-height: var(--description-expanded-height);
+}
+
+/* Кнопка купить */
+.buy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--button-text-color);
+    background-color: transparent;
+    border: 1px solid var(--card-border-color);
+    border-color: var(--button-text-color);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: background-color var(--short-duration) ease, color var(--short-duration) ease;
+    padding: var(--button-padding);
+    margin-top: auto;
+    width: 100%;
+    margin-bottom: var(--button-margin-bottom);
+    font-weight: var(--button-font-weight);
+}
+
+.buy-button:hover {
+    color: var(--text-buy-color);
+    background-color: var(--button-text-color);
+}
+
+/* Убираем изменение размеров карточки при наведении на кнопку */
+.buy-button:focus, .buy-button:hover {
+    transform: none;
+}
+
+/* Центрирование и стили для сообщения ожидания */
+.center-container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+/* Оформление текста */
+.h1, .p {
+    color: var(--text-another-color);
+}
+
+/* Убираем скачки, оставляем базовые стили текста */
+.loading-text {
+    font-size: var(--loading-text-font-size);
+    color: var(--button-text-color);
+    margin: var(--mini-padding) 0;
+}

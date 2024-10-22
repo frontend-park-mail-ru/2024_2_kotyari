@@ -1,3 +1,3 @@
 export declare const errors: {
-    ShablonError: (err: any) => void;
+  ShablonError: (err: any) => void;
 };

@@ -1,16 +1,16 @@
-@import '/src/css/parametrs/parameters.css';
-@import '/src/css/parametrs/animations.css';
+@import '/public/css/parametrs/parameters.css';
+@import '/public/css/parametrs/animations.css';
 
 .center-container {
     text-align: center;
     margin-top: 20%;
 }
 
-.h1, .p {
+.error-fade-in-text h1 p{
     color: var(--text-another-color);
 }
 
-.fade-in-text {
+.error-fade-in-text {
     opacity: 0;
     animation: fadeIn var(--one-second-duration) ease-in forwards;
 }
