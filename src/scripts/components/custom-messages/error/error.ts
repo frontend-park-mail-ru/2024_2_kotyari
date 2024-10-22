@@ -1,5 +1,5 @@
 import { errorsDescriptions } from './errors.js';
-import { rootId } from '../../../../services/app/config';
+import { contentRenderId } from '../../../../services/app/config';
 import errorTmp from './error.hbs?raw';
 import Handlebars from 'handlebars';
 
@@ -25,9 +25,9 @@ export function errorPage(name: string): void {
 
   console.log(config);
 
-  const rootElement = document.getElementById(rootId) as HTMLElement;
+  const rootElement = document.getElementById(contentRenderId) as HTMLElement;
   if (!rootElement) {
-    console.error(`Element ID = ${rootId} not found`);
+    console.error(`Element ID = ${contentRenderId} not found`);
   }
 
   rootElement.innerHTML = '';

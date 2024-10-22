@@ -1,4 +1,4 @@
-<div class="product-container">
+<div class="product">
   <div class="carousel-slider-container">
     <div id="carousel" class="carousel">
       <div class="product-page__arrow-button">
@@ -27,69 +27,70 @@
     </div>
   </div>
 
-  <div class="product-info">
-    <h1 class="product-name">{{name}}</h1>
-    <div class="rating">
-      <span class="text-rating">⭐ {{rating}}</span>
-      <span class="text-review">{{reviewCount}} отзывов</span>
-      <span class="material-icons">videocam_outlined</span> {{videoCount}} видео
+    <div class="product-info">
+      <h1 class="product-name">{{name}}</h1>
+      <div class="rating">
+        <span class="text-rating">⭐ {{rating}}</span>
+        <span class="text-review">{{reviewCount}} отзывов</span>
+        <span class="material-icons">videocam_outlined</span> {{videoCount}} видео
+      </div>
+
+      <div class="brand">
+        <img src="{{brand.logo}}" alt="brand logo">
+        {{brand.name}}
+      </div>
+
+      {{#if isUsedAvailable}}
+        <div class="condition">
+          Состояние товара:
+          <div class="condition-buttons">
+            <button class="condition-new {{#if isNewSelected}}selected{{/if}}" data-price="{{newPrice}}">
+              <span class="condition-text">Новые <br> <span class="price-condition">{{newPrice}} ₽</span></span>
+            </button>
+            <button class="condition-used {{#if isUsedSelected}}selected{{/if}}" data-price="{{usedPrice}}">
+              <span class="condition-text">Уцененные <br> <span class="price-condition">{{usedPrice}} ₽</span></span>
+            </button>
+          </div>
+        </div>
+      {{/if}}
+
+      <div class="colors">
+        {{#each colors}}
+          <button class="color-button {{#if this.selected}}selected{{/if}}">
+            <span class="color-circle" style="background-color: {{this.code}}"></span>
+          </button>
+        {{/each}}
+      </div>
+
+      <div class="description-product-page">
+        {{#each description}}
+          <div class="description-item">
+            <span class="description-key">{{this.key}}</span>: <span class="description-value">{{this.value}}</span>
+          </div>
+        {{/each}}
+      </div>
+
+      <a href="#more-description" class="more-description-link">Перейти к описанию</a>
     </div>
 
-    <div class="brand">
-      <img src="{{brand.logo}}" alt="brand logo">
-      {{brand.name}}
-    </div>
-
-    {{#if isUsedAvailable}}
-      <div class="condition">
-        Состояние товара:
-        <div class="condition-buttons">
-          <button class="condition-new {{#if isNewSelected}}selected{{/if}}" data-price="{{newPrice}}">
-            <span class="condition-text">Новые <br> <span class="price-condition">{{newPrice}} ₽</span></span>
-          </button>
-          <button class="condition-used {{#if isUsedSelected}}selected{{/if}}" data-price="{{usedPrice}}">
-            <span class="condition-text">Уцененные <br> <span class="price-condition">{{usedPrice}} ₽</span></span>
-          </button>
+    <div class="purchase-info">
+      <div class="rating">
+        <span class="text-article">Артикул: {{article}}</span> <span class="share-link">Поделиться</span>
+      </div>
+      <div class="price-box">
+        <div class="current-price-product-page">{{currentPrice}} ₽</div>
+        <div class="old-price">{{oldPrice}} ₽</div>
+        <div class="cart-container">
+          <button class="cart-button">В корзину</button>
+          <span class="material-icons favorite-icon">favorite_border_outlined</span>
         </div>
       </div>
-    {{/if}}
 
-    <div class="colors">
-      {{#each colors}}
-        <button class="color-button {{#if this.selected}}selected{{/if}}">
-          <span class="color-circle" style="background-color: {{this.code}}"></span>
-        </button>
-      {{/each}}
-    </div>
-
-
-    <div class="description-product-page">
-      {{#each description}}
-        <div class="description-item">
-          <span class="description-key">{{this.key}}</span>: <span class="description-value">{{this.value}}</span>
-        </div>
-      {{/each}}
-    </div>
-
-    <a href="#more-description" class="more-description-link">Перейти к описанию</a>
-  </div>
-
-  <div class="purchase-info">
-    <div class="rating">
-      <span class="text-article">Артикул: {{article}}</span>  <span class="share-link">Поделиться</span>
-    </div>
-    <div class="price-box">
-      <div class="current-price-product-page">{{currentPrice}} ₽</div>
-      <div class="old-price">{{oldPrice}} ₽</div>
-      <div class="cart-container">
-        <button class="cart-button">В корзину</button>
-        <span class="material-icons favorite-icon">favorite_border_outlined</span>
+      <div class="return-policy">
+        <span class="description-key">На возврат</span>: <span class="description-value">14 дней</span>
+        <br>
+        <span class="description-value">Примерка</span>
       </div>
-    </div>
-
-    <div class="return-policy">
-      <span class="description-key">На возврат</span>: <span class="description-value">14 дней</span>
-      <span class="description-value">Примерка</span>
     </div>
   </div>
 </div>

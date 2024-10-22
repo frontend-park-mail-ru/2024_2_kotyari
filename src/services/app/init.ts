@@ -15,11 +15,14 @@ import { CardPresenter } from '@/scripts/components/card/presenter/card';
 import { menuSignIn, menuSignUp } from '@/scripts/components/auth-menu/views/configs';
 import { errorPage } from '@/scripts/components/custom-messages/error/error';
 import { buildSingleOrderPage } from '../../scripts/components/single-order/single-order';
+import { buildProductPage } from '../../scripts/components/product-page/presenters/product-page';
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import Handlebars from 'handlebars';
 import { storageUser } from '../storage/user';
 import { CartBuilder } from "../../scripts/components/cart/view/cart-builder";
 import { OrderPlacementBuilder } from "../../scripts/components/order-placement/view/order-placement-builder";
+import { buildAccountPage } from '../../scripts/components/personal-account/presenters/account';
+
 
 const reg = (): void => {
   /**
@@ -85,8 +88,11 @@ router.addRoute('/error/404', () => errorPage('404'), new RegExp('^/error/404$')
 
 router.addRoute('/logout', () => loginPresenter.logout(), new RegExp('^/logout$'), true, false);
 
-router.addRoute('/order/:id', () => buildSingleOrderPage(singleOrder), new RegExp('^/order/d+$'), true, false);
+router.addRoute('/product/:id', () => buildProductPage(), new RegExp('^\\/product\\/(\\d+)$'), false, false);
 
+router.addRoute('/account', () => buildAccountPage(), new RegExp('^/account$'), true, false);
+
+router.addRoute('/order_list', () => buildOrderList(orderList), new RegExp('^/order_list$'), true, false);
 router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), false, false);
 
 router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), false, false);

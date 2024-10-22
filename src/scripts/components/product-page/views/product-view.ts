@@ -1,12 +1,18 @@
-import { TemplateManager } from '../../../constprograms/templatizer/templatize.js';
+import product from './product-page.hbs?raw';
+import Handlebars from 'handlebars';
+import { contentRenderId } from '../../../../services/app/config';
 
-export async function renderProductPage(templateURL: string, data: any) {
-  const mainElement = document.getElementById('main');
-  if (!mainElement) {
-    console.error('Element with id "main" not found.');
-    return;
+const compiled = Handlebars.compile(product);
+
+export async function renderProductPage(data: any) {
+  const rootElement = document.getElementById(contentRenderId) as HTMLElement;
+  if (!rootElement) {
+    console.error(`Элемент root ${contentRenderId} -- ${rootElement}`);
   }
-  await TemplateManager.templatize(mainElement, templateURL, data);
+  rootElement.innerHTML = '';
+  const templateElement = document.createElement('div');
+  templateElement.innerHTML = compiled(data);
+  rootElement.appendChild(templateElement);
 }
 
 export function updatePriceDisplay(button: HTMLButtonElement, priceElement: HTMLElement) {

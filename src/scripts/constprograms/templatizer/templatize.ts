@@ -1,6 +1,6 @@
 import { HandlebarManager } from '../handlebars/handlebars';
-import { errors } from '../../errors/errors';
-import { partials } from './partials';
+import { errors } from '../../errors/error';
+import { partials } from './partials.d.ts';
 import { helpers } from './helpers';
 import { HelperFunctions, Partials } from './types/types';
 

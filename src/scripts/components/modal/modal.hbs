@@ -1,6 +1,35 @@
-<div id="{{id}}" class="modal__main">
+<div class="modal" id="modal">
+  <div id="{{id}}" class="modal__main">
     <div class="modal__container">
-        <span class="btn__close" data-action="close">&times;</span>
+      <span class="btn__close" data-action="close">&times;</span>
 
+      <h2 class="auth-container__title">{{title}}</h2>
+
+      <div class="auth-container__error" id="global_error" style="display: none;">
+        <span class="form__error-feedback" id="global_error_message">{{error_msg}}</span>
+      </div>
+
+      <form id="{{formId}}" action="{{action}}" method="post" class="form">
+        <span class="form__error-feedback" id="error"></span>
+
+        {{#each fields as |field|}}
+          <div class="input-container">
+            <label for="{{field.id}}" class="form__label">{{field.label}}</label>
+            {{#if (eq field.type 'select')}}
+              <select id="{{field.id}}" name="{{field.name}}" class="form__input">
+                {{#each field.options as |option|}}
+                  <option value="{{option.value}}" {{#if (eq option.value field.selected)}}selected{{/if}}>{{option.label}}</option>
+                {{/each}}
+              </select>
+            {{else}}
+              <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" value="{{field.value}}" class="form__input" />
+            {{/if}}
+          </div>
+          <span class="form__error-feedback" id="{{field.error_id}}"></span>
+        {{/each}}
+
+        <button type="submit" class="form__submit-button">{{submitText}}</button>
+      </form>
     </div>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 import card from './card.hbs?raw';
-import { rootId } from '@/services/app/config';
+import { contentRenderId } from '@/services/app/config';
 import Handlebars from 'handlebars';
 
 export interface CardViewInterface {
@@ -14,9 +14,9 @@ export class CardView implements CardViewInterface {
   }
 
   private _render = (data: { products: any[] }): void => {
-    const rootElement = document.getElementById(rootId);
+    const rootElement = document.getElementById(contentRenderId);
     if (!rootElement) {
-      console.log(`ошибка rooElement ${rootElement} -- rootId ${rootId}`);
+      console.log(`ошибка rooElement ${rootElement} -- rootId ${contentRenderId}`);
       return;
     }
 

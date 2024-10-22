@@ -1,5 +1,5 @@
 import { buildMain, LoginView, router } from './init.js';
-import { backurl, CLICK_CLASSES, urlAttribute } from './config.ts';
+import { backurl, CLICK_CLASSES, urlAttribute } from './config';
 import { storageUser } from '../storage/user';
 import {registerFunctions} from "../../scripts/constprograms/helperName";
 

@@ -1,4 +1,5 @@
 import { Partials } from './types/types';
 
 // Определяем интерфейс для маппинга partials
-export const partials: Record<string, Partials[]>;
+// @ts-ignore
+export const partials: Record<string, Partials[]> = {}; // Initialize with an empty object
