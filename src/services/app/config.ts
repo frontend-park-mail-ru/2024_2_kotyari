@@ -1,4 +1,5 @@
 export const rootId: string = 'app';
+export const contentRenderId: string = 'content-render';
 
 /**
  * URL-адрес бекенд-сервера, используемый для отправки запросов с фронтенда.

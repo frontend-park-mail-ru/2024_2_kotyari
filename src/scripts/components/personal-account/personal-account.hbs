@@ -1,4 +1,4 @@
-<div class="container-personal-account">
+<div class="account">
   <!-- Левая колонка -->
   <div class="column-personal-account">
     <div class="box-personal-account user-info">
@@ -10,15 +10,18 @@
       <div class="user-details">
         <div class="description-wrapper">
           <div class="description-item">
-            <span class="description-key">Пол</span>: <span class="description-value">{{user.gender}}</span>
+            <span class="description-key">Пол</span>: <span class="description-value gender">{{user.gender}}</span>
           </div>
           <div class="description-item">
-            <span class="description-key">Почта</span>: <span class="description-value">{{user.email}}</span>
+            <span class="description-key">Почта</span>: <span class="description-value email">{{user.email}}</span>
           </div>
         </div>
-        <span class="material-icons edit">edit</span>
+        <button id="edit-user-info" class="edit-btn user-info" type="button">
+          <span class="material-icons edit">edit</span>
+        </button>
       </div>
-      <button class="logout-button-personal-account">Выйти</button>
+      <button class="logout-button-personal-account" href="/logout" router="stability-active">Выход</button>
+
     </div>
   </div>
 
@@ -31,10 +34,12 @@
         </div>
         <div class="{{this.detailsClass}}">
           <h3 class="{{this.titleClass}}">{{this.title}}</h3>
-          <p>{{this.text}}</p>
+          <p class="{{this.textClass}}">{{this.text}}</p>
         </div>
         {{#if this.editable}}
-          <span class="material-icons edit">edit</span>
+          <button id="edit-user-address" class="edit-btn user-info" type="button">
+            <span class="material-icons edit">edit</span>
+          </button>
         {{/if}}
       </div>
     {{/each}}

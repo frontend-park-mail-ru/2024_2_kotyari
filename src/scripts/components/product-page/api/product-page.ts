@@ -1,5 +1,5 @@
 export async function getProductData(productId: number): Promise<any> {
-  const url = `http://localhost:3000/catalog/product/${productId}`;
+  const url = `catalog/product/${productId}`;
 
   return fetch(url, {
     method: 'GET',

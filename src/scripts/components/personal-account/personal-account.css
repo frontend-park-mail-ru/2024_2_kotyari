@@ -1,156 +1,172 @@
-@import '/src/css/parametrs/parameters.css';
+@import "/public/css/parametrs/parameters.css";
 
-.container-personal-account {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--big-margin);
+.account {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--padding);
+    max-width: 1360px;
+    margin: var(--margin-zero) auto;
+}
+
+
+.edit-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .column-personal-account {
-  flex: 1;
-  margin: 0 var(--default-margin);
+    flex: 1;
+    margin: 0 var(--default-margin);
 }
 
 .box-personal-account {
-  background-color: var(--card-background-color);
-  border: var(--one-border) solid var(--card-border-color);
-  border-radius: var(--default-font-size);
-  box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
-  padding: var(--large-padding);
-  margin-bottom: var(--big-margin-bottom);
-  position: relative;
+    background-color: var(--card-background-color);
+    border: var(--one-border) solid var(--card-border-color);
+    border-radius: var(--default-font-size);
+    box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
+    padding: var(--large-padding);
+    margin-bottom: var(--big-margin-bottom);
+    position: relative;
 }
 
 .user-photo {
-  width: 200px;
-  border-radius: var(--default-border-radius);
+    width: 200px;
+    flex: 3;
+    border-radius: var(--default-border-radius);
 }
 
 .user-details {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--gap20);
-  margin-left: var(--big-margin);
-  vertical-align: top;
-  font-family: 'UbuntuSans', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--gap20);
+    margin-left: var(--big-margin);
+    vertical-align: top;
+    font-family: 'UbuntuSans', sans-serif;
+}
+
+.notification {
+    flex: 1;
+    margin-right: -170px;
 }
 
 .user-name {
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: ellipsis;
-  margin: 0;
-  flex: 2;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+    margin: 0;
+    flex: 4;
 }
 
 .icons-personal-account {
-  display: grid;
-  color: var(--base-background-color);
-  flex: 1;
+    display: grid;
+    color: var(--base-background-color);
+    flex: 1;
 }
 
 .logout-button-personal-account {
-  margin-top: var(--default-margin);
-  padding: var(--button-padding);
-  font-size: var(--font-size_label);
-  font-family: 'UbuntuSans', sans-serif;
-  font-weight: bold;
-  background-color: var(--base-background-color);
-  color: var(--text-inv);
-  border: none;
-  border-radius: var(--default-border-radius);
-  flex-grow: 1;
-  cursor: pointer;
-  margin-left: var(--default-margin);
-  white-space: nowrap;
-  text-align: center;
+    margin-top: var(--default-margin);
+    padding: var(--button-padding);
+    font-size: var(--font-size_label);
+    font-family: 'UbuntuSans', sans-serif;
+    font-weight: bold;
+    background-color: var(--base-background-color);
+    color: var(--text-inv);
+    border: none;
+    border-radius: var(--default-border-radius);
+    flex-grow: 1;
+    cursor: pointer;
+    margin-left: var(--default-margin);
+    white-space: nowrap;
+    text-align: center;
 }
 
 .logout-button-personal-account:hover {
-  background-color: var(--darker-background-color);
-  transform: scale(var(--litle-scale));
+    background-color: var(--darker-background-color);
+    transform: scale(var(--litle-scale));
 }
 .local_shipping {
-  font-size: 70px;
+    font-size: 70px;
 }
 .icon-personal-account {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 .edit-link {
-  display: block;
-  margin-top: var(--default-margin);
-  color: var(--link-color);
-  cursor: pointer;
+    display: block;
+    margin-top: var(--default-margin);
+    color: var(--link-color);
+    cursor: pointer;
 }
 
 .material-icons.notification{
-  color: var(--base-background-color);
+    color: var(--base-background-color);
 }
 
 .delivery-info,
 .address-info,
 .favorites-info,
 .purchases-info {
-  display: flex;
-  align-items: center;
-  background-color: var(--card-background-color);
-  border: var(--one-border) solid var(--card-border-color);
-  border-radius: var(--default-border-radius);
-  box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
-  padding: var(--large-padding);
-  margin-bottom: var(--big-margin-bottom);
+    display: flex;
+    align-items: center;
+    background-color: var(--card-background-color);
+    border: var(--one-border) solid var(--card-border-color);
+    border-radius: var(--default-border-radius);
+    box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
+    padding: var(--large-padding);
+    margin-bottom: var(--big-margin-bottom);
 }
 
 .delivery-title,
 .address-title,
 .favorites-title,
 .purchases-title {
-  margin: 0;
-  font-size: var(--title-profile);
+    margin: 0;
+    font-size: var(--title-profile);
 }
 
 .delivery-status,
 .address-description,
 .favorites-count,
 .purchases-status {
-  margin: var(--middle-margin) 0 0;
+    margin: var(--middle-margin) 0 0;
 }
 
 .material-icons.local-shipping {
-  font-size: var(--font-size-mat-icons-profile);
-  color: var(--base-background-color);
-  margin-right: var(--padding15);
+    font-size: var(--font-size-mat-icons-profile);
+    color: var(--base-background-color);
+    margin-right: var(--padding15);
 }
 
 .material-icons.pin-drop {
-  font-size: var(--font-size-mat-icons-profile);
-  color: var(--base-background-color);
-  margin-right: var(--padding15);
+    font-size: var(--font-size-mat-icons-profile);
+    color: var(--base-background-color);
+    margin-right: var(--padding15);
 }
 
 .material-icons.favorite {
-  font-size: var(--font-size-mat-icons-profile);
-  color: var(--base-background-color);
-  margin-right: var(--padding15);
+    font-size: var(--font-size-mat-icons-profile);
+    color: var(--base-background-color);
+    margin-right: var(--padding15);
 }
 
 .material-icons.shopping-basket {
-  font-size: var(--font-size-mat-icons-profile);
-  color: var(--base-background-color);
-  margin-right: var(--padding15);
+    font-size: var(--font-size-mat-icons-profile);
+    color: var(--base-background-color);
+    margin-right: var(--padding15);
 }
 
 .material-icons.edit{
-  color: var(--base-background-color);
+    color: var(--base-background-color);
 }
 
 .delivery-details,
 .address-details,
 .favorites-details,
 .purchases-details {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap20);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap20);
 }

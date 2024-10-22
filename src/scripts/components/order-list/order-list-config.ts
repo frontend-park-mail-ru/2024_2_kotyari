@@ -19,6 +19,7 @@ export const orderList = {
   title: 'Мои заказы',
   orders: [
     {
+      id: '1',
       date: '8 октября',
       status: 'Вы получили 9 октября',
       total: '12 345',
@@ -36,6 +37,7 @@ export const orderList = {
       ],
     },
     {
+      id: '2',
       date: '10 октября',
       status: 'Вы получили 11 октября',
       total: '7 890',

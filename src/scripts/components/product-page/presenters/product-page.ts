@@ -7,14 +7,16 @@ import {
   updateFavoriteIcon,
   Carousel,
 } from '../views/product-view.js';
+
 // import { getProductData } from '../api/product-page';
+
+
 import { productData } from './data.js';
-const productPageTemplateURL = '/src/scripts/components/product-page/views/product-page.hbs';
 
 export async function buildProductPage() {
   try {
     // const data = await getProductData(productId);
-    await renderProductPage(productPageTemplateURL, productData);
+    await renderProductPage(productData);
 
     initializeConditionButtons();
     initializeColorButtons();

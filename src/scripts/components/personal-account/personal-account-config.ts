@@ -1,4 +1,11 @@
-export const personalAccountData = {
+import {
+  PersonalAccountData,
+  User,
+  DeliveryInfo,
+  FavoritesPurchaseInfo,
+} from './types/types';
+
+export const personalAccountData: PersonalAccountData = {
   user: {
     name: 'Иван Иванов',
     photoUrl:
@@ -6,6 +13,7 @@ export const personalAccountData = {
     gender: 'Мужской',
     email: 'ivan@example.com',
     notifications: true,
+    address: '2-я Бауманская, 5',
   },
   deliveryInfo: [
     {
@@ -14,6 +22,7 @@ export const personalAccountData = {
       icon: 'local_shipping',
       detailsClass: 'delivery-details',
       titleClass: 'delivery-title',
+      textClass: 'status-text',
       title: 'Доставка',
       text: 'Ближайшая не ожидается',
       editable: false,
@@ -24,8 +33,9 @@ export const personalAccountData = {
       icon: 'pin_drop',
       detailsClass: 'address-details',
       titleClass: 'address-title',
+      textClass: 'address-text',
       title: 'Адрес доставки',
-      text: 'Адреса доставки для пользователя',
+      text: '2-я Бауманская, 5',
       editable: true,
     },
   ],
@@ -36,6 +46,7 @@ export const personalAccountData = {
       icon: 'favorite_outline',
       detailsClass: 'favorites-details',
       titleClass: 'favorites-title',
+      textClass: 'favorites-text',
       title: 'Избранное',
       text: '5 товаров в наличии',
     },
@@ -45,6 +56,7 @@ export const personalAccountData = {
       icon: 'shopping_basket',
       detailsClass: 'purchases-details',
       titleClass: 'purchases-title',
+      textClass: 'purchases-text',
       title: 'Покупки',
       text: 'Смотреть',
     },
