@@ -105,7 +105,7 @@ body {
     white-space: nowrap;
 }
 
-.old-price {
+.product-page__old-price {
     color: var(--old-price-color);
     text-decoration: line-through;
     margin-right: var(--mini-padding);

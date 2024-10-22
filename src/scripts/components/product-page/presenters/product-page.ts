@@ -29,11 +29,11 @@ export async function buildProductPage() {
 }
 
 function initializeConditionButtons() {
-  const conditionButtons = Array.from(document.querySelectorAll('.condition-buttons button')).filter(
+  const conditionButtons = Array.from(document.querySelectorAll('.product-page__condition-buttons button')).filter(
     (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
   );
 
-  const currentPriceElement = document.querySelector('.current-price-product-page') as HTMLElement;
+  const currentPriceElement = document.querySelector('.product-page__current-price-product-page') as HTMLElement;
 
   conditionButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -44,7 +44,7 @@ function initializeConditionButtons() {
 }
 
 function initializeColorButtons() {
-  const colorButtons = Array.from(document.querySelectorAll('.colors .color-button')).filter(
+  const colorButtons = Array.from(document.querySelectorAll('.product-page__colors .product-page__color-button')).filter(
     (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
   );
 
@@ -56,7 +56,7 @@ function initializeColorButtons() {
 }
 
 function initializeCartButton() {
-  const cartButton = document.querySelector('.cart-button') as HTMLButtonElement;
+  const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
 
   cartButton.addEventListener('click', () => {
     updateCartButton(cartButton);
@@ -64,7 +64,7 @@ function initializeCartButton() {
 }
 
 function initializeFavoriteIcon() {
-  const favoriteIcon = document.querySelector('.favorite-icon') as HTMLElement;
+  const favoriteIcon = document.querySelector('.product-page__favorite-icon') as HTMLElement;
 
   favoriteIcon.addEventListener('click', () => {
     updateFavoriteIcon(favoriteIcon);

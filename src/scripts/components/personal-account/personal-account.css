@@ -9,19 +9,19 @@
 }
 
 
-.edit-btn{
+.account__edit-btn{
     background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
 }
 
-.column-personal-account {
+.account__column-personal-account {
     flex: 1;
     margin: 0 var(--default-margin);
 }
 
-.box-personal-account {
+.account__box-personal-account {
     background-color: var(--card-background-color);
     border: var(--one-border) solid var(--card-border-color);
     border-radius: var(--default-font-size);
@@ -31,13 +31,13 @@
     position: relative;
 }
 
-.user-photo {
+.account__user-photo {
     width: 200px;
     flex: 3;
     border-radius: var(--default-border-radius);
 }
 
-.user-details {
+.account__user-details {
     display: flex;
     justify-content: space-between;
     gap: var(--gap20);
@@ -46,12 +46,12 @@
     font-family: 'UbuntuSans', sans-serif;
 }
 
-.notification {
+.account__notification {
     flex: 1;
     margin-right: -170px;
 }
 
-.user-name {
+.account__user-name {
     white-space: nowrap;
     overflow: visible;
     text-overflow: ellipsis;
@@ -59,13 +59,13 @@
     flex: 4;
 }
 
-.icons-personal-account {
+.account__icons-personal-account {
     display: grid;
     color: var(--base-background-color);
     flex: 1;
 }
 
-.logout-button-personal-account {
+.account__logout-button-personal-account {
     margin-top: var(--default-margin);
     padding: var(--button-padding);
     font-size: var(--font-size_label);
@@ -82,32 +82,25 @@
     text-align: center;
 }
 
-.logout-button-personal-account:hover {
+.account__logout-button-personal-account:hover {
     background-color: var(--darker-background-color);
     transform: scale(var(--litle-scale));
 }
-.local_shipping {
+.account__local_shipping {
     font-size: 70px;
 }
-.icon-personal-account {
+.account__icon-personal-account {
     font-size: 30px;
 }
 
-.edit-link {
-    display: block;
-    margin-top: var(--default-margin);
-    color: var(--link-color);
-    cursor: pointer;
-}
-
-.material-icons.notification{
+.material-icons.account__notification{
     color: var(--base-background-color);
 }
 
-.delivery-info,
-.address-info,
-.favorites-info,
-.purchases-info {
+.account__delivery-info,
+.account__address-info,
+.account__favorites-info,
+.account__purchases-info {
     display: flex;
     align-items: center;
     background-color: var(--card-background-color);
@@ -116,55 +109,56 @@
     box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
     padding: var(--large-padding);
     margin-bottom: var(--big-margin-bottom);
+    height: 45%;
 }
 
-.delivery-title,
-.address-title,
-.favorites-title,
-.purchases-title {
+.account__delivery-title,
+.account__address-title,
+.account__favorites-title,
+.account__purchases-title {
     margin: 0;
     font-size: var(--title-profile);
 }
 
-.delivery-status,
-.address-description,
-.favorites-count,
-.purchases-status {
+.account__delivery-status,
+.account__address-description,
+.account__favorites-count,
+.account__purchases-status {
     margin: var(--middle-margin) 0 0;
 }
 
-.material-icons.local-shipping {
+.material-icons.account__local-shipping {
     font-size: var(--font-size-mat-icons-profile);
     color: var(--base-background-color);
     margin-right: var(--padding15);
 }
 
-.material-icons.pin-drop {
+.material-icons.account__pin-drop {
     font-size: var(--font-size-mat-icons-profile);
     color: var(--base-background-color);
     margin-right: var(--padding15);
 }
 
-.material-icons.favorite {
+.material-icons.account__favorite {
     font-size: var(--font-size-mat-icons-profile);
     color: var(--base-background-color);
     margin-right: var(--padding15);
 }
 
-.material-icons.shopping-basket {
+.material-icons.account__shopping-basket {
     font-size: var(--font-size-mat-icons-profile);
     color: var(--base-background-color);
     margin-right: var(--padding15);
 }
 
-.material-icons.edit{
+.material-icons.account__edit{
     color: var(--base-background-color);
 }
 
-.delivery-details,
-.address-details,
-.favorites-details,
-.purchases-details {
+.account__delivery-details,
+.account__address-details,
+.account__favorites-details,
+.account__purchases-details {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
