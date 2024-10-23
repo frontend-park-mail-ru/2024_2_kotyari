@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import "/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/elements/view/product-item.css";
 .product-item {
   display: flex;
   align-items: center; /* Выравниваем элементы вертикально */

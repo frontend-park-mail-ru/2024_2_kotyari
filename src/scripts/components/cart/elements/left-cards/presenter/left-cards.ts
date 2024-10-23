@@ -61,25 +61,21 @@ export class LeftCardsPresenter {
 
       this.view.updateQuantityDisplay(productId, product.quantity);
 
-      console.log(product.quantity === 1);
+      // Переключение кнопки в режим удаления при количестве = 1
+      const isSingleItem = product.quantity === 1;
+      this.view.switchMinusButtonToDelete(productId, isSingleItem);
 
-      if (product.quantity === 1) {
-        this.view.switchMinusButtonToDelete(productId, true);
-        product.isSingleItem = true;
-      } else {
-        this.view.switchMinusButtonToDelete(productId, false);
-        product.isSingleItem = false;
-      }
-
+      product.isSingleItem = isSingleItem;
       this.rightCartPresenter.calculateCartTotals();
     }
   }
 
   // Обработчик удаления товара
   private handleRemoveItem(productId: string): void {
-    cartData.products = cartData.products.filter((product: CartProduct) => product.id !== productId);
+    cartData.products = cartData.products.filter((product) => product.id !== productId);
     this.view.removeItem(productId);
-    this.updateSelectedCount();
+    this.updateSelectedCount(); // Пересчёт выбранных товаров
+    this.updateSelectAllCheckbox(); // Обновляем состояние select-all
   }
 
   // Обработчик выбора товара

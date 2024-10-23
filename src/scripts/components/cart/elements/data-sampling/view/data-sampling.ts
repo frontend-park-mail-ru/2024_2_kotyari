@@ -34,9 +34,9 @@ export class DataSamplingView {
    */
   updateSelectAllCheckbox(allChecked: boolean, isIndeterminate: boolean) {
     this.selectAllCheckbox.checked = allChecked;
-    this.selectAllCheckbox.indeterminate = isIndeterminate;
+    this.selectAllCheckbox.indeterminate = allChecked ? false : isIndeterminate; // Исправлено
 
-    // Добавляем или убираем класс для состояния indeterminate
+    // Удаляем или добавляем класс для indeterminate
     if (isIndeterminate) {
       this.selectAllCheckbox.classList.add('cart-header__select-all--indeterminate');
     } else {

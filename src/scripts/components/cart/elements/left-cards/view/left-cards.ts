@@ -97,17 +97,22 @@ export class LeftCardsView {
       minusButton.innerHTML = isDelete ? '&#128465;' : '-';
       minusButton.classList.toggle('delete-btn', isDelete);
 
-      // Вынести обработчик в отдельную функцию
-      const handleClick = () => {
+      const handleRemoveClick = () => {
         if (productId) this.onRemoveItem(productId);
       };
 
+      const handleDecreaseClick = () => {
+        if (productId) this.onQuantityChange(productId, 'decrease');
+      };
+
+      // Удаляем все предыдущие обработчики, чтобы избежать утечек
+      minusButton.replaceWith(minusButton.cloneNode(true));
+      const updatedButton = document.querySelector(`#cart-remove-${productId}`);
+
       if (isDelete) {
-        // Добавляем обработчик
-        minusButton.addEventListener('click', handleClick);
+        updatedButton?.addEventListener('click', handleRemoveClick);
       } else {
-        // Удаляем обработчик, если кнопка перестала быть кнопкой удаления
-        minusButton.removeEventListener('click', handleClick);
+        updatedButton?.addEventListener('click', handleDecreaseClick);
       }
     }
   }

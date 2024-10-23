@@ -18,7 +18,9 @@ import { buildSingleOrderPage } from '../../scripts/components/single-order/sing
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import Handlebars from 'handlebars';
 import { storageUser } from '../storage/user';
-import {cart, cartBuilder} from '../../../src/scripts/components/cart/cart.js';
+import { CartBuilder } from "../../scripts/components/cart/view/cart-builder";
+import { OrderPlacementBuilder } from "../../scripts/components/order-placement/view/order-placement-builder";
+
 const reg = (): void => {
   /**
    * Хелпер 'eq' для сравнения двух значений.
@@ -67,6 +69,9 @@ const cardAPI = new CardAPI(backurl);
 const cardView = new CardView();
 const cardPresenter = new CardPresenter(cardAPI, cardView);
 
+const cartBuilder = new CartBuilder();
+const orderPlacementBuilder = new OrderPlacementBuilder();
+
 // Определение маршрутов
 router.addRoute(AUTH_URLS.LOGIN.route, () => loginPresenter.init(), new RegExp('^/login$'), false, true);
 
@@ -82,6 +87,6 @@ router.addRoute('/logout', () => loginPresenter.logout(), new RegExp('^/logout$'
 
 router.addRoute('/order/:id', () => buildSingleOrderPage(singleOrder), new RegExp('^/order/d+$'), true, false);
 
-router.addRoute('/cart', () => cartBuilder(), new RegExp('^/cart$'), false, false);
+router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), false, false);
 
-router.addRoute('/order', () => cartBuilder(), new RegExp('^/order$'), false, false);
+router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), false, false);

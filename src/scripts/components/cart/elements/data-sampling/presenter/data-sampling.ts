@@ -70,8 +70,13 @@ export class DataSamplingPresenter {
     const selectedItems = this.cartView.getSelectedItems();
     const selectedIds = selectedItems.map((item) => item.id.split('-')[2]);
 
+    // Удаляем товары из данных
     cartData.products = cartData.products.filter((product) => !selectedIds.includes(product.id));
+
+    // Удаляем элементы из DOM
     this.cartView.removeSelectedItems(selectedItems);
+
+    // Пересчитываем состояние select-all
     this.updateSelectAllCheckbox();
     this.updateSelectedCount();
   }
@@ -90,10 +95,9 @@ export class DataSamplingPresenter {
    */
   private updateSelectAllCheckbox() {
     const selectedCount = cartData.products.filter((product) => product.isSelected).length;
-    const allChecked = selectedCount === cartData.products.length;
-    const isIndeterminate = selectedCount > 0 && selectedCount < cartData.products.length;
+    const allChecked = selectedCount > 0 && selectedCount === cartData.products.length;
+    const isIndeterminate = selectedCount > 0 && !allChecked;
 
-    // Обновляем состояние select-all чекбокса
     this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
   }
 }
