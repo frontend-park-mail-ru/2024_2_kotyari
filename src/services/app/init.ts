@@ -67,8 +67,8 @@ export const LoginView = new AuthView(menuSignIn);
 const signUpValidate = new AuthValidate(SignUpView);
 const loginValidate = new AuthValidate(LoginView);
 
-const loginPresenter = new LoginPresenter(LoginView, authAPI, LoginView, loginValidate);
-const signUpPresenter = new SignUpPresenter(SignUpView, authAPI, SignUpView, signUpValidate);
+const loginPresenter = new LoginPresenter(LoginView, authAPI, LoginView, loginValidate, router);
+const signUpPresenter = new SignUpPresenter(SignUpView, authAPI, SignUpView, signUpValidate, router);
 
 const cardAPI = new CardAPI(backurl);
 const cardView = new CardView();
