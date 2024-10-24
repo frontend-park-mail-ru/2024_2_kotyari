@@ -15,6 +15,7 @@ export interface ProductItem {
   quantity: number; // Количество товаров
   productImage: string; // Изображение товара
   weight: number; // Вес товара
+  url: string;
 }
 
 export interface DeliveryDate {

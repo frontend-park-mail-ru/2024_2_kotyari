@@ -25,10 +25,16 @@
 body {
     height: 100%;
     font-family: var(--font-family), sans-serif;
+    max-width: 1920px;
+    max-height: 1080px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 html {
     height: 100%;
+    width: 100%;
+    justify-items: center;
 }
 
 .invisible {

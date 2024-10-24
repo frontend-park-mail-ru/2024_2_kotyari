@@ -1,19 +1,50 @@
-//import { DataSamplingView } from '../view/data-sampling.js';
-import { cartData } from '../../../api/products.js';
 import { DataSamplingView } from '../view/data-sampling.js';
 import { RightCartPresenter } from '../../right-element-of-cart/presenter/calculate-cart-totals';
+import { CartData } from "../../../types/types";
 
+/**
+ * Класс DataSamplingPresenter управляет функционалом выбора товаров в корзине
+ * и взаимодействует с представлением (view) и презентером итогов корзины.
+ *
+ * @class DataSamplingPresenter
+ */
 export class DataSamplingPresenter {
-  //private dataSamplingView: DataSamplingView;
+  /**
+   * Презентер для расчета итогов корзины.
+   * @private {RightCartPresenter}
+   */
   private rightCartPresenter: RightCartPresenter;
+
+  /**
+   * Представление для управления элементами корзины.
+   * @private {DataSamplingView}
+   */
   private cartView: DataSamplingView;
 
-  constructor(cartView: DataSamplingView, rightCartPresenter: RightCartPresenter) {
+  /**
+   * Данные корзины.
+   * @private {CartData}
+   */
+  private cartData: CartData;
+
+  /**
+   * Конструктор класса DataSamplingPresenter.
+   *
+   * @param {DataSamplingView} cartView - Представление для управления элементами корзины.
+   * @param {RightCartPresenter} rightCartPresenter - Презентер для расчета итогов корзины.
+   * @param {CartData} cartData - Данные корзины, включая список товаров.
+   */
+  constructor(cartView: DataSamplingView, rightCartPresenter: RightCartPresenter, cartData: CartData) {
+    this.cartData = cartData;
+
     this.cartView = cartView;
-    //this.dataSamplingView = new DataSamplingView();
     this.rightCartPresenter = rightCartPresenter;
   }
 
+  /**
+   * Инициализирует взаимодействие с корзиной:
+   * настраивает состояние чекбокса "select-all" и добавляет слушатели событий.
+   */
   initializeDataSampling() {
     // Инициализация состояния "select-all"
     this.updateSelectAllCheckbox();
@@ -31,12 +62,12 @@ export class DataSamplingPresenter {
    * @param checked булево значение: выделены ли все товары.
    */
   private handleSelectAllChange(checked: boolean) {
-    cartData.products = cartData.products.map((product) => ({
+    this.cartData.products = this.cartData.products.map((product) => ({
       ...product,
       isSelected: checked,
     }));
 
-    this.cartView.initializeCheckboxes(cartData.products); // Обновляем состояние чекбоксов
+    this.cartView.initializeCheckboxes(this.cartData.products); // Обновляем состояние чекбоксов
     this.updateSelectedCount(); // Обновляем количество выбранных товаров
   }
 
@@ -48,7 +79,7 @@ export class DataSamplingPresenter {
    * @param checked булево значение: выбран ли товар.
    */
   private handleItemCheckboxChange(productId: string, checked: boolean) {
-    cartData.products = cartData.products.map((product) => {
+    this.cartData.products = this.cartData.products.map((product) => {
       if (product.id === productId) {
         return {
           ...product,
@@ -71,7 +102,7 @@ export class DataSamplingPresenter {
     const selectedIds = selectedItems.map((item) => item.id.split('-')[2]);
 
     // Удаляем товары из данных
-    cartData.products = cartData.products.filter((product) => !selectedIds.includes(product.id));
+    this.cartData.products = this.cartData.products.filter((product) => !selectedIds.includes(product.id));
 
     // Удаляем элементы из DOM
     this.cartView.removeSelectedItems(selectedItems);
@@ -85,7 +116,7 @@ export class DataSamplingPresenter {
    * Обновляет количество выбранных товаров.
    */
   private updateSelectedCount() {
-    const selectedCount = cartData.products.filter((product) => product.isSelected).length;
+    const selectedCount = this.cartData.products.filter((product) => product.isSelected).length;
     this.cartView.updateSelectedCount(selectedCount);
     this.rightCartPresenter.calculateCartTotals();
   }
@@ -94,8 +125,8 @@ export class DataSamplingPresenter {
    * Обновляет состояние чекбокса "select-all" на основе состояния товаров в корзине.
    */
   private updateSelectAllCheckbox() {
-    const selectedCount = cartData.products.filter((product) => product.isSelected).length;
-    const allChecked = selectedCount > 0 && selectedCount === cartData.products.length;
+    const selectedCount = this.cartData.products.filter((product) => product.isSelected).length;
+    const allChecked = selectedCount > 0 && selectedCount === this.cartData.products.length;
     const isIndeterminate = selectedCount > 0 && !allChecked;
 
     this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);

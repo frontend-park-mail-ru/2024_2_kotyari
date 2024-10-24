@@ -69,6 +69,9 @@
 .right-element-card__payment-method--selected {
   border-color: var(--base-background-color); /* Цвет обводки для выбранного метода */
 }
+.right-element-card__payment-method--selected:hover {
+  border-color: var(--base-background-color);
+}
 .right-element-card__payment-method-icon {
   font-size: 36px; /* Размер иконки */
   color: var(--text-color);

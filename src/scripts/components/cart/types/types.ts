@@ -1,27 +1,109 @@
 /**
  * Интерфейс для объекта продукта в корзине.
+ *
+ * @interface CartProduct
  */
 export interface CartProduct {
-  id: string; // Уникальный идентификатор товара
-  name: string; // Название товара
-  cost: number; // Цена товара
-  currency: string; // Валюта товара
-  image_url: string; // URL изображения товара
-  old_cost?: number; // Старая цена (может отсутствовать, поэтому необязательное поле)
-  discount?: number; // Процент скидки (может отсутствовать)
-  weight: number; // Вес товара в килограммах
-  is_liked: boolean; // Статус "добавлено в избранное"
-  delivery_date: string; // Дата доставки товара
-  quantity: number; // Количество товара
-  isSingleItem: boolean; // Флаг, указывающий, что товар единственный в своей категории
-  isSelected: boolean; // Флаг, указывающий, выбран ли товар для оформления заказа
-  url: string; // URL товара на сайте
+  /**
+   * Уникальный идентификатор товара.
+   * @type {string}
+   */
+  id: string;
+
+  /**
+   * Название товара.
+   * @type {string}
+   */
+  name: string;
+
+  /**
+   * Цена товара.
+   * @type {number}
+   */
+  cost: number;
+
+  /**
+   * Валюта товара (например, "₽", "$").
+   * @type {string}
+   */
+  currency: string;
+
+  /**
+   * URL изображения товара.
+   * @type {string}
+   */
+  image_url: string;
+
+  /**
+   * Старая цена товара (если есть).
+   * @type {number | undefined}
+   */
+  old_cost?: number;
+
+  /**
+   * Процент скидки на товар (если присутствует).
+   * @type {number | undefined}
+   */
+  discount?: number;
+
+  /**
+   * Вес товара в килограммах.
+   * @type {number}
+   */
+  weight: number;
+
+  /**
+   * Флаг, указывающий, добавлен ли товар в избранное.
+   * @type {boolean}
+   */
+  is_liked: boolean;
+
+  /**
+   * Дата доставки товара в формате строки (например, "2024-10-24").
+   * @type {string}
+   */
+  delivery_date: string;
+
+  /**
+   * Количество данного товара в корзине.
+   * @type {number}
+   */
+  quantity: number;
+
+  /**
+   * Флаг, указывающий, является ли товар единственным в своей категории.
+   * @type {boolean}
+   */
+  isSingleItem: boolean;
+
+  /**
+   * Флаг, указывающий, выбран ли товар для оформления заказа.
+   * @type {boolean}
+   */
+  isSelected: boolean;
+
+  /**
+   * URL товара на сайте.
+   * @type {string}
+   */
+  url: string;
 }
 
 /**
  * Интерфейс для объекта корзины.
+ *
+ * @interface CartData
  */
 export interface CartData {
-  selectedCount: number; // Количество выбранных товаров
-  products: CartProduct[]; // Массив продуктов в корзине
+  /**
+   * Количество выбранных товаров в корзине.
+   * @type {number}
+   */
+  selectedCount: number;
+
+  /**
+   * Массив продуктов, находящихся в корзине.
+   * @type {CartProduct[]}
+   */
+  products: CartProduct[];
 }

@@ -19,7 +19,7 @@ export function buildBody(data: any): Promise<void> {
   if (rootElement)
     return new Promise<void>((resolve, reject) => {
       // Вставляем тело страницы
-      document.body.insertAdjacentHTML('beforeend', Handlebars.compile(body)());
+      document.body.insertAdjacentHTML('beforeend', Handlebars.compile(body)({'root': rootId}));
 
       const header = document.querySelector('header');
       const footer = document.querySelector('footer');

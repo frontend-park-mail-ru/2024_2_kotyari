@@ -1,12 +1,49 @@
 import { Helper } from '../../../../../constprograms/helper.js';
-import { CartProduct } from '../../../types/types'; // Допустим, есть интерфейс для товара
+import { CartProduct } from '../../../types/types';
 
+/**
+ * Класс RightCartView отвечает за отображение информации о корзине, включая
+ * общую стоимость, скидку, финальную цену и управление кнопкой "Оформить заказ".
+ *
+ * @class RightCartView
+ */
 export class RightCartView {
+  /**
+   * Элемент, отображающий общее количество товаров и вес.
+   *
+   * @private
+   * @type {HTMLElement}
+   */
   private readonly totalItemsElement: HTMLElement;
+
+  /**
+   * Элемент, отображающий сумму скидки.
+   *
+   * @private
+   * @type {HTMLElement}
+   */
   private readonly benefitPriceElement: HTMLElement;
+
+  /**
+   * Элемент, отображающий итоговую стоимость корзины.
+   *
+   * @private
+   * @type {HTMLElement}
+   */
   private readonly finalPriceElement: HTMLElement;
+
+  /**
+   * Кнопка "Оформить заказ".
+   *
+   * @private
+   * @type {HTMLButtonElement}
+   */
   private readonly checkoutButton: HTMLButtonElement;
 
+  /**
+   * Конструктор RightCartView.
+   * Инициализирует элементы DOM, необходимые для отображения данных корзины.
+   */
   constructor() {
     this.totalItemsElement = document.querySelector('.right-card__total-items') as HTMLElement;
     this.benefitPriceElement = document.querySelector('.right-card__benefit-price') as HTMLElement;
@@ -15,14 +52,15 @@ export class RightCartView {
   }
 
   /**
-   * Обновляет информацию о количестве товаров, их общем весе и стоимости.
+   * Обновляет информацию о количестве товаров, общем весе, полной стоимости,
+   * общей выгоде (скидке) и финальной цене с учетом скидки.
    *
-   * @param totalItems Общее количество товаров
-   * @param totalWeight Общий вес всех товаров
-   * @param totalPrice Полная стоимость всех товаров
-   * @param benefitPrice Общая выгода (скидка)
-   * @param finalPrice Финальная стоимость после скидки
-   * @param currency Валюта
+   * @param {number} totalItems Общее количество товаров
+   * @param {number} totalWeight Общий вес всех товаров
+   * @param {number} totalPrice Полная стоимость всех товаров
+   * @param {number} benefitPrice Общая выгода (скидка)
+   * @param {number} finalPrice Финальная стоимость после скидки
+   * @param {string} currency Валюта, в которой отображаются цены
    */
   updateTotals(
     totalItems: number,
@@ -44,7 +82,8 @@ export class RightCartView {
   }
 
   /**
-   * Обновляет информацию, если корзина пуста.
+   * Обновляет информацию о корзине, если она пуста.
+   * Показывает сообщение "Корзина пуста" и устанавливает нули в стоимости.
    */
   updateEmptyCart() {
     if (this.totalItemsElement && this.benefitPriceElement && this.finalPriceElement) {
@@ -55,10 +94,11 @@ export class RightCartView {
   }
 
   /**
-   * Управляет состоянием кнопки "Оформить заказ".
+   * Обновляет состояние кнопки "Оформить заказ" в зависимости от наличия выбранных товаров.
+   * Если нет выбранных товаров, кнопка блокируется и показывается подсказка.
    *
-   * @param isDisabled Блокировать кнопку или нет
-   * @param selectedItems Массив выбранных товаров для оформления
+   * @param {boolean} isDisabled Нужно ли блокировать кнопку
+   * @param {CartProduct[]} selectedItems Массив выбранных товаров для оформления
    */
   updateCheckoutButton(isDisabled: boolean, selectedItems: CartProduct[]) {
     if (this.checkoutButton) {

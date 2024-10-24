@@ -75,6 +75,10 @@
     border-color: var(--base-background-color); /* Цвет обводки для выбранного метода */
   }
 
+  &__payment-method--selected:hover {
+    border-color: var(--base-background-color);
+  }
+
   /* Иконка внутри метода оплаты */
   &__payment-method-icon {
     font-size: 36px; /* Размер иконки */

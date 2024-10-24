@@ -1,6 +1,32 @@
+/**
+ * Класс LeftCardsView отвечает за отображение и управление карточками товаров
+ * в пользовательском интерфейсе корзины слева.
+ *
+ * @class LeftCardsView
+ */
 export class LeftCardsView {
+  /**
+   * Коллекция элементов карточек товаров.
+   *
+   * @private
+   * @type {NodeListOf<HTMLElement>}
+   */
   private readonly cartItems: NodeListOf<HTMLElement>;
+
+  /**
+   * DOM-элемент, отображающий количество выбранных товаров.
+   *
+   * @private
+   * @type {HTMLElement}
+   */
   private readonly selectedCountElement: HTMLElement;
+
+  /**
+   * Чекбокс для выбора всех товаров в корзине.
+   *
+   * @private
+   * @type {HTMLInputElement}
+   */
   private readonly selectAllCheckbox: HTMLInputElement;
 
   public onFavoriteToggle: (productId: string) => void = () => {};
@@ -8,6 +34,10 @@ export class LeftCardsView {
   public onRemoveItem: (productId: string) => void = () => {};
   public onSelectItem: (productId: string, isSelected: boolean) => void = () => {};
 
+  /**
+   * Конструктор класса LeftCardsView.
+   * Инициализирует элементы карточек товаров и добавляет слушатели событий.
+   */
   constructor() {
     this.cartItems = document.querySelectorAll('.cart-item') as NodeListOf<HTMLElement>;
     this.selectedCountElement = document.getElementById('selected-count') as HTMLElement;
@@ -18,7 +48,13 @@ export class LeftCardsView {
     }
   }
 
-  // Настройка прослушивания событий
+  /**
+   * Настройка слушателей событий для всех элементов карточек товаров.
+   * Включает управление избранными, количеством, удалением и выбором товаров.
+   *
+   * @private
+   * @returns {void}
+   */
   private setupEventListeners(): void {
     this.cartItems.forEach((item) => {
       const productId = item.querySelector('.cart-item__btn-favorite')?.id.split('-')[2];
@@ -59,19 +95,34 @@ export class LeftCardsView {
     });
   }
 
-  // Обновить счетчик выбранных товаров
+  /**
+   * Обновляет отображение количества выбранных товаров.
+   *
+   * @param {number} count - Количество выбранных товаров.
+   */
   public updateSelectedCount(count: number): void {
     if (this.selectedCountElement) {
       this.selectedCountElement.textContent = count.toString();
     }
   }
 
+  /**
+   * Обновляет состояние чекбокса "Выбрать все".
+   *
+   * @param {boolean} allChecked - Выбраны ли все товары.
+   * @param {boolean} isIndeterminate - Промежуточное состояние чекбокса.
+   */
   public updateSelectAllCheckbox(allChecked: boolean, isIndeterminate: boolean): void {
     this.selectAllCheckbox.checked = allChecked;
     this.selectAllCheckbox.indeterminate = isIndeterminate;
   }
 
-  // Обновить иконку избранного
+  /**
+   * Обновляет иконку избранного товара.
+   *
+   * @param {string} productId - ID товара.
+   * @param {boolean} isLiked - Булево значение, указывающее, добавлен ли товар в избранное.
+   */
   public updateFavoriteIcon(productId: string, isLiked: boolean): void {
     const favoriteButton = document.querySelector(`#btn-favorite-${productId} .cart-item__wishlist-icon`);
 
@@ -80,7 +131,12 @@ export class LeftCardsView {
     }
   }
 
-  // Обновить отображение количества товара
+  /**
+   * Обновляет отображение количества товара на карточке.
+   *
+   * @param {string} productId - ID товара.
+   * @param {number} quantity - Количество товара.
+   */
   public updateQuantityDisplay(productId: string, quantity: number): void {
     const quantityDisplay = document.querySelector(`#quantity-${productId}`);
 
@@ -89,7 +145,12 @@ export class LeftCardsView {
     }
   }
 
-  // Переключение кнопки "минус" на иконку удаления
+  /**
+   * Переключает кнопку "минус" на иконку удаления при количестве товара = 1.
+   *
+   * @param {string} productId - ID товара.
+   * @param {boolean} isDelete - Булево значение, указывающее, переключить ли кнопку на режим удаления.
+   */
   public switchMinusButtonToDelete(productId: string, isDelete: boolean): void {
     const minusButton = document.querySelector(`#cart-remove-${productId}`);
 
@@ -117,7 +178,11 @@ export class LeftCardsView {
     }
   }
 
-  // Удалить товар
+  /**
+   * Удаляет элемент товара из DOM по его ID.
+   *
+   * @param {string} productId - ID товара.
+   */
   public removeItem(productId: string): void {
     const item = document.getElementById(`cart-item-${productId}`);
 

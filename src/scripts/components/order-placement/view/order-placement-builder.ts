@@ -49,6 +49,7 @@ export class OrderPlacementBuilder {
 
     private async renderOrderPlacement(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
+            this.rootElement.innerHTML='';
             this.rootElement!.insertAdjacentHTML('beforeend', this.orderPlacementTemplate([]));
 
             this.rightElementOfOrderPlacementRoot = document.getElementById('right-element-of-order-placement');
@@ -82,7 +83,7 @@ export class OrderPlacementBuilder {
     private async renderLeftPart(): Promise<void> {
         this.deliveryDatesListRoot = document.getElementById('data-sampling');
 
-        this.deliveryDatesListRoot.innerHTML = '';
+        //this.deliveryDatesListRoot.innerHTML = '';
 
         if (this.deliveryDatesListRoot) {
             // Рендерим список дат доставки с товарами

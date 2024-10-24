@@ -22,7 +22,6 @@ const helperName: Array<iHelper> = [
 export async function registerFunctions(): Promise<Boolean> {
     try {
         helperName.forEach((helpFunction: iHelper) => {
-            console.log(helpFunction.name, helpFunction.function)
             Handlebars.registerHelper(helpFunction.name, helpFunction.function);
         })
     } catch (error) {
