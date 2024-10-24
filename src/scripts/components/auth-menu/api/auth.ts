@@ -1,5 +1,11 @@
 import { AUTH_URLS } from './config.js';
-import { LoginCredentials, response, SignUpCredentials } from '../types/types.js';
+import {
+  authResponse,
+  ErrorResponse,
+  LoginCredentials,
+  SignUpCredentials,
+  UserInfo,
+} from '../types/types.js';
 import { backurl } from '@/services/app/config.ts';
 
 export default class AuthAPI {
@@ -10,7 +16,7 @@ export default class AuthAPI {
     this.backUrl = backUrl;
   }
 
-  login = (credentials: LoginCredentials): Promise<response> => {
+  login = (credentials: LoginCredentials): Promise<authResponse> => {
     return fetch(this.backUrl + this.config.LOGIN.route, {
       credentials: 'include',
       method: 'POST',
@@ -25,22 +31,31 @@ export default class AuthAPI {
     })
       .then((res) => {
         if (res.ok) {
-          return { ok: true };
+          return res.json().then((resJSON) => {
+            if ('username' in resJSON) {
+              return { status: res.status, body: resJSON as UserInfo };
+            } else {
+              console.error('Ошибка авторизации:', resJSON.error_message);
+              return { status: res.status, body: resJSON as ErrorResponse };
+            }
+          });
         } else if (res.status === 401) {
-          return { ok: false, errorMsg: 'Пользователя не существует' };
+          return { status: res.status, body: { error_message: 'Пользователя не существует' } as ErrorResponse };
         } else {
-          return res.text().then((errorMsg) => ({ ok: false, errorMsg }));
+          return res.json().then((resJSON) => {
+            console.error('Ошибка авторизации:', resJSON.error_message);
+            return { status: res.status, body: resJSON as ErrorResponse };
+          });
         }
       })
       .catch((err) => {
         console.error('Ошибка при запросе:', err.message);
-        return { ok: false, errorMsg: err };
+        return { status: 500, body: { error_message: err.message } as ErrorResponse };
       });
   };
 
-  signup = (credentials: SignUpCredentials): Promise<response> => {
+  signup = (credentials: SignUpCredentials): Promise<authResponse> => {
     const url = this.backUrl + this.config.SIGNUP.route;
-
     return fetch(url, {
       credentials: 'include',
       method: 'POST',
@@ -57,17 +72,24 @@ export default class AuthAPI {
     })
       .then((res) => {
         if (res.ok) {
-          return { ok: true };
+          return res.json().then((resJSON) => {
+            if ('username' in resJSON) {
+              return { status: res.status, body: resJSON as UserInfo };
+            } else {
+              console.error('Ошибка регистрации:', resJSON.error_message);
+              return { status: res.status, body: resJSON as ErrorResponse };
+            }
+          });
         }
 
         return res.json().then((resJSON) => {
           console.error('Ошибка регистрации:', resJSON.error_message);
-          return { ok: false, errorMsg: resJSON.error_message };
+          return { status: res.status, body: resJSON as ErrorResponse };
         });
       })
       .catch((err) => {
         console.error('Ошибка при запросе:', err.message);
-        return { ok: false, errorMsg: err.message };
+        return { status: 500, body: { error_message: err.message } as ErrorResponse };
       });
   };
 

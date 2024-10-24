@@ -25,6 +25,7 @@ export default class Router {
 
   private onPopState(event: PopStateEvent): void {
     const path = event.state ? event.state.page : window.location.pathname;
+    this.clearContainer();
     this.resolveRoute(path);
   }
 

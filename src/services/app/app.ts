@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (res.ok) {
         return res.json().then((data) => {
           console.log(data);
-          return { name: data.username, city: 'Москва' };
+          return { name: data.username, city: data.city };
         });
       }
 
@@ -39,22 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((user) => {
       console.log(user);
       LoginView.updateAfterAuth(user.name);
-      return buildMain({ name: user.name, city: user.city });
-    })
-    .then(() => {
-      router.init();
+      buildMain({ name: user.name, city: user.city })
+        .then(() => {
+          router.init();
 
-      let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
+          let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
 
-      routes.forEach((route) => {
-        let href = route.getAttribute(urlAttribute);
-        if (href) {
-          route.addEventListener('click', (event) => {
-            event.preventDefault();
-            if (href) router.navigate(href, true);
+          routes.forEach((route) => {
+            let href = route.getAttribute(urlAttribute);
+            if (href) {
+              route.addEventListener('click', (event) => {
+                event.preventDefault();
+                if (href) router.navigate(href, true);
+              });
+            }
           });
-        }
-      });
+        })
     })
     .catch((err) => {
       console.error('Error during app initialization:', err);

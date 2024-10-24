@@ -10,9 +10,18 @@ export type SignUpCredentials = {
   repeat_password: string;
 };
 
-export type response = {
-  ok: boolean;
-  errorMsg?: string;
+export type UserInfo = {
+  username: string;
+  city: string;
+};
+
+export type ErrorResponse = {
+  error_message: string;
+};
+
+export type authResponse = {
+  status: number;
+  body: UserInfo | ErrorResponse;
 };
 
 export interface validateInterface {
@@ -34,7 +43,7 @@ export interface errorViewInterface {
 }
 
 export interface AuthViewInterface {
-  updateAfterAuth(username: string): void;
+  updateAfterAuth(user: UserInfo): void;
 
   render(): void;
 
@@ -42,10 +51,10 @@ export interface AuthViewInterface {
 }
 
 export interface SignInAPI {
-  login(credentials: LoginCredentials): Promise<response>;
+  login(credentials: LoginCredentials): Promise<authResponse>;
   logout(): Promise<boolean>;
 }
 
 export interface SignUpAPI {
-  signup(credentials: SignUpCredentials): Promise<response>;
+  signup(credentials: SignUpCredentials): Promise<authResponse>;
 }
