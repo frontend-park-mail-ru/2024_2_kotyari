@@ -10,8 +10,8 @@ const compiled = Handlebars.compile(order);
  * @async
  * @param {Object} data - Данные для рендеринга страницы заказа.
  */
-export const buildSingleOrderPage = (data): void => {
-  const rootElement = document.querySelector(rootId) as HTMLElement;
+export const buildSingleOrderPage = (data: any): void => {
+  const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
     console.error(`Элемент root ${rootId} -- ${rootElement}`);
   }

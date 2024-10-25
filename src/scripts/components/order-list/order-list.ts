@@ -10,7 +10,7 @@ const compiled = Handlebars.compile(orders);
  * @param {Object} data - Данные для рендеринга списка заказов.
  */
 export async function buildOrderList(data) {
-  const rootElement = document.querySelector(rootId) as HTMLElement;
+  const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
     console.error(`Элемент root ${rootId} -- ${rootElement}`);
   }
