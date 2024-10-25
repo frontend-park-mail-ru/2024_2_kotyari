@@ -13,7 +13,7 @@
   }
 
   &__checkbox {
-    margin-top: 8px;
+    margin-top: var(--checkbox-margin-top);
   }
 
   &__image {
@@ -27,7 +27,7 @@
       aspect-ratio: 1 / 1;
       border-radius: var(--card-border-radius);
       min-height: var(--min-card-image-width);
-      background: url('https://via.placeholder.com/150') center center / cover no-repeat;
+      background: var(--header-background) center center / cover no-repeat;
     }
   }
 
@@ -146,22 +146,20 @@
     cursor: pointer;
   }
 
-  // Чекбокс элемента товара
   &__checkbox {
     width: auto;
     display: flex;
     justify-content: center;
-    margin-right: 10px; /* Отступ между чекбоксом и текстом */
+    margin-right: var(--checkbox-margin-right);
   }
 
-  // Сам чекбокс
   &__select-item {
     appearance: none;
-    width: var(--checkbox-width); /* Размер чекбокса равен размеру крестика */
-    height: var(--checkbox-height); /* Размер чекбокса равен размеру крестика */
+    width: var(--checkbox-width);
+    height: var(--checkbox-height);
     background-color: var(--card-background-color);
     border: 2px solid var(--main-border-color);
-    border-radius: 3px; /* Чуть меньший радиус, чтобы соответствовать уменьшенному размеру */
+    border-radius: var(--select-item-border-radius);
     cursor: pointer;
     position: relative;
   }

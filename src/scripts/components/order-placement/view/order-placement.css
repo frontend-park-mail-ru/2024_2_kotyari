@@ -30,7 +30,7 @@
   .order-placement__content {
     flex-direction: column;
   }
-  .order-placement__left, .order-placement .cart-container__right {
+  .order-placement__left, .order-placement__right {
     width: var(--width-max);
   }
   .order-placement__right-absolute {

@@ -34,24 +34,24 @@
     font-weight: var(--grand-total-font-weight);
     display: flex;
     justify-content: space-between;
-    margin-top: var(--mini-gap); /* Небольшой отступ перед итогом */
+    margin-top: var(--mini-gap);
     color: var(--default-text-color);
   }
 
   &__promo-input {
-    background-color: #EEEEEE;
+    background-color: var(--header-background);
     border: none;
-    border-radius: 25px;
+    border-radius: var(--card-border-radius);
     color: var(--text-color);
     padding: var(--chrckout-padding);
     width: var(--width-max);
-    height: 48px; /* Должно соответствовать высоте кнопки */
+    height: var(--right-order-height);
     font-size: var(--input-font-size);
-    padding-left: 15px; /* Отступ для placeholder ближе к левому краю */
+    padding-left: var(--padding15);
   }
 
   &__promo-input::placeholder {
-    color: #888888; /* Цвет текста для placeholder */
+    color: var(--delete-color);
   }
 
   &__payment-method {
@@ -59,16 +59,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 45%; /* Половина строки */
+    width: var(--path-width); /* Половина строки */
     border: 2px solid #EEEEEE; /* Стандартная обводка */
-    border-radius: 25px;
-    padding: 15px;
+    border-radius: var(--card-border-radius);
+    padding: var(--padding15);
     cursor: pointer;
     transition: border-color var(--short-duration) ease-in-out; /* Плавное изменение обводки */
   }
 
   &__payment-method:hover {
-    border-color: #888888; /* Более темная обводка при наведении */
+    border-color: var(--select-color); /* Более темная обводка при наведении */
   }
 
   &__payment-method--selected {
@@ -79,13 +79,11 @@
     border-color: var(--base-background-color);
   }
 
-  /* Иконка внутри метода оплаты */
   &__payment-method-icon {
-    font-size: 36px; /* Размер иконки */
+    font-size: var(--font-size-payment-method);
     color: var(--text-color);
   }
 
-  /* Текст под иконкой */
   &__payment-method-text {
     margin-top: var(--mini-gap);
     color: var(--text-color);
@@ -104,13 +102,14 @@
 // Блок для кнопки
 .checkout-btn {
   background-color: var(--base-background-color);
-  color: white;
+  color: var(--text-inv);
   border: none;
   font-size: var(--button-font-size);
   cursor: pointer;
   border-radius: var(--card-border-radius);
   padding: var(--chrckout-padding);
   width: var(--width-max);
+  height: var(--right-order-height);
 
   &:hover {
     background-color: var(--darker-background-color); // Более темный фон при наведении

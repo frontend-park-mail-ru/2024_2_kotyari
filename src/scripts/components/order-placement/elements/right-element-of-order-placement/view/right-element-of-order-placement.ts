@@ -1,3 +1,8 @@
+/**
+ * Класс для управления элементами правой части страницы оформления заказа.
+ *
+ * @class RightElementOfOrderPlacementView
+ */
 export class RightElementOfOrderPlacementView {
   /**
    * Коллекция DOM-элементов, представляющих способы оплаты.

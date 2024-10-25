@@ -1,34 +1,34 @@
 .product-item {
   display: flex;
-  align-items: center; /* Выравниваем элементы вертикально */
+  align-items: center;
   margin-bottom: var(--total-item-margin-bottom);
-  gap: 12px; /* Добавляем отступ между элементами */
+  gap: var(--mini-gap);
   margin-top: var(--main-gap);
 
   &__image {
-    width: 75px;
-    height: 75px;
-    border-radius: 25px;
+    width: var(--order-image-width);
+    height: var(--order-image-height);
+    border-radius: var(--card-border-radius);
     margin-right: var(--main-gap);
     object-fit: cover; /* Чтобы изображение заполняло квадрат */
-    padding-down: 10px;
-    background: url('https://via.placeholder.com/150') center center / cover no-repeat;
+    padding-down: var(--order-image-padding-down);
+    background: var(--header-background) center center / cover no-repeat;
   }
 
   &__details {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Распределяем текст по высоте изображения */
-    height: 75px; /* Высота для выравнивания текста с изображением */
+    height: var(--order-image-height); /* Высота для выравнивания текста с изображением */
   }
 
   &__name {
     font-size: var(--font-size_label);
-    margin-top: 4px; /* Чуть ниже верха изображения */
+    margin-top: var(--name-margin-top); /* Чуть ниже верха изображения */
   }
 
   &__price {
     font-size: var(--font-size_label);
-    margin-bottom: 4px; /* Чуть выше низа изображения */
+    margin-bottom: var(--name-margin-top); /* Чуть выше низа изображения */
   }
 }

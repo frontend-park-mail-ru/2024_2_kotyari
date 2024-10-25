@@ -41,6 +41,7 @@
     --header-background: oklch(0.95 0 0);
     --name-buy-color: oklab(0.93 0.03 -0.04);
     --delete-color: #888888;
+    --select-color: #a8a6a6;
     --divider-color: #ACABAB;
     --text-hover-color: #dcd3ef;
     --text-actife-color: #b09ace;
@@ -49,6 +50,7 @@
     --main-gap: 20px;
     --gap: 16px;
     --mini-gap: 12px;
+    --index-gap: 8px;
     --form-gap: 5px;
     --card-padding: 20px;
     --big-padding: 16px;
@@ -72,6 +74,7 @@
     --description-margin-bottom: 10px;
     --total-item-margin-bottom: 10px;
     --midle-button-margin-bottom: 10px;
+    --checkbox-margin-top: 8px;
     --midle-margin-top: 5px;
     --delete-margin-left: 20px;
     --container-margin: 20px auto;
@@ -82,6 +85,8 @@
     --checkbox-margin-right: 10px;
     --midle-margin-left: 5px;
     --litle-margin-top: 2px;
+    --name-margin-top: 4px;
+    --price-margin-bottom: 4px;
     --micro-margin-left: 5px;
     --litle-margin-left: 7px;
     --big-margin-right: 20px;
@@ -103,6 +108,7 @@
 
     /* Размеры */
     --card-border-radius: 25px;
+    --ring-border-radius: 50%;
     --mini-card-border-radius: 6px;
     --card-image-height: 150px;
     --mini-card-image-height: 115px;
@@ -116,9 +122,11 @@
     --mini-description-max-height: 12px;
     --description-expanded-height: 40px; /* Максимум на 2 строки */
     --quantity-height: 40px; /* Максимум на 2 строки */
+    --right-order-height: 48px; /* Максимум на 2 строки */
     --mini-description-expanded-height: 32px; /* Максимум на 2 строки */
     --button-padding: 10px 15px;
     --container-padding: 30px 60px 30px;
+    --order-image-padding-down: 10px;
     --button-border-radius: 5px;
     --button-border-radius4: 4px;
     --button-font-weight: bold;
@@ -127,6 +135,7 @@
     --auth-button-border-radius: 6px;
     --container-border-radius: 16px;
     --icon-dropdown-border-radius: 3px;
+    --select-item-border-radius: 3px;
     --one-border: 1px;
     --icon-dropdown-border-width: 0 10px 10px 10px;
     --max-width-px-long: 1150px;
@@ -134,6 +143,10 @@
     --checkbox-width: 16px;
     --checkbox-height: 16px;
     --card-image-width: 23%;
+    --order-image-width: 75px;
+    --order-image-height: 75px;
+    --order-index-width-plus: 32px;
+    --order-index-height-plus: 32px;
     --min-card-image-width: 155px;
     --details-width: 70%;
 
@@ -146,6 +159,7 @@
     --left-width: 60%;
     --quantity-width: 60%;
     --right-width: 35%;
+    --path-width: 45%;
 
     --left-center: 50%;
     --proc-full-width: 100%;
@@ -166,6 +180,7 @@
     --description-font-size: 12px;
     --loading-text-font-size: 16px;
     --font-size-catalog-button: 35px;
+    --font-size-payment-method: 36px;
     --font-size_label: 14px;
     --font-size-span-catalog-button: 16px;
     --font-size-date-right: 14px;

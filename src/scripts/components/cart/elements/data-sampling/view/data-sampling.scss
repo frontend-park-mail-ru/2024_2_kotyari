@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-start; // Ориентируем элементы влево
   align-items: center;
-  gap: var(--main-gap); // Отступ между элементами
+  gap: var(--main-gap);
   margin-bottom: var(--big-margin-bottom);
 
   &__left-part {
@@ -13,19 +13,19 @@
 
   &__label {
     white-space: nowrap; // Запрещаем перенос текста на новую строку
-    font-size: var(--font-size_label); // Задаем фиксированный размер шрифта
+    font-size: var(--font-size_label);
     margin-left: var(--lable-margin-left);
   }
 
   &__delete-selected {
     text-decoration: none; // Убираем подчеркивание
-    color: black;
-    font-size: var(--font-size_label); // Фиксированный размер шрифта
+    color: var(--default-text-color);
+    font-size: var(--font-size_label);
     display: flex;
     align-items: center;
-    white-space: nowrap; // Чтобы текст не переносился
+    white-space: nowrap;
     margin-left: var(--delete-margin-left);
-    flex-shrink: 0; // Не сжимаем правую часть
+    flex-shrink: 0;
   }
 
   &__select-all {
@@ -33,9 +33,9 @@
   }
 
   &__icon {
-    color: var(--delete-color); // Серый цвет для крестика
+    color: var(--delete-color);
     font-size: var(--font-size);
-    margin-right: var(--icon-margin-right); // Отступ между крестиком и текстом
+    margin-right: var(--icon-margin-right);
     margin-left: var(--icon-margin-left);
   }
 
@@ -53,15 +53,13 @@
     }
   }
 
-  // Чекбокс элемента товара
   &__checkbox {
     width: auto;
     display: flex;
     justify-content: center;
-    margin-right: var(--checkbox-margin-right); /* Отступ между чекбоксом и текстом */
+    margin-right: var(--checkbox-margin-right);
   }
 
-  // Сам чекбокс
   &__select-all {
     appearance: none;
     width: var(--checkbox-width);

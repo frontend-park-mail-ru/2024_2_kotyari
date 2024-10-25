@@ -7,21 +7,101 @@ import leftElementOfOrderPlacement from '../elements/left-element-of-order-place
 import deliveryDatesList from '../elements/left-element-of-order-placement/elements/delivery-dates-list/view/delivery-dates-list.hbs?raw';
 import productItem from '../elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item/view/product-item.hbs?raw';
 import Handlebars from "handlebars";
+import {OrderData} from "../types/types";
+import Router from "../../../../services/app/router";
 
+/**
+ * Класс для построения и управления процессом оформления заказа.
+ *
+ * @class OrderPlacementBuilder
+ */
 export class OrderPlacementBuilder {
+    /**
+     * Корневой элемент страницы.
+     *
+     * @private
+     * @type {HTMLElement | null}
+     */
     private readonly rootElement: HTMLElement | null;
+
+    /**
+     * Корневой элемент правой части оформления заказа.
+     *
+     * @private
+     * @type {HTMLElement | null}
+     */
     private rightElementOfOrderPlacementRoot: HTMLElement | null = null;
+
+    /**
+     * Корневой элемент левой части оформления заказа.
+     *
+     * @private
+     * @type {HTMLElement | null}
+     */
     private leftElementOfOrderPlacementRoot: HTMLElement | null = null;
+
+    /**
+     * Корневой элемент для списка дат доставки.
+     *
+     * @private
+     * @type {HTMLElement | null}
+     */
     private deliveryDatesListRoot: HTMLElement | null = null;
 
+    /**
+     * Данные заказа.
+     *
+     * @private
+     * @type {OrderData}
+     */
+    private orderData: OrderData;
+
+    /**
+     * Шаблон оформления заказа.
+     *
+     * @private
+     * @type {HandlebarsTemplateDelegate}
+     */
     private readonly orderPlacementTemplate: HandlebarsTemplateDelegate;
+
+    /**
+     * Шаблон правой части оформления заказа.
+     *
+     * @private
+     * @type {HandlebarsTemplateDelegate}
+     */
     private readonly rightElementOfOrderPlacementTemplate: HandlebarsTemplateDelegate;
+
+    /**
+     * Шаблон левой части оформления заказа.
+     *
+     * @private
+     * @type {HandlebarsTemplateDelegate}
+     */
     private readonly leftElementOfOrderPlacementTemplate: HandlebarsTemplateDelegate;
+
+    /**
+     * Шаблон списка дат доставки.
+     *
+     * @private
+     * @type {HandlebarsTemplateDelegate}
+     */
     private readonly deliveryDatesListTemplate: HandlebarsTemplateDelegate;
+
+    /**
+     * Шаблон элемента товара.
+     *
+     * @private
+     * @type {HandlebarsTemplateDelegate}
+     */
     private readonly productItemTemplate: HandlebarsTemplateDelegate;
 
+    /**
+     * Конструктор класса. Выполняет инициализацию данных и компиляцию шаблонов.
+     */
     constructor() {
         this.rootElement = document.getElementById(rootId);
+        this.orderData = orderData;
 
         this.orderPlacementTemplate = Handlebars.compile(orderPlacement);
         this.rightElementOfOrderPlacementTemplate = Handlebars.compile(rightElementOfOrderPlacement);
@@ -33,9 +113,21 @@ export class OrderPlacementBuilder {
         Handlebars.registerPartial('product-item', this.productItemTemplate);
     }
 
+    /**
+     * Строит процесс оформления заказа. Если корневой элемент не найден,
+     * выбрасывает ошибку или перенаправляет пользователя в корзину.
+     *
+     * @public
+     * @returns {Promise<void>}
+     */
     public async buildOrderPlacement(): Promise<void> {
         if (!this.rootElement) {
             throw new Error(`Root element with ID ${rootId} not found`);
+        }
+
+        if (!this.orderData.deliveryDates) {
+            const router = new Router();
+            return router.navigate('/cart')
         }
 
         try {
@@ -47,6 +139,12 @@ export class OrderPlacementBuilder {
         }
     }
 
+    /**
+     * Рендерит структуру оформления заказа.
+     *
+     * @private
+     * @returns {Promise<void>}
+     */
     private async renderOrderPlacement(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             this.rootElement.innerHTML='';
@@ -80,6 +178,12 @@ export class OrderPlacementBuilder {
         });
     }
 
+    /**
+     * Рендерит левую часть оформления заказа, включая список дат доставки.
+     *
+     * @private
+     * @returns {Promise<void>}
+     */
     private async renderLeftPart(): Promise<void> {
         this.deliveryDatesListRoot = document.getElementById('data-sampling');
 
@@ -94,6 +198,12 @@ export class OrderPlacementBuilder {
         }
     };
 
+    /**
+     * Инициализирует правую часть оформления заказа.
+     *
+     * @private
+     * @returns {void}
+     */
     private initializeOrderPlacement(): void {
         new RightElementOfOrderPlacementView();
     }

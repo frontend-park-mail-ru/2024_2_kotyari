@@ -6,8 +6,6 @@
   padding: var(--card-padding);
   width: var(--width-max);
   margin-bottom: var(--main-gap);
-  /* Иконка внутри метода оплаты */
-  /* Текст под иконкой */
   /* Контейнер для размещения двух иконок на одной строке */
 }
 .right-element-card__total-items {
@@ -34,37 +32,37 @@
   font-weight: var(--grand-total-font-weight);
   display: flex;
   justify-content: space-between;
-  margin-top: var(--mini-gap); /* Небольшой отступ перед итогом */
+  margin-top: var(--mini-gap);
   color: var(--default-text-color);
 }
 .right-element-card__promo-input {
-  background-color: #EEEEEE;
+  background-color: var(--header-background);
   border: none;
-  border-radius: 25px;
+  border-radius: var(--card-border-radius);
   color: var(--text-color);
   padding: var(--chrckout-padding);
   width: var(--width-max);
-  height: 48px; /* Должно соответствовать высоте кнопки */
+  height: var(--right-order-height);
   font-size: var(--input-font-size);
-  padding-left: 15px; /* Отступ для placeholder ближе к левому краю */
+  padding-left: var(--padding15);
 }
 .right-element-card__promo-input::placeholder {
-  color: #888888; /* Цвет текста для placeholder */
+  color: var(--delete-color);
 }
 .right-element-card__payment-method {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 45%; /* Половина строки */
+  width: var(--path-width); /* Половина строки */
   border: 2px solid #EEEEEE; /* Стандартная обводка */
-  border-radius: 25px;
-  padding: 15px;
+  border-radius: var(--card-border-radius);
+  padding: var(--padding15);
   cursor: pointer;
   transition: border-color var(--short-duration) ease-in-out; /* Плавное изменение обводки */
 }
 .right-element-card__payment-method:hover {
-  border-color: #888888; /* Более темная обводка при наведении */
+  border-color: var(--select-color); /* Более темная обводка при наведении */
 }
 .right-element-card__payment-method--selected {
   border-color: var(--base-background-color); /* Цвет обводки для выбранного метода */
@@ -73,7 +71,7 @@
   border-color: var(--base-background-color);
 }
 .right-element-card__payment-method-icon {
-  font-size: 36px; /* Размер иконки */
+  font-size: var(--font-size-payment-method);
   color: var(--text-color);
 }
 .right-element-card__payment-method-text {
@@ -90,13 +88,14 @@
 
 .checkout-btn {
   background-color: var(--base-background-color);
-  color: white;
+  color: var(--text-inv);
   border: none;
   font-size: var(--button-font-size);
   cursor: pointer;
   border-radius: var(--card-border-radius);
   padding: var(--chrckout-padding);
   width: var(--width-max);
+  height: var(--right-order-height);
 }
 .checkout-btn:hover {
   background-color: var(--darker-background-color);

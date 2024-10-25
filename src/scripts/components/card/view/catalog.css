@@ -70,9 +70,8 @@ body {
     margin-bottom: var(--description-margin-bottom);
     overflow: hidden;
     border-radius: var(--card-border-radius);
-    background-image: url('https://via.placeholder.com/150');
+    background: var(--header-background);
     background-size: cover;
-    background-position: center;
 }
 
 .card-image img {
