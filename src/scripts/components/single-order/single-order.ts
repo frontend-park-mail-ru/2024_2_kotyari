@@ -1,5 +1,5 @@
 import order from './single-order.hbs?raw';
-import { contentRenderId } from '../../../services/app/config';
+import { rootId } from '../../../services/app/config';
 import Handlebars from 'handlebars';
 
 const compiled = Handlebars.compile(order);
@@ -11,9 +11,9 @@ const compiled = Handlebars.compile(order);
  * @param {Object} data - Данные для рендеринга страницы заказа.
  */
 export const buildSingleOrderPage = (data: any): void => {
-  const rootElement = document.getElementById(contentRenderId) as HTMLElement;
+  const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
-    console.error(`Элемент root ${contentRenderId} -- ${rootElement}`);
+    console.error(`Элемент root ${rootId} -- ${rootElement}`);
   }
 
   rootElement.innerHTML = '';

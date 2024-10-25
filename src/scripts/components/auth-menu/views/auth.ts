@@ -1,7 +1,7 @@
 import { AuthViewInterface } from '../types/types.js';
 import form from './auth.hbs?raw';
 import Handlebars from 'handlebars';
-import { contentRenderId } from '@/services/app/config';
+import { rootId } from '@/services/app/config';
 
 export default class AuthView implements AuthViewInterface {
   private readonly config: {};
@@ -15,9 +15,9 @@ export default class AuthView implements AuthViewInterface {
   private _render = () => {
     if (this.compiled === null) this.compiled = Handlebars.compile(form);
 
-    const rootElement = document.getElementById(contentRenderId);
+    const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      return console.error(`Элемент ID =  ${contentRenderId} не найден`);
+      return console.error(`Элемент ID =  ${rootId} не найден`);
     }
 
     rootElement.innerHTML = '';
