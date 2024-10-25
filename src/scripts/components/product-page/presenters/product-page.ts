@@ -1,61 +1,67 @@
 import { ProductPage } from '../views/product-view.js';
 import { productData } from './data.js';
-import { Carousel } from '../views/carousel';
+import { Carousel } from '../../carousel/carousel';
 
-export async function buildProductPage() {
-  try {
-    const productPage = new ProductPage();
-    await productPage.render(productData);
+export class ProductPageBuilder {
+  private productPage: ProductPage;
 
-    initializeConditionButtons(productPage);
-    initializeColorButtons(productPage);
-    initializeCartButton(productPage);
-    initializeFavoriteIcon(productPage);
-    new Carousel();
-  } catch (error) {
-    console.error('Error building product page:', error);
+  constructor() {
+    this.productPage = new ProductPage();
   }
-}
 
-function initializeConditionButtons(productPage: ProductPage) {
-  const conditionButtons = Array.from(document.querySelectorAll('.product-page__condition-buttons button')).filter(
-    (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
-  );
+  async build() {
+    try {
+      await this.productPage.render(productData);
+      this.initializeConditionButtons();
+      this.initializeColorButtons();
+      this.initializeCartButton();
+      this.initializeFavoriteIcon();
+      new Carousel();
+    } catch (error) {
+      console.error('Error building product page:', error);
+    }
+  }
 
-  const currentPriceElement = document.querySelector('.product-page__current-price-product-page') as HTMLElement;
+  private initializeConditionButtons() {
+    const conditionButtons = Array.from(document.querySelectorAll('.product-page__condition-buttons button')).filter(
+      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
+    );
 
-  conditionButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      productPage.updateConditionSelection(button, conditionButtons);
-      productPage.updatePriceDisplay(button, currentPriceElement);
+    const currentPriceElement = document.querySelector('.product-page__current-price-product-page') as HTMLElement;
+
+    conditionButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        this.productPage.updateConditionSelection(button, conditionButtons);
+        this.productPage.updatePriceDisplay(button, currentPriceElement);
+      });
     });
-  });
-}
+  }
 
-function initializeColorButtons(productPage: ProductPage) {
-  const colorButtons = Array.from(document.querySelectorAll('.product-page__colors .product-page__color-button')).filter(
-    (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
-  );
+  private initializeColorButtons() {
+    const colorButtons = Array.from(document.querySelectorAll('.product-page__colors .product-page__color-button')).filter(
+      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
+    );
 
-  colorButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      productPage.updateColorSelection(button, colorButtons);
+    colorButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        this.productPage.updateColorSelection(button, colorButtons);
+      });
     });
-  });
-}
+  }
 
-function initializeCartButton(productPage: ProductPage) {
-  const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
+  private initializeCartButton() {
+    const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
 
-  cartButton.addEventListener('click', () => {
-    productPage.updateCartButton(cartButton);
-  });
-}
+    cartButton.addEventListener('click', () => {
+      this.productPage.updateCartButton(cartButton);
+    });
+  }
 
-function initializeFavoriteIcon(productPage: ProductPage) {
-  const favoriteIcon = document.querySelector('.product-page__favorite-icon') as HTMLElement;
+  private initializeFavoriteIcon() {
+    const favoriteIcon = document.querySelector('.product-page__favorite-icon') as HTMLElement;
 
-  favoriteIcon.addEventListener('click', () => {
-    productPage.updateFavoriteIcon(favoriteIcon);
-  });
+    favoriteIcon.addEventListener('click', () => {
+      this.productPage.updateFavoriteIcon(favoriteIcon);
+    });
+  }
 }

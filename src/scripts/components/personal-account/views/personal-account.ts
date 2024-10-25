@@ -4,47 +4,64 @@ import { rootId } from '../../../../services/app/config';
 import { BuildModalOptions, editAddressConfig, editNameGenderEmailConfig } from '../../modal/views/types';
 import { buildModalWithContent } from '../../modal/views/modal';
 
-const compiled = Handlebars.compile(account);
-const MODAL_ROOT_ID = 'modal-render';
-const MODAL_ID = 'modal';
-const EDIT_USER_INFO_TRIGGER = 'edit-user-info';
-const EDIT_USER_ADDRESS_TRIGGER = 'edit-user-address';
-const FIELD_NAME = 'name';
-const FIELD_GENDER = 'gender';
-const FIELD_EMAIL = 'email';
-const FIELD_ADDRESS = 'address';
+export class PersonalAccountPage {
+  private MODAL_ROOT_ID = 'modal-render';
+  private MODAL_ID = 'modal';
+  private EDIT_USER_INFO_TRIGGER = 'edit-user-info';
+  private EDIT_USER_ADDRESS_TRIGGER = 'edit-user-address';
+  private FIELD_NAME = 'name';
+  private FIELD_GENDER = 'gender';
+  private FIELD_EMAIL = 'email';
+  private FIELD_ADDRESS = 'address';
 
-function openUserEditModal(options: BuildModalOptions) {
-  buildModalWithContent(options);
-}
+  // Compile Handlebars template
+  private compiled = Handlebars.compile(account);
 
-export async function renderPersonalAccountPage(data: any) {
-  const rootElement = document.getElementById(rootId) as HTMLElement;
-  if (!rootElement) {
-    console.error(`Элемент root ${rootId} не найден`);
-    return;
+  constructor(private data: any) {}
+
+  public async render() {
+    const rootElement = document.getElementById(rootId) as HTMLElement;
+    if (!rootElement) {
+      console.error(`Element with id ${rootId} not found`);
+      return;
+    }
+
+    this.initializeUI(rootElement);
+
+    const user = this.data.user;
+    this.setupEditButtons(user);
   }
 
-  rootElement.innerHTML = '';
-  const templateElement = document.createElement('div');
-  templateElement.innerHTML = compiled(data);
-  rootElement.appendChild(templateElement);
+  private initializeUI(rootElement: HTMLElement) {
+    rootElement.innerHTML = '';
+    const templateElement = document.createElement('div');
+    templateElement.innerHTML = this.compiled(this.data);
+    rootElement.appendChild(templateElement);
+  }
 
-  const user = data.user;
+  private setupEditButtons(user: any) {
+    const editButton = document.getElementById(this.EDIT_USER_INFO_TRIGGER);
+    const editButtonAddress = document.getElementById(this.EDIT_USER_ADDRESS_TRIGGER);
 
-  const editButton = document.getElementById(EDIT_USER_INFO_TRIGGER);
-  const editButtonAddress = document.getElementById(EDIT_USER_ADDRESS_TRIGGER);
+    if (editButton) {
+      this.setupEditUserInfoButton(editButton, user);
+    }
 
-  if (editButton) {
-    editButton.addEventListener('click', () => {
+    if (editButtonAddress) {
+      this.setupEditUserAddressButton(editButtonAddress, user);
+    }
+  }
+
+  private setupEditUserInfoButton(button: HTMLElement, user: any) {
+    button.addEventListener('click', () => {
       const userData = {
         ...editNameGenderEmailConfig,
         fields: editNameGenderEmailConfig.fields.map((field) => {
-          if (field.name === FIELD_NAME) {
+          if (field.name === this.FIELD_NAME) {
             field.value = user.name;
-          } else if (field.name === FIELD_GENDER) {
+          } else if (field.name === this.FIELD_GENDER) {
             field.selected = user.gender;
-          } else if (field.name === FIELD_EMAIL) {
+          } else if (field.name === this.FIELD_EMAIL) {
             field.value = user.email;
           }
           return field;
@@ -53,22 +70,22 @@ export async function renderPersonalAccountPage(data: any) {
 
       const options: BuildModalOptions = {
         user,
-        triggerElement: EDIT_USER_INFO_TRIGGER,
-        rootId: MODAL_ROOT_ID,
-        modalID: MODAL_ID,
+        triggerElement: this.EDIT_USER_INFO_TRIGGER,
+        rootId: this.MODAL_ROOT_ID,
+        modalID: this.MODAL_ID,
         data: userData,
       };
-      // Используем PersonalDataModal для редактирования персональных данных
-      openUserEditModal(options);
+
+      this.openUserEditModal(options);
     });
   }
 
-  if (editButtonAddress) {
-    editButtonAddress.addEventListener('click', () => {
+  private setupEditUserAddressButton(button: HTMLElement, user: any) {
+    button.addEventListener('click', () => {
       const addressData = {
         ...editAddressConfig,
         fields: editAddressConfig.fields.map((field) => {
-          if (field.name === FIELD_ADDRESS) {
+          if (field.name === this.FIELD_ADDRESS) {
             field.value = user.address;
           }
           return field;
@@ -77,13 +94,17 @@ export async function renderPersonalAccountPage(data: any) {
 
       const options: BuildModalOptions = {
         user,
-        triggerElement: EDIT_USER_ADDRESS_TRIGGER,
-        rootId: MODAL_ROOT_ID,
-        modalID: MODAL_ID,
+        triggerElement: this.EDIT_USER_ADDRESS_TRIGGER,
+        rootId: this.MODAL_ROOT_ID,
+        modalID: this.MODAL_ID,
         data: addressData,
       };
-      // Используем AddressModal для редактирования адреса
-      openUserEditModal(options);
+
+      this.openUserEditModal(options);
     });
+  }
+
+  private openUserEditModal(options: BuildModalOptions) {
+    buildModalWithContent(options);
   }
 }

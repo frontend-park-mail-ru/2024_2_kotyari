@@ -2,13 +2,13 @@ import product from './product-page.hbs?raw';
 import Handlebars from 'handlebars';
 import { rootId } from '../../../../services/app/config';
 
-const compiledTemplate = Handlebars.compile(product);
-
 export class ProductPage {
   private rootElement: HTMLElement | null;
+  private compiledTemplate: Handlebars.TemplateDelegate;
 
   constructor() {
     this.rootElement = document.getElementById(rootId);
+    this.compiledTemplate = Handlebars.compile(product);
   }
 
   async render(data: any) {
@@ -18,7 +18,7 @@ export class ProductPage {
     }
     this.rootElement.innerHTML = '';
     const templateElement = document.createElement('div');
-    templateElement.innerHTML = compiledTemplate(data);
+    templateElement.innerHTML = this.compiledTemplate(data);
     this.rootElement.appendChild(templateElement);
   }
 

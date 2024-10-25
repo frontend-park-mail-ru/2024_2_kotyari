@@ -14,7 +14,7 @@ export class PersonalDataModal extends BaseModalController {
 
     const form = document.getElementById(data.formId) as HTMLFormElement | null;
     if (form) {
-      form.addEventListener('submit', (event: Event) => {
+      form.addEventListener('submit', (event: SubmitEvent) => {
         event.preventDefault();
         const formData = new FormData(form);
         this.handleFormSubmission(data.id, formData, user);
@@ -35,19 +35,16 @@ export class PersonalDataModal extends BaseModalController {
   private updateUserInfo(updatedUser: { name: string; gender: string; email: string }, user: any) {
     Object.assign(user, updatedUser);
 
-    // Обновляем имя пользователя
     const userNameElement = document.querySelector(USER_NAME_SELECTOR) as HTMLElement | null;
     if (userNameElement) {
       userNameElement.textContent = updatedUser.name;
     }
 
-    // Обновляем пол пользователя
     const genderElement = document.querySelector(USER_GENDER_SELECTOR) as HTMLElement | null;
     if (genderElement) {
       genderElement.textContent = updatedUser.gender;
     }
 
-    // Обновляем email пользователя
     const emailElement = document.querySelector(USER_EMAIL_SELECTOR) as HTMLElement | null;
     if (emailElement) {
       emailElement.textContent = updatedUser.email;

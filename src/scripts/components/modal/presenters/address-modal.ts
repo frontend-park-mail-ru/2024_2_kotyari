@@ -10,7 +10,7 @@ export class AddressModal extends BaseModalController {
 
     const form = document.getElementById(data.formId) as HTMLFormElement | null;
     if (form) {
-      form.addEventListener('submit', (event: Event) => {
+      form.addEventListener('submit', (event: SubmitEvent) => {
         event.preventDefault();
         const formData = new FormData(form);
         this.handleFormSubmission(data.id, formData, user);

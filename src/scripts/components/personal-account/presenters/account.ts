@@ -1,6 +1,7 @@
 import { personalAccountData } from '../views/personal-account-config';
-import { renderPersonalAccountPage } from '../views/personal-account';
+import { PersonalAccountPage } from '../views/personal-account';
 
 export async function buildAccountPage() {
-    await renderPersonalAccountPage(personalAccountData);
+    const page = new PersonalAccountPage(personalAccountData);
+    await page.render();
 }

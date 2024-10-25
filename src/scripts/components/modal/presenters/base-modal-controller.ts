@@ -3,11 +3,13 @@ import { ModalControllerParams } from '../views/types';
 export class BaseModalController {
   modalElem: HTMLElement | null;
   btn: HTMLElement | null;
+  btnClose: string | undefined;
   time: number;
 
   constructor({ modal, btnOpen, btnClose, time = 300 }: ModalControllerParams) {
     this.modalElem = document.getElementById(modal);
     this.btn = document.getElementById(btnOpen);
+    this.btnClose = btnClose;
     this.time = time;
 
     if (!this.btn || !this.modalElem) {
@@ -15,26 +17,26 @@ export class BaseModalController {
       return;
     }
 
-    this.initializeModal(btnClose);
+    this.initializeModal();
   }
 
-  initializeModal(btnClose?: string) {
-    const closeModal = (event: Event | KeyboardEvent) => {
+  initializeModal() {
+    const closeModal = (event: Event) => {
       const target = event.target as HTMLElement;
 
-      if (target === this.modalElem || (btnClose && target.closest(btnClose))) {
+      if (target === this.modalElem || (this.btnClose && target.closest(this.btnClose))) {
         this.modalElem!.style.opacity = '0';
         setTimeout(() => {
           this.modalElem!.style.visibility = 'hidden';
         }, this.time);
-        window.removeEventListener('keydown', closeModal);
+        window.removeEventListener('click', closeModal);
       }
     };
 
     const openModal = () => {
       this.modalElem!.style.visibility = 'visible';
       this.modalElem!.style.opacity = '1';
-      window.addEventListener('keydown', closeModal);
+      window.addEventListener('click', closeModal);
     };
 
     this.btn!.addEventListener('click', openModal);
