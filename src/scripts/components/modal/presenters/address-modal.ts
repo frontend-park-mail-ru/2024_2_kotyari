@@ -1,37 +1,41 @@
-import { BaseModalController } from './base-modal-controller';
+import { BaseModal } from './base-modal';
 import { ModalControllerParams } from '../views/types';
 
 const USER_ADDRESS_SELECTOR = '.account__address-details .account__address-text';
 const FIELD_ADDRESS = 'address';
 
-export class AddressModal extends BaseModalController {
-  constructor(params: ModalControllerParams, data: any, user: any) {
-    super(params);
+export class AddressModal extends BaseModal {
+  constructor(config: ModalControllerParams, data: any, user: any) {
+    super(config, data, user);
+    this.renderContent();
+  }
 
-    const form = document.getElementById(data.formId) as HTMLFormElement | null;
-    if (form) {
-      form.addEventListener('submit', (event: SubmitEvent) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        this.handleFormSubmission(data.id, formData, user);
-        this.closeModal();
-      });
+  protected renderContent(): void {
+    const addressField = this.data.fields.find((field: any) => field.name === FIELD_ADDRESS);
+    if (addressField) {
+      addressField.value = this.user.address;
+    }
+
+    const modalElement = document.getElementById(this.config.modal);
+    if (modalElement) {
+      const form = modalElement.querySelector(`#${this.data.formId}`) as HTMLFormElement | null;
+      if (form) {
+        form.addEventListener('submit', (event: SubmitEvent) => {
+          event.preventDefault();
+          this.handleFormSubmission(form, [FIELD_ADDRESS], (updatedData) => {
+            this.updateAddress(updatedData.address);
+          });
+          this.close();
+        });
+      }
     }
   }
 
-  handleFormSubmission(_formId: string, formData: FormData, user: any): void {
-    const updatedAddress = {
-      address: formData.get(FIELD_ADDRESS) as string,
-    };
-    this.updateAddress(updatedAddress, user);
-  }
-
-  private updateAddress(updatedAddress: { address: string }, user: any) {
-    user.address = updatedAddress.address;
-
+  private updateAddress(updatedAddress: string): void {
+    this.user.address = updatedAddress;
     const addressElement = document.querySelector(USER_ADDRESS_SELECTOR) as HTMLElement;
     if (addressElement) {
-      addressElement.textContent = updatedAddress.address;
+      addressElement.textContent = updatedAddress;
     }
   }
 }

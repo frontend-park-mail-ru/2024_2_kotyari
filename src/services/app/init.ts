@@ -19,9 +19,9 @@ import { ProductPageBuilder } from '../../scripts/components/product-page/presen
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import Handlebars from 'handlebars';
 import { storageUser } from '../storage/user';
+import { AccountPageBuilder } from '../../scripts/components/personal-account/presenters/account';
 import { CartBuilder } from "../../scripts/components/cart/view/cart-builder";
 import { OrderPlacementBuilder } from "../../scripts/components/order-placement/view/order-placement-builder";
-import { buildAccountPage } from '../../scripts/components/personal-account/presenters/account';
 import { buildOrderList } from '../../scripts/components/order-list/order-list';
 import { orderList } from '../../scripts/components/order-list/order-list-config';
 
@@ -97,7 +97,10 @@ router.addRoute('/product/:id', () => {
 }, new RegExp('^\\/product\\/(\\d+)$'), false, false);
 
 
-router.addRoute('/account', () => buildAccountPage(), new RegExp('^/account$'), true, false);
+router.addRoute('/account', () => {
+  const accountPageBuilder = new AccountPageBuilder();
+  accountPageBuilder.build();
+}, new RegExp('^/account$'), true, false);
 
 router.addRoute('/order_list', () => buildOrderList(orderList), new RegExp('^/order_list$'), true, false);
 router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), false, false);

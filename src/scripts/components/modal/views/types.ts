@@ -1,3 +1,5 @@
+import { personalAccountData } from '../../personal-account/views/personal-account-config';
+
 export const editNameGenderEmailConfig = {
   id: 'edit_info',
   title: 'Редактировать информацию',
@@ -8,7 +10,7 @@ export const editNameGenderEmailConfig = {
       label: 'Имя',
       type: 'text',
       name: 'name',
-      value: 'Иван Иванов',
+      value: personalAccountData.user.name,
       error_id: 'nameError',
     },
     {
@@ -20,7 +22,7 @@ export const editNameGenderEmailConfig = {
         { value: 'Мужской', label: 'Мужской' },
         { value: 'Женский', label: 'Женский' },
       ],
-      selected: 'Мужской',
+      selected: personalAccountData.user.gender,
       error_id: 'genderError',
     },
     {
@@ -28,7 +30,7 @@ export const editNameGenderEmailConfig = {
       label: 'Почта',
       type: 'email',
       name: 'email',
-      value: 'example@mail.com',
+      value: personalAccountData.user.email,
       error_id: 'emailError',
     },
   ],
@@ -45,7 +47,7 @@ export const editAddressConfig = {
       label: 'Адрес',
       type: 'text',
       name: 'address',
-      value: 'Москва, ул. Ленина, д. 1',
+      value: personalAccountData.user.address,
       error_id: 'addressError',
     },
   ],
@@ -61,16 +63,8 @@ export interface User {
 
 export interface ModalControllerParams {
   modal: string;
+  rootId: string;
   btnOpen: string;
   btnClose?: string;
   time?: number;
 }
-
-export interface BuildModalOptions {
-  user: User;
-  triggerElement: string;
-  rootId: string;
-  modalID: string;
-  data: any;
-}
-
