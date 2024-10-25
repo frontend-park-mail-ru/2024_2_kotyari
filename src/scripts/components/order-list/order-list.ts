@@ -1,5 +1,5 @@
 import orders from './order-list.hbs?raw';
-import { contentRenderId } from '../../../services/app/config';
+import { rootId } from '../../../services/app/config';
 import Handlebars from 'handlebars';
 
 const compiled = Handlebars.compile(orders);
@@ -10,9 +10,9 @@ const compiled = Handlebars.compile(orders);
  * @param {Object} data - Данные для рендеринга списка заказов.
  */
 export async function buildOrderList(data) {
-  const rootElement = document.getElementById(contentRenderId) as HTMLElement;
+  const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
-    console.error(`Элемент root ${contentRenderId} -- ${rootElement}`);
+    console.error(`Элемент root ${rootId} -- ${rootElement}`);
   }
 
   rootElement.innerHTML = '';

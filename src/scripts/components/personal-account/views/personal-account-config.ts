@@ -3,7 +3,7 @@ import {
   User,
   DeliveryInfo,
   FavoritesPurchaseInfo,
-} from './types/types';
+} from '../types/types';
 
 export const personalAccountData: PersonalAccountData = {
   user: {
