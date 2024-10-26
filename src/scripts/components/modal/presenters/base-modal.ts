@@ -18,14 +18,10 @@ export abstract class BaseModal {
     if (modalElement) {
       modalElement.style.visibility = 'visible';
       modalElement.style.opacity = '1';
+
       closeButton?.addEventListener('click', this.close.bind(this));
 
-      modalElement.addEventListener('click', (event) => {
-        const modalContent = modalElement.querySelector('.modal-content');
-        if (modalContent && !modalContent.contains(event.target as Node)) {
-          this.close();
-        }
-      });
+      modalElement.addEventListener('click', this.handleOutsideClick.bind(this));
     }
   }
 
@@ -35,7 +31,16 @@ export abstract class BaseModal {
       modalElement.style.opacity = '0';
       setTimeout(() => {
         modalElement.style.visibility = 'hidden';
+        modalElement.removeEventListener('click', this.handleOutsideClick.bind(this));
       }, 300);
+    }
+  }
+
+  private handleOutsideClick(event: MouseEvent) {
+    const modalElement = document.getElementById(this.config.modal);
+    const modalContent = modalElement?.querySelector('.modal__container');
+    if (modalContent && !modalContent.contains(event.target as Node)) {
+      this.close();
     }
   }
 

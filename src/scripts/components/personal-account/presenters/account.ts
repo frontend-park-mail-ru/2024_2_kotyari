@@ -1,6 +1,6 @@
 import { personalAccountData } from '../views/personal-account-config';
 import { PersonalAccountPage } from '../views/personal-account';
-import { ModalFactory } from '../../modal/views/modal-factory';
+import { ModalFactory } from '../../modal/presenters/modal-factory';
 import { editAddressConfig, editNameGenderEmailConfig, ModalControllerParams } from '../../modal/views/types';
 
 export class AccountPageBuilder {
@@ -37,7 +37,10 @@ export class AccountPageBuilder {
                     btnClose: this.EDIT_USER_BUTTON_CLOSE,
                 };
 
-                ModalFactory.showModal(this.EDIT_USERINFO_TYPE, modalParams, editNameGenderEmailConfig, this.user);
+                const modalInstance = ModalFactory.showModal(this.EDIT_USERINFO_TYPE, modalParams, editNameGenderEmailConfig, this.user);
+                if (modalInstance) {
+                    modalInstance.open();
+                }
             });
         }
 
@@ -50,7 +53,10 @@ export class AccountPageBuilder {
                     btnClose: this.EDIT_USER_BUTTON_CLOSE,
                 };
 
-                ModalFactory.showModal(this.EDIT_USERADDRESS_TYPE, modalParams, editAddressConfig, this.user);
+                const modalInstance = ModalFactory.showModal(this.EDIT_USERADDRESS_TYPE, modalParams, editAddressConfig, this.user);
+                if (modalInstance) {
+                    modalInstance.open();
+                }
             });
         }
     }

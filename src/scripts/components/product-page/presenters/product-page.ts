@@ -1,6 +1,6 @@
 import { ProductPage } from '../views/product-view.js';
 import { productData } from './data.js';
-import { Carousel } from '../../carousel/carousel';
+import { Carousel } from '../../carousel/presenters/carousel';
 
 export class ProductPageBuilder {
   private productPage: ProductPage;

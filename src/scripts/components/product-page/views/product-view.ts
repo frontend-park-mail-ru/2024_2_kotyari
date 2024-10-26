@@ -1,6 +1,7 @@
 import product from './product-page.hbs?raw';
 import Handlebars from 'handlebars';
 import { rootId } from '../../../../services/app/config';
+import carouselSliderTemplate from '../../carousel/views/carousel-slider.hbs?raw';
 
 export class ProductPage {
   private rootElement: HTMLElement | null;
@@ -16,10 +17,12 @@ export class ProductPage {
       console.error(`Элемент root ${rootId} не найден`);
       return;
     }
+    Handlebars.registerPartial('carousel-slider', carouselSliderTemplate);
     this.rootElement.innerHTML = '';
     const templateElement = document.createElement('div');
     templateElement.innerHTML = this.compiledTemplate(data);
     this.rootElement.appendChild(templateElement);
+
   }
 
   updatePriceDisplay(button: HTMLButtonElement, priceElement: HTMLElement) {

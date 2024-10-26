@@ -40,93 +40,6 @@
     display: block;
 }
 
-
-.product-page__gallery {
-    align-content: center;
-    width: 100%;
-    height: 90%;
-    overflow: hidden;
-    position: relative;
-    overflow-y: auto;
-    scrollbar-width: thin;
-}
-
-.product-page__gallery ul {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: top 0.3s ease-in-out;
-}
-
-.product-page__gallery ul li {
-    height: 25%;
-    flex: 1;
-    margin-bottom: 10px;
-}
-
-.product-page__thumbnail {
-    width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    border-radius: var(--default-border-radius);
-    margin-bottom: var(--middle-margin);
-}
-
-.product-page__arrow-button {
-    display: flex;
-    justify-content: center;
-    width: var(--width-max);
-    height: 5%;
-}
-
-
-.product-page__carousel img.active-thumbnail {
-    border: var(--carousel-border) solid var(--carousel-border-color-active);
-}
-
-.product-page__slider {
-    position: relative;
-    width: var(--width-max);
-    height: var(--slider-height);
-    overflow: visible;
-}
-
-.product-page__slide {
-    position: absolute;
-    width: var(--width-max);
-    height: var(--width-max);
-    opacity: 0;
-}
-
-.product-page__slider-button {
-    position: absolute;
-    top: var(--proc-top-sliders);
-    transform: translateY(var(--y-coord-proc));
-    border: none;
-    border-radius: var(--default-border-radius);
-    padding: var(--micro-padding);
-    cursor: pointer;
-    z-index: var(--button-slider-z-index);
-}
-
-#product-page__prev-button {
-    left: var(--sliders-button-place);
-}
-
-#product-page__next-button {
-    right: var(--sliders-button-place);
-}
-
-.product-page__slide:first-child {
-    opacity: 1;
-}
-
 .product-page__product-columns {
     display: flex;
     justify-content: space-between;
@@ -386,14 +299,4 @@
     color: gray;
     text-align: center;
     margin-top: var(--default-margin);
-}
-
-.product-page__scroll-up,
-.product-page__scroll-down {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: var(--micro-padding);
-    cursor: pointer;
-    margin: var(--micro-padding) 0;
 }
