@@ -33,18 +33,18 @@ export default class AuthAPI {
         if (res.ok) {
           return res.json().then((resJSON) => {
             if ('username' in resJSON) {
-              return { status: res.status, body: resJSON as UserInfo };
+              return { status: res.status, body: resJSON.body as UserInfo };
             } else {
               console.error('Ошибка авторизации:', resJSON.error_message);
-              return { status: res.status, body: resJSON as ErrorResponse };
+              return { status: res.status, body: resJSON.body as ErrorResponse };
             }
           });
         } else if (res.status === 401) {
           return { status: res.status, body: { error_message: 'Пользователя не существует' } as ErrorResponse };
         } else {
           return res.json().then((resJSON) => {
-            console.error('Ошибка авторизации:', resJSON.error_message);
-            return { status: res.status, body: resJSON as ErrorResponse };
+            console.error('Ошибка авторизации:', resJSON.body.error_message);
+            return { status: res.status, body: resJSON.body as ErrorResponse };
           });
         }
       })
@@ -74,17 +74,17 @@ export default class AuthAPI {
         if (res.ok) {
           return res.json().then((resJSON) => {
             if ('username' in resJSON) {
-              return { status: res.status, body: resJSON as UserInfo };
+              return { status: res.status, body: resJSON.body as UserInfo };
             } else {
-              console.error('Ошибка регистрации:', resJSON.error_message);
-              return { status: res.status, body: resJSON as ErrorResponse };
+              console.error('Ошибка регистрации:', resJSON.body.error_message);
+              return { status: res.status, body: resJSON.body as ErrorResponse };
             }
           });
         }
 
         return res.json().then((resJSON) => {
-          console.error('Ошибка регистрации:', resJSON.error_message);
-          return { status: res.status, body: resJSON as ErrorResponse };
+          console.error('Ошибка регистрации:', resJSON.body.error_message);
+          return { status: res.status, body: resJSON.body as ErrorResponse };
         });
       })
       .catch((err) => {

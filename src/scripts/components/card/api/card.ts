@@ -1,5 +1,7 @@
 import { CARD_URLS } from './config.js';
 
+
+
 export interface CardApiInterface {
   fetchCards(): Promise<any>;
 }
