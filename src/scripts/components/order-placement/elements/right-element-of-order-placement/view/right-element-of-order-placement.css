@@ -1,0 +1,118 @@
+@charset "UTF-8";
+.right-element-card {
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-bottom: var(--main-gap);
+  /* Контейнер для размещения двух иконок на одной строке */
+}
+.right-element-card__total-items {
+  font-size: var(--total-items-font-size);
+  color: var(--default-text-color);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--total-item-margin-bottom);
+}
+.right-element-card__divider {
+  border: none;
+  border-top: 1px solid var(--divider-color);
+  margin: var(--divider-margin);
+}
+.right-element-card__benefit {
+  font-size: var(--benefit-font-size);
+  color: var(--default-text-color);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--benefit-margin-bottom);
+}
+.right-element-card__grand-total {
+  font-size: var(--grand-total-items-font-size);
+  font-weight: var(--grand-total-font-weight);
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--mini-gap);
+  color: var(--default-text-color);
+}
+.right-element-card__promo-input {
+  background-color: var(--header-background);
+  border: none;
+  border-radius: var(--card-border-radius);
+  color: var(--text-color);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+  height: var(--right-order-height);
+  font-size: var(--input-font-size);
+  padding-left: var(--padding15);
+}
+.right-element-card__promo-input::placeholder {
+  color: var(--delete-color);
+}
+.right-element-card__payment-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--path-width); /* Половина строки */
+  border: 2px solid #EEEEEE; /* Стандартная обводка */
+  border-radius: var(--card-border-radius);
+  padding: var(--padding15);
+  cursor: pointer;
+  transition: border-color var(--short-duration) ease-in-out; /* Плавное изменение обводки */
+}
+.right-element-card__payment-method:hover {
+  border-color: var(--select-color); /* Более темная обводка при наведении */
+}
+.right-element-card__payment-method--selected {
+  border-color: var(--base-background-color); /* Цвет обводки для выбранного метода */
+}
+.right-element-card__payment-method--selected:hover {
+  border-color: var(--base-background-color);
+}
+.right-element-card__payment-method-icon {
+  font-size: var(--font-size-payment-method);
+  color: var(--text-color);
+}
+.right-element-card__payment-method-text {
+  margin-top: var(--mini-gap);
+  color: var(--text-color);
+  font-size: var(--font-size_label);
+}
+.right-element-card__payment-methods {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--main-gap); /* Разделение между иконками */
+  align-items: center; /* Иконки на одной высоте */
+}
+
+.checkout-btn {
+  background-color: var(--base-background-color);
+  color: var(--text-inv);
+  border: none;
+  font-size: var(--button-font-size);
+  cursor: pointer;
+  border-radius: var(--card-border-radius);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+  height: var(--right-order-height);
+}
+.checkout-btn:hover {
+  background-color: var(--darker-background-color);
+  color: var(--text-inv);
+}
+.checkout-btn:active {
+  background-color: var(--darkest-background-color);
+  color: var(--text-inv);
+}
+.checkout-btn.disabled {
+  background-color: var(--disabled-background-color);
+  color: var(--disabled-color);
+  cursor: not-allowed;
+}
+.checkout-btn.disabled:hover {
+  background-color: var(--disabled-background-color);
+  color: var(--disabled-color);
+}
+
+/*# sourceMappingURL=right-element-of-order-placement.css.map */

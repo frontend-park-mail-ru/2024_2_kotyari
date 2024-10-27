@@ -5,6 +5,8 @@
 @import '/src/scripts/components/modal/modal.css';
 @import '/src/scripts/layouts/footer/footer.css';
 @import '/src/scripts/layouts/header/header.css';
+@import '/src/scripts/components/cart/view/cart.css';
+@import '/src/scripts/components/order-placement/view/order-placement.css';
 @import '/src/scripts/components/order-list/order-list.css';
 @import '/src/scripts/components/single-order/single-order.css';
 @import '/src/scripts/components/auth-menu/views/container.css';
@@ -23,10 +25,16 @@
 body {
     height: 100%;
     font-family: var(--font-family), sans-serif;
+    max-width: 1920px;
+    max-height: 1080px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 html {
     height: 100%;
+    width: 100%;
+    justify-items: center;
 }
 
 .invisible {

@@ -1,4 +1,16 @@
+/**
+ * Вспомогательный класс с полезными утилитарными методами для форматирования дат,
+ * выбора форм слов и сравнения значений.
+ *
+ * @class Helper
+ */
 export class Helper {
+  /**
+   * Массив с названиями месяцев на русском языке.
+   *
+   * @private
+   * @type {string[]}
+   */
   private static months: string[] = [
     'января',
     'февраля',
@@ -18,6 +30,7 @@ export class Helper {
    * Функция для преобразования формата даты из '2024-10-15' в '15 октября 2024 г.'
    *
    * @param {string} dateStr - Дата в формате строки 'YYYY-MM-DD'.
+   * @throws {Error} Если формат даты некорректен.
    * @returns {string} Дата в формате 'DD месяц YYYY г.'.
    */
   public static formatDate(dateStr: string): string {
