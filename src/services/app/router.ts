@@ -80,7 +80,7 @@ export default class Router {
     console.log(route);
     if (route.loginRequired) {
       const user = this.isAuth();
-      if (user.name === '') {
+      if (user.username === '') {
         console.error('Пользователь не авторизован, перенаправление на /login');
         this.navigate(AUTH_URLS.LOGIN.route, true);
         return;
@@ -89,9 +89,9 @@ export default class Router {
 
     if (route.logoutRequired) {
       const user = this.isAuth();
-      console.log(`USER ${user.name}`);
+      console.log(`USER ${user.username}`);
 
-      if (user.name !== '') {
+      if (user.username !== '') {
         console.log('Пользователь вошел в аккаунт');
         history.back();
         return;

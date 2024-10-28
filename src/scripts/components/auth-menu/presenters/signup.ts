@@ -76,7 +76,7 @@ export class SignUpPresenter {
       .then((response: authResponse) => {
         if (response.status === 200) {
           const userInfo = response.body as UserInfo;
-          storageUser.saveUserData({ name: userInfo.username, city: userInfo.city });
+          storageUser.saveUserData({ username: userInfo.username, city: userInfo.city });
           this.view.updateAfterAuth(userInfo);
 
           this.router.navigate('/');

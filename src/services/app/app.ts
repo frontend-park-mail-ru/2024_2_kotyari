@@ -1,6 +1,7 @@
 import { buildMain, LoginView, router } from './init.js';
 import { backurl, CLICK_CLASSES, urlAttribute } from './config.ts';
 import { storageUser } from '../storage/user';
+import { User } from '../types/types';
 
 document.addEventListener('DOMContentLoaded', () => {
   return fetch(backurl, {
@@ -15,9 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(res.status);
 
       if (res.ok) {
-        return res.json().then((data) => {
-          console.log(data);
-          return { name: data.username, city: data.city };
+        return res.json()
+          .then((data) => {
+            data = data.body
+            console.log('NEED:  -',data);
+
+            return { name: data.name, city: data.city };
         });
       }
 
@@ -32,12 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return { name: '', city: 'Москва' };
     })
     .then((user) => {
-      storageUser.saveUserData(user);
+      storageUser.saveUserData(user as User);
 
       return user;
     })
     .then((user) => {
-      console.log(user);
+      console.log('USER: ', user);
+
+
       LoginView.updateAfterAuth(user.name);
       buildMain({ name: user.name, city: user.city })
         .then(() => {

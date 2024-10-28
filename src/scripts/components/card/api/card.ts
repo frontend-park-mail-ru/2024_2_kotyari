@@ -1,9 +1,24 @@
 import { CARD_URLS } from './config.js';
 
+interface Response {
+  status: number;
+  body: Product[];
+}
 
+interface Product {
+  id: number;
+  description: string;
+  count: number;
+  name: string;
+  price: number;
+  original_price: number;
+  discount: number;
+  rating: number;
+  image_url: string;
+}
 
 export interface CardApiInterface {
-  fetchCards(): Promise<any>;
+  fetchCards(): Promise<Product[]>;
 }
 
 export default class CardAPI implements CardApiInterface {
@@ -14,7 +29,7 @@ export default class CardAPI implements CardApiInterface {
     this.backUrl = backUrl;
   }
 
-  fetchCards(): Promise<any> {
+  fetchCards(): Promise<Product[]> {
     return fetch(this.backUrl + this.config.CATALOG.route, {
       method: 'GET',
       headers: {
@@ -27,7 +42,15 @@ export default class CardAPI implements CardApiInterface {
         }
         return res.json();
       })
-      .catch((err) => {
+      .then(data => {
+        if (data.status === 200) {
+          console.log('1123124',data.body)
+          return data.body;
+        } else {
+          throw new Error('Непредвиденный статус ответа');
+        }
+      })
+      .catch(err => {
         console.error('Ошибка при запросе:', err.message);
         throw err;
       });

@@ -4,9 +4,9 @@ import {
   ErrorResponse,
   LoginCredentials,
   SignUpCredentials,
-  UserInfo,
 } from '../types/types.js';
 import { backurl } from '@/services/app/config.ts';
+import { User } from '../../../../services/types/types';
 
 export default class AuthAPI {
   private config = AUTH_URLS;
@@ -33,7 +33,7 @@ export default class AuthAPI {
         if (res.ok) {
           return res.json().then((resJSON) => {
             if ('username' in resJSON) {
-              return { status: res.status, body: resJSON.body as UserInfo };
+              return { status: res.status, body: resJSON.body as User };
             } else {
               console.error('Ошибка авторизации:', resJSON.error_message);
               return { status: res.status, body: resJSON.body as ErrorResponse };
@@ -74,7 +74,7 @@ export default class AuthAPI {
         if (res.ok) {
           return res.json().then((resJSON) => {
             if ('username' in resJSON) {
-              return { status: res.status, body: resJSON.body as UserInfo };
+              return { status: res.status, body: resJSON.body as User };
             } else {
               console.error('Ошибка регистрации:', resJSON.body.error_message);
               return { status: res.status, body: resJSON.body as ErrorResponse };

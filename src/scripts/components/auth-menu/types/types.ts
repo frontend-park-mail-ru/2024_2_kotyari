@@ -1,3 +1,5 @@
+import { User } from '../../../../services/types/types';
+
 export type LoginCredentials = {
   email: string;
   password: string;
@@ -10,18 +12,13 @@ export type SignUpCredentials = {
   repeat_password: string;
 };
 
-export type UserInfo = {
-  username: string;
-  city: string;
-};
-
 export type ErrorResponse = {
   error_message: string;
 };
 
 export type authResponse = {
   status: number;
-  body: UserInfo | ErrorResponse;
+  body: User | ErrorResponse;
 };
 
 export interface validateInterface {
@@ -43,7 +40,7 @@ export interface errorViewInterface {
 }
 
 export interface AuthViewInterface {
-  updateAfterAuth(user: UserInfo): void;
+  updateAfterAuth(user: User): void;
 
   render(): void;
 

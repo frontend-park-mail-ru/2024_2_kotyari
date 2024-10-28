@@ -3,11 +3,11 @@ import {
   AuthViewInterface, ErrorResponse,
   errorViewInterface,
   LoginCredentials,
-  SignInAPI, UserInfo,
+  SignInAPI,
   validateInterface,
 } from '../types/types.js';
 import { menuSignIn } from '../views/configs.js';
-import { IRouter } from '../../../../services/types/types';
+import { IRouter, User } from '../../../../services/types/types';
 import { storageUser } from '../../../../services/storage/user';
 
 export class LoginPresenter {
@@ -50,6 +50,7 @@ export class LoginPresenter {
       .logout()
       .then(() => {
         this.view.updateAfterLogout();
+        storageUser.clearUserData()
         this.router.navigate('/');
       })
       .catch((err) => {
@@ -77,9 +78,9 @@ export class LoginPresenter {
 
       .then((response) => {
         if (response.status === 200) {
-          const userInfo = response.body as UserInfo;
-          storageUser.saveUserData({ name: userInfo.username, city: userInfo.city });
+          const userInfo = response.body as User;
 
+          storageUser.saveUserData(userInfo);
           this.view.updateAfterAuth(userInfo);
           this.router.navigate('/');
           return;
