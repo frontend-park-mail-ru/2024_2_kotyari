@@ -1,0 +1,20 @@
+<div class="delivery-list">
+    {{#each deliveryDates}}
+        <div class="delivery-card">
+            <div class="delivery-card__date-row">
+                <div class="delivery-card__index-wrapper">
+                    <span class="delivery-card__index">{{@index}}</span>
+                    <span class="delivery-card__date">Доставим {{formatDate date}}</span>
+                </div>
+                <span class="delivery-card__weight">{{weight}} кг</span>
+            </div>
+            <hr class="delivery-card__divider">
+
+            <div class="delivery-card__items">
+                {{#each items}}
+                    {{> product-item name=productName price=productPrice quantity=quantity}}
+                {{/each}}
+            </div>
+        </div>
+    {{/each}}
+</div>

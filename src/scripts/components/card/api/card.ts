@@ -1,7 +1,5 @@
 import { CARD_URLS } from './config.js';
 
-
-
 export interface CardApiInterface {
   fetchCards(): Promise<any>;
 }
@@ -21,13 +19,13 @@ export default class CardAPI implements CardApiInterface {
         'Content-Type': 'application/json',
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error('Ошибка при получении карточек');
         }
         return res.json();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Ошибка при запросе:', err.message);
         throw err;
       });

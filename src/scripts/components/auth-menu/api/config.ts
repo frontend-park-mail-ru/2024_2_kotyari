@@ -1,4 +1,3 @@
-
 export const AUTH_URLS = {
   LOGIN: {
     route: '/login',
@@ -7,5 +6,5 @@ export const AUTH_URLS = {
   SIGNUP: {
     route: '/signup',
     name: 'Регистрация',
-  }
-}
+  },
+};

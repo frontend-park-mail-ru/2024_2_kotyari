@@ -5,6 +5,7 @@ import path from 'path';
 
 const app = express();
 const PORT = 3000;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,11 +20,14 @@ app.use(express.static(imgPath));
 app.use(express.static(publicPath));
 app.use(express.static(cssPath));
 
-// app.get('/src/css/*', (req, res) => {
-//   if (req.url.endsWith('.css')) {
-//     res.sendFile(path.join(basePath, req.url));
-//   }
-// })
+app.get('/dist/scripts/*', (req, res) => {
+  const filePath = path.join(distPath, req.params[0]); // Динамически вычисляем путь к файлу
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      res.status(404).send('<h1>error Not Found</h1>');
+    }
+  });
+});
 
 /**
  * Универсальный обработчик маршрутов для изображений.

@@ -10,9 +10,11 @@ body {
 .catalog {
     display: grid;
     gap: var(--gap);
-    padding: var(--padding);
+    padding-top: var(--padding);
     justify-content: var(--catalog-justify-content);
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    width: 90%;
+    margin: auto;
 }
 
 /* Карточка товара */
@@ -68,9 +70,8 @@ body {
     margin-bottom: var(--description-margin-bottom);
     overflow: hidden;
     border-radius: var(--card-border-radius);
-    background-image: url('https://via.placeholder.com/150');
+    background: var(--header-background);
     background-size: cover;
-    background-position: center;
 }
 
 .card-image img {
@@ -170,7 +171,7 @@ body {
 }
 
 /* Оформление текста */
-h1, p {
+.h1, .p {
     color: var(--text-another-color);
 }
 

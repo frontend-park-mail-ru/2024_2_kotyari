@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "target": "ES2022",
+    "target": "ES6",
     "moduleResolution": "node",
     "noEmit": false,  // Разрешает создание файлов
     "allowJs": true,

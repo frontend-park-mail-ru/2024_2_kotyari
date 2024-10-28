@@ -1,0 +1,19 @@
+<div class="recipient-card">
+    <h2 class="recipient-card__title">Данные получателя</h2>
+    <hr class="recipient-card__divider">
+
+    <div class="recipient-card__row">
+        <span class="recipient-card__label">Адрес</span>
+        <div class="recipient-card__details">
+            <span class="recipient-card__address" title="{{recipient.address}}">{{recipient.address}}</span>
+            <span class="recipient-card__edit-icon material-icons">arrow_forward</span>
+        </div>
+    </div>
+
+    <div class="recipient-card__row">
+        <span class="recipient-card__label">Получатель</span>
+        <span class="recipient-card__name" title="{{recipient.recipientName}}">{{recipient.recipientName}}</span>
+    </div>
+</div>
+
+<div id="data-sampling"></div>  <!-- Второй HBS с датами доставки и товарами -->

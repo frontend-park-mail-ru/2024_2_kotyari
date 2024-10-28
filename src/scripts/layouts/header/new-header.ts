@@ -11,8 +11,7 @@ export function logoutUpdate() {
   const nameElement = document.getElementById('name');
 
   if (avatarElement && nameElement) {
-    avatarElement.innerHTML =
-      `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
+    avatarElement.innerHTML = `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
        <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>`;
     nameElement.innerHTML = '<span class="icon-label-hidden catalog-link" id="name">Вход</span>';
   }
@@ -41,15 +40,13 @@ export function logoutUpdate() {
  */
 export async function AddDropDown(): Promise<void> {
   const avatarIcon = document.getElementById('avatar-icon') as HTMLElement | null;
-  if (!avatarIcon)
-    return;
+  if (!avatarIcon) return;
 
   const dropdown = avatarIcon.querySelector('.icon-dropdown') as HTMLElement | null;
-  if (!dropdown)
-    return;
+  if (!dropdown) return;
 
   // Открытие и закрытие по клику
-  avatarIcon.addEventListener('click', async function(event) {
+  avatarIcon.addEventListener('click', async function (event) {
     await new Promise((resolve) => {
       dropdown.classList.toggle('show');
       avatarIcon.classList.toggle('show'); // Добавляем или убираем класс для иконки
@@ -59,7 +56,7 @@ export async function AddDropDown(): Promise<void> {
   });
 
   // Закрытие при клике вне элемента
-  document.addEventListener('click', async function() {
+  document.addEventListener('click', async function () {
     if (dropdown.classList.contains('show')) {
       await new Promise((resolve) => {
         dropdown.classList.remove('show');
@@ -70,7 +67,7 @@ export async function AddDropDown(): Promise<void> {
   });
 
   // Закрытие меню при уходе курсора с иконки
-  avatarIcon.addEventListener('mouseleave', async function() {
+  avatarIcon.addEventListener('mouseleave', async function () {
     if (!dropdown.classList.contains('show')) {
       await new Promise((resolve) => {
         dropdown.classList.remove('show');

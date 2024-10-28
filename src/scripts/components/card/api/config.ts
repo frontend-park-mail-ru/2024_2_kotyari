@@ -1,4 +1,3 @@
-
 export const CARD_URLS = {
   HOME: {
     route: '/',
@@ -7,5 +6,5 @@ export const CARD_URLS = {
   CATALOG: {
     route: '/catalog',
     name: 'Главная oxic',
-  }
-}
+  },
+};

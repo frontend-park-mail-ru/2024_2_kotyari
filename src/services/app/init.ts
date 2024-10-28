@@ -18,6 +18,8 @@ import { buildSingleOrderPage } from '../../scripts/components/single-order/sing
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import Handlebars from 'handlebars';
 import { storageUser } from '../storage/user';
+import { CartBuilder } from "../../scripts/components/cart/view/cart-builder";
+import { OrderPlacementBuilder } from "../../scripts/components/order-placement/view/order-placement-builder";
 
 const reg = (): void => {
   /**
@@ -67,6 +69,9 @@ const cardAPI = new CardAPI(backurl);
 const cardView = new CardView();
 const cardPresenter = new CardPresenter(cardAPI, cardView);
 
+const cartBuilder = new CartBuilder();
+const orderPlacementBuilder = new OrderPlacementBuilder();
+
 // Определение маршрутов
 router.addRoute(AUTH_URLS.LOGIN.route, () => loginPresenter.init(), new RegExp('^/login$'), false, true);
 
@@ -81,3 +86,7 @@ router.addRoute('/error/404', () => errorPage('404'), new RegExp('^/error/404$')
 router.addRoute('/logout', () => loginPresenter.logout(), new RegExp('^/logout$'), true, false);
 
 router.addRoute('/order/:id', () => buildSingleOrderPage(singleOrder), new RegExp('^/order/d+$'), true, false);
+
+router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), false, false);
+
+router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), false, false);
