@@ -24,6 +24,7 @@ import { CartBuilder } from "../../scripts/components/cart/view/cart-builder";
 import { OrderPlacementBuilder } from "../../scripts/components/order-placement/view/order-placement-builder";
 import { buildOrderList } from '../../scripts/components/order-list/order-list';
 import { orderList } from '../../scripts/components/order-list/order-list-config';
+import { soon } from "../../scripts/components/custom-messages/soon/soon";
 
 const reg = (): void => {
   /**
@@ -103,6 +104,9 @@ router.addRoute('/account', () => {
 }, new RegExp('^/account$'), true, false);
 
 router.addRoute('/order_list', () => buildOrderList(orderList), new RegExp('^/order_list$'), true, false);
-router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), false, false);
 
-router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), false, false);
+router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), true, false);
+
+router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), true, false);
+
+router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
