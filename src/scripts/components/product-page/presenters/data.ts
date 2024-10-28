@@ -12,7 +12,7 @@ export const productData: Product = {
   ],
   selectedImage: 'blob:null/24135918-71be-41e8-84a2-c60a45b16ad4',
   rating: 4.5,
-  reviewCount: 125,
+   reviewCount: 125,
   videoCount: 10,
   brand: {
     name: 'MICONIC',
