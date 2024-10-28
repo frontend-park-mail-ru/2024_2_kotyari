@@ -40,7 +40,7 @@ export default class AuthView implements AuthViewInterface {
 
     if (avatarElement) {
       avatarElement.innerHTML = `
-      <a href="/profile" router="stability-active" class="catalog-link">Личный кабинет</a>
+      <a href="/account" router="stability-active" class="catalog-link">Личный кабинет</a>
       <a href="/logout" router="stability-active" id="logout" class="catalog-link">Выход</a>
     `;
     }
