@@ -1,23 +1,4 @@
 /**
- * Обновляет интерфейс после выхода пользователя из системы.
- *
- * Заменяет содержимое элементов с идентификаторами 'avatar' и 'name',
- * показывая ссылки на вход и регистрацию. Затем перенаправляет на страницу авторизации без перезагрузки страницы.
- *
- * @function
- */
-export function logoutUpdate() {
-  const avatarElement = document.getElementById('avatar');
-  const nameElement = document.getElementById('name');
-
-  if (avatarElement && nameElement) {
-    avatarElement.innerHTML = `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
-       <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>`;
-    nameElement.innerHTML = '<span class="icon-label-hidden catalog-link" id="name">Вход</span>';
-  }
-}
-
-/**
  * Добавляет функциональность выпадающего меню для иконки аватара.
  *
  * Функция обеспечивает открытие/закрытие выпадающего меню при клике на иконку аватара,
@@ -38,7 +19,7 @@ export function logoutUpdate() {
  *   AddDropDown();
  * });
  */
-export async function AddDropDown(): Promise<void> {
+export function AddDropDown(): void {
   const avatarIcon = document.getElementById('avatar-icon') as HTMLElement | null;
   if (!avatarIcon) return;
 

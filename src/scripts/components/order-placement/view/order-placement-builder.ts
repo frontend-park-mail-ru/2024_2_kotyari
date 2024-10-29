@@ -9,6 +9,7 @@ import productItem from '../elements/left-element-of-order-placement/elements/de
 import Handlebars from "handlebars";
 import {OrderData} from "../types/types";
 import Router from "../../../../services/app/router";
+import { router } from '../../../../services/app/init';
 
 /**
  * Класс для построения и управления процессом оформления заказа.
@@ -22,7 +23,7 @@ export class OrderPlacementBuilder {
      * @private
      * @type {HTMLElement | null}
      */
-    private readonly rootElement: HTMLElement | null;
+    private rootElement: HTMLElement | null;
 
     /**
      * Корневой элемент правой части оформления заказа.
@@ -121,13 +122,14 @@ export class OrderPlacementBuilder {
      * @returns {Promise<void>}
      */
     public async buildOrderPlacement(): Promise<void> {
-        if (!this.rootElement) {
+        const elem = document.getElementById(rootId)
+
+        if (!elem) {
             throw new Error(`Root element with ID ${rootId} not found`);
         }
 
         if (!this.orderData.deliveryDates) {
-            const router = new Router();
-            return router.navigate('/cart')
+            router.navigate('/cart')
         }
 
         try {
@@ -147,6 +149,8 @@ export class OrderPlacementBuilder {
      */
     private async renderOrderPlacement(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
+            this.rootElement = document.getElementById(rootId);
+
             this.rootElement.innerHTML='';
             this.rootElement!.insertAdjacentHTML('beforeend', this.orderPlacementTemplate([]));
 

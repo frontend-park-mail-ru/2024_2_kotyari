@@ -4,6 +4,7 @@ import head from './header/header.hbs?raw';
 import body from './body.hbs?raw';
 import search from '@/scripts/components/elements/searcher/searcher.hbs';
 import Handlebars from 'handlebars';
+import { AddDropDown } from './header/header';
 
 /**
  * Функция для рендеринга основного содержимого страницы.
@@ -43,7 +44,7 @@ export function buildBody(data: any): Promise<void> {
       }
     })
       .then(() => {
-        console.log('успешно');
+          AddDropDown()
       })
       .catch((err) => {
         console.log(err);
