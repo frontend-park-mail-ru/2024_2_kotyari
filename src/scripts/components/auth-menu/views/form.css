@@ -10,12 +10,19 @@
     padding-bottom: var(--one-padding);
 }
 
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--default-color-input) inset;
+}
+
 .form__input {
+    background-color: var(--default-color-input);
+    border-radius: var(--default-border-radius);
     margin-top: var(--one-px-margin);
     padding: var(--mini-padding);
     font-size: var(--default-font-size);
-    border-radius: var(--input-border-radius);
-    border: 1px solid #ccc;
+    border: 0;
     box-shadow: 0 1px 3px var(--card-shadow-color);
     transition: border-color var(--short-duration) ease, box-shadow var(--short-duration) ease;
 }
@@ -31,9 +38,9 @@
     background-color: var(--base-background-color);
     color: var(--text-inv);
     border-width: 0;
-    border-radius: var(--auth-button-border-radius);
+    border-radius: var(--default-border-radius);
     cursor: pointer;
-    margin-bottom: var(--middle-button-margin-bottom);
+    margin-bottom: var(--midle-button-margin-bottom);
     transition: background-color var(--middle-duration) ease, color var(--middle-duration) ease;
 }
 

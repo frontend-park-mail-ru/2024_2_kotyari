@@ -2,6 +2,8 @@
     --card-align-items: center;
 
     /* Цветовая палитра */
+    --default-color-input: #EEEEEE;
+    --auth-menu-color: #fff;
     --background-color: #f9f9f9;
     --background-color-catalog-button: #ffffff00;
     --border-color-condition-product: #ffffff;
@@ -109,7 +111,7 @@
     --margin-right-material-icons: -142px;
     --margin-left-material-icons: 55px;
     --margin-text-article: 120px;
-    --card-box-shadow: 0 2px 5px;
+    /*--card-box-shadow: 0 2px 5px;*/
     --card-box-shadow: 0 1px 6px;
     --m-group-padding: 30px 60px 60px;
     --zero: 0;
@@ -148,7 +150,7 @@
     --card-aspect-ratio: 4 / 5;
     --input-border-radius: 6px;
     --auth-button-border-radius: 6px;
-    --container-border-radius: 16px;
+    --container-border-radius: 20px;
     --default-border-radius: 25px;
     --icon-dropdown-border-radius: 3px;
     --select-item-border-radius: 3px;
