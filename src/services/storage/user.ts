@@ -5,7 +5,7 @@ class StorageUser {
 
   // Метод для получения данных
   public getUserData(): User {
-    return this.userData;
+    return this.userData as User;
   }
 
   // Метод для сохранения данных

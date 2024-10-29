@@ -54,10 +54,10 @@ export const buildMain = (user: { name: string; city: string }): Promise<void> =
 };
 
 export const isAuth = (): boolean => {
-  console.log(storageUser.getUserData(), '123s');
-  const user:User = storageUser.getUserData();
+  const user = storageUser.getUserData();
+  console.log(user, '123s');
 
-  return user.username !== '';
+  return user.name !== '';
 };
 
 export const router = new Router('/login', isAuth, rootId);
