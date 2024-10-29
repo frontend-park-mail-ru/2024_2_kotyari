@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
               data = data.body
               console.log('NEED:  -',data);
 
-              return { name: data.name, city: data.city };
+              return { name: data.username, city: data.city };
             });
         }
 

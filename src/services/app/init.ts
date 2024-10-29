@@ -53,10 +53,11 @@ export const buildMain = (user: { name: string; city: string }): Promise<void> =
   return buildBody({ rootId, name, city });
 };
 
-export const isAuth = (): User => {
+export const isAuth = (): boolean => {
   console.log(storageUser.getUserData(), '123s');
+  const user:User = storageUser.getUserData();
 
-  return storageUser.getUserData();
+  return user.username !== '';
 };
 
 export const router = new Router('/login', isAuth, rootId);

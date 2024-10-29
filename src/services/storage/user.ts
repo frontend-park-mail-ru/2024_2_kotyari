@@ -15,7 +15,7 @@ class StorageUser {
 
   // Метод для очистки данных
   public clearUserData(): void {
-    this.userData = { username: '', city: '' };
+    this.userData = { username: '', city: 'Москва' };
   }
 }
 

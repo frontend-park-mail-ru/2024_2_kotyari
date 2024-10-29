@@ -1,16 +1,16 @@
 import { Route } from './route.js';
-import { User } from '../types/types.js';
 import { AUTH_URLS } from '../../scripts/components/auth-menu/api/config.js';
 import { CLICK_CLASSES, urlAttribute } from './config.js';
+import { isAuth } from './init';
 
 export default class Router {
   public routes: Route[] = [];
   readonly root: string;
-  readonly isAuth: () => User;
+  readonly isAuth: () => boolean;
   private readonly containerId: string;
   private container: HTMLElement | null = null;
 
-  constructor(root: string, isAuth: () => User, containerId: string) {
+  constructor(root: string, isAuth: () => boolean, containerId: string) {
     this.root = root || '/';
     this.isAuth = isAuth;
     this.containerId = containerId;
@@ -77,10 +77,10 @@ export default class Router {
       return;
     }
 
-    console.log(route);
     if (route.loginRequired) {
-      const user = this.isAuth();
-      if (user.username === '') {
+      const flag = isAuth();
+
+      if (!flag) {
         console.error('Пользователь не авторизован, перенаправление на /login');
         this.navigate(AUTH_URLS.LOGIN.route, true);
         return;
@@ -88,10 +88,9 @@ export default class Router {
     }
 
     if (route.logoutRequired) {
-      const user = this.isAuth();
-      console.log(`USER ${user.username}`);
+      const flag:boolean = isAuth();
 
-      if (user.username !== '') {
+      if (flag) {
         console.log('Пользователь вошел в аккаунт');
         history.back();
         return;
