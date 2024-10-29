@@ -1,24 +1,34 @@
-import { router } from '../../../../services/app/init.js';
 import {
-  AuthViewInterface,
+  authResponse,
+  AuthViewInterface, ErrorResponse,
   errorViewInterface,
   LoginCredentials,
   SignInAPI,
   validateInterface,
 } from '../types/types.js';
 import { menuSignIn } from '../views/configs.js';
+import { IRouter, User } from '../../../../services/types/types';
+import { storageUser } from '../../../../services/storage/user';
 
 export class LoginPresenter {
   private api: SignInAPI;
   private view: AuthViewInterface;
   private readonly validate: validateInterface;
   private errorView: errorViewInterface;
+  private router: IRouter;
 
-  constructor(view: AuthViewInterface, api: SignInAPI, errorView: errorViewInterface, validate: validateInterface) {
+  constructor(
+    view: AuthViewInterface,
+    api: SignInAPI,
+    errorView: errorViewInterface,
+    validate: validateInterface,
+    router:  IRouter,
+  ) {
     this.view = view;
     this.api = api;
     this.errorView = errorView;
     this.validate = validate;
+    this.router = router;
   }
 
   init = () => {
@@ -40,7 +50,8 @@ export class LoginPresenter {
       .logout()
       .then(() => {
         this.view.updateAfterLogout();
-        router.navigate('/');
+        storageUser.clearUserData()
+        this.router.navigate('/');
       })
       .catch((err) => {
         console.error(err);
@@ -64,16 +75,25 @@ export class LoginPresenter {
 
     this.api
       .login(credentials)
+
       .then((response) => {
-        if (response.ok) {
-          this.view.updateAfterAuth(credentials.email); // Обновляем UI с именем пользователя
-          router.navigate('/');
+        if (response.status === 200) {
+          const userInfo = response.body as User;
+
+          storageUser.saveUserData(userInfo);
+          this.view.updateAfterAuth(userInfo);
+          this.router.navigate('/');
+          return;
         }
+
+        const error = response.body as ErrorResponse;
+        console.error('Login error:', error.error_message);
+        this.errorView.displayBackError(error.error_message ?? 'неизвестная ошибка');
       })
-      .catch((error) => {
-        console.error('Ошибка при логине:', error);
-        this.errorView.displayBackError(error);
-        this.errorView.displayBackError(error);
+      .catch((error: authResponse) => {
+        const errorBody = error.body as ErrorResponse;
+        console.error('Ошибка при логине:', errorBody.error_message);
+        this.errorView.displayBackError(errorBody.error_message);
       });
   };
 

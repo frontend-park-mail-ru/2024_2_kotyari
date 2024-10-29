@@ -1,3 +1,5 @@
+import { User } from '../../../../services/types/types';
+
 export type LoginCredentials = {
   email: string;
   password: string;
@@ -10,9 +12,13 @@ export type SignUpCredentials = {
   repeat_password: string;
 };
 
-export type response = {
-  ok: boolean;
-  errorMsg?: string;
+export type ErrorResponse = {
+  error_message: string;
+};
+
+export type authResponse = {
+  status: number;
+  body: User | ErrorResponse;
 };
 
 export interface validateInterface {
@@ -34,7 +40,7 @@ export interface errorViewInterface {
 }
 
 export interface AuthViewInterface {
-  updateAfterAuth(username: string): void;
+  updateAfterAuth(user: User): void;
 
   render(): void;
 
@@ -42,10 +48,10 @@ export interface AuthViewInterface {
 }
 
 export interface SignInAPI {
-  login(credentials: LoginCredentials): Promise<response>;
+  login(credentials: LoginCredentials): Promise<authResponse>;
   logout(): Promise<boolean>;
 }
 
 export interface SignUpAPI {
-  signup(credentials: SignUpCredentials): Promise<response>;
+  signup(credentials: SignUpCredentials): Promise<authResponse>;
 }

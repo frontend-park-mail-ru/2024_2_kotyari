@@ -2,6 +2,7 @@ import { AuthViewInterface } from '../types/types.js';
 import form from './auth.hbs?raw';
 import Handlebars from 'handlebars';
 import { rootId } from '@/services/app/config';
+import { User } from '../../../../services/types/types';
 
 export default class AuthView implements AuthViewInterface {
   private readonly config: {};
@@ -34,9 +35,10 @@ export default class AuthView implements AuthViewInterface {
     });
   };
 
-  updateAfterAuth = (username: string): void => {
+  updateAfterAuth = (user: User): void => {
     const avatarElement = document.getElementById('avatar');
     const nameElement = document.getElementById('name');
+    const cityElement = document.getElementById('city');
 
     if (avatarElement) {
       avatarElement.innerHTML = `
@@ -46,8 +48,12 @@ export default class AuthView implements AuthViewInterface {
     }
 
     if (nameElement) {
-      nameElement.textContent = username;
+      nameElement.textContent = user.username;
       nameElement.classList.add('icon-label-hidden', 'catalog-link');
+    }
+
+    if (cityElement) {
+      cityElement.textContent = user.city;
     }
   };
 

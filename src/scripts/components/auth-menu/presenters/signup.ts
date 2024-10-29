@@ -1,19 +1,35 @@
-import { AuthViewInterface, errorViewInterface, SignUpAPI, validateInterface } from '../types/types';
+import {
+  authResponse,
+  AuthViewInterface,
+  ErrorResponse,
+  errorViewInterface,
+  SignUpAPI,
+  UserInfo,
+  validateInterface,
+} from '../types/types';
 import { menuSignIn, menuSignUp } from '../views/configs.js';
-import { router } from '../../../../services/app/init.js';
 import { storageUser } from '../../../../services/storage/user';
+import { IRouter } from '../../../../services/types/types';
 
 export class SignUpPresenter {
   private api: SignUpAPI;
   private view: AuthViewInterface;
   private validate: validateInterface;
   private errorView: errorViewInterface;
+  private router: IRouter;
 
-  constructor(view: AuthViewInterface, api: SignUpAPI, errorView: errorViewInterface, validate: validateInterface) {
+  constructor(
+    view: AuthViewInterface,
+    api: SignUpAPI,
+    errorView: errorViewInterface,
+    validate: validateInterface,
+    router: IRouter,
+  ) {
     this.view = view;
     this.api = api;
     this.errorView = errorView;
     this.validate = validate;
+    this.router = router;
   }
 
   init = () => {
@@ -57,21 +73,24 @@ export class SignUpPresenter {
 
     this.api
       .signup(credentials)
-      .then((response) => {
-        if (response.ok) {
-          router.navigate('/');
+      .then((response: authResponse) => {
+        if (response.status === 200) {
+          const userInfo = response.body as UserInfo;
+          storageUser.saveUserData({ username: userInfo.username, city: userInfo.city });
+          this.view.updateAfterAuth(userInfo);
 
-          storageUser.saveUserData({ name: credentials.username, city: 'Москва' });
-          this.view.updateAfterAuth(credentials.username);
-        } else {
-          console.error('Signup error:', response.errorMsg);
-          this.errorView.displayBackError(response.errorMsg ?? 'неизвестная ошибка');
+          this.router.navigate('/');
+          return;
         }
+
+        const error = response.body as ErrorResponse;
+        console.error('Login error:', error.error_message);
+        this.errorView.displayBackError(error.error_message ?? 'неизвестная ошибка');
       })
-      .catch((error) => {
-        console.error('Ошибка при регистрации:', error);
-        this.errorView.displayBackError(error);
-        console.error('Error during signup:', error);
+      .catch((error: authResponse) => {
+        const errorBody = error.body as ErrorResponse;
+        console.error('Ошибка при логине:', errorBody.error_message);
+        this.errorView.displayBackError(errorBody.error_message);
       });
   };
 

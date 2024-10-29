@@ -6,26 +6,26 @@
 
 <div class="catalog" id="cards">
     {{#each products}}
-        <div class="card" href="/product/{{url}}" router="changed-active">
+        <div class="card" href="/product/{{id}}" router="changed-active">
             <div class="card-image">
                 <img
-                        src="{{#if image}}{{image}}{{else}}https://via.placeholder.com/150{{/if}}"
+                        src="data:image;base64,{{image_url}}"
                         loading="lazy"
                         onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"
                 />
             </div>
             <div class="card-info">
                 <div class="price">
-                    <span class="current-price">{{currentPrice}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
-                    {{#if oldPrice}}
-                        <span class="product-page__old-price">{{oldPrice}} {{currency}}</span>
+                    <span class="current-price">{{price}}₽</span>
+                    {{#if original_price}}
+                        <span class="old-price">{{original_price}}₽</span>
                     {{/if}}
                     {{#if discount}}
                         <span class="discount">-{{discount}}%</span>
                     {{/if}}
                 </div>
                 <div class="description" title="{{description}}">
-                    {{shortDescription}}
+                    {{name}}
                 </div>
                 <a class="buy-button">Купить</a>
             </div>

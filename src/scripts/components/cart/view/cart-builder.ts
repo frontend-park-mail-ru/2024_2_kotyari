@@ -18,7 +18,7 @@ export class CartBuilder {
      * Корневой HTML-элемент, в который будет рендериться корзина.
      * @private {HTMLElement | null}
      */
-    private readonly rootElement: HTMLElement | null;
+    private rootElement: HTMLElement | null;
 
     /**
      * HTML-элемент для левой части корзины.
@@ -72,8 +72,6 @@ export class CartBuilder {
      * Конструктор класса. Инициализирует корневой элемент и компилирует Handlebars-шаблоны.
      */
     constructor() {
-        this.rootElement = document.getElementById(rootId);
-
         this.cartTemplate = Handlebars.compile(cart);
         this.leftCardsTemplate = Handlebars.compile(leftCards);
         this.rightElementOfCartTemplate = Handlebars.compile(rightElementOfCart);
@@ -89,10 +87,6 @@ export class CartBuilder {
      * @throws {Error} Если корневой элемент не найден.
      */
     public async buildCart(): Promise<void> {
-        if (!this.rootElement) {
-            throw new Error(`Root element with ID ${rootId} not found`);
-        }
-
         try {
             await this.renderCart();
             this.initializeCartPresenter();
@@ -110,6 +104,12 @@ export class CartBuilder {
      */
     private async renderCart(): Promise<void> {
         return new Promise<void>(async (resolve, reject) => {
+            this.rootElement = document.getElementById(rootId);
+
+            if (!this.rootElement) {
+                throw new Error(`Root element with ID ${rootId} not found`);
+            }
+
             //this.rootElement.innerHTML='';
             // Вставляем основной шаблон корзины на страницу.
             this.rootElement.insertAdjacentHTML('beforeend', this.cartTemplate([]));

@@ -15,11 +15,10 @@ import Handlebars from 'handlebars';
  * @returns {Promise<void>} Возвращает промис, который разрешается после завершения рендеринга.
  */
 export function buildBody(data: any): Promise<void> {
-  const rootElement = document.getElementById(rootId) as HTMLElement;
-  if (rootElement)
+
     return new Promise<void>((resolve, reject) => {
       // Вставляем тело страницы
-      document.body.insertAdjacentHTML('beforeend', Handlebars.compile(body)({'root': rootId}));
+      document.body.insertAdjacentHTML('beforeend', Handlebars.compile(body)({'root' : rootId}));
 
       const header = document.querySelector('header');
       const footer = document.querySelector('footer');

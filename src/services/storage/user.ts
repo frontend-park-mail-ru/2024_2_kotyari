@@ -1,7 +1,7 @@
 import { User } from '../types/types';
 
 class StorageUser {
-  private userData: User = { name: '', city: 'Москва' };
+  private userData: User = { username: '', city: 'Москва' };
 
   // Метод для получения данных
   public getUserData(): User {
@@ -9,13 +9,13 @@ class StorageUser {
   }
 
   // Метод для сохранения данных
-  public saveUserData(data: { name: string; city: string }): void {
+  public saveUserData(data: User): void {
     this.userData = data;
   }
 
   // Метод для очистки данных
   public clearUserData(): void {
-    this.userData = { name: '', city: '' };
+    this.userData = { username: '', city: '' };
   }
 }
 
