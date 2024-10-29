@@ -17,14 +17,14 @@ import { errorPage } from '@/scripts/components/custom-messages/error/error';
 import { buildSingleOrderPage } from '../../scripts/components/single-order/single-order';
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
-import Handlebars from 'handlebars';
 import { storageUser } from '../storage/user';
-import { AccountPageBuilder } from '../../scripts/components/personal-account/presenters/account';
-import { CartBuilder } from "../../scripts/components/cart/view/cart-builder";
-import { OrderPlacementBuilder } from "../../scripts/components/order-placement/view/order-placement-builder";
-import { buildOrderList } from '../../scripts/components/order-list/order-list';
-import { orderList } from '../../scripts/components/order-list/order-list-config';
-import { soon } from "../../scripts/components/custom-messages/soon/soon";
+import { AccountPageBuilder } from '@/scripts/components/personal-account/presenters/account';
+import { CartBuilder } from "@/scripts/components/cart/view/cart-builder";
+import { OrderPlacementBuilder } from "@/scripts/components/order-placement/view/order-placement-builder";
+import { buildOrderList } from '@/scripts/components/order-list/order-list';
+import { orderList } from '@/scripts/components/order-list/order-list-config';
+// import { soon } from "@/scripts/components/custom-messages/soon/soon";
+import Handlebars from 'handlebars';
 
 const reg = (): void => {
   /**
@@ -41,6 +41,7 @@ const reg = (): void => {
 };
 
 reg();
+
 
 export const buildMain = (user: { name: string; city: string }): Promise<void> => {
   if (!user) {
@@ -109,4 +110,4 @@ router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), t
 
 router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), true, false);
 
-router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
+// router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
