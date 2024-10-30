@@ -10,7 +10,7 @@
 
 .modal__main {
     font-family: var(--mega-font-family), sans-serif;
-    font-weight: var(--little-font-weight);
+    font-weight: var(--litle-font-weight);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,16 +26,16 @@
     cursor: default;
     padding: var(--big-padding);
     z-index: 10;
-    overflow-y: auto;
 }
 
 .btn__close {
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 50px;
     cursor: pointer;
-    font-size: var(--mega-font-size);
+    font-size: 24px; /* Можно использовать фиксированное значение или переменную */
     color: var(--text-color);
+    transition: color var(--short-duration) ease;
 }
 
 .modal__container {

@@ -53,16 +53,23 @@
     --text-hover-color: #dcd3ef;
     --text-actife-color: #b09ace;
 
+    /* Размеры карточек */
+    --card-width: 370px; /* Увеличенная ширина карточки */
+    --card-height: 500px; /* Увеличенная высота карточки */
+    --gap: 20px; /* Расстояние между карточками */
+    --padding: 20px;
+    --card-aspect-ratio: 16 / 9;
+
     /* Отступы */
     --main-gap: 20px;
     --gap20: 20px;
-    --gap: 16px;
+    /* --gap: 16px; */
     --mini-gap: 12px;
     --index-gap: 8px;
     --form-gap: 5px;
     --card-padding: 20px;
     --big-padding: 16px;
-    --padding: 16px;
+    /* --padding: 16px; */
     --padding15: 15px;
     --mini-padding: 12px;
     --small-padding: 10px;
@@ -101,7 +108,7 @@
     --litle-margin-left: 7px;
     --big-margin-right: 20px;
     --normal-margin-top: 10px;
-    --one-margin-botton: 1 px;
+    --one-margin-botton: 1px;
     --big-margin: 20px;
     --middle-margin: 5px;
     --small-margin: 2px;
@@ -111,7 +118,9 @@
     --margin-right-material-icons: -142px;
     --margin-left-material-icons: 55px;
     --margin-text-article: 120px;
-    /*--card-box-shadow: 0 2px 5px;*/
+
+    /* Тени и размеры */
+    /* --card-box-shadow: 0 2px 5px; */
     --card-box-shadow: 0 1px 6px;
     --m-group-padding: 30px 60px 60px;
     --zero: 0;
@@ -122,16 +131,16 @@
     --space-description: 8px;
     --font-size-mat-icons-profile: 100px;
 
-    /* Размеры */
+    /* Радиусы и размеры */
     --card-border-radius: 25px;
     --ring-border-radius: 50%;
     --mini-card-border-radius: 6px;
     --card-image-height: 150px;
     --mini-card-image-height: 115px;
-    --card-width: 220px; /* Фиксированная ширина карточки */
+    /* --card-width: 220px; /* Фиксированная ширина карточки */
     --mini-card-width: 170px;
     --min-width: 400px;
-    --card-height: 250px; /* Фиксированная высота карточки */
+    /* --card-height: 250px; /* Фиксированная высота карточки */
     --mini-card-height: 185px;
     --footer-height: 80px;
     --description-max-height: 20px;
@@ -147,7 +156,7 @@
     --colors-product-border-radius: 50%;
     --button-border-radius4: 4px;
     --button-font-weight: bold;
-    --card-aspect-ratio: 4 / 5;
+    /* --card-aspect-ratio: 4 / 5; */
     --input-border-radius: 6px;
     --auth-button-border-radius: 6px;
     --container-border-radius: 20px;
@@ -197,7 +206,7 @@
     --mega-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
     'Open Sans', 'Helvetica Neue', sans-serif;
     --button-font-size: 18px;
-    --price-font-size: 16px;
+    --price-font-size: 20px; /* Обновлено для согласованности с --card-price-font-size */
     --input-font-size: 16px;
     --total-items-font-size: 15px;
     --grand-total-items-font-size: 25px;
@@ -214,7 +223,7 @@
     --font-size: 18px;
     --font-size-date-right: 14px;
     --small-font-size: 12px;
-    --default-font-size: 18px;
+    /* --default-font-size: 18px; */
     --font-size20: 20px;
     --card-title-font-size: 20px;
     --card-price-font-size: 20px;
@@ -231,21 +240,19 @@
     --font-size-description-product: 15px;
     --litle-font-weight: 400;
     --midle-font-weight: 550;
-    --litle-font-weight: 400;
     --card-prise-font-weight: 500;
     --container-title-font-weight: 600;
     --grand-total-font-weight: 700;
     --middle-font-weight: 550;
-
 
     /* Расположение */
     --catalog-justify-content: center;
     --card-justify-content: space-between;
     --card-allign-items: center;
     --card-text-align: center;
-    --card-z-index_on: 2;
+    --card-z-index_on: 10;
     --card-z-index: 1;
-    --header-z-index: 9999;
+    --header-z-index: 10;
     --before-card-z-index: -1;
     --button-slider-z-index: 10;
     --before-card-tlrb: -10px;
@@ -275,4 +282,42 @@
     --phone-header: 840px;
 
 
+    /* Цветовая палитра */
+    --color-background: #f9f9f9;
+    --color-card-background: #fff;
+    --color-border: #ddd;
+    --color-text: #333;
+    --color-old-price: #bcbcbc;
+    --color-discount: #4e3173;
+    --color-button-text: #fff;
+    --color-button-background: #7a16d5;
+    --color-hover-background: #b09ace;
+    --color-error: red;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-shadow-hover: rgba(0, 0, 0, 0.2);
+
+    /* Размеры карточек */
+    --border-radius: 25px;
+
+    /* Размеры изображений */
+    --image-height: 300px;
+    --image-border-radius: 20px;
+
+    /* Шрифты и размеры текста */
+    --font-size-base: 16px;
+    --font-size-price: 20px;
+    --font-size-description: 14px;
+    --font-size-button: 18px;
+    --font-weight-bold: bold;
+
+    /* Анимация */
+    --transition-duration: 0.3s;
+
+    /* Отступы */
+    --margin-auto: auto;
+
+
+    /* Другие переменные */
+    --z-index-card: 1;
+    --z-index-hover: 2;
 }
