@@ -13,6 +13,7 @@
     margin: 3% auto 10%;
     color: var(--default-text-color);
     border-radius: var(--default-border-radius);
+    box-shadow: var(--card-box-shadow) var(--card-shadow-color);
     padding: var(--container-padding);
     transition: box-shadow var(--short-duration) ease, transform var(--short-duration) ease;
     border: var(--one-padding) solid var(--card-border-color);

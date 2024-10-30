@@ -25,6 +25,7 @@ import { buildOrderList } from '@/scripts/components/order-list/order-list';
 import { orderList } from '@/scripts/components/order-list/order-list-config';
 // import { soon } from "@/scripts/components/custom-messages/soon/soon";
 import Handlebars from 'handlebars';
+import { categoryConfig, generateCategories } from '../../scripts/components/category/view/category';
 
 const reg = (): void => {
   /**
@@ -110,5 +111,6 @@ router.addRoute('/order_list', () => buildOrderList(orderList), new RegExp('^/or
 router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), true, false);
 
 router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), true, false);
-
+router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category$'), false, false);
+// router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category/[^/]+$'), false, false);
 // router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);

@@ -1,10 +1,10 @@
 .catalog {
+    max-width: 1300px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
     gap: var(--gap);
     padding: var(--padding) 0;
     justify-content: center;
-    width: var(--container-width);
     margin: var(--margin-auto);
 }
 
