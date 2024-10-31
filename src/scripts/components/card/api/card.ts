@@ -37,9 +37,10 @@ export default class CardAPI implements CardApiInterface {
       },
     })
       .then((res) => {
-        if (!res.ok) {
+        if (res.status !== 200) {
           throw new Error('Ошибка при получении карточек');
         }
+
         return res.json();
       })
       .then(data => {

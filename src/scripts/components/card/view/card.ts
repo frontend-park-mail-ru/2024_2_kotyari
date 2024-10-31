@@ -20,8 +20,6 @@ export class CardView implements CardViewInterface {
       return;
     }
 
-    console.log('123', data);
-
     rootElement.innerHTML = '';
     const templateElement = document.createElement('div');
     templateElement.innerHTML = this.compiled(data);

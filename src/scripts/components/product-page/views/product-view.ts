@@ -1,4 +1,4 @@
-import product from './product-page.hbs?raw';
+import product from './new-pr-page.hbs?raw';
 import Handlebars from 'handlebars';
 import { rootId } from '../../../../services/app/config';
 import carouselSliderTemplate from '../../carousel/views/carousel-slider.hbs?raw';
@@ -23,6 +23,16 @@ export class ProductPage {
     templateElement.innerHTML = this.compiledTemplate(data);
     this.rootElement.appendChild(templateElement);
 
+  }
+
+  updateSizeSelection(selectedButton: HTMLButtonElement, buttons: HTMLButtonElement[]) {
+    buttons.forEach((btn) => btn.classList.remove('selected'));
+    selectedButton.classList.add('selected');
+  }
+
+  updateTextOptionSelection(selectedLink: HTMLAnchorElement, links: HTMLAnchorElement[]) {
+    links.forEach((link) => link.classList.remove('selected'));
+    selectedLink.classList.add('selected');
   }
 
   updatePriceDisplay(button: HTMLButtonElement, priceElement: HTMLElement) {

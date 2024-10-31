@@ -17,7 +17,7 @@
     border: 1px solid var(--card-border-color);
     border-radius: var(--default-border-radius);
     box-shadow: 0 1px 6px var(--card-shadow-color);
-    padding: var(--padding);
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,13 +26,14 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    height: 280px; /* Фиксированная высота для всех карточек */
+    height: 330px; /* Фиксированная высота для всех карточек */
     width: 100%; /* Полная ширина столбца в сетке */
+    min-width: 250px;
 }
 
 .category-card-image {
     width: 100%;
-    height: 180px;
+    height: 250px;
     border-radius: var(--default-border-radius);
     overflow: hidden;
     background-color: #f0f0f0;
@@ -47,7 +48,7 @@
     font-size: var(--font-size-price);
     color: black;
     font-weight: normal;
-    margin-bottom: var(--gap);
+    margin-bottom: var(--mini-padding);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

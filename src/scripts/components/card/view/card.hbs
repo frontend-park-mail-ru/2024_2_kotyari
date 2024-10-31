@@ -9,10 +9,11 @@
         <div class="card" href="/product/{{id}}" router="changed-active">
             <div class="card-image">
                 <img
-                        src="data:image;base64,{{image_url}}"
+                        src="{{image_url}}"
                         loading="lazy"
-                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"
                 />
+<!--                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"-->
+<!--                />-->
             </div>
             <div class="card-info">
                 <div class="price">

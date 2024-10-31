@@ -2,7 +2,7 @@ import { rootId } from '@/services/app/config';
 import foot from './footer/footer.hbs?raw';
 import head from './header/header.hbs?raw';
 import body from './body.hbs?raw';
-import search from '@/scripts/components/elements/searcher/searcher.hbs';
+import search from '@/scripts/components/searcher/searcher.hbs';
 import Handlebars from 'handlebars';
 import { AddDropDown } from './header/header';
 

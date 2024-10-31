@@ -1,5 +1,61 @@
 @import "/public/css/parametrs/parameters.css";
 
+.product-page__color-button {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+.product-page__color-button.selected {
+    border-color: #7a16d5;
+}
+
+.product-page__color-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* Стили для опций размера */
+.product-page__size-button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.product-page__size-button.selected {
+    border-color: #7a16d5;
+    background-color: #f0f0f0;
+}
+
+/* Стили для текстовых опций */
+.product-page__text-option {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: white;
+}
+
+.product-page__text-option:hover {
+    background-color: #f9f9f9;
+}
+
+.product-page__text-option.selected {
+    border-color: #7a16d5;
+    background-color: #f0f0f0;
+}
+
 .product {
     display: flex;
     justify-content: space-between;
