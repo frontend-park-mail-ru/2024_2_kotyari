@@ -7,8 +7,9 @@ import {
   validateInterface,
 } from '../types/types.js';
 import { menuSignIn } from '../views/configs.js';
-import { IRouter, User } from '../../../../services/types/types';
-import { storageUser } from '../../../../services/storage/user';
+import { IRouter, IUser } from '../../../../services/types/types';
+import { defaultUser, storageUser } from '../../../../services/storage/user';
+import { updateAfterAuth, updateAfterLogout } from '../../../layouts/body';
 
 export class LoginPresenter {
   private api: SignInAPI;
@@ -49,8 +50,10 @@ export class LoginPresenter {
     this.api
       .logout()
       .then(() => {
-        this.view.updateAfterLogout();
+        updateAfterLogout(defaultUser);
         storageUser.clearUserData()
+
+        this.router.clearHistory();
         this.router.navigate('/');
       })
       .catch((err) => {
@@ -78,12 +81,13 @@ export class LoginPresenter {
 
       .then((response) => {
         if (response.status === 200) {
-          const userInfo = response.body as User;
+          const userInfo = response.body as IUser;
 
           storageUser.saveUserData(userInfo);
-          this.view.updateAfterAuth(userInfo);
-          this.router.navigate('/');
-          return;
+          updateAfterAuth(userInfo);
+
+          this.router.back();
+          return Promise.resolve(response);
         }
 
         const error = response.body as ErrorResponse;

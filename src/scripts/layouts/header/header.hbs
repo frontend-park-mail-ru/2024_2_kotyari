@@ -7,13 +7,16 @@
 <!-- Вторая строка -->
     <div class="header-bottom">
         <div class="logo" id="logo" href="/catalog" router="stability-active">oxic</div>
-        <button class="catalog-link catalog-button" title="Каталог" href="/catalog" router="stability-active"><txt class="catalog-simbol">&#8801;</txt><span>Каталог</span></button>
-      <div id="searcher"></div>
+        <button class="catalog-link catalog-button" title="Каталог" href="/catalog" router="stability-active"><txt class="catalog-simbol">&#8801;
+        </txt><span>Каталог</span></button>
+      <div id="searcher">
+
+      </div>
         <div class="icons">
             <div class="icon" id="avatar-icon">
                 <span class="material-icons">account_circle</span>
                 {{#if name}}
-                    <span class="icon-label-hidden catalog-link" id="name">{{name}}</span>
+                    <span class="icon-label-hidden catalog-link" id="name">{{username}}</span>
                     <div class="icon-dropdown" id="avatar">
                         <a href="/account" router="stability-active" class="catalog-link">Личный кабинет</a>
                         <a href="/logout" router="stability-active" class="catalog-link">Выход</a>
@@ -29,6 +32,10 @@
             <div router="stability-active" class="icon" href="/cart" title="Корзина">
                 <span class="material-icons">shopping_cart</span>
                 <span class="icon-label catalog-link">Корзина</span>
+            </div>
+            <div router="stability-active" class="icon" href="/category" title="Корзина">
+              <span class="material-icons">category</span>
+              <span class="icon-label catalog-link">Категории</span>
             </div>
             <div router="stability-active" class="icon" href="/favorites" title="Избранное">
                 <span class="material-icons">favorite</span>

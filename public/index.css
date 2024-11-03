@@ -15,8 +15,9 @@
 @import '/src/scripts/components/auth-menu/views/error.css';
 @import '/src/scripts/components/auth-menu/views/form.css';
 @import '/src/scripts/components/auth-menu/views/toggle-password.css';
-@import '/src/scripts/components/elements/searcher/searcher.css';
 @import '/src/scripts/components/carousel/views/carousel.css';
+@import '/src/scripts/components/searcher/searcher.css';
+@import "/src/scripts/components/category/view/category.css";
 
 * {
     margin: 0;

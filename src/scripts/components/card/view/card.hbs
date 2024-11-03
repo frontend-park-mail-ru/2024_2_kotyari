@@ -4,31 +4,41 @@
 <!--    <p class="loading-text">Товары будут добавлены позже.</p>-->
 <!--</div>-->
 
+<div class="container">
+  <div class="cards-view-title" style="display: block; margin-bottom: 10px; margin-left: 20px;">
+    {{page_title}}
+  </div>
+
+
 <div class="catalog" id="cards">
-    {{#each products}}
-        <div class="card" href="/product/{{id}}" router="changed-active">
-            <div class="card-image">
-                <img
-                        src="data:image;base64,{{image_url}}"
-                        loading="lazy"
-                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"
-                />
-            </div>
-            <div class="card-info">
-                <div class="price">
-                    <span class="current-price">{{price}}₽</span>
-                    {{#if original_price}}
-                        <span class="old-price">{{original_price}}₽</span>
-                    {{/if}}
-                    {{#if discount}}
-                        <span class="discount">-{{discount}}%</span>
-                    {{/if}}
-                </div>
-                <div class="description" title="{{description}}">
-                    {{name}}
-                </div>
-                <a class="buy-button">Купить</a>
-            </div>
+
+  {{#each products}}
+    <div class="card" href="/product/{{id}}" router="changed-active">
+      <div class="card-image">
+        <img
+          src="{{image_url}}"
+          loading="lazy"
+        />
+        <!--                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"-->
+        <!--                />-->
+      </div>
+      <div class="card-info">
+        <div class="price">
+          <span class="current-price">{{price}}₽</span>
+          {{#if original_price}}
+            <span class="old-price">{{original_price}}₽</span>
+          {{/if}}
+          {{#if discount}}
+            <span class="discount">-{{discount}}%</span>
+          {{/if}}
         </div>
+        <div class="card-title">
+          {{title}}
+        </div>
+
+        <a class="buy-button">В корзину</a>
+      </div>
+    </div>
     {{/each}}
+</div>
 </div>

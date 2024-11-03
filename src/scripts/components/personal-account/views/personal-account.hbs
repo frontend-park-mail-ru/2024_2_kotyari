@@ -3,24 +3,29 @@
   <div class="account__column-personal-account">
     <div class="account__box-personal-account user-info">
       <div class="account__user-details">
-        <img src="{{user.photoUrl}}" alt="User Photo" class="account__user-photo">
-        <h2 class="account__user-name">{{user.name}}</h2>
-        <span class="material-icons account__notification">{{#if user.notifications}}notifications_unread{{else}}notifications{{/if}}</span>
+        <div class="account__avatar-container">
+          <img src="{{avatar_url}}" alt="User Photo" class="account__user-photo">
+          <div class="account__avatar-overlay">
+            <span class="account__avatar-text">Поменять аватар</span>
+          </div>
+        </div>
+        <h2 class="account__user-name">{{username}}</h2>
+<!--        <span class="material-icons account__notification">{{#if user.notifications}}notifications_unread{{else}}notifications{{/if}}</span>-->
       </div>
       <div class="account__user-details">
         <div class="product-page__description-wrapper">
           <div class="product-page__description-item">
-            <span class="product-page__description-key">Пол</span>: <span class="product-page__description-value gender">{{user.gender}}</span>
+            <span class="product-page__description-key">Пол:</span><span class="product-page__description-value gender">{{gender}}</span>
           </div>
           <div class="product-page__description-item">
-            <span class="product-page__description-key">Почта</span>: <span class="product-page__description-value email">{{user.email}}</span>
+            <span class="product-page__description-key">Почта:</span> <span class="product-page__description-value email">{{email}}</span>
           </div>
         </div>
         <button id="edit-user-info" class="account__edit-btn user-info" type="button">
           <span class="material-icons account__edit">edit</span>
         </button>
       </div>
-      <button class="account__logout-button-personal-account" href="/logout" router="stability-active">Выход</button>
+      <button class="account__logout-button-personal-account" href="/logout" router="changed-active">Выход</button>
 
     </div>
   </div>
@@ -54,7 +59,7 @@
         </div>
         <div class="{{this.detailsClass}}">
           <h3 class="{{this.titleClass}}">{{this.title}}</h3>
-          <p>{{this.text}}</p>
+          <p class="{{this.textClass}}" href="{{href}}" router="changed-active">{{this.text}}</p>
         </div>
       </div>
     {{/each}}

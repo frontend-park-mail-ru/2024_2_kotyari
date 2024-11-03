@@ -1,5 +1,5 @@
 @import '/public/css/parametrs/parameters.css';
-@import '/src/scripts/components/elements/searcher/searcher.css';
+@import '/src/scripts/components/searcher/searcher.css';
 
 /* Закрепляем хедер */
 header {

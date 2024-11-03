@@ -11,7 +11,7 @@ export class Carousel {
   constructor() {
     this.slides = document.querySelectorAll('.product-page__slide');
     this.thumbnails = document.querySelectorAll('.product-page__thumbnail');
-    this.list = document.querySelector('.product-page__gallery ul')!;
+    this.list = document.querySelector('.product-page__gallery ul') as HTMLElement;
     this.carousel = document.getElementById('carousel')!;
     this.currentIndex = 0;
     this.position = 0;

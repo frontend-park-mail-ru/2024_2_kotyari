@@ -4,7 +4,7 @@ import { AddressModal } from './address-modal';
 import { BaseModal } from './base-modal';
 import { ModalControllerParams } from '../views/types';
 
-type ModalType = 'edit_info' | 'edit_address';
+export type ModalType = 'edit_info' | 'edit_address';
 
 type ModalConstructor = new (config: ModalControllerParams, data: any, user: any) => BaseModal;
 
@@ -30,7 +30,6 @@ export class ModalFactory {
       return null;
     }
 
-    const modalInstance = new ModalClass(modalParams, data, user);
-    return modalInstance;
+    return new ModalClass(modalParams, data, user);
   }
 }

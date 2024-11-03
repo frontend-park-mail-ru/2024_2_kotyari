@@ -1,6 +1,7 @@
 import { CardApiInterface } from '../api/card.js';
 import { CardViewInterface } from '../view/card.js';
 import { router } from '../../../../services/app/init.js';
+import { backurl } from '../../../../services/app/config';
 
 export class CardPresenter {
   private api: CardApiInterface;
@@ -21,6 +22,10 @@ export class CardPresenter {
     return this.api
       .fetchCards()
       .then((cardsData) => {
+        cardsData.forEach((card) => {
+          card.image_url = `${backurl}/${card.image_url}`;
+        });
+
         this.view.render({ products: cardsData });
       })
       .catch((err) => {

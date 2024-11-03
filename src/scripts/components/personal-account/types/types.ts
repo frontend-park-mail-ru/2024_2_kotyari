@@ -1,5 +1,5 @@
 
-export interface User {
+export interface Account {
   name: string;
   photoUrl: string;
   gender: string;
@@ -32,7 +32,6 @@ export interface FavoritesPurchaseInfo {
 }
 
 export interface PersonalAccountData {
-  user: User;
   deliveryInfo: DeliveryInfo[];
   rightColumnInfo: FavoritesPurchaseInfo[];
 }

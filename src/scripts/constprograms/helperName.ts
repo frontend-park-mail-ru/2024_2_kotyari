@@ -54,6 +54,10 @@ export async function registerFunctions(): Promise<Boolean> {
         helperName.forEach((helpFunction: iHelper) => {
             Handlebars.registerHelper(helpFunction.name, helpFunction.function);
         })
+
+        Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+            return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
+        });
     } catch (error) {
         console.error(error);
 

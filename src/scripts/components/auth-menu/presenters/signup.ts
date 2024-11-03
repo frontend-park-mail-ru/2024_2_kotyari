@@ -4,12 +4,12 @@ import {
   ErrorResponse,
   errorViewInterface,
   SignUpAPI,
-  UserInfo,
   validateInterface,
 } from '../types/types';
 import { menuSignIn, menuSignUp } from '../views/configs.js';
 import { storageUser } from '../../../../services/storage/user';
-import { IRouter } from '../../../../services/types/types';
+import { IRouter, IUser } from '../../../../services/types/types';
+import { updateAfterAuth } from '../../../layouts/body';
 
 export class SignUpPresenter {
   private api: SignUpAPI;
@@ -75,9 +75,9 @@ export class SignUpPresenter {
       .signup(credentials)
       .then((response: authResponse) => {
         if (response.status === 200) {
-          const userInfo = response.body as UserInfo;
-          storageUser.saveUserData({ username: userInfo.username, city: userInfo.city });
-          this.view.updateAfterAuth(userInfo);
+          const userInfo = response.body as IUser;
+          storageUser.saveUserData(userInfo);
+          updateAfterAuth(userInfo);
 
           this.router.navigate('/');
           return;
