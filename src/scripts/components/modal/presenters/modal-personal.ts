@@ -1,6 +1,7 @@
 import { editNameGenderEmailConfig, ModalControllerParams, ModalField } from '../views/types';
 import { BaseModal } from './base-modal';
 import { ModalRenderer } from '../views/modal-render';
+import { backurl } from '../../../../services/app/config';
 
 
 
@@ -22,7 +23,6 @@ export class PersonalDataModal extends BaseModal {
       }
     });
 
-    // Render the modal using ModalRenderer
     this.modalElement = ModalRenderer.render(this.config.rootId, editNameGenderEmailConfig);
     this.setupListeners();
   }
@@ -32,18 +32,33 @@ export class PersonalDataModal extends BaseModal {
     const form = this.modalElement.querySelector(`#${editNameGenderEmailConfig.formId}`) as HTMLFormElement;
     if (!form) return;
 
-    // Handle form submission without Object.fromEntries
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const formData = new FormData(form);
       const updatedUser: Record<string, string> = {};
+
       formData.forEach((value, key) => {
         updatedUser[key] = value as string;
       });
 
-      this.onSubmitCallback(updatedUser);
-      this.close();
+      try {
+        const response = await fetch(`${backurl}/account`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedUser),
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          this.onSubmitCallback(updatedUser);
+          this.close();
+        } else {
+          console.error('Failed to update profile:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error);
+      }
     });
 
     // Close button listener

@@ -1,6 +1,7 @@
 import { BaseModal } from './base-modal';
 import { editAddressConfig, ModalControllerParams } from '../views/types';
 import { ModalRenderer } from '../views/modal-render';
+import { backurl } from '../../../../services/app/config';
 
 export class AddressModal extends BaseModal {
   private readonly onSubmitCallback: (updatedAddress: Record<string, string>) => void;
@@ -25,17 +26,33 @@ export class AddressModal extends BaseModal {
     const form = this.modalElement.querySelector(`#${editAddressConfig.formId}`) as HTMLFormElement;
     if (!form) return;
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const formData = new FormData(form);
-      const updatedAddress = Array.from(formData.entries()).reduce((acc, [key, value]) => {
-        acc[key] = value as string;
-        return acc;
-      }, {} as Record<string, string>);
+      const updatedAddress: Record<string, string> = {};
 
-      this.onSubmitCallback(updatedAddress);
-      this.close();
+      formData.forEach((value, key) => {
+        updatedAddress[key] = value as string;
+      });
+
+      try {
+        const response = await fetch(`${backurl}/address`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedAddress),
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          this.onSubmitCallback(updatedAddress);
+          this.close();
+        } else {
+          console.error('Failed to update address:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error updating address:', error);
+      }
     });
 
     const closeButton = this.modalElement.querySelector('.btn__close');

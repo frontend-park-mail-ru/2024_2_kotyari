@@ -79,7 +79,6 @@ const categoryPresenter = new CategoryPresenter(categoryAPI, categoryView, cardV
 // Определение маршрутов
 const accountPresenter = new AccountPresenter(backurl, rootId);
 
-// todo конфиг пути сделать
 router.addRoute(AUTH_URLS.LOGIN.route, () => loginPresenter.init(), new RegExp('^/login$'), false, true);
 
 router.addRoute(AUTH_URLS.SIGNUP.route, () => signUpPresenter.init(), new RegExp('^/signup$'), false, true);

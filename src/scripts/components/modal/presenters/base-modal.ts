@@ -13,9 +13,12 @@ export abstract class BaseModal {
   }
 
   public open() {
+    this.modalElement = document.getElementById('modal-render');
+
     if (!this.modalElement) {
       this.renderContent();
     }
+
     if (this.modalElement) {
       this.modalElement.style.visibility = 'visible';
       this.modalElement.style.opacity = '1';

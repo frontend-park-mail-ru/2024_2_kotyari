@@ -6,6 +6,7 @@ export class AccountView {
   private readonly rootId: string;
   private readonly compiledTemplate: HandlebarsTemplateDelegate;
   private rootElement: HTMLElement | null;
+
   public onEditAvatarClick?: () => void;
   public onEditUserInfoClick?: () => void;
   public onEditAddressClick?: () => void;
