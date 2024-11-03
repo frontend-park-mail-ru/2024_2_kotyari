@@ -3,7 +3,7 @@ import { rootId } from '@/services/app/config';
 import Handlebars from 'handlebars';
 
 export interface CardViewInterface {
-  render(data: { products: any[] }): void;
+  render(data: { products: any[], page_title?: string  }, title?: string): void;
 }
 
 export class CardView implements CardViewInterface {
@@ -13,20 +13,20 @@ export class CardView implements CardViewInterface {
     this.compiled = Handlebars.compile(card);
   }
 
-  private _render = (data: { products: any[] }): void => {
+  render = (data: { products: any[], page_title?: string }, title?: string): void => {
     const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      console.log(`ошибка rooElement ${rootElement} -- rootId ${rootId}`);
+      console.log(`ошибка rootElement ${rootElement} -- rootId ${rootId}`);
       return;
     }
 
     rootElement.innerHTML = '';
     const templateElement = document.createElement('div');
+    data.page_title = 'Каталог'
+    if (title !== '' && title != undefined) {
+      data.page_title = 'Категория: ' + title;
+    }
     templateElement.innerHTML = this.compiled(data);
     rootElement.appendChild(templateElement);
-  };
-
-  render = (data: { products: any[] }): void => {
-    this._render(data);
   };
 }

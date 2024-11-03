@@ -1,22 +1,29 @@
-import { User } from '../types/types';
+import { IUser, User } from '../types/types';
+
+export const defaultUser = new User('', 'Москва');
 
 class StorageUser {
-  private userData: User = { username: '', city: 'Москва' };
+  private userData: IUser;
 
-  // Метод для получения данных
-  public getUserData(): User {
-    return this.userData as User;
+  constructor(user: IUser) {
+    this.userData = user;
   }
 
-  // Метод для сохранения данных
-  public saveUserData(data: User): void {
+  public getUserData(): IUser {
+    return this.userData as IUser;
+  }
+
+  public saveUserData(data: IUser): void {
+    console.log(data);
+
     this.userData = data;
   }
 
-  // Метод для очистки данных
   public clearUserData(): void {
-    this.userData = { username: '', city: 'Москва' };
+    console.log('Я РАБОТАЮ');
+
+    this.userData = defaultUser;
   }
 }
 
-export const storageUser = new StorageUser();
+export const storageUser = new StorageUser(defaultUser);

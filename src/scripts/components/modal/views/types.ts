@@ -1,4 +1,15 @@
-import { personalAccountData } from '../../personal-account/views/personal-account-config';
+
+export interface ModalField {
+  id: string;
+  label: string;
+  type: 'text' | 'email' | 'select';
+  name: string;
+  value?: string;
+  error_id: string;
+  options?: { value: string; label: string }[];
+  selected?: string;
+}
+
 
 export const editNameGenderEmailConfig = {
   id: 'edit_info',
@@ -10,7 +21,7 @@ export const editNameGenderEmailConfig = {
       label: 'Имя',
       type: 'text',
       name: 'name',
-      value: personalAccountData.user.name,
+      value: '',
       error_id: 'nameError',
     },
     {
@@ -22,7 +33,7 @@ export const editNameGenderEmailConfig = {
         { value: 'Мужской', label: 'Мужской' },
         { value: 'Женский', label: 'Женский' },
       ],
-      selected: personalAccountData.user.gender,
+      selected: 'Мужской',
       error_id: 'genderError',
     },
     {
@@ -30,10 +41,10 @@ export const editNameGenderEmailConfig = {
       label: 'Почта',
       type: 'email',
       name: 'email',
-      value: personalAccountData.user.email,
+      value: '',
       error_id: 'emailError',
     },
-  ],
+  ] as ModalField[],
   submitText: 'Сохранить изменения',
 };
 
@@ -43,13 +54,37 @@ export const editAddressConfig = {
   formId: 'address-edit-form',
   fields: [
     {
-      id: 'user-address',
-      label: 'Адрес',
+      id: 'user-city',
+      label: 'Город',
       type: 'text',
-      name: 'address',
-      value: personalAccountData.user.address,
+      name: 'city',
+      value: '',
       error_id: 'addressError',
     },
+    {
+      id: 'user-street',
+      label: 'Улица',
+      type: 'text',
+      name: 'street',
+      value: '',
+      error_id: 'addressError',
+    },
+    {
+      id: 'user-house',
+      label: 'Дом',
+      type: 'text',
+      name: 'house',
+      value: '',
+      error_id: 'addressError',
+    },
+    {
+      id: 'user-flat',
+      label: 'Этаж',
+      type: 'text',
+      name: 'flat',
+      value: '',
+      error_id: 'addressError',
+    }
   ],
   submitText: 'Сохранить изменения',
 };

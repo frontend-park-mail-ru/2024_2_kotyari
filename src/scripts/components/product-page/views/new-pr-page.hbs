@@ -51,19 +51,21 @@
     {{/each}}
 
     <div class="product-page__characteristics">
-      <h2>Характеристики</h2>
       <ul>
         {{#each characteristics}}
-          <li><strong>{{@key}}:</strong> {{this}}</li>
+          <div class="product-page__description-item">
+            <span class="product-page__description-key">{{@key}}</span>: <span class="product-page__description-value">{{this}}</span>
+          </div>
         {{/each}}
       </ul>
     </div>
 
+<!--    <div class="product-page__more-description-link">Перейти к описанию</div>-->
+    <br/>
+    <br/>
     <div class="product-page__description-product-page">
       {{description}}
     </div>
-
-    <a href="#more-description" class="product-page__more-description-link">Перейти к описанию</a>
   </div>
 
   <div class="product-page__purchase-info">

@@ -4,41 +4,49 @@ export abstract class BaseModal {
   protected config: ModalControllerParams;
   protected data: any;
   protected user: any;
+  protected modalElement: HTMLElement | null = null; // Add modalElement here
 
-  constructor(config: ModalControllerParams, data: any, user: any) {
+  protected constructor(config: ModalControllerParams, data: any, user: any) {
     this.config = config;
     this.data = data;
     this.user = user;
   }
 
   public open() {
-    const modalElement = document.getElementById(this.config.modal);
-    const closeButton = modalElement?.querySelector(this.config.btnClose);
+    if (!this.modalElement) {
+      this.renderContent();
+    }
+    if (this.modalElement) {
+      this.modalElement.style.visibility = 'visible';
+      this.modalElement.style.opacity = '1';
 
-    if (modalElement) {
-      modalElement.style.visibility = 'visible';
-      modalElement.style.opacity = '1';
+      if (!this.config.btnClose){
+        this.config.btnClose = 'btn__close';
+      }
 
+      const closeButton = this.modalElement.querySelector(this.config.btnClose);
       closeButton?.addEventListener('click', this.close.bind(this));
 
-      modalElement.addEventListener('click', this.handleOutsideClick.bind(this));
+      this.modalElement.addEventListener('click', this.handleOutsideClick.bind(this));
     }
   }
 
   public close() {
-    const modalElement = document.getElementById(this.config.modal);
-    if (modalElement) {
-      modalElement.style.opacity = '0';
+    if (this.modalElement) {
+      this.modalElement.style.opacity = '0';
       setTimeout(() => {
-        modalElement.style.visibility = 'hidden';
-        modalElement.removeEventListener('click', this.handleOutsideClick.bind(this));
+        this.modalElement!.style.visibility = 'hidden';
+        this.modalElement!.removeEventListener('click', this.handleOutsideClick.bind(this));
       }, 300);
     }
   }
 
   private handleOutsideClick(event: MouseEvent) {
-    const modalElement = document.getElementById(this.config.modal);
-    const modalContent = modalElement?.querySelector('.modal__container');
+    if (!this.modalElement) {
+      console.error(this.modalElement, ' not found');
+      return;
+    }
+    const modalContent = this.modalElement.querySelector('.modal__container');
     if (modalContent && !modalContent.contains(event.target as Node)) {
       this.close();
     }

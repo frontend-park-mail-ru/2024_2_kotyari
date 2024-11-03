@@ -36,9 +36,26 @@ export default class AuthView implements AuthViewInterface {
   };
 
   updateAfterAuth = (user: User): void => {
+    console.log('updateAfterAuth', user);
+
     const avatarElement = document.getElementById('avatar');
+    if (!avatarElement) {
+      console.log('avatarElement not found');
+      return;
+    }
     const nameElement = document.getElementById('name');
-    const cityElement = document.getElementById('city');
+    if (!nameElement) {
+      console.log('nameElement not found');
+      return;
+    }
+    const cityElement = document.getElementById('user-city');
+    if (!cityElement) {
+      console.log('cityElement not found');
+    }
+
+    console.log(avatarElement, nameElement,cityElement);
+
+    console.log(user);
 
     if (avatarElement) {
       avatarElement.innerHTML = `
@@ -57,9 +74,22 @@ export default class AuthView implements AuthViewInterface {
     }
   };
 
-  updateAfterLogout = (): void => {
+  updateAfterLogout = (user: User): void => {
     const avatarElement = document.getElementById('avatar');
+    if (!avatarElement) {
+      console.log('avatarElement not found');
+      return;
+    }
     const nameElement = document.getElementById('name');
+    if (!nameElement) {
+      console.log('nameElement not found');
+      return;
+    }
+    const cityElement = document.getElementById('user-city');
+    if (!cityElement) {
+      console.log('cityElement not found');
+      return;
+    }
 
     if (avatarElement) {
       avatarElement.innerHTML = `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
@@ -69,6 +99,10 @@ export default class AuthView implements AuthViewInterface {
     if (nameElement) {
       nameElement.textContent = 'Вход';
       nameElement.classList.add('icon-label-hidden', 'catalog-link');
+    }
+
+    if (cityElement) {
+      cityElement.textContent = user.city;
     }
   };
 

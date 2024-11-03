@@ -23,27 +23,42 @@ export default class Router {
     this.navigate(window.location.pathname, false); // false означает, что не нужно пушить состояние
   }
 
-  private onPopState(event: PopStateEvent): void {
-    const path = event.state ? event.state.page : window.location.pathname;
-    this.clearContainer();
-    this.resolveRoute(path);
-  }
-
   addRoute(path: string, handler: () => void, pattern: RegExp, loginRequired = false, logoutRequired = false): void {
     const route = new Route(path, handler, pattern, loginRequired, logoutRequired);
     this.routes.push(route);
   }
 
-  navigate(path: string, pushState: boolean = true): void {
+  clearHistory = (): void => {
+    history.replaceState(null, '', this.root);
+
+    history.pushState(null, '', this.root);
+  }
+
+  back = (): void => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      this.navigate(this.root, false);
+    }
+  };
+
+  navigate(path: string, pushState: boolean = true, replaceState: boolean = false): void {
     const url = this.getFormattedURL(path);
 
-    if (pushState) {
+    if (replaceState) {
+      history.replaceState({ page: url }, '', url);
+    } else if (pushState) {
       history.pushState({ page: url }, '', url);
     }
 
     this.clearContainer();
     this.resolveRoute(url);
     this.addHandlers();
+  }
+
+  getRouteParams(url: string = window.location.pathname): { [key: string]: string } | null {
+    const route = this.routes.find((route) => route.matches(url));
+    return route ? route.getParams(url) : null;
   }
 
   private addHandlers = () => {
@@ -72,7 +87,7 @@ export default class Router {
     const route = this.routes.find((route) => route.matches(url));
 
     if (!route) {
-      this.navigate('/error/404', false);
+      this.navigate('/error/404', false, true);
       history.replaceState(null, '', window.location.pathname);
       return;
     }
@@ -88,18 +103,17 @@ export default class Router {
     }
 
     if (route.logoutRequired) {
-      const flag:boolean = isAuth();
+      const flag = isAuth();
 
       if (flag) {
-        console.log('Пользователь вошел в аккаунт');
-        history.back();
+        console.log('Пользователь вошел в аккаунт', );
+        this.navigate('/', false);
         return;
       }
     }
 
     route.handler();
   }
-
   private listen(): void {
     window.addEventListener('popstate', this.onPopState.bind(this));
   }
@@ -130,5 +144,11 @@ export default class Router {
         });
       }
     });
+  }
+
+  private onPopState(event: PopStateEvent): void {
+    const path = event.state ? event.state.page : window.location.pathname;
+    this.clearContainer();
+    this.resolveRoute(path);
   }
 }

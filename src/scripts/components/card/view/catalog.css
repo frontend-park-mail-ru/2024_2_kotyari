@@ -1,11 +1,32 @@
+@import '/public/css/parametrs/parameters.css';
+
+.cards-view-title {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    font-size: 30px;
+    font-weight: var(--font-weight-bold);
+    color: black;
+    font-family: var(--mega-font-family), sans-serif ;
+}
+
+.container {
+    margin: var(--margin-auto);
+    justify-content: center;
+    display: flex;
+    max-width: 1300px;
+    flex-direction: column;
+}
+.cards-view-title {
+    margin: var(--margin-auto);
+}
+
 .catalog {
     max-width: 1300px;
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
     gap: var(--gap);
     padding: var(--padding) 0;
-    justify-content: center;
-    margin: var(--margin-auto);
+    display: grid;
 }
 
 /* Карточка товара */

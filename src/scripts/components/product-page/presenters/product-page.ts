@@ -3,6 +3,7 @@ import { productData } from './data.js';
 import { Carousel } from '../../carousel/presenters/carousel';
 import { getProductData } from '../api/product-page';
 import { backurl } from '../../../../services/app/config';
+import { router } from '../../../../services/app/init';
 
 export class ProductPageBuilder {
   private productPage: ProductPage;
@@ -13,7 +14,14 @@ export class ProductPageBuilder {
 
   async build() {
     try {
-      const productData = await getProductData(15); // Замените на нужный ID
+      const keys = router.getRouteParams();
+      if (keys === null) {
+        return
+      }
+
+      const id = keys["id"];
+      console.log(id);
+      const productData = await getProductData(id);
 
       if (productData.seller && productData.seller.logo && !productData.seller.logo.startsWith('http')) {
         productData.seller.logo = `${backurl}/${productData.seller.logo}`;

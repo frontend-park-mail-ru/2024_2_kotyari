@@ -68,7 +68,7 @@ async function fetchProductData(productId: number): Promise<ProductData> {
 
 
 
-export async function getProductData(productId: number): Promise<ProductData | { ok: false }> {
+export async function getProductData(productId: string): Promise<ProductData | { ok: false }> {
   const url = `${backurl}/product/${productId}`;
 
   try {

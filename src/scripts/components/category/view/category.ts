@@ -1,35 +1,34 @@
 import category from './category.hbs?raw';
 import { rootId } from '../../../../services/app/config';
 import Handlebars from 'handlebars';
+import { Category } from '../api/category';
+import { CardViewInterface } from '../../card/view/card';
 
-interface Category {
-  name: string;
-  image: string;
+
+export interface CategoryViewInterface {
+  build(config: {categories: Category[]}): void;
+  renderCategoryProducts(products: { products: any[] }, link: string): void;
 }
 
-export function generateCategories(config: Array<Category>): void {
-  // Предположим, что мы используем Handlebars для рендеринга
+export class CategoryView implements CategoryViewInterface {
+  private readonly template: any;
+  private readonly cardView: any;
 
-  // Чтение шаблона hbs файла
-  const templateContent = category;
-  const template = Handlebars.compile(templateContent);
+  constructor(cardView: CardViewInterface) {
+    this.template = Handlebars.compile(category);
+    this.cardView = cardView;
+  }
 
-  // Создание контекста с категориями из конфигурации
-  const context = { categories: config };
+  build = (config: {categories: Category[]}) =>{
+    const htmlContent = this.template(config);
 
-  // Генерация HTML страницы с использованием шаблона
-  const htmlContent = template(context);
+    const root = document.getElementById(rootId);
 
-  const root = document.getElementById(rootId);
+    root.innerHTML = htmlContent;
+  }
 
-  root.innerHTML = htmlContent;
+  renderCategoryProducts = (products: { products: any[] }, link: string): void => {
+    // products.page_title = category.category.name;
+    this.cardView.render(products, link);
+  }
 }
-
-// Пример конфигурации категорий
-export const categoryConfig: Array<Category> = [
-  { name: "Технологии", image: "https://cache-limeshop.cdnvideo.ru/limeshop/aa/7584034295a65c7a7b16611ee83c700155dc81e05.jpeg?q=85&w=849" },
-  { name: "Здоровье", image: "https://cache-limeshop.cdnvideo.ru/limeshop/aa/7584034295a65c7a7b16611ee83c700155dc81e05.jpeg?q=85&w=849" },
-  { name: "Спорт", image: "https://cache-limeshop.cdnvideo.ru/limeshop/aa/7584034295a65c7a7b16611ee83c700155dc81e05.jpeg?q=85&w=849" },
-];
-
-// Вызов функции для генерации категорий

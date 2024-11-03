@@ -17,16 +17,16 @@ export class Route {
     return this.pattern.test(url);
   };
 
-  // matches = (url: string): { [key: string]: string } | null => {
-  //   const match = this.pattern.exec(url);
-  //   if (match) {
-  //     const params: { [key: string]: string } = {};
-  //     const keys = this.route.match(/:(\w+)/g) || [];
-  //     keys.forEach((key, index) => {
-  //       params[key.substring(1)] = match[index + 1]; // index + 1, потому что первый элемент - это полное совпадение
-  //     });
-  //     return params;
-  //   }
-  //   return null;
-  // }
+  getParams(url: string): { [key: string]: string } | null {
+    const match = this.pattern.exec(url);
+    if (match) {
+      const params: { [key: string]: string } = {};
+      const keys = this.route.match(/:(\w+)/g) || [];
+      keys.forEach((key, index) => {
+        params[key.substring(1)] = match[index + 1]; // index + 1, так как первый элемент - полное совпадение
+      });
+      return params;
+    }
+    return null;
+  }
 }

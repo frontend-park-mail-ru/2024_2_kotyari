@@ -1,30 +1,19 @@
-import Handlebars from "handlebars";
-import {rootId} from "../../../../services/app/config";
-import soonTmp from './soon.hbs?raw';
+import { rootId } from '../../../../services/app/config';
+import soonTemplate from './soon.hbs?raw';
+import Handlebars from 'handlebars';
 
-const returnPage = '/';
+const compiled = Handlebars.compile(soonTemplate);
 
-/**
- * Отображает шаблон 'soon' в основной области контента.
- *
- * Эта функция загружает шаблон 'soon' и вставляет его в 'main'.
- *
- * @returns {Promise} Промис, который разрешается после успешного отображения шаблона.
- */
-export function soon() {
-    let config = {
-        return: returnPage,
-    };
+export function soon() :void{
+  const root = document.getElementById(rootId)
+  if(!root) return;
 
-    const compiled = Handlebars.compile(soonTmp);
+  root.innerHTML = '';
 
-    const rootElement = document.getElementById(rootId) as HTMLElement;
-    if (!rootElement) {
-        console.error(`Element ID = ${rootId} not found`);
-    }
 
-    rootElement.innerHTML = '';
-    const templateElement = document.createElement('div');
-    templateElement.innerHTML = compiled(config);
-    rootElement.appendChild(templateElement);
+  const div = document.createElement('div');
+  div.innerHTML = compiled({ return:'/' });
+
+  root.appendChild(div);
+
 }
