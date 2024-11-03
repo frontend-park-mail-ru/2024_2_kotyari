@@ -73,11 +73,11 @@ export class RightCartView {
     if (this.totalItemsElement && this.benefitPriceElement && this.finalPriceElement) {
       this.totalItemsElement.innerHTML = `
                 Всего: ${totalItems} ${Helper.pluralize(totalItems, 'товар', 'товара', 'товаров')}, ${Math.round(totalWeight * 10) / 10}кг
-                <span class="total-price">${totalPrice}${currency}</span>
+                <span class="total-price">${totalPrice} ${currency ? Helper.isNotUndefined(currency) : '₽' }</span>
             `;
 
-      this.benefitPriceElement.innerText = `${benefitPrice}${currency}`;
-      this.finalPriceElement.innerText = `${finalPrice}${currency}`;
+      this.benefitPriceElement.innerText = `${benefitPrice} ${currency ? Helper.isNotUndefined(currency) : '₽' }`;
+      this.finalPriceElement.innerText = `${finalPrice} ${currency ? Helper.isNotUndefined(currency) : '₽' }`;
     }
   }
 
@@ -87,7 +87,7 @@ export class RightCartView {
    */
   updateEmptyCart() {
     if (this.totalItemsElement && this.benefitPriceElement && this.finalPriceElement) {
-      this.totalItemsElement.innerHTML = 'Пока ничего в корзине нет';
+      this.totalItemsElement.innerHTML = 'Пока ничего не выбрано';
       this.benefitPriceElement.innerText = '0';
       this.finalPriceElement.innerText = '0';
     }

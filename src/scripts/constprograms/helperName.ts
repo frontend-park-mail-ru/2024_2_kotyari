@@ -33,6 +33,12 @@ const helperName: Array<iHelper> = [
     }, {
         name: 'eq',
         function: Helper.eq.bind(Helper)
+    }, {
+        name: 'isNotUndefined',
+        function: Helper.isNotUndefined.bind(Helper)
+    }, {
+        name: 'isNotNull',
+        function: Helper.isNotNull.bind(Helper)
     }
 ];
 

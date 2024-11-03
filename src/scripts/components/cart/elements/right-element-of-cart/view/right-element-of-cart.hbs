@@ -4,7 +4,7 @@
         <!-- Строка с количеством товаров, весом и ценой -->
         <p class="right-card__total-items">
             Всего: {{totalItems}} {{pluralize totalItems 'товар' 'товара' 'товаров'}}, {{totalWeight}}кг
-            <span class="right-card__total-price">{{totalPrice}}{{currency}}</span>
+            <span class="right-card__total-price">{{totalPrice}}{{#if (isNotUndefined currency)}}{{currency}}{{else}}₽{{/if}}</span>
         </p>
 
         <!-- Горизонтальная линия -->
@@ -13,13 +13,13 @@
         <!-- Строка с информацией о выгоде -->
         <p class="right-card__benefit">
             Моя выгода:
-            <span class="right-card__benefit-price">{{benefitPrice}}{{currency}}</span>
+            <span class="right-card__benefit-price">{{benefitPrice}}{{#if (isNotUndefined currency)}}{{currency}}{{else}}₽{{/if}}</span>
         </p>
 
         <!-- Строка с итоговой ценой -->
         <p class="right-card__grand-total">
             <strong>Итого:</strong>
-            <span class="right-card__final-price">{{finalPrice}}{{currency}}</span>
+            <span class="right-card__final-price">{{finalPrice}}{{#if (isNotUndefined currency)}}{{currency}}{{else}}₽{{/if}}</span>
         </p>
     </div>
 </div>

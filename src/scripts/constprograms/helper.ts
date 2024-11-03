@@ -81,7 +81,28 @@ export class Helper {
    * @param {*} b - Второе значение для сравнения.
    * @returns {boolean} Возвращает true, если значения равны, иначе false.
    */
-  public static eq(a: string, b: string): boolean {
+  public static eq(a: any, b: any): boolean {
+    console.log(a, b)
     return a === b;
+  }
+
+  /**
+   * Проверка на пустоту
+   *
+   * @param {*} value - Первое значение для логического И.
+   * @returns {boolean} Возвращает true, если значение - не пустота, иначе false.
+   */
+  public static isNotUndefined(value: any): boolean {
+    return Boolean(value !== undefined);
+  }
+
+  /**
+   * Проверка на не равенство 0
+   *
+   * @param {*} value - Первое значение для логического И.
+   * @returns {boolean} Возвращает true, если значение - не нулевое, иначе false.
+   */
+  public static isNotNull(value: any): boolean {
+    return Boolean(value !== 0);
   }
 }
