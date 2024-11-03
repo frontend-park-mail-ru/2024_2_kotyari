@@ -8,6 +8,7 @@ import rightElementOfCart from '../elements/right-element-of-cart/view/right-ele
 import dataSampling from '../elements/data-sampling/view/data-sampling.hbs?raw';
 import Handlebars from "handlebars";
 import {CartData} from "../types/types";
+import {RightCartView} from "../elements/right-element-of-cart/view/calculate-cart-totals";
 
 /**
  * Класс для сборки и отображения корзины на странице.
@@ -110,8 +111,6 @@ export class CartBuilder {
                 throw new Error(`Root element with ID ${rootId} not found`);
             }
 
-            //this.rootElement.innerHTML='';
-            // Вставляем основной шаблон корзины на страницу.
             this.rootElement.insertAdjacentHTML('beforeend', this.cartTemplate([]));
 
             this.leftCardsRoot = document.getElementById('left-cards');
@@ -119,19 +118,42 @@ export class CartBuilder {
             this.dataSamplingRoot = document.getElementById('data-sampling');
 
             if (this.leftCardsRoot && this.rightElementOfCartRoot && this.dataSamplingRoot) {
-                this.cartData = await CartApiInterface.getCartData();
+                try {
+                    this.cartData = await CartApiInterface.getCartData();
 
-                // Очищаем содержимое блоков перед добавлением новых данных.
-                this.leftCardsRoot.innerHTML = '';
-                this.rightElementOfCartRoot.innerHTML = '';
-                this.dataSamplingRoot.innerHTML = '';
+                    if (!this.cartData || this.cartData.products.length === 0) {
+                        const cartView = new RightCartView();
+                        cartView.updateEmptyCart();
+                        resolve();
+                        return;
+                    }
 
-                // Вставляем шаблоны с данными в соответствующие блоки.
-                this.leftCardsRoot.insertAdjacentHTML('beforeend', this.leftCardsTemplate(this.cartData));
-                this.rightElementOfCartRoot.insertAdjacentHTML('beforeend', this.rightElementOfCartTemplate(this.cartData));
-                this.dataSamplingRoot.insertAdjacentHTML('beforeend', this.dataSamplingTemplate(this.cartData));
+                    this.leftCardsRoot.innerHTML = '';
+                    this.rightElementOfCartRoot.innerHTML = '';
+                    this.dataSamplingRoot.innerHTML = '';
 
-                resolve();
+                    this.leftCardsRoot.insertAdjacentHTML('beforeend', this.leftCardsTemplate(this.cartData));
+                    this.rightElementOfCartRoot.insertAdjacentHTML('beforeend', this.rightElementOfCartTemplate(this.cartData));
+                    this.dataSamplingRoot.insertAdjacentHTML('beforeend', this.dataSamplingTemplate(this.cartData));
+
+                    resolve();
+                } catch (error) {
+                    if (error.message.includes('404')) {
+                        this.leftCardsRoot.innerHTML = '';
+                        this.rightElementOfCartRoot.innerHTML = '';
+                        this.dataSamplingRoot.innerHTML = '';
+
+                        this.leftCardsRoot.insertAdjacentHTML('beforeend', this.leftCardsTemplate(this.cartData));
+                        this.rightElementOfCartRoot.insertAdjacentHTML('beforeend', this.rightElementOfCartTemplate(this.cartData));
+                        this.dataSamplingRoot.insertAdjacentHTML('beforeend', this.dataSamplingTemplate(this.cartData));
+
+                        const rightCartView = new RightCartView();
+                        rightCartView.updateEmptyCart();
+                        resolve();
+                    } else {
+                        reject(new Error('Ошибка отрисовки cart'));
+                    }
+                }
             } else {
                 reject(new Error('Ошибка отрисовки cart'));
             }

@@ -87,11 +87,18 @@ export class RightCartView {
    */
   updateEmptyCart() {
     if (this.totalItemsElement && this.benefitPriceElement && this.finalPriceElement) {
-      this.totalItemsElement.innerHTML = 'Корзина пуста';
+      this.totalItemsElement.innerHTML = 'Пока ничего в корзине нет';
       this.benefitPriceElement.innerText = '0';
       this.finalPriceElement.innerText = '0';
     }
+
+    if (this.checkoutButton) {
+      this.checkoutButton.disabled = true;
+      this.checkoutButton.classList.add('disabled');
+      this.checkoutButton.setAttribute('title', 'Выберите хотя бы один товар для оформления заказа');
+    }
   }
+
 
   /**
    * Обновляет состояние кнопки "Оформить заказ" в зависимости от наличия выбранных товаров.

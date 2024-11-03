@@ -1,6 +1,7 @@
 import { DataSamplingView } from '../view/data-sampling.js';
 import { RightCartPresenter } from '../../right-element-of-cart/presenter/calculate-cart-totals';
 import { CartData } from "../../../types/types";
+import {CartApiInterface} from "../../../api/cart-api";
 
 /**
  * Класс DataSamplingPresenter управляет функционалом выбора товаров в корзине
@@ -62,13 +63,17 @@ export class DataSamplingPresenter {
    * @param checked булево значение: выделены ли все товары.
    */
   private handleSelectAllChange(checked: boolean) {
-    this.cartData.products = this.cartData.products.map((product) => ({
-      ...product,
-      isSelected: checked,
-    }));
-
-    this.cartView.initializeCheckboxes(this.cartData.products); // Обновляем состояние чекбоксов
-    this.updateSelectedCount(); // Обновляем количество выбранных товаров
+    try {
+      CartApiInterface.selectAllProducts(checked).then(() => {
+        this.cartData.products = this.cartData.products.map((product) => ({
+          ...product,
+          isSelected: checked,
+        }));
+        this.cartView.initializeCheckboxes(this.cartData.products);
+        this.updateSelectedCount();});
+    } catch (error) {
+      console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
+    }
   }
 
   /**
@@ -98,18 +103,17 @@ export class DataSamplingPresenter {
    * Удаляет выбранные товары из корзины и обновляет состояние.
    */
   private handleDeleteSelected() {
-    const selectedItems = this.cartView.getSelectedItems();
-    const selectedIds = selectedItems.map((item) => item.id.split('-')[2]);
-
-    // Удаляем товары из данных
-    this.cartData.products = this.cartData.products.filter((product) => !selectedIds.includes(product.id));
-
-    // Удаляем элементы из DOM
-    this.cartView.removeSelectedItems(selectedItems);
-
-    // Пересчитываем состояние select-all
-    this.updateSelectAllCheckbox();
-    this.updateSelectedCount();
+    try {
+      CartApiInterface.deleteSelectedProducts().then(() => {
+        this.cartData.products = this.cartData.products.map((product) => ({
+          ...product,
+        }));
+        this.cartView.initializeCheckboxes(this.cartData.products);
+        this.updateSelectedCount();
+      })
+    } catch (error) {
+      console.error("Ошибка при изменении состояния 'Удалить выбранное':", error);
+    }
   }
 
   /**
@@ -124,11 +128,17 @@ export class DataSamplingPresenter {
   /**
    * Обновляет состояние чекбокса "select-all" на основе состояния товаров в корзине.
    */
-  private updateSelectAllCheckbox() {
-    const selectedCount = this.cartData.products.filter((product) => product.isSelected).length;
-    const allChecked = selectedCount > 0 && selectedCount === this.cartData.products.length;
-    const isIndeterminate = selectedCount > 0 && !allChecked;
+  updateSelectAllCheckbox() {
+    try {
+      const selectedCount = this.cartData.products.filter((product) => product.isSelected).length;
+      const allChecked = selectedCount > 0 && selectedCount === this.cartData.products.length;
+      const isIndeterminate = selectedCount > 0 && !allChecked;
 
-    this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
+      CartApiInterface.selectAllProducts(isIndeterminate).then(() => {
+        this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
+      })
+    } catch (error) {
+      console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
+    }
   }
 }
