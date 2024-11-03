@@ -17,4 +17,40 @@ export const CART_URLS = {
             'Content-Type': 'application/json',
         }
     },
+    updateProductQuantity: {
+        route: '/cart/product/', // Плсде идет productId
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    },
+    selectProduct: {
+        route: '/cart/select/product/', // Плсде идет productId
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    },
+    selectAllProducts: {
+        route: '/cart/select/products',
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    },
+    deleteSelectedProducts: {
+        route: '/cart/select/product',
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    },
+    deleteProduct: {
+        route: '/cart/product/', // После идет productId
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    },
+    urlOfProduct: '/product/' // Посде идет ProductId
 };

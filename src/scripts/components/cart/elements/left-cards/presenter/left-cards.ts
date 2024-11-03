@@ -3,6 +3,7 @@ import { CartData, CartProduct } from '../../../types/types';
 import { LeftCardsView } from '../view/left-cards.js';
 import { RightCartView } from '../../right-element-of-cart/view/calculate-cart-totals.js';
 import { DataSamplingPresenter } from "../../data-sampling/presenter/data-sampling";
+import {CartApiInterface} from "../../../api/cart-api";
 
 /**
  * Класс LeftCardsPresenter управляет взаимодействием с карточками товаров слева
@@ -49,7 +50,7 @@ export class LeftCardsPresenter {
     this.dataSamplingPresenter = dataSamplingPresenter;
 
     const rightCartView = new RightCartView();
-    this.rightCartPresenter = new RightCartPresenter(rightCartView);
+    this.rightCartPresenter = new RightCartPresenter(rightCartView, this.cartData);
 
     // Привязка обработчиков событий
     this.view.onFavoriteToggle = this.handleFavoriteToggle.bind(this);
@@ -110,14 +111,20 @@ export class LeftCardsPresenter {
         product.quantity--;
       }
 
-      this.view.updateQuantityDisplay(productId, product.quantity);
+      try {
+        CartApiInterface.updateProductQuantity(productId, product.quantity).then(() => {
+          this.view.updateQuantityDisplay(productId, product.quantity);
 
-      // Переключение кнопки в режим удаления при количестве = 1
-      const isSingleItem = product.quantity === 1;
-      this.view.switchMinusButtonToDelete(productId, isSingleItem);
+          // Переключение кнопки в режим удаления при количестве = 1
+          const isSingleItem = product.quantity === 1;
+          this.view.switchMinusButtonToDelete(productId, isSingleItem);
 
-      product.isSingleItem = isSingleItem;
-      this.rightCartPresenter.calculateCartTotals();
+          product.isSingleItem = isSingleItem;
+          this.rightCartPresenter.calculateCartTotals();
+        })
+      } catch (error) {
+        console.error('Ошибка при обновлении количества товара:', error);
+      }
     }
   }
 
@@ -128,10 +135,17 @@ export class LeftCardsPresenter {
    */
   private handleRemoveItem(productId: string): void {
     this.cartData.products = this.cartData.products.filter((product) => product.id !== productId);
-    this.view.removeItem(productId);
-    this.updateSelectedCount(); // Пересчёт выбранных товаров
-    this.updateSelectAllCheckbox(); // Обновляем состояние select-all
-    this.dataSamplingPresenter.updateSelectAllCheckbox();
+
+    try {
+      CartApiInterface.deleteProduct(productId).then(() => {
+        this.view.removeItem(productId);
+        this.updateSelectedCount(); // Пересчёт выбранных товаров
+        this.updateSelectAllCheckbox(); // Обновляем состояние select-all
+        this.dataSamplingPresenter.updateSelectAllCheckbox();
+      })
+    } catch (error) {
+      console.error('Ошибка при удалении товара из корзины:', error);
+    }
   }
 
   /**
@@ -142,9 +156,16 @@ export class LeftCardsPresenter {
    */
   private handleSelectItem(productId: string, isSelected: boolean): void {
     const product = this.findProductById(productId);
-    if (product) {
-      product.isSelected = isSelected;
-      this.updateSelectedCount();
+
+    try {
+      CartApiInterface.selectProduct(productId, isSelected).then(() => {
+        if (product) {
+          product.isSelected = isSelected;
+          this.updateSelectedCount();
+        }
+      })
+    } catch (error) {
+      console.error('Ошибка при выборе товара в корзине:', error);
     }
   }
 
