@@ -20,7 +20,7 @@ export const editNameGenderEmailConfig = {
       id: 'user-name',
       label: 'Имя',
       type: 'text',
-      name: 'name',
+      name: 'username',
       value: '',
       error_id: 'nameError',
     },

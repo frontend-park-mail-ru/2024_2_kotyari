@@ -49,7 +49,7 @@ export class AccountView {
 
     const addressElement = this.rootElement.querySelector('.account__address-details .account__address-text');
     if (addressElement) {
-      addressElement.textContent = `${address.city}, ${address.street}, ${address.house}, ${address.flat}`;
+      addressElement.textContent = `г.${address.city}, ул.${address.street}, д.${address.house}, кв.${address.flat}`;
     }
   }
 
