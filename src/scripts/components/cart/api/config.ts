@@ -19,7 +19,7 @@ export const CART_URLS = {
     },
     updateProductQuantity: {
         route: '/cart/product/', // Плсде идет productId
-        method: 'POST',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         }

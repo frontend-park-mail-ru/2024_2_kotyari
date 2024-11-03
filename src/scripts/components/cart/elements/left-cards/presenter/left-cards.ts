@@ -103,16 +103,18 @@ export class LeftCardsPresenter {
    */
   private handleQuantityChange(productId: string, action: 'increase' | 'decrease'): void {
     const product = this.findProductById(productId);
-
+    let count:number = 0;
     if (product) {
       if (action === 'increase') {
         product.quantity++;
+        count =1;
       } else if (action === 'decrease' && product.quantity > 1) {
         product.quantity--;
+        count = -1;
       }
 
       try {
-        CartApiInterface.updateProductQuantity(productId, product.quantity).then(() => {
+        CartApiInterface.updateProductQuantity(productId, count).then(() => {
           this.view.updateQuantityDisplay(productId, product.quantity);
 
           // Переключение кнопки в режим удаления при количестве = 1
