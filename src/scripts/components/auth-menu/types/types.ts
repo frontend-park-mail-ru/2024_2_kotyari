@@ -1,4 +1,4 @@
-import { IUser, User } from '../../../../services/types/types';
+import { IUser } from '../../../../services/types/types';
 
 export type LoginCredentials = {
   email: string;
@@ -40,11 +40,7 @@ export interface errorViewInterface {
 }
 
 export interface AuthViewInterface {
-  updateAfterAuth(user: IUser): void;
-
   render(): void;
-
-  updateAfterLogout(user: User): void;
 }
 
 export interface SignInAPI {

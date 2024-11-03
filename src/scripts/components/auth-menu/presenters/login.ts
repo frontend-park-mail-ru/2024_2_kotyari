@@ -8,7 +8,8 @@ import {
 } from '../types/types.js';
 import { menuSignIn } from '../views/configs.js';
 import { IRouter, IUser } from '../../../../services/types/types';
-import { storageUser } from '../../../../services/storage/user';
+import { defaultUser, storageUser } from '../../../../services/storage/user';
+import { updateAfterAuth, updateAfterLogout } from '../../../layouts/body';
 
 export class LoginPresenter {
   private api: SignInAPI;
@@ -49,7 +50,7 @@ export class LoginPresenter {
     this.api
       .logout()
       .then(() => {
-        this.view.updateAfterLogout();
+        updateAfterLogout(defaultUser);
         storageUser.clearUserData()
 
         this.router.clearHistory();
@@ -83,7 +84,7 @@ export class LoginPresenter {
           const userInfo = response.body as IUser;
 
           storageUser.saveUserData(userInfo);
-          this.view.updateAfterAuth(userInfo);
+          updateAfterAuth(userInfo);
 
           this.router.back();
           return Promise.resolve(response);

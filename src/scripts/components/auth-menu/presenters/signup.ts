@@ -9,7 +9,7 @@ import {
 import { menuSignIn, menuSignUp } from '../views/configs.js';
 import { storageUser } from '../../../../services/storage/user';
 import { IRouter, IUser } from '../../../../services/types/types';
-import { User } from '../../modal/views/types';
+import { updateAfterAuth } from '../../../layouts/body';
 
 export class SignUpPresenter {
   private api: SignUpAPI;
@@ -77,7 +77,7 @@ export class SignUpPresenter {
         if (response.status === 200) {
           const userInfo = response.body as IUser;
           storageUser.saveUserData(userInfo);
-          this.view.updateAfterAuth(userInfo);
+          updateAfterAuth(userInfo);
 
           this.router.navigate('/');
           return;

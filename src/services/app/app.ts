@@ -1,19 +1,19 @@
-import { LoginView, router } from './init.js';
+import { router } from './init.js';
 import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
 import { registerFunctions } from '../../scripts/constprograms/helperName';
 import { ErrorResponse } from '../../scripts/components/auth-menu/types/types';
 import { categoryStorage } from '../storage/category';
-import { buildBody } from '../../scripts/layouts/body';
+import { buildBody, updateAfterAuth, updateAfterLogout } from '../../scripts/layouts/body';
 
 
 export const buildMain = (user: User): Promise<void> => {
   return buildBody({ rootId }).then(() => {
     if (user.username === '') {
-      LoginView.updateAfterLogout(user);
+      updateAfterLogout(user);
     } else {
-      LoginView.updateAfterAuth(user);
+      updateAfterAuth(user);
     }
   });
 };

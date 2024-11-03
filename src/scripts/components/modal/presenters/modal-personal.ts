@@ -3,8 +3,6 @@ import { BaseModal } from './base-modal';
 import { ModalRenderer } from '../views/modal-render';
 import { backurl } from '../../../../services/app/config';
 
-
-
 export class PersonalDataModal extends BaseModal {
   private readonly onSubmitCallback: (updatedUser: Record<string, string>) => void;
 

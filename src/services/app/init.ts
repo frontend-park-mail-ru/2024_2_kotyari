@@ -16,18 +16,14 @@ import { buildSingleOrderPage } from '../../scripts/components/single-order/sing
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import { storageUser } from '../storage/user';
-import { AccountPageBuilder } from '@/scripts/components/personal-account/presenters/account';
 import { CartBuilder } from "@/scripts/components/cart/view/cart-builder";
 import { OrderPlacementBuilder } from "@/scripts/components/order-placement/view/order-placement-builder";
 import { buildOrderList } from '@/scripts/components/order-list/order-list';
 import { orderList } from '@/scripts/components/order-list/order-list-config';
-// import { soon } from "@/scripts/components/custom-messages/soon/soon";
 import Handlebars from 'handlebars';
-import { categoryConfig, CategoryView, generateCategories } from '../../scripts/components/category/view/category';
+import { CategoryView } from '../../scripts/components/category/view/category';
 import { CategoryApi } from '../../scripts/components/category/api/category';
 import { CategoryPresenter } from '../../scripts/components/category/presenter/category';
-import { AccountAPI } from '../../scripts/components/personal-account/api/personal-account';
-import { AccountView } from '../../scripts/components/personal-account/views/account';
 import { AccountPresenter } from '../../scripts/components/personal-account/presenters/account';
 import { soon } from '../../scripts/components/custom-messages/soon/soon';
 
@@ -76,7 +72,6 @@ const categoryAPI = new CategoryApi();
 const categoryView = new CategoryView(cardView);
 const categoryPresenter = new CategoryPresenter(categoryAPI, categoryView, cardView, router);
 
-// Определение маршрутов
 const accountPresenter = new AccountPresenter(backurl, rootId);
 
 router.addRoute(AUTH_URLS.LOGIN.route, () => loginPresenter.init(), new RegExp('^/login$'), false, true);
@@ -107,6 +102,8 @@ router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), t
 router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), true, false);
 // router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category/[^/]+$'), false, false);
 // router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
+
+router.addRoute('/logout', () => loginPresenter.logout(), new RegExp('^/logout$'), true, false);
 
 router.addRoute(
   '/category',

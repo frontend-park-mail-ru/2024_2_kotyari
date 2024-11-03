@@ -89,13 +89,6 @@ export const editAddressConfig = {
   submitText: 'Сохранить изменения',
 };
 
-export interface User {
-  name: string;
-  gender: string;
-  email: string;
-  address: string;
-}
-
 export interface ModalControllerParams {
   modal: string;
   rootId: string;

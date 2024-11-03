@@ -2,8 +2,9 @@ import { AccountAPI, UserData } from '../api/personal-account';
 import { AccountView } from '../views/account';
 import { PersonalDataModal } from '../../modal/presenters/modal-personal';
 import { AddressModal } from '../../modal/presenters/modal-address';
-import { editAddressConfig, editNameGenderEmailConfig } from '../../modal/views/types';
 import { backurl } from '../../../../services/app/config';
+import { storageUser } from '../../../../services/storage/user';
+import { updateAfterAuth } from '../../../layouts/body';
 
 
 export class AccountPresenter {
@@ -105,7 +106,10 @@ export class AccountPresenter {
       const file = fileInput.files?.[0] || null;
       if (file) {
         try {
-          const newAvatarUrl = await this.accountAPI.updateAvatar(file);
+          let newAvatarUrl = await this.accountAPI.updateAvatar(file);
+          newAvatarUrl = `${backurl}/${newAvatarUrl}`;
+
+          this.userData.avatar_url = `${backurl}/${newAvatarUrl}`;
           this.view.updateAvatar(newAvatarUrl);
         } catch (error) {
           console.error('Failed to upload avatar:', error);
@@ -118,7 +122,7 @@ export class AccountPresenter {
 
   private async handleEditUserInfo() {
     const userDataRecord: Record<string, string> = {
-      name: this.userData.username,
+      username: this.userData.username,
       gender: this.userData.gender,
       email: this.userData.email,
     };
@@ -133,8 +137,13 @@ export class AccountPresenter {
           deliveryInfo: this.deliveryInfo,
           rightColumnInfo: this.rightColumnInfo,
         });
+
+        storageUser.changeUsername(this.userData.username);
+        updateAfterAuth(storageUser.getUserData());
       }
     );
+
+
 
     userInfoModal.open();
   }
@@ -153,6 +162,9 @@ export class AccountPresenter {
       (updatedAddress) => {
         this.userData.Address = { ...this.userData.Address, ...updatedAddress };
         this.view.updateAddress(this.userData.Address);
+
+        storageUser.changeCity(this.userData.Address.city);
+        updateAfterAuth(storageUser.getUserData());
       }
     );
     addressModal.open();

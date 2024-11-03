@@ -2,7 +2,6 @@ import { AuthViewInterface } from '../types/types.js';
 import form from './auth.hbs?raw';
 import Handlebars from 'handlebars';
 import { rootId } from '@/services/app/config';
-import { User } from '../../../../services/types/types';
 
 export default class AuthView implements AuthViewInterface {
   private readonly config: {};
@@ -33,77 +32,6 @@ export default class AuthView implements AuthViewInterface {
     document.querySelectorAll('.input-container__toggle-password').forEach((item) => {
       item.addEventListener('click', this.togglePassword as EventListener);
     });
-  };
-
-  updateAfterAuth = (user: User): void => {
-    console.log('updateAfterAuth', user);
-
-    const avatarElement = document.getElementById('avatar');
-    if (!avatarElement) {
-      console.log('avatarElement not found');
-      return;
-    }
-    const nameElement = document.getElementById('name');
-    if (!nameElement) {
-      console.log('nameElement not found');
-      return;
-    }
-    const cityElement = document.getElementById('user-city');
-    if (!cityElement) {
-      console.log('cityElement not found');
-    }
-
-    console.log(avatarElement, nameElement,cityElement);
-
-    console.log(user);
-
-    if (avatarElement) {
-      avatarElement.innerHTML = `
-      <a href="/account" router="stability-active" class="catalog-link">Личный кабинет</a>
-      <a href="/logout" router="stability-active" id="logout" class="catalog-link">Выход</a>
-    `;
-    }
-
-    if (nameElement) {
-      nameElement.textContent = user.username;
-      nameElement.classList.add('icon-label-hidden', 'catalog-link');
-    }
-
-    if (cityElement) {
-      cityElement.textContent = user.city;
-    }
-  };
-
-  updateAfterLogout = (user: User): void => {
-    const avatarElement = document.getElementById('avatar');
-    if (!avatarElement) {
-      console.log('avatarElement not found');
-      return;
-    }
-    const nameElement = document.getElementById('name');
-    if (!nameElement) {
-      console.log('nameElement not found');
-      return;
-    }
-    const cityElement = document.getElementById('user-city');
-    if (!cityElement) {
-      console.log('cityElement not found');
-      return;
-    }
-
-    if (avatarElement) {
-      avatarElement.innerHTML = `<a href="/login" router="stability-active" class="catalog-link">Вход</a>
-                        <a href="/signup" router="stability-active" class="catalog-link">Регистрация</a>`;
-    }
-
-    if (nameElement) {
-      nameElement.textContent = 'Вход';
-      nameElement.classList.add('icon-label-hidden', 'catalog-link');
-    }
-
-    if (cityElement) {
-      cityElement.textContent = user.city;
-    }
   };
 
   displayBackError = (message: string) => {

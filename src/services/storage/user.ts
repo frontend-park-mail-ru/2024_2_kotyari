@@ -24,6 +24,14 @@ class StorageUser {
 
     this.userData = defaultUser;
   }
+
+  public changeCity(city: string): void {
+    this.userData.city = city;
+  }
+
+  public changeUsername(username: string): void {
+    this.userData.username = username;
+  }
 }
 
 export const storageUser = new StorageUser(defaultUser);
