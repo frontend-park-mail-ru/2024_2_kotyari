@@ -47,12 +47,3 @@
     color: var(--link-color);
 }
 
-.auth-container__error {
-    padding: var(--small-padding);
-    background-color: var(--global-error-background-color);
-    color: var(--global-error-color);
-    border: var(--one-border) solid var(--global-error-border-color);
-    border-radius: var(--button-border-radius4);
-    margin-bottom: var(--big-margin-bottom);
-    display: none;
-}

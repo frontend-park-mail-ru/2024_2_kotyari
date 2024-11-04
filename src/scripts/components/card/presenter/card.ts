@@ -22,6 +22,7 @@ export class CardPresenter {
     return this.api
       .fetchCards()
       .then((cardsData) => {
+
         cardsData.forEach((card) => {
           card.image_url = `${backurl}/${card.image_url}`;
         });

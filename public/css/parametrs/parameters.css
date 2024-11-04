@@ -36,7 +36,7 @@
     --container-background-color: oklch(0.95 0 0);
     --error-color: red;
     --global-error-color: #721c24;
-    --error-background-color: #ffe6e6;
+    --error-background-color: #daa5a5;
     --global-error-background-color: #f8d7da;
     --global-error-border-color: #f5c6cb;
     --default-text-color: #000;
@@ -222,7 +222,7 @@
     --font-size-span-catalog-button: 16px;
     --font-size: 18px;
     --font-size-date-right: 14px;
-    --small-font-size: 12px;
+    --small-font-size: 14px;
     /* --default-font-size: 18px; */
     --font-size20: 20px;
     --card-title-font-size: 20px;
@@ -237,7 +237,7 @@
     --error-font-size: 0.875em;
     --default-font-size: 25px;
     --font-size-brand-product: var(--font-size-description-product);
-    --font-size-description-product: 15px;
+    --font-size-description-product: 16px;
     --litle-font-weight: 400;
     --midle-font-weight: 550;
     --card-prise-font-weight: 500;

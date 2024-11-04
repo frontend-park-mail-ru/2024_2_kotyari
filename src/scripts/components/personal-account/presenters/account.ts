@@ -28,7 +28,7 @@ export class AccountPresenter {
       this.userData = await this.accountAPI.fetchUserData();
       this.userData.avatar_url = `${backurl}/${this.userData.avatar_url}`;
 
-      this.deliveryInfo = this.buildDeliveryInfo(this.userData);
+      this.deliveryInfo = await this.buildDeliveryInfo(this.userData);
       this.rightColumnInfo = this.buildRightColumnInfo();
 
       this.view.render({
@@ -41,8 +41,12 @@ export class AccountPresenter {
     }
   }
 
-  private buildDeliveryInfo(userData: UserData) {
+  private async buildDeliveryInfo(userData: UserData) {
     const addressText = `${userData.Address.city}, ул.${userData.Address.street}, д.${userData.Address.house}, кв.${userData.Address.flat}`;
+
+    let msg: string;
+
+    msg = await this.accountAPI.getNearestDeliveryDate()
 
     return [
       {
@@ -53,7 +57,7 @@ export class AccountPresenter {
         titleClass: 'account__delivery-title',
         textClass: 'account__status-text',
         title: 'Доставка',
-        text: 'Ближайшая не ожидается',
+        text: msg,
         editable: false,
       },
       {
@@ -90,7 +94,7 @@ export class AccountPresenter {
         detailsClass: 'account__purchases-details',
         titleClass: 'account__purchases-title',
         textClass: 'account__purchases-text',
-        title: 'Покупки',
+        title: 'Заказы',
         text: 'Смотреть',
         href: '/order_list',
       }
@@ -112,12 +116,19 @@ export class AccountPresenter {
           this.userData.avatar_url = `${backurl}/${newAvatarUrl}`;
           this.view.updateAvatar(newAvatarUrl);
         } catch (error) {
-          console.error('Failed to upload avatar:', error);
+
+          const errorMessage = this.parseError(error);
+
+          this.view.displayErrorMessage(errorMessage);
         }
       }
     });
 
     fileInput.click();
+  }
+
+  private parseError(error: any): string {
+    return error.body.error_message;
   }
 
   private async handleEditUserInfo() {

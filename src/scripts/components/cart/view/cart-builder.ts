@@ -9,6 +9,7 @@ import dataSampling from '../elements/data-sampling/view/data-sampling.hbs?raw';
 import Handlebars from "handlebars";
 import {CartData} from "../types/types";
 import {RightCartView} from "../elements/right-element-of-cart/view/calculate-cart-totals";
+import { backurl } from '../../../../services/app/config';
 
 /**
  * Класс для сборки и отображения корзины на странице.
@@ -127,6 +128,10 @@ export class CartBuilder {
                         resolve();
                         return;
                     }
+
+                    this.cartData.products.forEach((cart) => {
+                        cart.image_url = `${backurl}/${cart.image_url}`;
+                    });
 
                     this.leftCardsRoot.innerHTML = '';
                     this.rightElementOfCartRoot.innerHTML = '';

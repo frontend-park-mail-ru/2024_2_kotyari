@@ -39,7 +39,7 @@ export const editNameGenderEmailConfig = {
     {
       id: 'user-email',
       label: 'Почта',
-      type: 'email',
+      type: 'text',
       name: 'email',
       value: '',
       error_id: 'emailError',
@@ -59,7 +59,7 @@ export const editAddressConfig = {
       type: 'text',
       name: 'city',
       value: '',
-      error_id: 'addressError',
+      error_id: 'city-error',
     },
     {
       id: 'user-street',
@@ -67,7 +67,7 @@ export const editAddressConfig = {
       type: 'text',
       name: 'street',
       value: '',
-      error_id: 'addressError',
+      error_id: 'street-error',
     },
     {
       id: 'user-house',
@@ -75,15 +75,15 @@ export const editAddressConfig = {
       type: 'text',
       name: 'house',
       value: '',
-      error_id: 'addressError',
+      error_id: 'house-error',
     },
     {
       id: 'user-flat',
-      label: 'Этаж',
+      label: 'Квартира',
       type: 'text',
       name: 'flat',
       value: '',
-      error_id: 'addressError',
+      error_id: 'flat-error',
     }
   ],
   submitText: 'Сохранить изменения',

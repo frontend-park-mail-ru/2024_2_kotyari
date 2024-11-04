@@ -2,7 +2,11 @@ import { CARD_URLS } from './config.js';
 
 interface Response {
   status: number;
-  body: Product[];
+  body: Product[] | ResponseErr;
+}
+
+interface ResponseErr {
+  error_message: string;
 }
 
 interface Product {
@@ -16,6 +20,8 @@ interface Product {
   rating: number;
   image_url: string;
 }
+
+
 
 export interface CardApiInterface {
   fetchCards(): Promise<Product[]>;

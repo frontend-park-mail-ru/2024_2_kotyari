@@ -57,17 +57,6 @@ select:-webkit-autofill {
     border: 2px solid var(--darkest-background-color);
 }
 
-.form__input_invalid {
-    border-color: var(--error-color);
-    background-color: var(--error-background-color);
-}
-
-.form__error-feedback {
-    color: var(--error-color);
-    font-size: var(--error-font-size);
-    margin-top: var(--middle-margin);
-    display: block;
-}
 
 
 @media (max-width: 768px) {

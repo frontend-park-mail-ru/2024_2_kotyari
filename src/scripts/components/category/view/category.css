@@ -33,7 +33,8 @@
 
 .category-card-image {
     width: 100%;
-    height: 250px;
+    height: 100%;
+    object-fit: cover;
     border-radius: var(--default-border-radius);
     overflow: hidden;
     background-color: #f0f0f0;

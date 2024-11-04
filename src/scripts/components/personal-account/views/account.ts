@@ -40,6 +40,30 @@ export class AccountView {
     }
   }
 
+  public displayErrorMessage(errorMessage: string) {
+    const errorContainer = document.createElement('div') as HTMLElement;
+    errorContainer.classList.add('error-message');
+    errorContainer.textContent = errorMessage;
+
+    if (!this.rootElement) {
+      console.error('root element with id ${this.rootId} not found');
+      return;
+    }
+    const avatarContainer = this.rootElement.querySelector('.account__user-name') as HTMLElement | null;
+    if (!avatarContainer) {
+      console.error('avatar container not found');
+      return;
+    }
+
+    console.log(avatarContainer,errorContainer);
+    avatarContainer.appendChild(errorContainer);
+
+    console.log(avatarContainer);
+
+    setTimeout(() => {
+      errorContainer.remove();
+    }, 20000);
+  }
   public updateAddress(address: UserData['Address']) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement){

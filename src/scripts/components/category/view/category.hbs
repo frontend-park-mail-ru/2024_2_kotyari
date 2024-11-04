@@ -1,9 +1,7 @@
 <div class="category-catalog">
   {{#each categories}}
     <div class="category-card"  href="/category/{{link_to}}" router="changed-active">
-      <div class="category-card-image">
-        <img src="{{picture}}" alt="{{name}}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
-      </div>
+        <img class="category-card-image" src="{{picture}}" alt="{{name}}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
       <h2 class="category-card-title">{{name}}</h2>
     </div>
   {{/each}}

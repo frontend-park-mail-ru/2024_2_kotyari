@@ -44,7 +44,6 @@
     transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
     position: relative;
     max-width: var(--card-width);
-    height: var(--card-height);
     overflow: hidden;
     cursor: pointer;
     background-clip: border-box;
@@ -73,7 +72,7 @@
 .card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Сохраняет пропорции и заполняет контейнер */
+    object-fit: cover;
     transition: transform var(--transition-duration) ease;
 }
 
