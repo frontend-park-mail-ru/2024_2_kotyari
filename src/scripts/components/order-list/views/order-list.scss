@@ -1,7 +1,6 @@
 @import "/public/css/parametrs/parameters.css";
 
 .order-list {
-  /* Возможно вынесение в переменную */
   max-width: 1081px;
   margin: auto;
 
@@ -34,9 +33,20 @@
       margin-bottom: var(--small-margin);
     }
 
-    &-date {
-      font-size: var(--font-size20);
-      color: var(--text-color);
+    &__dates {
+      display: flex;
+      flex-direction: column;
+
+      &-order-date {
+        font-size: 22px;
+        color: var(--text-color);
+      }
+
+      &-delivery-date {
+        margin-top: var(--big-margin);
+        font-size: var(--font-size-base);
+        color: var(--text-color);
+      }
     }
 
     &-total {
@@ -48,9 +58,7 @@
   &__footer {
     display: flex;
     align-items: center;
-    margin-bottom: var(--small-margin);
-    margin-top: 72px;
-
+    margin-top: 50px;
   }
 
   &__review-button {

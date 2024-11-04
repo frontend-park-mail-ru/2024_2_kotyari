@@ -12,7 +12,6 @@ import { CardView } from '@/scripts/components/card/view/card';
 import { CardPresenter } from '@/scripts/components/card/presenter/card';
 import { menuSignIn, menuSignUp } from '@/scripts/components/auth-menu/views/configs';
 import { errorPage } from '@/scripts/components/custom-messages/error/error';
-import { buildSingleOrderPage } from '../../scripts/components/single-order/single-order';
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import { storageUser } from '../storage/user';
@@ -26,6 +25,8 @@ import { CategoryApi } from '../../scripts/components/category/api/category';
 import { CategoryPresenter } from '../../scripts/components/category/presenter/category';
 import { AccountPresenter } from '../../scripts/components/personal-account/presenters/account';
 import { soon } from '../../scripts/components/custom-messages/soon/soon';
+import { OrderListPresenter } from '../../scripts/components/order-list/presenters/order-list';
+import { SingleOrderPresenter } from '../../scripts/components/single-order/presenter/single-order';
 
 const reg = (): void => {
   /**
@@ -74,6 +75,10 @@ const categoryPresenter = new CategoryPresenter(categoryAPI, categoryView, cardV
 
 const accountPresenter = new AccountPresenter(backurl, rootId);
 
+const orderListPresenter = new OrderListPresenter(rootId);
+
+const singleOrderPresenter = new SingleOrderPresenter(rootId)
+
 router.addRoute(AUTH_URLS.LOGIN.route, () => loginPresenter.init(), new RegExp('^/login$'), false, true);
 
 router.addRoute(AUTH_URLS.SIGNUP.route, () => signUpPresenter.init(), new RegExp('^/signup$'), false, true);
@@ -84,8 +89,6 @@ router.addRoute(CARD_URLS.CATALOG.route, () => cardPresenter.init(), new RegExp(
 
 router.addRoute('/error/404', () => errorPage('404'), new RegExp('^/error/404$'));
 
-router.addRoute('/order/:id', () => buildSingleOrderPage(singleOrder), new RegExp('^\\/order\\/(\\d+)$'), false, false);
-
 router.addRoute('/product/:id', () => {
   const productPageBuilder = new ProductPageBuilder();
   productPageBuilder.build();
@@ -93,9 +96,15 @@ router.addRoute('/product/:id', () => {
 
 router.addRoute('/account', () => accountPresenter.initialize(), new RegExp('^/account$'), true, false);
 
+router.addRoute('/order_list', () => orderListPresenter.initialize(), new RegExp('^/order_list$'), true, false)
+
+router.addRoute('/order/:id/:deliveryDate', () => {
+  singleOrderPresenter.initialize();
+}, new RegExp('^\\/order\\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\\/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z)$'), true, false)
+
 router.addRoute('/soon', () => soon(), new RegExp('^/soon$'), false, false);
 
-router.addRoute('/order_list', () => buildOrderList(orderList), new RegExp('^/order_list$'), true, false);
+// router.addRoute('/order_list', () => buildOrderList(orderList), new RegExp('^/order_list$'), true, false);
 
 router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), true, false);
 

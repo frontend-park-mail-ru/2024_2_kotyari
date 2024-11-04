@@ -1,25 +1,24 @@
 <div id="{{id}}" class="order">
-    <h2 class="order__title">Заказ № {{orderNumber}}</h2>
+    <h2 class="order__title">Заказ № &nbsp;{{id}}</h2>
 
     <div class="order__summary">
         <div class="order__info">
             <div class="order__info__status">
-                <p>Вы получили {{deliveryDate}}</p>
-                <span class="order__info__paid-status">заказ оплачен</span>
+                <span>Доставим &nbsp;{{delivery_date}}</span>
+                <span class="order__info__paid-status">{{order_status}}</span>
             </div>
             <div class="order__info__recipient">
                 <h4>Получатель</h4>
                 <div class="order__info__recipient-details">
-                    <p>{{recipientName}}</p>
-                    <p>{{recipientAddress}}</p>
+                    <p>{{recipient}}</p>
+                    <p>{{address}}</p>
                 </div>
             </div>
         </div>
 
         <div class="order__total">
             <div class="order__total-header">
-                <span class="order__total-items">Всего: {{totalItems}} товара</span>
-                <span class="order__total-weight">{{totalWeight}} кг</span>
+                <span class="order__total-items">Всего: &nbsp;{{totalItems}}&nbsp; товара</span>
             </div>
             <div class="order__total-footer">
                 <h2 class="order__total-label">Итого</h2>
@@ -30,14 +29,14 @@
 
     <div class="order__details">
         <h3 class="order__details-label">Состав заказа</h3>
-        {{#each items as |item|}}
-            <div class="order__details__item">
-                <img src="{{item.image}}" alt="{{item.name}}" class="order__details__item-image"/>
+        {{#each products}}
+            <div class="order__details__item" data-product-id="{{id}}" href="/product/{{id}}" router="changed-active">
+                <img src="{{image_url}}" alt="{{name}}" class="order__details__item-image"/>
                 <div class="order__details__item-info">
-                    <span class="order__details__item-name">{{item.name}}</span>
+                    <span class="order__details__item-name">{{name}}</span>
                     <div class="order__details__item-price-and-quantity">
-                        <span class="order__details__item-price">{{item.price}}₽</span>
-                        <span class="order__details__item-quantity">{{item.quantity}} шт</span>
+                        <span class="order__details__item-price">{{cost}}₽</span>
+                        <span class="order__details__item-quantity">&nbsp;{{count}} шт</span>
                     </div>
                 </div>
             </div>
