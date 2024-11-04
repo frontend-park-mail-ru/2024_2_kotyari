@@ -5,50 +5,49 @@
   <div class="product-page__product-info">
     <h1 class="product-page__product-name">{{title}}</h1>
     <div class="product-page__rating">
-      <span class="text-rating">⭐ {{rating}}</span>
-      <span router="stability-active" class="text-review" href="/comments">{{review_count}} отзывов</span>
-      <span router="stability-active" class="material-icons" href="/videos">videocam_outlined</span>
-      <span router="stability-active" href="/videos">{{videoCount}} видео</span>
+      <span router="changed-active" href="/soon" class="text-rating">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             height="24px"
+             viewBox="0 -960 960 960"
+             width="24px" fill="#ffcd42">
+          <path d="m378-330 102-60 103 60-29-113
+          89-75-116-10-47-108-47 109-116
+          9 90 74-29 114ZM185-65l80-331L3-620l343-29
+           134-313 134 314 343 28-262 224 80
+           331-295-176L185-65Zm295-408Z" />
+        </svg>
+        <span>{{rating}}</span>
+      </span>
+      <span router="changed-active" href="/soon" class="text-review" href="/comments">{{review_count}} отзывов</span>
+      <!--      <span router="" class="material-icons" href="/videos">videocam_outlined</span>-->
+      <!--      <span router="stability-active" href="/videos">{{videoCount}} видео</span>-->
     </div>
     <div class="product-page__brand">
       <img src="{{seller.logo}}" alt="brand logo">
       {{seller.name}}
     </div>
-
-    {{#if body.isUsedAvailable}}
-      <div class="product-page__condition">
-        Состояние товара:
-        <div class="product-page__condition-buttons">
-          <button class="condition-new {{#if body.isNewSelected}}selected{{/if}}" data-price="{{body.newPrice}}">
-            <span class="product-page__condition-text">Новые <br> <span class="product-page__price-condition">{{body.newPrice}} ₽</span></span>
-          </button>
-          <button class="condition-used {{#if body.isUsedSelected}}selected{{/if}}" data-price="{{body.usedPrice}}">
-            <span class="product-page__condition-text">Уцененные <br> <span class="product-page__price-condition">{{body.usedPrice}} ₽</span></span>
-          </button>
-        </div>
-      </div>
-    {{/if}}
-
-    {{#each options.values}}
-      <div class="product-page__option">
-        <span class="product-page__option-title">{{title}}:</span>
-        <div class="product-page__option-values">
-          {{#each options}}
-            {{#ifEquals ../type "color"}}
-              <button class="product-page__color-button {{#if this.selected}}selected{{/if}}" style="background-color: {{value}};" data-link="{{link}}" title="{{value}}">
-                <span class="product-page__color-circle"></span>
-              </button>
-            {{else ifEquals ../type "size"}}
-              <button class="product-page__size-button {{#if this.selected}}selected{{/if}}" data-link="{{link}}">
-                {{value}}
-              </button>
-            {{else}}
-              <a href="{{link}}" class="product-page__text-option">{{value}}</a>
-            {{/ifEquals}}
-          {{/each}}
-        </div>
-      </div>
-    {{/each}}
+    <!--    {{#each options.values}}-->
+    <!--      <div class="product-page__option">-->
+    <!--        <div class="product-page__option-title">{{title}}:</div>-->
+    <!--        <div class="product-page__option-values">-->
+    <!--          {{#each options}}-->
+      <!--            {{#ifEquals ../type "color"}}-->
+        <!--              <button class="product-page__color-button {{#if
+          selected}}selected{{/if}}" style="background-color: {{value}};" href="{{link}}" router="changed-active" title="{{value}}">-->
+        <!--                <span class="product-page__color-circle"></span>-->
+        <!--              </button>-->
+        <!--            {{else ifEquals ../type "size"}}-->
+        <!--              <button class="product-page__size-button {{#if
+          selected}}selected{{/if}}" href="{{link}}" router="changed-active">-->
+        <!--                {{value}}-->
+        <!--              </button>-->
+        <!--            {{else}}-->
+        <!--              <a href="{{link}}" router="changed-active" class="product-page__text-option">{{value}}</a>-->
+        <!--            {{/ifEquals}}-->
+      <!--          {{/each}}-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    {{/each}}-->
 
     <div class="product-page__characteristics">
       <ul>
@@ -61,10 +60,8 @@
     </div>
 
 <!--    <div class="product-page__more-description-link">Перейти к описанию</div>-->
-    <br/>
-    <br/>
     <div class="product-page__description-product-page">
-      {{description}}
+      <span style="width: 90%">{{description}}</span>
     </div>
   </div>
 
@@ -74,7 +71,8 @@
       <div class="product-page__old-price">{{original_price}} ₽</div>
       <div class="product-page__cart-container">
         <button class="product-page__cart-button">В корзину</button>
-        <span class="material-icons product-page__favorite-icon">favorite_border_outlined</span>
+<!--        <span class="material-icons product-page__favorite-icon">favorite_border_outlined</span>-->
+
       </div>
     </div>
 

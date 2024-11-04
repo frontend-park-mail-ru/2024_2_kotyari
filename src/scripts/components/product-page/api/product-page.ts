@@ -37,57 +37,87 @@ interface ProductData {
   };
   characteristics: ProductCharacteristics;
   seller: ProductSeller;
+  in_cart: boolean;
 }
 
-// Основной интерфейс для общего ответа, включающий `status` и `body`
 interface ApiResponse {
   status: number;
   body: ProductData;
 }
 
-async function fetchProductData(productId: number): Promise<ProductData> {
-  try {
-    const response = await fetch(`https://api.example.com/products/${productId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+export class ProductPageApi {
 
-    const result: ApiResponse = await response.json();
-    return result.body; // Возвращаем только `body`, как требуется
-  } catch (error) {
-    console.error('Fetch error:', error);
-    throw error; // Пробрасываем ошибку дальше, чтобы обработать её при вызове
-  }
-}
+  getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
+    const url = `${backurl}/product/${productId}`;
 
-
-
-export async function getProductData(productId: string): Promise<ProductData | { ok: false }> {
-  const url = `${backurl}/product/${productId}`;
-
-  try {
-    const response = await fetch(url, {
+    return fetch(url, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Error fetching product data: ${res.statusText}`);
+        }
+
+        return res.json();
+      })
+      .then(data => {
+        return {ok: true, body: data.body};
+      })
+      .catch(e => {
+        console.error('Fetch error:', e);
+        return { ok: false };
+      })
+  }
+
+
+  addToCart = (productId: string): Promise<void> =>{
+    const url = `${backurl}/cart/product/${productId}`;
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then()
+      .catch()
+  }
+
+  rmFromCart = (productId: string): Promise<void> => {
+    const url = `${backurl}/cart/product/${productId}`;
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then()
+      .catch()
+  }
+
+  static async updateProductQuantity(productId: string, count: number = 1): Promise<void> {
+    const response = await fetch(`${backurl}/cart/product/${productId}`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ count }),
     });
 
     if (!response.ok) {
-      throw new Error(`Error fetching product data: ${response.statusText}`);
+      throw new Error(`Ошибка при обновлении количества: ${response.status}`);
     }
-
-    const result: ApiResponse = await response.json();
-    return result.body;
-  } catch (error) {
-    console.error('Fetch error:', error);
-    return { ok: false };
   }
+
 }

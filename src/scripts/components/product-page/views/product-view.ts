@@ -4,12 +4,11 @@ import { rootId } from '../../../../services/app/config';
 import carouselSliderTemplate from '../../carousel/views/carousel-slider.hbs?raw';
 
 export class ProductPage {
-  private rootElement: HTMLElement | null;
-  private compiledTemplate: Handlebars.TemplateDelegate;
+  private readonly rootElement: HTMLElement | null;
+  private readonly compiledTemplate = Handlebars.compile(product);
 
   constructor() {
     this.rootElement = document.getElementById(rootId);
-    this.compiledTemplate = Handlebars.compile(product);
   }
 
   async render(data: any) {
@@ -23,6 +22,18 @@ export class ProductPage {
     templateElement.innerHTML = this.compiledTemplate(data);
     this.rootElement.appendChild(templateElement);
 
+  }
+
+  setButtonPressedState(cartButton: HTMLElement) {
+    cartButton.classList.add('pressed');
+    cartButton.style.backgroundColor = 'white';
+    cartButton.style.color = '#7a16d5';
+  }
+
+  setButtonDefaultState(cartButton: HTMLElement) {
+    cartButton.classList.remove('pressed');
+    cartButton.style.backgroundColor = '#7a16d5';
+    cartButton.style.color = 'white';
   }
 
   updateSizeSelection(selectedButton: HTMLButtonElement, buttons: HTMLButtonElement[]) {

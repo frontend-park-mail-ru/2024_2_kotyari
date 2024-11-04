@@ -1,12 +1,13 @@
 import { ProductPage } from '../views/product-view.js';
-import { productData } from './data.js';
 import { Carousel } from '../../carousel/presenters/carousel';
-import { getProductData } from '../api/product-page';
+import { ProductPageApi } from '../api/product-page';
 import { backurl } from '../../../../services/app/config';
 import { router } from '../../../../services/app/init';
+import { ProductData } from '../types/types';
 
 export class ProductPageBuilder {
   private productPage: ProductPage;
+  private api = new ProductPageApi();
 
   constructor() {
     this.productPage = new ProductPage();
@@ -14,34 +15,36 @@ export class ProductPageBuilder {
 
   async build() {
     try {
-      const keys = router.getRouteParams();
-      if (keys === null) {
-        return
+      const id = this.getProductId();
+      if (id === ''){
+        router.navigate('/')
+        return;
       }
 
-      const id = keys["id"];
-      console.log(id);
-      const productData = await getProductData(id);
+      const productRes = await this.api.getProductData(id);
+
+      if (!productRes.ok) {
+        router.navigate('/');
+      }
+
+      const productData = productRes.body as ProductData;
 
       if (productData.seller && productData.seller.logo && !productData.seller.logo.startsWith('http')) {
         productData.seller.logo = `${backurl}/${productData.seller.logo}`;
       }
 
-      console.log(productData);
-
       productData.images.forEach((image) => {
         image.url = `${backurl}/${image.url}`;
       });
 
-
       await this.productPage.render(productData);
 
-
       this.initializeConditionButtons();
-      this.initializeOptionButtons();
-      this.initializeCartButton();
-      this.initializeFavoriteIcon();
+      // this.initializeOptionButtons();
+      this.initializeCartButtons(productData.in_cart);
+      // this.initializeFavoriteIcon();
       new Carousel();
+
     } catch (error) {
       console.error('Error building product page:', error);
     }
@@ -110,12 +113,89 @@ export class ProductPageBuilder {
     });
   }
 
-  private initializeCartButton() {
-    const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
+  private getProductId = (): string =>{
+    const keys = router.getRouteParams();
+    if (keys === null) {
+      return '';
+    }
 
-    cartButton.addEventListener('click', () => {
-      this.productPage.updateCartButton(cartButton);
+    return  keys["id"];
+  }
+
+  private initializeCartButtons(isInCart: boolean) {
+    const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
+    const incrementButton = document.createElement('button');
+    incrementButton.textContent = '+';
+    incrementButton.className = 'product-page__increment-button';
+    incrementButton.style.display = isInCart ? 'inline-block' : 'none';
+
+    if (isInCart) {
+      cartButton.textContent = 'Удалить из корзины';
+      this.productPage.setButtonPressedState(cartButton);
+    } else {
+      cartButton.textContent = 'В корзину';
+      this.productPage.setButtonDefaultState(cartButton);
+    }
+
+    cartButton.addEventListener('click', async () => {
+      if (cartButton.textContent === 'В корзину') {
+        await this.addToCart(cartButton, incrementButton);
+      } else {
+        await this.removeFromCart(cartButton, incrementButton);
+      }
     });
+
+    incrementButton.addEventListener('click', async () => {
+      await this.increaseCartCount(cartButton, incrementButton);
+    });
+
+    cartButton.after(incrementButton);
+  }
+
+  private async addToCart(cartButton: HTMLElement, incrementButton: HTMLElement) {
+    const id = this.getProductId();
+    if (id === ''){
+      router.navigate('/')
+      return;
+    }
+
+    const result = await this.api.addToCart(id);
+    if (result.ok) {
+      cartButton.textContent = 'Удалить из корзины';
+      incrementButton.style.display = 'inline-block';
+      this.productPage.setButtonPressedState(cartButton);
+    }
+  }
+
+  private async removeFromCart(cartButton: HTMLElement, incrementButton: HTMLElement) {
+    const id = this.getProductId();
+    if (id === ''){
+      router.navigate('/')
+      return;
+    }
+
+
+    const result = await this.api.rmFromCart(id);
+    if (result.ok) {
+      cartButton.textContent = 'В корзину';
+      incrementButton.style.display = 'none';
+      this.productPage.setButtonDefaultState(cartButton);
+    }
+  }
+
+  private async increaseCartCount(cartButton: HTMLElement, incrementButton: HTMLElement) {
+    const id = this.getProductId();
+    if (id === '') {
+      router.navigate('/')
+      return;
+    }
+
+    try {
+      await ProductPageApi.updateProductQuantity(id);
+      cartButton.textContent = 'Удалить из корзины';
+    } catch (error) {
+      console.error('Ошибка при обновлении количества:', error);
+    }
   }
 
   private initializeFavoriteIcon() {

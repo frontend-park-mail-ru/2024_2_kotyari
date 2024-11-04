@@ -65,7 +65,7 @@ header {
 
 @font-face {
     font-family: 'Syncopate-Bold';
-    src: url('/public/assets/img/static/Syncopate-Bold.ttf');
+    src: url('/public/assets/fonts/Syncopate-Bold.ttf');
 }
 
 .logo {

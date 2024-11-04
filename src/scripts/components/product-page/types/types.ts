@@ -69,6 +69,7 @@ export interface ProductData {
   };
   characteristics: ProductCharacteristics;
   seller: ProductSeller;
+  in_cart: boolean;
 }
 
 export interface ApiResponse {

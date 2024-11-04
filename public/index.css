@@ -1,7 +1,6 @@
 @import '/public/css/parametrs/parameters.css';
 @import '/src/scripts/components/card/view/catalog.css';
 @import '/src/scripts/components/custom-messages/error/error.css';
-@import '/src/scripts/components/custom-messages/soon/soon.css';
 @import '/src/scripts/components/modal/views/modal.css';
 @import '/src/scripts/layouts/footer/footer.css';
 @import '/src/scripts/layouts/header/header.css';
@@ -18,18 +17,27 @@
 @import '/src/scripts/components/carousel/views/carousel.css';
 @import '/src/scripts/components/searcher/searcher.css';
 @import "/src/scripts/components/category/view/category.css";
+@import '/src/scripts/components/custom-messages/soon/soon.css';
+
+
+@font-face {
+    font-family: 'UbuntuSans';
+    src: url('/public/assets/fonts/UbuntuSans.ttf');
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-size-adjust: none;
+    font-family: UbuntuSans, sans-serif;
+    font-weight: 450;
 }
 
 body {
     height: 100%;
     font-family: var(--font-family), sans-serif;
-    max-width: 1920px;
+    max-width: 1300px;
     max-height: 1080px;
     margin-left: auto;
     margin-right: auto;

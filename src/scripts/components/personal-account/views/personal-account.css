@@ -1,16 +1,26 @@
 @import "/public/css/parametrs/parameters.css";
 
+.error-message {
+    background-color: #F5C6CBFF;
+    color: red;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    z-index: 10;
+}
 
 .account__avatar-container {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     cursor: pointer;
     border-radius:var(--default-border-radius) ;
     overflow: hidden;
 }
 
 .account__user-photo {
+    justify-content: center;
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -6,11 +6,17 @@
     margin-top: 20%;
 }
 
-.soon-bounce-text h1 p {
+.soon-bounce-link,
+.soon-bounce-title {
     color: var(--base-background-color);
 }
 
+.soon-bounce-link {
+    cursor: pointer;
+}
+
+.soon-bounce-link,
+.soon-bounce-title,
 .soon-bounce-text {
     animation: bounce var(--two-seconds-duration) ease-in;
-    will-change: transform;
 }

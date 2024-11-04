@@ -29,7 +29,8 @@ export class AccountAPI {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch user data');
+      const errorBody = await response.json();
+      throw { status: response.status, body: errorBody };
     }
 
     const data = await response.json();
@@ -47,10 +48,43 @@ export class AccountAPI {
     });
 
     if (!response.ok) {
-      throw new Error('Error uploading avatar');
+      const errorBody = await response.json();
+
+      throw { status: response.status, body: errorBody.body };
     }
 
     const result = await response.json();
     return result.body.avatar_url;
+  }
+
+  public async getNearestDeliveryDate(): Promise<string> {
+    const url = `${this.baseUrl}/orders/nearest`;
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        // If response is not OK, handle error only once
+        const errorData = await response.json();
+        return errorData.body?.error_message || 'Error fetching delivery date';
+      }
+
+      // Read the response body only once
+      const data = await response.json();
+      const deliveryDate = new Date(data.body.delivery_date);
+      return `Ожидаемая дата доставки: ${deliveryDate.toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })}`;
+    } catch (error) {
+      console.error('Failed to fetch nearest delivery date:', error);
+      return 'Не удалось получить дату доставки';
+    }
   }
 }
