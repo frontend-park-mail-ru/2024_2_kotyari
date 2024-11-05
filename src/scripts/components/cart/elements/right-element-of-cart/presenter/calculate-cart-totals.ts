@@ -41,7 +41,10 @@ export class RightCartPresenter {
    *
    * @returns {Promise<void>} Промис, разрешающийся после обновления данных корзины.
    */
-  async calculateCartTotals() {
+  async calculateCartTotals(cartData : CartData) {
+    console.log(cartData);
+
+    this.cartData = cartData;
     const selectedItems = this.cartData.products.filter((product: CartProduct) => product.isSelected);
 
     // Подсчет общего количества товаров

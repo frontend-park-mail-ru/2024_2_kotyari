@@ -18,14 +18,14 @@ export const CART_URLS = {
         }
     },
     updateProductQuantity: {
-        route: '/cart/product/', // Плсде идет productId
+        route: '/cart/product/', // После идет productId
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         }
     },
     selectProduct: {
-        route: '/cart/select/product/', // Плсде идет productId
+        route: '/cart/select/product/', // После идет productId
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export const CART_URLS = {
         }
     },
     deleteSelectedProducts: {
-        route: '/cart/select/product',
+        route: '/cart/selected',
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

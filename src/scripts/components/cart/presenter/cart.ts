@@ -59,17 +59,18 @@ export class CartPresenter {
     this.rightCartPresenter = new RightCartPresenter(rightCartView, this.cartData);
 
     // Инициализируем Presenter для выборки данных.
-    this.dataSamplingPresenter = new DataSamplingPresenter(this.cartView, this.rightCartPresenter, this.cartData);
 
     // Инициализируем View и Presenter для работы с карточками слева.
     const leftCardsView = new LeftCardsView();
     this.leftCardsPresenter = new LeftCardsPresenter(leftCardsView, this.dataSamplingPresenter, this.cartData);
+
+    this.dataSamplingPresenter = new DataSamplingPresenter(this.cartView, this.rightCartPresenter, this.cartData);
   }
 
   /**
    * Инициализация работы с корзиной. Загружает состояние корзины и добавляет слушатели событий.
    */
-  initializeCart() {
+  async initializeCart() {
     // Инициализируем чекбоксы на основе данных корзины
     this.cartView.initializeCheckboxes(this.cartData.products);
 
@@ -78,7 +79,6 @@ export class CartPresenter {
 
     // Выполняем дополнительные настройки.
     this.leftCardsPresenter.updateSelectedCount();
-    this.leftCardsPresenter.checkIfCartIsEmpty();
-    this.rightCartPresenter.calculateCartTotals();
+    await this.rightCartPresenter.calculateCartTotals(this.cartData);
   }
 }

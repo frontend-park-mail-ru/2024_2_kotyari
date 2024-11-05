@@ -194,7 +194,7 @@ export class LeftCardsView {
   /**
    * Отображает сообщение о том, что корзина пуста.
    */
-  public displayEmptyCartMessage(): void {
+  public static displayEmptyCartMessage(): void {
     const cartContainer = document.querySelector('.cart-items');
     if (cartContainer) {
       cartContainer.innerHTML = '<div class="cart-item__placeholder" id="empty-cart-placeholder">\n' +

@@ -2,8 +2,8 @@ import { RightCartPresenter } from '../../right-element-of-cart/presenter/calcul
 import { CartData, CartProduct } from '../../../types/types';
 import { LeftCardsView } from '../view/left-cards.js';
 import { RightCartView } from '../../right-element-of-cart/view/calculate-cart-totals.js';
-import { DataSamplingPresenter } from "../../data-sampling/presenter/data-sampling";
-import {CartApiInterface} from "../../../api/cart-api";
+import { DataSamplingPresenter } from '../../data-sampling/presenter/data-sampling';
+import { CartApiInterface } from '../../../api/cart-api';
 
 /**
  * Класс LeftCardsPresenter управляет взаимодействием с карточками товаров слева
@@ -65,7 +65,7 @@ export class LeftCardsPresenter {
   updateSelectedCount(): void {
     const selectedCount = this.cartData.products.filter((product: CartProduct) => product.isSelected).length;
     this.view.updateSelectedCount(selectedCount);
-    this.rightCartPresenter.calculateCartTotals();
+    this.rightCartPresenter.calculateCartTotals(this.cartData);
 
     // Обновляем состояние чекбокса "Выбрать все"
     this.updateSelectAllCheckbox();
@@ -114,7 +114,7 @@ export class LeftCardsPresenter {
       }
 
       try {
-        CartApiInterface.updateProductQuantity(productId, count).then(() => {
+        CartApiInterface.updateProductQuantity(productId, count).then(async () => {
           this.view.updateQuantityDisplay(productId, product.quantity);
 
           // Переключение кнопки в режим удаления при количестве = 1
@@ -122,7 +122,7 @@ export class LeftCardsPresenter {
           this.view.switchMinusButtonToDelete(productId, isSingleItem);
 
           product.isSingleItem = isSingleItem;
-          this.rightCartPresenter.calculateCartTotals();
+          await this.rightCartPresenter.calculateCartTotals(this.cartData);
         })
       } catch (error) {
         console.error('Ошибка при обновлении количества товара:', error);
@@ -139,7 +139,8 @@ export class LeftCardsPresenter {
     this.cartData.products = this.cartData.products.filter((product) => product.id !== productId);
 
     try {
-      CartApiInterface.deleteProduct(productId).then(() => {
+      CartApiInterface.deleteProduct(productId)
+        .then(() => {
         this.view.removeItem(productId);
         this.updateSelectedCount(); // Пересчёт выбранных товаров
         this.updateSelectAllCheckbox(); // Обновляем состояние select-all
@@ -188,7 +189,7 @@ export class LeftCardsPresenter {
    */
   private checkIfCartIsEmpty(): void {
     if (this.cartData.products.length === 0) {
-      this.view.displayEmptyCartMessage();
+      LeftCardsView.displayEmptyCartMessage();
     }
   }
 }

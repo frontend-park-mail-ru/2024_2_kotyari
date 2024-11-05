@@ -17,10 +17,13 @@ export class CartApiInterface {
       });
 
       if (!response.ok) {
-        throw new Error(`Ошибка при получении данных: ${response.status}`);
+        throw Error(`Ошибка при получении данных: ${response.status}`);
       }
 
       const data = await response.json();
+
+      console.log(data);
+
       return CartApiInterface.transformCartData(data.body.products);
     } catch (error) {
       console.error('Ошибка:', error);
@@ -60,7 +63,7 @@ export class CartApiInterface {
       method: CART_URLS.selectProduct.method,
       credentials: 'include',
       headers: CART_URLS.selectProduct.headers,
-      body: JSON.stringify({ isSelected }),
+      body: JSON.stringify({ 'is_selected' :isSelected }),
     });
 
     if (!response.ok) {
@@ -71,15 +74,15 @@ export class CartApiInterface {
   /**
    * Выбор всех продуктов.
    *
-   * @param {boolean} isSelected - Статус выбора
+   * @param {boolean} is_selected - Статус выбора
    * @returns {Promise<void>}
    */
-  static async selectAllProducts(isSelected: boolean): Promise<void> {
+  static async selectAllProducts(is_selected: boolean): Promise<void> {
     const response = await fetch(`${backurl}${CART_URLS.selectAllProducts.route}`, {
       method: CART_URLS.selectAllProducts.method,
       credentials: 'include',
       headers: CART_URLS.selectAllProducts.headers,
-      body: JSON.stringify({ isSelected }),
+      body: JSON.stringify({'is_selected': is_selected}),
     });
 
     if (!response.ok) {
@@ -100,8 +103,13 @@ export class CartApiInterface {
     });
 
     if (!response.ok) {
+      console.log('123');
       throw new Error(`Ошибка при удалении выбранных продуктов: ${response.status}`);
     }
+
+    console.log('321');
+
+    return Promise.resolve();
   }
 
   /**
@@ -148,7 +156,12 @@ export class CartApiInterface {
     });
 
     if (!response.ok) {
+      console.log('123');
       throw new Error(`Ошибка при удалении продукта: ${response.status}`);
     }
+
+    console.log('321');
+
+    return Promise.resolve();
   }
 }

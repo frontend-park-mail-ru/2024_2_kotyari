@@ -2,6 +2,7 @@ import { DataSamplingView } from '../view/data-sampling.js';
 import { RightCartPresenter } from '../../right-element-of-cart/presenter/calculate-cart-totals';
 import { CartData } from "../../../types/types";
 import {CartApiInterface} from "../../../api/cart-api";
+import { LeftCardsView } from '../../left-cards/view/left-cards';
 
 /**
  * Класс DataSamplingPresenter управляет функционалом выбора товаров в корзине
@@ -26,7 +27,7 @@ export class DataSamplingPresenter {
    * Данные корзины.
    * @private {CartData}
    */
-  private cartData: CartData;
+  private readonly cartData: CartData;
 
   /**
    * Конструктор класса DataSamplingPresenter.
@@ -37,7 +38,6 @@ export class DataSamplingPresenter {
    */
   constructor(cartView: DataSamplingView, rightCartPresenter: RightCartPresenter, cartData: CartData) {
     this.cartData = cartData;
-
     this.cartView = cartView;
     this.rightCartPresenter = rightCartPresenter;
   }
@@ -104,12 +104,26 @@ export class DataSamplingPresenter {
    */
   private handleDeleteSelected() {
     try {
-      CartApiInterface.deleteSelectedProducts().then(() => {
+      CartApiInterface.deleteSelectedProducts().then(async () => {
+        const selectedItems = this.cartView.getSelectedItems();
+        const selectedIds = selectedItems.map((item) => item.id.split('-')[2]);
+
+        this.cartData.products = this.cartData.products.filter((product) => !selectedIds.includes(product.id));
+
         this.cartData.products = this.cartData.products.map((product) => ({
           ...product,
         }));
+
+        this.cartView.removeSelectedItems(this.cartView.getSelectedItems());
+
         this.cartView.initializeCheckboxes(this.cartData.products);
-        this.updateSelectedCount();
+        this.updateSelectAllCheckbox();
+
+        await this.updateSelectedCount();
+
+        if (this.cartData.products.length === 0) {
+          LeftCardsView.displayEmptyCartMessage();
+        }
       })
     } catch (error) {
       console.error("Ошибка при изменении состояния 'Удалить выбранное':", error);
@@ -122,7 +136,8 @@ export class DataSamplingPresenter {
   private updateSelectedCount() {
     const selectedCount = this.cartData.products.filter((product) => product.isSelected).length;
     this.cartView.updateSelectedCount(selectedCount);
-    this.rightCartPresenter.calculateCartTotals();
+
+    return this.rightCartPresenter.calculateCartTotals(this.cartData);
   }
 
   /**
@@ -134,9 +149,7 @@ export class DataSamplingPresenter {
       const allChecked = selectedCount > 0 && selectedCount === this.cartData.products.length;
       const isIndeterminate = selectedCount > 0 && !allChecked;
 
-      CartApiInterface.selectAllProducts(isIndeterminate).then(() => {
-        this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
-      })
+      this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
     } catch (error) {
       console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
     }
