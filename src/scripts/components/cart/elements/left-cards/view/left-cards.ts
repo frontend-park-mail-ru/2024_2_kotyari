@@ -190,4 +190,21 @@ export class LeftCardsView {
       item.remove();
     }
   }
+
+  /**
+   * Отображает сообщение о том, что корзина пуста.
+   */
+  public displayEmptyCartMessage(): void {
+    const cartContainer = document.querySelector('.cart-items');
+    if (cartContainer) {
+      cartContainer.innerHTML = '<div class="cart-item__placeholder" id="empty-cart-placeholder">\n' +
+          '        <svg class="cart-item__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n' +
+          '            <circle cx="12" cy="12" r="10"></circle>\n' +
+          '            <path d="M16 12l-4 4-4-4"></path>\n' +
+          '        </svg>\n' +
+          '        <p class="cart-item__placeholder-text">Ваша корзина пуста</p>\n' +
+          '        <p class="cart-item__placeholder-suggestion">Добавьте товары, чтобы увидеть их здесь!</p>\n' +
+          '    </div>';
+    }
+  }
 }
