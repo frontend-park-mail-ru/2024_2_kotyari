@@ -78,6 +78,7 @@ export class CartPresenter {
 
     // Выполняем дополнительные настройки.
     this.leftCardsPresenter.updateSelectedCount();
+    this.leftCardsPresenter.checkIfCartIsEmpty();
     this.rightCartPresenter.calculateCartTotals();
   }
 }
