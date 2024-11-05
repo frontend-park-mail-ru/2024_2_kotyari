@@ -1,5 +1,4 @@
 import { rootId } from "@/services/app/config.ts";
-import { RightElementOfOrderPlacementView } from '@/scripts/components/order-placement/elements/right-element-of-order-placement/view/right-element-of-order-placement.ts';
 import orderPlacement from './order-placement.hbs?raw';
 import rightElementOfOrderPlacement from '../elements/right-element-of-order-placement/view/right-element-of-order-placement.hbs?raw';
 import leftElementOfOrderPlacement from '../elements/left-element-of-order-placement/view/left-element-of-order-placement.hbs?raw';
@@ -9,6 +8,9 @@ import Handlebars from "handlebars";
 import {OrderData} from "../types/types";
 import { router } from '../../../../services/app/init';
 import {OrderPlacementApiInterface} from "../api/order-placement";
+import {
+    RightElementOfOrderPlacementView
+} from '../elements/right-element-of-order-placement/view/right-element-of-order-placement';
 
 /**
  * Класс для построения и управления процессом оформления заказа.
@@ -96,12 +98,13 @@ export class OrderPlacementBuilder {
      */
     private readonly productItemTemplate: HandlebarsTemplateDelegate;
 
+    private rightElementsView: RightElementOfOrderPlacementView;
+
     /**
      * Конструктор класса. Выполняет инициализацию данных и компиляцию шаблонов.
      */
     constructor() {
         this.rootElement = document.getElementById(rootId);
-
         this.orderPlacementTemplate = Handlebars.compile(orderPlacement);
         this.rightElementOfOrderPlacementTemplate = Handlebars.compile(rightElementOfOrderPlacement);
         this.leftElementOfOrderPlacementTemplate = Handlebars.compile(leftElementOfOrderPlacement);
@@ -132,6 +135,8 @@ export class OrderPlacementBuilder {
             if (!this.orderData.deliveryDates) {
                 router.navigate('/cart')
             }
+
+            this.rightElementsView = new RightElementOfOrderPlacementView(this.orderData.recipient.address);
 
             await this.renderOrderPlacement();
             await this.renderLeftPart();

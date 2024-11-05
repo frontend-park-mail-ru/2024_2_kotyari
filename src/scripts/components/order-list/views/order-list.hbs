@@ -11,7 +11,7 @@
           <span class="order-list__card-total">{{status}} &nbsp;{{total_price}}₽</span>
         </div>
         <div class="order-list__footer">
-          <button id="review-button" class="order-list__review-button" disabled>Оцените товары</button>
+          <button id="review-button" class="order-list__review-button" router="changed-active" href="/soon" disabled>Оцените товары</button>
           <div class="order-list__items">
             {{#each products}}
               <div class="order-list__items-item">

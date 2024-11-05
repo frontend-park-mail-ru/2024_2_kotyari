@@ -59,14 +59,14 @@ export class OrderPlacementApiInterface {
    * @async
    * @returns {Promise<void>} Промис без возвращаемого значения.
    */
-  public static async placeOrder(): Promise<void> {
+  public static async placeOrder(address: string): Promise<void> {
     try {
       const response = await fetch(`${backurl}${ORDER_PLACEMENT_URLS.placeOrder.route}`, {
         method: ORDER_PLACEMENT_URLS.placeOrder.method,
         credentials: 'include',
         headers: ORDER_PLACEMENT_URLS.placeOrder.headers,
         body: JSON.stringify({
-          address: 'sdffds',
+          address: address,
         }),
       });
 
@@ -87,6 +87,7 @@ export class OrderPlacementApiInterface {
    * @returns {OrderData} Преобразованные данные корзины.
    */
   private static transformCartData(data: any): OrderData {
+
     return {
       totalItems: data.total_items,
       totalWeight: data.total_weight,
@@ -108,7 +109,7 @@ export class OrderPlacementApiInterface {
           productName: item.product_name,
           productPrice: item.product_price,
           quantity: item.quantity,
-          productImage: item.product_image,
+          productImage: `${backurl}\\${item.product_image}`,
           weight: item.weight,
           url: item.url,
         })),

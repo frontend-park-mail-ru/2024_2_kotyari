@@ -18,10 +18,10 @@ export class RightElementOfOrderPlacementView {
    * Конструктор класса RightElementOfOrderPlacementView.
    * Инициализирует список способов оплаты и запускает процессы инициализации.
    */
-  constructor() {
+  constructor(address: string) {
     // Инициализация: получаем все элементы способов оплаты
     this.paymentMethods = document.querySelectorAll('.right-element-card__payment-method');
-    this.init();
+    this.init(address);
   }
 
   /**
@@ -72,11 +72,11 @@ export class RightElementOfOrderPlacementView {
    * @private
    * @returns {void}
    */
-  private init(): void {
+  private init(address: string): void {
     this.addEventListeners();
 
     document.getElementById('order-button')?.addEventListener('click', async () => {
-      await OrderPlacementApiInterface.placeOrder();
+      await OrderPlacementApiInterface.placeOrder(address);
     });
   }
 }
