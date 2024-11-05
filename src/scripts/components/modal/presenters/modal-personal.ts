@@ -30,7 +30,6 @@ export class PersonalDataModal extends BaseModal {
     const form = this.modalElement.querySelector(`#${editNameGenderEmailConfig.formId}`) as HTMLFormElement;
     if (!form) return;
 
-    // Form submission listener
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = new FormData(form);
@@ -45,13 +44,11 @@ export class PersonalDataModal extends BaseModal {
         .catch((error) => console.error("Submit failed:", error));
     });
 
-    // Validation listeners for each input field on focusout
     const inputs = form.querySelectorAll('input, select') as HTMLInputElement[];
     inputs.forEach((input) => {
       input.addEventListener('focusout', () => this.handleFieldValidation(input));
     });
 
-    // Close button listener
     const closeButton = this.modalElement.querySelector('.btn__close');
     closeButton?.addEventListener('click', this.close.bind(this));
   }

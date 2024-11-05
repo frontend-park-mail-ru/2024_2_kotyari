@@ -16,7 +16,6 @@ export class AddressModal extends BaseModal {
       field.value = this.user[field.name] || '';
     });
 
-    // Render the modal using ModalRenderer
     this.modalElement = ModalRenderer.render(this.config.rootId, editAddressConfig);
     this.setupListeners();
   }
@@ -28,6 +27,11 @@ export class AddressModal extends BaseModal {
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+
+      if (!this.validateForm()) {
+        console.log("Validation failed: Some required fields are empty.");
+        return;
+      }
 
       const formData = new FormData(form);
       const updatedAddress: Record<string, string> = {};
@@ -59,15 +63,56 @@ export class AddressModal extends BaseModal {
     closeButton?.addEventListener('click', this.close.bind(this));
   }
 
+  private validateForm(): boolean {
+    let isValid = true;
+
+    editAddressConfig.fields.forEach((field) => {
+      const inputElement = this.modalElement?.querySelector(`[name="${field.name}"]`) as HTMLInputElement;
+
+      if (inputElement && field.name !== 'apartment' && !inputElement.value.trim()) {
+        this.addInputError(inputElement, `Поле "${field.label}" не должно быть пустым`);
+        isValid = false;
+      } else {
+        this.removeInputError(inputElement);
+      }
+    });
+
+    return isValid;
+  }
+
+  private addInputError(element: HTMLElement, message: string) {
+    const errorId = element.getAttribute('data-error-id') || `${element.name}Error`;
+    let errorElement = document.getElementById(errorId);
+
+    if (!errorElement) {
+      errorElement = document.createElement('div');
+      errorElement.id = errorId;
+      errorElement.className = 'form__error';
+      element.parentElement?.appendChild(errorElement);
+    }
+
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+    element.classList.add('form__input_invalid');
+    element.style.backgroundColor = '#ffe6e6';
+    element.style.borderColor = 'red';
+  }
+
+  private removeInputError(element: HTMLElement) {
+    const errorId = element.getAttribute('data-error-id') || `${element.name}Error`;
+    const errorElement = document.getElementById(errorId);
+
+    if (errorElement) {
+      errorElement.style.display = 'none';
+      errorElement.textContent = '';
+      element.classList.remove('form__input_invalid');
+      element.style.borderColor = '';
+      element.style.backgroundColor = '';
+    }
+  }
+
   public open() {
     this.renderContent();
     super.open();
   }
-}
-
-function fromEntries(entries: Iterable<[string, any]>): Record<string, any> {
-  return [...entries].reduce((acc, [key, value]) => {
-    acc[key] = value;
-    return acc;
-  }, {} as Record<string, any>);
 }

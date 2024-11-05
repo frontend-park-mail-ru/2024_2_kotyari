@@ -26,6 +26,9 @@ export class AccountPresenter {
   public async initialize() {
     try {
       this.userData = await this.accountAPI.fetchUserData();
+
+
+
       this.userData.avatar_url = `${backurl}/${this.userData.avatar_url}`;
 
       this.deliveryInfo = await this.buildDeliveryInfo(this.userData);
@@ -42,7 +45,13 @@ export class AccountPresenter {
   }
 
   private async buildDeliveryInfo(userData: UserData) {
-    const addressText = `${userData.Address.city}, ул.${userData.Address.street}, д.${userData.Address.house}, кв.${userData.Address.flat}`;
+    const addressText = [
+      userData.Address?.city?.trim(),
+      userData.Address?.street?.trim(),
+      userData.Address?.house?.trim(),
+      userData.Address?.flat?.trim()
+    ].filter(Boolean).join(', ') || 'Добавьте адресс';
+
 
     let msg: string;
 
