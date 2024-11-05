@@ -1,9 +1,6 @@
-interface apiResponse {
-  status: number;
-  body: any;
-}
+import { apiResponse, parseJsonResponse } from './utils';
 
-class CSRF {
+export class CSRF {
   private token: string | null = null;
   private readonly csrfEndpoint: string;
 
@@ -48,6 +45,7 @@ class CSRF {
 
     const headers: HeadersInit = {
       'X-CSRF-Token': this.token,
+      Accept: 'application/json',
     };
 
     let requestBody: BodyInit | null;
@@ -71,10 +69,7 @@ class CSRF {
     }
 
     return fetch(url, info)
-      .then(async (res) => {
-        const responseBody = await res.json().catch(() => null);
-        return { status: res.status, body: responseBody.body };
-      });
+      .then(parseJsonResponse);
   };
 
   post = (url: string, body: any): Promise<apiResponse> => {
@@ -98,5 +93,3 @@ class CSRF {
     await this.fetchToken();
   }
 }
-
-export default CSRF;

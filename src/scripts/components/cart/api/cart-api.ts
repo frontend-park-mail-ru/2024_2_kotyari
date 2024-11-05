@@ -1,8 +1,11 @@
 import { CartData, CartProduct } from '../types/types'; // Импорт интерфейсов
 import { backurl } from "../../../../services/app/config";
 import { CART_URLS } from "./config";
+import { CSRF } from '../../../../services/api/csrf';
 
 export class CartApiInterface {
+  private csrf: CSRF;
+
   /**
    * Получение данных корзины.
    *

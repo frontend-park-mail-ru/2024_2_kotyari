@@ -12,6 +12,7 @@ import { CardView } from '@/scripts/components/card/view/card';
 import { CardPresenter } from '@/scripts/components/card/presenter/card';
 import { menuSignIn, menuSignUp } from '@/scripts/components/auth-menu/views/configs';
 import { errorPage } from '@/scripts/components/custom-messages/error/error';
+import { buildSingleOrderPage } from '../../scripts/components/single-order/single-order';
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
 import { singleOrder } from '../../scripts/components/single-order/single-order-config';
 import { storageUser } from '../storage/user';
@@ -111,24 +112,11 @@ router.addRoute('/soon', () => soon(), new RegExp('^/soon$'), false, false);
 router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), true, false);
 
 router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), true, false);
-router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category/[^/]+$'), false, false);
+// router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category/[^/]+$'), false, false);
 router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
 
 router.addRoute('/logout', () => loginPresenter.logout(), new RegExp('^/logout$'), true, false);
 
-router.addRoute(
-  '/category',
-  () => categoryPresenter.renderCategories(),
-  new RegExp('^/category$'),
-  false,
-  false
-);
+router.addRoute('/category', () => categoryPresenter.renderCategories(), new RegExp('^/category$'), false, false);
 
-// Route for displaying products in a specific category based on `link` parameter
-router.addRoute(
-  '/category/:link',
-  () => categoryPresenter.loadCategoryProducts(),
-  new RegExp('^/category/([^/]+)$'),
-  false,
-  false
-);
+router.addRoute('/category/:link', () => categoryPresenter.loadCategoryProducts(), new RegExp('^/category/([^/]+)$'), false, false);
