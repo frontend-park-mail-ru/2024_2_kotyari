@@ -34,7 +34,8 @@ export class Helper {
    * @returns {string} Дата в формате 'DD месяц YYYY г.'.
    */
   public static formatDate(dateStr: string): string {
-    const [year, month, day] = dateStr.split('-').map(Number);
+    const datePart = dateStr.split('T')[0];
+    const [year, month, day] = datePart.split('-').map(Number);
 
     if (!year || !month || !day || month < 1 || month > 12) {
       throw new Error(`Invalid date format: ${dateStr}`);

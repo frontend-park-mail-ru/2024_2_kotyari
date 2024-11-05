@@ -1,3 +1,5 @@
+import {OrderPlacementApiInterface} from "../../../api/order-placement";
+
 /**
  * Класс для управления элементами правой части страницы оформления заказа.
  *
@@ -35,14 +37,16 @@ export class RightElementOfOrderPlacementView {
   }
 
   /**
-   * Устанавливает первый способ оплаты как выбранный по умолчанию.
+   * Обновляет выбранный способ оплаты через API.
    *
-   * @private
-   * @returns {void}
+   * @async
+   * @param {Element} methodElement - Элемент DOM, содержащий информацию о выбранном способе оплаты.
+   * @returns {Promise<void>} Промис без возвращаемого значения.
    */
-  private setDefaultSelected(): void {
-    if (this.paymentMethods.length > 0) {
-      this.paymentMethods[0].classList.add('right-element-card__payment-method--selected');
+  private async updatePaymentMethod(methodElement: Element): Promise<void> {
+    const selectedMethod = methodElement.querySelector('.right-element-card__payment-method-text')?.textContent;
+    if (selectedMethod) {
+      await OrderPlacementApiInterface.updatePaymentMethod(selectedMethod);
     }
   }
 
@@ -54,9 +58,10 @@ export class RightElementOfOrderPlacementView {
    */
   private addEventListeners(): void {
     this.paymentMethods.forEach((method) => {
-      method.addEventListener('click', () => {
+      method.addEventListener('click', async () => {
         this.clearSelected();
         method.classList.add('right-element-card__payment-method--selected');
+        await this.updatePaymentMethod(method);
       });
     });
   }
@@ -68,7 +73,10 @@ export class RightElementOfOrderPlacementView {
    * @returns {void}
    */
   private init(): void {
-    this.setDefaultSelected();
     this.addEventListeners();
+
+    document.getElementById('order-button')?.addEventListener('click', async () => {
+      await OrderPlacementApiInterface.placeOrder();
+    });
   }
 }

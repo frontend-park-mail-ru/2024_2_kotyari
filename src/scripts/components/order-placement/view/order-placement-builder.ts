@@ -1,5 +1,4 @@
 import { rootId } from "@/services/app/config.ts";
-import { orderData } from "../api/order-placement";
 import { RightElementOfOrderPlacementView } from '@/scripts/components/order-placement/elements/right-element-of-order-placement/view/right-element-of-order-placement.ts';
 import orderPlacement from './order-placement.hbs?raw';
 import rightElementOfOrderPlacement from '../elements/right-element-of-order-placement/view/right-element-of-order-placement.hbs?raw';
@@ -8,8 +7,8 @@ import deliveryDatesList from '../elements/left-element-of-order-placement/eleme
 import productItem from '../elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item/view/product-item.hbs?raw';
 import Handlebars from "handlebars";
 import {OrderData} from "../types/types";
-import Router from "../../../../services/app/router";
 import { router } from '../../../../services/app/init';
+import {OrderPlacementApiInterface} from "../api/order-placement";
 
 /**
  * Класс для построения и управления процессом оформления заказа.
@@ -55,7 +54,7 @@ export class OrderPlacementBuilder {
      * @private
      * @type {OrderData}
      */
-    private orderData: OrderData;
+    private orderData: OrderData | null = null;
 
     /**
      * Шаблон оформления заказа.
@@ -102,7 +101,6 @@ export class OrderPlacementBuilder {
      */
     constructor() {
         this.rootElement = document.getElementById(rootId);
-        this.orderData = orderData;
 
         this.orderPlacementTemplate = Handlebars.compile(orderPlacement);
         this.rightElementOfOrderPlacementTemplate = Handlebars.compile(rightElementOfOrderPlacement);
@@ -128,11 +126,13 @@ export class OrderPlacementBuilder {
             throw new Error(`Root element with ID ${rootId} not found`);
         }
 
-        if (!this.orderData.deliveryDates) {
-            router.navigate('/cart')
-        }
-
         try {
+            this.orderData = await OrderPlacementApiInterface.getCartProducts();
+
+            if (!this.orderData.deliveryDates) {
+                router.navigate('/cart')
+            }
+
             await this.renderOrderPlacement();
             await this.renderLeftPart();
             this.initializeOrderPlacement();
@@ -167,12 +167,12 @@ export class OrderPlacementBuilder {
                 // Рендерим правую и левую часть оформления заказа
                 this.rightElementOfOrderPlacementRoot.insertAdjacentHTML(
                     'beforeend',
-                    this.rightElementOfOrderPlacementTemplate(orderData)
+                    this.rightElementOfOrderPlacementTemplate(this.orderData)
                 );
 
                 this.leftElementOfOrderPlacementRoot.insertAdjacentHTML(
                     'beforeend',
-                    this.leftElementOfOrderPlacementTemplate(orderData)
+                    this.leftElementOfOrderPlacementTemplate(this.orderData)
                 );
 
                 resolve();
@@ -197,7 +197,7 @@ export class OrderPlacementBuilder {
             // Рендерим список дат доставки с товарами
             this.deliveryDatesListRoot.insertAdjacentHTML(
                 'beforeend',
-                this.deliveryDatesListTemplate({deliveryDates: orderData.deliveryDates})
+                this.deliveryDatesListTemplate({deliveryDates: this.orderData.deliveryDates})
             );
         }
     };

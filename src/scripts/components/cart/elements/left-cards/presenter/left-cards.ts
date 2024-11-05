@@ -144,6 +144,8 @@ export class LeftCardsPresenter {
         this.updateSelectedCount(); // Пересчёт выбранных товаров
         this.updateSelectAllCheckbox(); // Обновляем состояние select-all
         this.dataSamplingPresenter.updateSelectAllCheckbox();
+
+        this.checkIfCartIsEmpty();
       })
     } catch (error) {
       console.error('Ошибка при удалении товара из корзины:', error);
@@ -179,5 +181,14 @@ export class LeftCardsPresenter {
    */
   private findProductById(productId: string): CartProduct | undefined {
     return this.cartData.products.find((p: CartProduct) => p.id === productId);
+  }
+
+  /**
+   * Проверяет, пуста ли корзина, и обновляет представление, если это так.
+   */
+  private checkIfCartIsEmpty(): void {
+    if (this.cartData.products.length === 0) {
+      this.view.displayEmptyCartMessage();
+    }
   }
 }
