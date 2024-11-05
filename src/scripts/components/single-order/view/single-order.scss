@@ -3,10 +3,9 @@
 .order {
   max-width: var(--max-width-px-long);
   margin: var(--big-margin) auto;
-  padding: var(--padding);
 
   &__title {
-    font-size: var(--big-font-size_another);
+    font-size: var(--big-font-size);
     font-weight: var(--middle-font-weight);
     margin-bottom: var(--big-margin-bottom);
   }
@@ -34,11 +33,11 @@
     }
 
     &__paid-status {
-      font-size: var(--default-font-size);
+      font-size: var(--font-size);
     }
 
     &__recipient {
-      padding-top: 48px;
+      padding-top: 40px;
 
       &-details {
         display: flex;
@@ -71,7 +70,7 @@
     &-footer {
       display: flex;
       justify-content: space-between;
-      padding-top: 22px;
+      padding-top: 15px;
     }
 
     &-amount {

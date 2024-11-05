@@ -2,10 +2,9 @@
 .order {
   max-width: var(--max-width-px-long);
   margin: var(--big-margin) auto;
-  padding: var(--padding);
 }
 .order__title {
-  font-size: var(--big-font-size_another);
+  font-size: var(--big-font-size);
   font-weight: var(--middle-font-weight);
   margin-bottom: var(--big-margin-bottom);
 }
@@ -30,10 +29,10 @@
   align-items: center;
 }
 .order__info__paid-status {
-  font-size: var(--default-font-size);
+  font-size: var(--font-size);
 }
 .order__info__recipient {
-  padding-top: 48px;
+  padding-top: 40px;
 }
 .order__info__recipient-details {
   display: flex;
@@ -62,7 +61,7 @@
 .order__total-footer {
   display: flex;
   justify-content: space-between;
-  padding-top: 22px;
+  padding-top: 15px;
 }
 .order__total-amount {
   margin-top: auto;

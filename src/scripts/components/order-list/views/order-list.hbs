@@ -1,0 +1,26 @@
+<div class="orders">
+  <div id="order-list-container" class="order-list">
+    <h2 class="order-list__title">Мои заказы</h2>
+    {{#each orders}}
+      <div class="order-list__card" data-order-id="{{id}}" data-delivery-date_req="{{delivery_date_req}}" href="/order/{{id}}/{{delivery_date_req}}" router="changed-active">
+      <div class="order-list__card__header">
+          <div class="order-list__card__dates">
+            <span class="order-list__card__dates-order-date">Заказ от &nbsp;{{formatDate order_date}}</span>
+            <span class="order-list__card__dates-delivery-date">Доставим &nbsp;{{formatDate delivery_date}}</span>
+          </div>
+          <span class="order-list__card-total">{{status}} &nbsp;{{total_price}}₽</span>
+        </div>
+        <div class="order-list__footer">
+          <button id="review-button" class="order-list__review-button" disabled>Оцените товары</button>
+          <div class="order-list__items">
+            {{#each products}}
+              <div class="order-list__items-item">
+                <img src="{{image_url}}" alt="{{title}}" class="order-item-image"/>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
