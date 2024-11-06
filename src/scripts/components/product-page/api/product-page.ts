@@ -45,7 +45,6 @@ interface ApiResponse {
   body: ProductData;
 }
 
-
 export class ProductPageApi {
 
   getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
@@ -75,8 +74,7 @@ export class ProductPageApi {
       })
   }
 
-
-  addToCart = (productId: string): Promise<void> =>{
+  addToCart = (productId: string): Promise<{ ok: boolean; unauthorized?: boolean }> =>{
     const url = `${backurl}/cart/product/${productId}`;
     return fetch(url, {
       method: 'POST',
@@ -86,11 +84,19 @@ export class ProductPageApi {
       },
       credentials: 'include',
     })
-      .then()
-      .catch()
+      .then((response) => {
+        if (response.status === 401) {
+          return { ok: false, unauthorized: true };
+        }
+        return { ok: response.ok };
+      })
+      .catch((error) => {
+        console.error('Error adding to cart:', error);
+        return { ok: false };
+      });
   }
 
-  rmFromCart = (productId: string): Promise<void> => {
+  rmFromCart = (productId: string): Promise<{ ok: boolean; unauthorized?: boolean }> => {
     const url = `${backurl}/cart/product/${productId}`;
     return fetch(url, {
       method: 'DELETE',
@@ -100,11 +106,19 @@ export class ProductPageApi {
       },
       credentials: 'include',
     })
-      .then()
-      .catch()
+      .then((response) => {
+        if (response.status === 401) {
+          return { ok: false, unauthorized: true };
+        }
+        return { ok: response.ok };
+      })
+      .catch((error) => {
+        console.error('Error removing from cart:', error);
+        return { ok: false };
+      });
   }
 
-  static async updateProductQuantity(productId: string, count: number = 1): Promise<void> {
+  static async updateProductQuantity(productId: string, count: number = 1): Promise<void>{
     const response = await fetch(`${backurl}/cart/product/${productId}`, {
       method: 'PATCH',
       credentials: 'include',

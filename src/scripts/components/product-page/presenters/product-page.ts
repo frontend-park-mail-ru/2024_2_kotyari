@@ -2,7 +2,7 @@ import { ProductPage } from '../views/product-view.js';
 import { Carousel } from '../../carousel/presenters/carousel';
 import { ProductPageApi } from '../api/product-page';
 import { backurl } from '../../../../services/app/config';
-import { router } from '../../../../services/app/init';
+import { isAuth, router } from '../../../../services/app/init';
 import { ProductData } from '../types/types';
 
 export class ProductPageBuilder {
@@ -133,8 +133,15 @@ export class ProductPageBuilder {
       cartButton.textContent = 'Удалить из корзины';
       this.productPage.setButtonPressedState(cartButton);
     } else {
-      cartButton.textContent = 'В корзину';
-      this.productPage.setButtonDefaultState(cartButton);
+      if (!isAuth()) {
+        cartButton.textContent = 'Войдите в аккаунт';
+        cartButton.setAttribute('router', 'changed-active');
+        cartButton.setAttribute('href', '/login');
+        return;
+      } else {
+        cartButton.textContent = 'В корзину';
+        this.productPage.setButtonDefaultState(cartButton);
+      }
     }
 
     cartButton.addEventListener('click', async () => {
@@ -159,12 +166,21 @@ export class ProductPageBuilder {
       return;
     }
 
-    const result = await this.api.addToCart(id);
-    if (result.ok) {
-      cartButton.textContent = 'Удалить из корзины';
-      incrementButton.style.display = 'inline-block';
-      this.productPage.setButtonPressedState(cartButton);
-    }
+    this.api.addToCart(id)
+      .then((result) => {
+        if (result.unauthorized) {
+          cartButton.textContent = 'Войдите в аккаунт';
+          cartButton.setAttribute('router', 'changed-active');
+          cartButton.setAttribute('href', '/login');
+          return;
+        }
+
+        if (result.ok) {
+          cartButton.textContent = 'Удалить из корзины';
+          incrementButton.style.display = 'inline-block';
+          this.productPage.setButtonPressedState(cartButton);
+        }
+      });
   }
 
   private async removeFromCart(cartButton: HTMLElement, incrementButton: HTMLElement) {
@@ -174,13 +190,20 @@ export class ProductPageBuilder {
       return;
     }
 
+    this.api.rmFromCart(id).then((result) => {
+      if (result.unauthorized) {
+        cartButton.textContent = 'Войдите в аккаунт';
+        cartButton.setAttribute('router', 'changed-active');
+        cartButton.setAttribute('href', '/login');
+        return;
+      }
 
-    const result = await this.api.rmFromCart(id);
-    if (result.ok) {
-      cartButton.textContent = 'В корзину';
-      incrementButton.style.display = 'none';
-      this.productPage.setButtonDefaultState(cartButton);
-    }
+      if (result.ok) {
+        cartButton.textContent = 'В корзину';
+        incrementButton.style.display = 'none';
+        this.productPage.setButtonDefaultState(cartButton);
+      }
+    });
   }
 
   private async increaseCartCount(cartButton: HTMLElement, incrementButton: HTMLElement) {

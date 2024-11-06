@@ -70,16 +70,16 @@
       <div class="product-page__current-price-product-page">{{price}} ₽</div>
       <div class="product-page__old-price">{{original_price}} ₽</div>
       <div class="product-page__cart-container">
-        <button class="product-page__cart-button">В корзину</button>
+        <button class="product-page__cart-button" {{#if flag}}router="changed-active" href="/login"{{/if}}>{{value}}</button>
 <!--        <span class="material-icons product-page__favorite-icon">favorite_border_outlined</span>-->
 
       </div>
     </div>
 
-    <div class="product-page__return-policy">
-      <span class="product-page__description-key">На возврат</span>: <span class="product-page__description-value">14 дней</span>
-      <br>
-      <span class="product-page__description-value">Примерка</span>
-    </div>
+<!--    <div class="product-page__return-policy">-->
+<!--      <span class="product-page__description-key">На возврат</span>: <span class="product-page__description-value">14 дней</span>-->
+<!--      <br>-->
+<!--      <span class="product-page__description-value">Примерка</span>-->
+<!--    </div>-->
   </div>
 </div>

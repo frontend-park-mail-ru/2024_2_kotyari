@@ -42,13 +42,15 @@ const reg = (): void => {
   });
 };
 
-reg();
+
 
 export const isAuth = (): boolean => {
   const user = storageUser.getUserData();
 
   return user.username !== '';
 };
+
+reg();
 
 export const router = new Router('/login', isAuth, rootId);
 
