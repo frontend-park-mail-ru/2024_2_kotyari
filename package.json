@@ -23,14 +23,14 @@
     "handlebars": "^4.7.8"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "server": "node server/server.js",
     "prepare": "husky",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "npm run format && npm run lint -- --fix",
     "dev": "vite",
-    "build": "tsc",
-    "rebuild": "vite build && vite preview"
+    "build": "vite build",
+    "start": "vite preview"
   },
   "husky": {
     "hooks": {
