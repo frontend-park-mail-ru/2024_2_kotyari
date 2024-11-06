@@ -1,0 +1,52 @@
+{{#if products.length}}
+    <div class="cart-items">
+        {{#each products}}
+            <div class="cart-item" id="cart-item-{{id}}">
+                <div class="cart-item__checkbox">
+                    <input type="checkbox" class="cart-item__select-item" id="cart-checkbox-{{id}}">
+                </div>
+                <div class="cart-item__image" href="{{url}}" router="changed-active" title="Перейти на страницу товара">
+                    <img src="{{image_url}}" alt="{{name}}" onerror="this.src='https://via.placeholder.com/150'">
+                </div>
+                <div class="cart-item__details">
+                    <div class="cart-item__title" href="{{url}}" router="changed-active" title="Перейти на страницу товара">{{name}}</div>
+                    <div class="cart-item__price">
+                        <span class="cart-item__current-price">{{cost}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
+                        {{#if old_cost}}
+                            <span class="cart-item__old-price">{{old_cost}} {{#if currency}}{{currency}}{{else}}₽{{/if}}</span>
+                        {{/if}}
+                        {{#if discount}}
+                            <span class="cart-item__discount">-{{discount}}%</span>
+                        {{/if}}
+                    </div>
+                    <div class="cart-item__quantity-wrapper">
+                        <div class="cart-item__quantity">
+                            <button class="cart-item__quantity-btn cart-item__quantity-btn--minus {{#if isSingleItem}}delete-btn{{/if}}" id="cart-remove-{{id}}">
+                                {{#if isSingleItem}}&#128465;{{else}}-{{/if}}
+                            </button>
+                            <span class="cart-item__quantity-count" id="quantity-{{id}}">{{quantity}} шт.</span>
+                            <button class="cart-item__quantity-btn cart-item__quantity-btn--plus">+</button>
+                        </div>
+                        <button class="cart-item__btn-favorite" id="btn-favorite-{{id}}">
+                            <!--{{#if is_liked}}
+                                <span class="cart-item__wishlist-icon material-icons">favorite</span>
+                            {{else}}
+                                <span class="cart-item__wishlist-icon material-icons">favorite_border</span>
+                            {{/if}}-->
+                        </button>
+                    </div>
+                </div>
+                <button class="cart-item__remove-item" id="cart-close-{{id}}">&#x2715;</button>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <div class="cart-item__placeholder" id="empty-cart-placeholder">
+        <svg class="cart-item__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M16 12l-4 4-4-4"></path>
+        </svg>
+        <p class="cart-item__placeholder-text">Ваша корзина пуста</p>
+        <p class="cart-item__placeholder-suggestion">Добавьте товары, чтобы увидеть их здесь!</p>
+    </div>
+{{/if}}

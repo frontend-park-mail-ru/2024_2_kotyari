@@ -1,0 +1,127 @@
+@import "/public/css/parametrs/parameters.css";
+
+.order {
+  max-width: var(--max-width-px-long);
+  margin: var(--big-margin) auto;
+
+  &__title {
+    font-size: var(--big-font-size);
+    font-weight: var(--middle-font-weight);
+    margin-bottom: var(--big-margin-bottom);
+  }
+
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--big-margin);
+  }
+
+  &__info {
+    background-color: #ffffff;
+    border: var(--one-border) solid var(--card-border-color);
+    border-radius: var(--container-border-radius);
+    box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+    padding: calc(var(--padding) + 2px);
+    width: 600px;
+    height: 150px;
+
+    &__status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__paid-status {
+      font-size: var(--font-size);
+    }
+
+    &__recipient {
+      padding-top: 40px;
+
+      &-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 11px;
+      }
+    }
+  }
+
+  &__total {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-background-color);
+    border: var(--one-border) solid var(--card-border-color);
+    border-radius: var(--container-border-radius);
+    box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+    padding: var(--padding);
+    width: 500px;
+    height: 100px;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: calc(var(--small-font-size) + 3px);
+      border-bottom: var(--one-border) solid var(--card-border-color);
+      padding-bottom: calc(var(--one-padding) + 3px);
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 15px;
+    }
+
+    &-amount {
+      margin-top: auto;
+      margin-bottom: auto;
+      font-weight: var(--middle-font-weight);
+    }
+  }
+
+  &__details {
+    width: 600px;
+    background-color: var(--card-background-color);
+    border: var(--one-border) solid var(--card-border-color);
+    border-radius: var(--container-border-radius);
+    box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+    padding: var(--padding);
+
+    &-title {
+      font-size: var(--default-font-size);
+    }
+
+    &__item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: calc(var(--padding) + 5px);
+
+      &-image {
+        width: 75px;
+        height: 75px;
+        border-radius: 25%;
+        object-fit: fill;
+        margin-right: var(--big-margin);
+        box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+      }
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 75px;
+      }
+
+      &-name,
+      &-quantity {
+        font-size: calc(var(--small-font-size) + 2px);
+      }
+
+      &-price {
+        font-weight: var(--middle-font-weight);
+      }
+    }
+  }
+}

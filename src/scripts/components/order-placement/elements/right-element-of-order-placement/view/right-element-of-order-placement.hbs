@@ -1,0 +1,28 @@
+<div class="right-element-card">
+    <!-- Первая карточка с итоговой информацией и промокодом -->
+    <p class="right-element-card__total-items">
+        Всего: {{totalItems}} {{pluralize totalItems 'товар' 'товара' 'товаров'}} <span style="text-align: right;">{{totalWeight}} кг</span>
+    </p>
+    <hr class="right-element-card__divider">
+    <input type="text" class="right-element-card__promo-input" placeholder="Промокод">
+    <p class="right-element-card__grand-total">
+        <strong>К оплате</strong>
+        <span class="right-element-card__final-price">{{finalPrice}} {{currency}}</span>
+    </p>
+</div>
+
+<div class="right-element-card">
+    <!-- Вторая карточка с выбором способа оплаты -->
+    <h3 class="right-element-card__payment-title" style="font-weight: normal; margin-bottom: var(--mini-gap);">Способ оплаты</h3>
+    <div class="right-element-card__payment-methods">
+        {{#each paymentMethods}}
+            <div class="right-element-card__payment-method {{#if isSelected}}right-element-card__payment-method--selected{{/if}}">
+                <span class="material-icons right-element-card__payment-method-icon">{{icon}}</span>
+                <p class="right-element-card__payment-method-text">{{method}}</p>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<!-- Кнопка для оформления заказа с отступом -->
+<button class="checkout-btn" id="order-button">Заказать</button>

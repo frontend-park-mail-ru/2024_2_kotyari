@@ -1,0 +1,73 @@
+// Блок для карточки (корневая обертка)
+.right-card {
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-top: var(--card-margin-top);
+
+  &__total-items {
+    font-size: var(--total-items-font-size);
+    color: var(--default-text-color);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--total-item-margin-bottom);
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--divider-color);
+    margin: var(--divider-margin);
+  }
+
+  &__benefit {
+    font-size: var(--benefit-font-size);
+    color: var(--default-text-color);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--benefit-margin-bottom);
+  }
+
+  &__grand-total {
+    font-size: var(--grand-total-items-font-size);
+    font-weight: var(--grand-total-font-weight);
+    display: flex;
+    justify-content: space-between;
+    color: var(--default-text-color);
+  }
+}
+
+// Блок для кнопки
+.cart-checkout-btn {
+  background-color: var(--base-background-color);
+  color: white;
+  border: none;
+  font-size: var(--button-font-size);
+  cursor: pointer;
+  border-radius: var(--card-border-radius);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+  transition: background-color var(--short-duration) ease, color var(--short-duration);
+
+  &:hover {
+    background-color: var(--darker-background-color); // Более темный фон при наведении
+    color: var(--text-inv);
+  }
+
+  &:active {
+    background-color: var(--darkest-background-color); // Самый темный фон при нажатии
+    color: var(--text-inv);
+  }
+
+  &.disabled {
+    background-color: var(--disabled-background-color); // Серый фон для заблокированной кнопки
+    color: var(--disabled-color);            // Серый цвет текста
+    cursor: not-allowed;    // Иконка неактивности
+
+    &:hover {
+      background-color: var(--disabled-background-color); // Оставляем тот же цвет при наведении
+      color: var(--disabled-color);
+    }
+  }
+}

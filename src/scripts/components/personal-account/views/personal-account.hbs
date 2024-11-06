@@ -1,0 +1,70 @@
+<div class="account">
+  <!-- Левая колонка -->
+  <div class="account__column-personal-account">
+    <div class="account__box-personal-account user-info">
+      <div class="account__user-details">
+        <div class="account__avatar-container">
+          <img src="{{avatar_url}}" alt="User Photo" class="account__user-photo">
+          <div class="account__avatar-overlay">
+            <span class="account__avatar-text">Поменять аватар</span>
+          </div>
+        </div>
+
+        <div class="msg">{{avatarErrorMessage}}</div>
+
+        <h2 class="account__user-name">{{username}}</h2>
+<!--        <span class="material-icons account__notification">{{#if user.notifications}}notifications_unread{{else}}notifications{{/if}}</span>-->
+      </div>
+      <div class="account__user-details">
+        <div class="product-page__description-wrapper">
+          <div class="product-page__description-item">
+            <span class="product-page__description-key">Пол:</span><span class="product-page__description-value gender">{{gender}}</span>
+          </div>
+          <div class="product-page__description-item">
+            <span class="product-page__description-key">Почта:</span> <span class="product-page__description-value email">{{email}}</span>
+          </div>
+        </div>
+        <button id="edit-user-info" class="account__edit-btn user-info" type="button">
+          <span class="material-icons account__edit">edit</span>
+        </button>
+      </div>
+      <button class="account__logout-button-personal-account" href="/logout" router="changed-active">Выход</button>
+
+    </div>
+  </div>
+
+  <!-- Центральная колонка -->
+  <div class="account__column-personal-account">
+    {{#each deliveryInfo}}
+      <div class="{{this.class}}">
+        <div class="account__icon-personal-account">
+          <span class="material-icons {{this.iconClass}}">{{this.icon}}</span>
+        </div>
+        <div class="{{this.detailsClass}}">
+          <h3 class="{{this.titleClass}}">{{this.title}}</h3>
+          <p class="{{this.textClass}}">{{this.text}}</p>
+        </div>
+        {{#if this.editable}}
+          <button id="edit-user-address" class="account__edit-btn user-info" type="button">
+            <span class="material-icons account__edit">edit</span>
+          </button>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+
+  <!-- Правая колонка -->
+  <div class="account__column-personal-account">
+    {{#each rightColumnInfo}}
+      <div class="{{this.class}}">
+        <div class="account__icon-personal-account">
+          <span class="material-icons {{this.iconClass}}">{{this.icon}}</span>
+        </div>
+        <div class="{{this.detailsClass}}">
+          <h3 class="{{this.titleClass}}">{{this.title}}</h3>
+          <p class="{{this.textClass}}" href="{{href}}" router="changed-active">{{this.text}}</p>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

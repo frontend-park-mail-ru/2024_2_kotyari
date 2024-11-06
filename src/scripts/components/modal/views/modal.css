@@ -1,0 +1,150 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--card-z-index_on);
+}
+
+.modal__main {
+    font-family: var(--mega-font-family), sans-serif;
+    font-weight: var(--litle-font-weight);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: var(--proc-min-width);
+    width: var(--min-width);
+    max-width: var(--proc-max-width);
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: default;
+    padding: var(--big-padding);
+    z-index: 10;
+}
+
+.btn__close {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--text-color);
+    transition: color var(--short-duration) ease;
+}
+
+.modal__container {
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0; /* Убираем отступы, чтобы избежать лишнего пространства */
+    border-radius: var(--container-border-radius);
+    padding: var(--container-padding);
+    background-color: var(--container-background-color);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--form-gap);
+}
+
+.form__label {
+    font-size: var(--default-font-size);
+    margin-bottom: var(--one-px-margin);
+    padding-bottom: var(--one-padding);
+}
+
+.form__input {
+    margin-top: var(--one-px-margin);
+    padding: var(--mini-padding);
+    font-size: var(--default-font-size);
+    border-radius: var(--input-border-radius);
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px var(--card-shadow-color);
+    transition: border-color var(--short-duration) ease, box-shadow var(--short-duration) ease;
+}
+
+.form__input:focus {
+    outline: none;
+}
+
+.form__submit-button {
+    padding: var(--mini-padding);
+    font-size: var(--default-font-size);
+    font-weight: bold;
+    background-color: var(--base-background-color);
+    color: var(--text-inv);
+    border-width: 0;
+    border-radius: var(--auth-button-border-radius);
+    cursor: pointer;
+    margin-top: var(--middle-margin);
+    transition: background-color var(--middle-duration) ease, color var(--middle-duration) ease;
+}
+
+.form__submit-button:hover {
+    background-color: var(--darker-background-color);
+    color: var(--text-inv);
+    border: 2px solid var(--darker-background-color);
+    transform: scale(var(--big-scale));
+}
+
+.form__submit-button:active {
+    background-color: var(--darkest-background-color);
+    color: var(--text-inv);
+    border: 2px solid var(--darkest-background-color);
+}
+
+.form__input_invalid {
+    border-color: var(--error-color);
+    background-color: var(--error-background-color);
+}
+
+.form__error-feedback {
+    color: var(--error-color);
+    font-size: var(--error-font-size);
+    margin-top: var(--middle-margin);
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .modal__container {
+        padding: 15px;
+    }
+
+    .auth-container__title {
+        font-size: 20px;
+    }
+
+    .form__label {
+        font-size: 14px;
+    }
+
+    .form__input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .form__submit-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form__input {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .form__submit-button {
+        padding: 8px;
+        font-size: 12px;
+    }
+}

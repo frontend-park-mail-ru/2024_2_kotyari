@@ -1,0 +1,54 @@
+@import "/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/view/delivery-dates-list.css";
+
+.recipient-card {
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-bottom: var(--main-gap);
+
+  &__title {
+    font-size: var(--card-title-font-size);
+    color: var(--default-text-color);
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--divider-color);
+    margin: var(--divider-margin);
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--total-item-margin-bottom);
+  }
+
+  &__label {
+    color: var(--default-text-color);
+    font-size: var(--font-size_label);
+  }
+
+  &__details {
+    display: flex;
+    align-items: center;
+  }
+
+  &__address, &__name {
+    font-size: var(--input-font-size);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__name {
+    margin-right: 17%;
+  }
+
+  &__edit-icon {
+    cursor: pointer;
+    margin-left: var(--main-gap);
+  }
+}

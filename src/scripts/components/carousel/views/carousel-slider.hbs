@@ -1,0 +1,27 @@
+<div class="product-page__carousel-slider-container">
+  <div id="carousel" class="product-page__carousel">
+    <div class="product-page__arrow-button">
+      <button class="product-page__arrow prev"><span class="material-icons">keyboard_arrow_up</span></button>
+    </div>
+    <div class="product-page__gallery">
+      <ul>
+        {{#each images}}
+          <li>
+            <img src="{{this.url}}" alt="Миниатюра" class="product-page__thumbnail" onclick="selectImage('{{this}}')">
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="product-page__arrow-button">
+      <button class="product-page__arrow next"><span class="material-icons">keyboard_arrow_down</span></button>
+    </div>
+  </div>
+
+  <div class="product-page__slider">
+    <button id="product-page__prev-button" class="product-page__slider-button"><span class="material-icons">chevron_left</span></button>
+    {{#each images}}
+      <img src="{{this.url}}" alt="Изображение" class="product-page__slide">
+    {{/each}}
+    <button id="product-page__next-button" class="product-page__slider-button"><span class="material-icons">chevron_right</span></button>
+  </div>
+</div>
