@@ -111,8 +111,8 @@ router.addRoute('/soon', () => soon(), new RegExp('^/soon$'), false, false);
 router.addRoute('/cart', () => cartBuilder.buildCart(), new RegExp('^/cart$'), true, false);
 
 router.addRoute('/order', () => orderPlacementBuilder.buildOrderPlacement(), new RegExp('^/order$'), true, false);
-// router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category/[^/]+$'), false, false);
-// router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
+router.addRoute('/category', () => generateCategories(categoryConfig),new RegExp('^/category/[^/]+$'), false, false);
+router.addRoute('/favorites', () => soon(), new RegExp('^/favorites$'), false, false);
 
 router.addRoute('/logout', () => loginPresenter.logout(), new RegExp('^/logout$'), true, false);
 
