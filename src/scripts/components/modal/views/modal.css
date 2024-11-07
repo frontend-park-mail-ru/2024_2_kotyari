@@ -31,7 +31,7 @@
 .btn__close {
     position: absolute;
     top: 15px;
-    right: 50px;
+    right: 20px;
     cursor: pointer;
     font-size: 24px;
     color: var(--text-color);
@@ -39,6 +39,7 @@
 }
 
 .modal__container {
+    position: relative;
     cursor: default;
     display: flex;
     flex-direction: column;
@@ -46,7 +47,7 @@
     margin: 0; /* Убираем отступы, чтобы избежать лишнего пространства */
     border-radius: var(--container-border-radius);
     padding: var(--container-padding);
-    background-color: var(--container-background-color);
+    background-color: var(--auth-menu-color);
 }
 
 .form {
