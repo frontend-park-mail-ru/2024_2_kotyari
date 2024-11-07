@@ -1,0 +1,49 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+.auth-container {
+  font-family: parameters.$mega-font-family, sans-serif;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: parameters.$proc-min-width;
+  width: parameters.$min-width;
+  position: relative;
+  background-color: parameters.$auth-menu-color;
+  max-width: parameters.$proc-max-width;
+  margin: 3% auto 10%;
+  color: parameters.$default-text-color;
+  border-radius: parameters.$default-border-radius;
+  box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
+  padding: parameters.$container-padding;
+  transition: box-shadow parameters.$short-duration ease, transform parameters.$short-duration ease;
+  border: parameters.$one-padding solid parameters.$card-border-color;
+
+  &:hover {
+    transform: scale(parameters.$litle-scale);
+  }
+
+  &__title {
+    text-align: center;
+    font-weight: parameters.$middle-font-weight;
+    font-size: parameters.$big-font-size;
+    margin-bottom: parameters.$xl-margin-bottom;
+  }
+
+  &__link {
+    font-size: 20px;
+    padding-top: parameters.$middle-padding-top;
+    text-align: center;
+  }
+
+  &__a {
+    display: block;
+    color: parameters.$text-another-color;
+    text-decoration: none;
+    transition: color parameters.$short-duration ease;
+
+    &:hover {
+      color: parameters.$link-color;
+    }
+  }
+}

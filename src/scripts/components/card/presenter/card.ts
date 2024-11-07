@@ -35,7 +35,7 @@ export class CardPresenter {
   };
 
   private attachCardClickHandlers() {
-    document.querySelectorAll('.card').forEach((card) => {
+    document.querySelectorAll('.catalog__card').forEach((card) => {
       card.addEventListener('click', () => {
         const link = card.getAttribute('data-link');
         if (link) {

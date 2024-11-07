@@ -1,34 +1,36 @@
+@use "../../../../../../../../../../../public/css/parametrs/parameters";
+
 .product-item {
   display: flex;
   align-items: center;
-  margin-bottom: var(--total-item-margin-bottom);
-  gap: var(--mini-gap);
-  margin-top: var(--main-gap);
+  margin-bottom: parameters.$total-item-margin-bottom;
+  gap: parameters.$mini-gap;
+  margin-top: parameters.$main-gap;
 
   &__image {
-    width: var(--order-image-width);
-    height: var(--order-image-height);
-    border-radius: var(--card-border-radius);
-    margin-right: var(--main-gap);
+    width: parameters.$order-image-width;
+    height: parameters.$order-image-height;
+    border-radius: parameters.$card-border-radius;
+    margin-right: parameters.$main-gap;
     object-fit: cover; /* Чтобы изображение заполняло квадрат */
-    padding-down: var(--order-image-padding-down);
-    background: var(--header-background) center center / cover no-repeat;
+    padding-down: parameters.$order-image-padding-down;
+    background: parameters.$header-background center center / cover no-repeat;
   }
 
   &__details {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Распределяем текст по высоте изображения */
-    height: var(--order-image-height); /* Высота для выравнивания текста с изображением */
+    height: parameters.$order-image-height; /* Высота для выравнивания текста с изображением */
   }
 
   &__name {
-    font-size: var(--font-size_label);
-    margin-top: var(--name-margin-top); /* Чуть ниже верха изображения */
+    font-size: parameters.$font-size_label;
+    margin-top: parameters.$name-margin-top; /* Чуть ниже верха изображения */
   }
 
   &__price {
-    font-size: var(--font-size_label);
-    margin-bottom: var(--name-margin-top); /* Чуть выше низа изображения */
+    font-size: parameters.$font-size_label;
+    margin-bottom: parameters.$name-margin-top; /* Чуть выше низа изображения */
   }
 }
