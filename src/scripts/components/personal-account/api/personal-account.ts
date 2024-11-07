@@ -23,6 +23,9 @@ export class AccountAPI {
   }
 
   public async fetchUserData(): Promise<UserData> {
+
+
+
     const response = await fetch(`${this.baseUrl}/account`, {
       method: 'GET',
       credentials: 'include',
@@ -58,6 +61,8 @@ export class AccountAPI {
   }
 
   public async getNearestDeliveryDate(): Promise<string> {
+
+
     const url = `${this.baseUrl}/orders/nearest`;
     try {
       const response = await fetch(url, {

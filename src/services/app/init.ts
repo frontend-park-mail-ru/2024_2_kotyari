@@ -24,6 +24,7 @@ import { OrderListPresenter } from '../../scripts/components/order-list/presente
 import { SingleOrderPresenter } from '../../scripts/components/single-order/presenter/single-order';
 import { HandlebarsRegEqual } from '../../scripts/utils/handlebars-reg-equal';
 import { isAuth } from '../storage/user';
+import { PERSONAL_ACCOUNT_ROUTES } from '../../scripts/components/personal-account/configs/config';
 
 HandlebarsRegEqual();
 
@@ -60,33 +61,41 @@ router.addRoute(AUTH_URLS.LOGIN.route,
   () => loginPresenter.init(),
   new RegExp('^/login$'),
   false, true);
+
 router.addRoute(AUTH_URLS.SIGNUP.route,
   () => signUpPresenter.init(),
   new RegExp('^/signup$'),
   false, true);
+
 router.addRoute('',
   () => cardPresenter.init(),
   new RegExp('^/$'),
   false, false);
+
 router.addRoute(CARD_URLS.CATALOG.route,
   () => cardPresenter.init(),
   new RegExp('^/catalog$'),
   false, false);
+
 router.addRoute('/error/404',
   () => errorPage('404'),
   new RegExp('^/error/404$'));
+
 router.addRoute('/product/:id',
   () => productPageBuilder.build().catch(e => console.error(e)),
   new RegExp('^\\/product\\/(\\d+)$'),
   false, false);
-router.addRoute('/account',
+
+router.addRoute(PERSONAL_ACCOUNT_ROUTES.ACCOUNT.ROUTE,
   () => accountPresenter.initialize(),
-  new RegExp('^/account$'),
+  PERSONAL_ACCOUNT_ROUTES.ACCOUNT.REG_EXP,
   true, false);
+
 router.addRoute('/order_list',
   () => orderListPresenter.initialize(),
   new RegExp('^/order_list$'),
   true, false)
+
 router.addRoute('/order/:id/:deliveryDate',
   () => singleOrderPresenter.initialize(),
   new RegExp('^\\/order\\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\\/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z)$'),
