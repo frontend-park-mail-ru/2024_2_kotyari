@@ -18,10 +18,6 @@
   }
 }
 
-.cards-view-title {
-
-}
-
 .catalog {
   grid-template-columns: repeat(auto-fit, minmax(parameters.$card-width, 1fr));
   gap: parameters.$gap;
