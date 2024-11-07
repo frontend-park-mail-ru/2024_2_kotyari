@@ -180,6 +180,7 @@
     width: 55px;
     height: 55px;
     margin-right: 7px;
+    object-fit: contain;
     border-radius: calc(var(--default-border-radius) - 7px);
 }
 
