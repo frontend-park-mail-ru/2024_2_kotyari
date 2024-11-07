@@ -1,5 +1,5 @@
-import { Helper } from '../../../../../constprograms/helper.js';
 import { CartProduct } from '../../../types/types';
+import { Helper } from '../../../../../utils/helper';
 
 /**
  * Класс RightCartView отвечает за отображение информации о корзине, включая

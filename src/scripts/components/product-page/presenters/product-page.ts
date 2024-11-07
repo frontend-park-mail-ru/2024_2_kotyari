@@ -2,8 +2,9 @@ import { ProductPage } from '../views/product-view.js';
 import { Carousel } from '../../carousel/presenters/carousel';
 import { ProductPageApi } from '../api/product-page';
 import { backurl } from '../../../../services/app/config';
-import { isAuth, router } from '../../../../services/app/init';
+import { router } from '../../../../services/app/init';
 import { ProductData } from '../types/types';
+import { isAuth } from '../../../../services/storage/user';
 
 export class ProductPageBuilder {
   private productPage: ProductPage;

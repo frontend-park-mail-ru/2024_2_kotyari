@@ -13,7 +13,7 @@ export class SingleOrderPresenter {
     this.singleOrderView = new SingleOrderView(rootId);
   }
 
-  public async initialize() {
+  public async initialize():Promise<void> {
     try {
       const keys = router.getRouteParams();
       if (keys === null) {
