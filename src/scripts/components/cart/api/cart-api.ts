@@ -29,7 +29,7 @@ export class CartApiInterface {
    * @returns {Promise<void>}
    */
   static async updateProductQuantity(productId: string, count: number): Promise<void> {
-    return csrf.patch(`${backurl}${CART_URLS.updateProductQuantity.route}${productId}`, count)
+    return csrf.patch(`${backurl}${CART_URLS.updateProductQuantity.route}${productId}`, { count })
       .then(res => {
         if (res.status !== 204) {
           throw new Error(`Ошибка при обновлении количества: ${res.status} - ${res.body.error_message}`);
