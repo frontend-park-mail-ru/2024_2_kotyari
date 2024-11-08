@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import string from 'vite-plugin-string';
@@ -39,6 +40,9 @@ export default defineConfig({
     string({ include: '**/*.hbs' }), // Добавляем поддержку импорта файлов .hbs как строк
     handlebars({
       partialDirectory: path.resolve(__dirname, 'src/scripts'),
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
     }),
   ],
   build: {

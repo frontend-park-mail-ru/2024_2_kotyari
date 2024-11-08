@@ -16,6 +16,25 @@ const imgPath = path.join(__dirname, '../src/assets');
 const basePath = path.join(__dirname, '../');
 // Используем middleware для статики
 
+app.use(express.static(path.join(__dirname, 'dist')));
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    }).catch((error) => {
+      console.error('Service Worker registration failed:', error);
+    });
+  });
+}
+
+
 app.use(express.static(imgPath));
 app.use(express.static(publicPath));
 app.use(express.static(cssPath));
