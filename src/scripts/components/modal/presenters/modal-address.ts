@@ -55,16 +55,17 @@ export class AddressModal extends BaseModal {
               throw new Error(`${res.status} - ${res.body.error_message}`);
           }
         })
-        .then(() => {
-          if (!this.modalElement) throw new Error('нет элемента модалки');
-
-          const closeButton = this.modalElement.querySelector('.btn__close');
-          closeButton?.addEventListener('click', this.close.bind(this));
-        })
         .catch((err) => {
           console.error('Error updating address:', err);
         })
     });
+
+    if (!this.modalElement) {
+      return;
+    }
+
+    const closeButton = this.modalElement.querySelector('.btn__close');
+    closeButton?.addEventListener('click', this.close.bind(this));
   }
 
   private validateForm(): boolean {
