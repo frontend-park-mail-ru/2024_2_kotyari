@@ -9,7 +9,7 @@
 }
 
 .product-page__carousel-slider-container {
-    flex: 2;
+    flex: 1.25;
     display: flex;
     gap: var(--gap);
     height: 700px;
@@ -17,7 +17,7 @@
 
 .product-page__carousel {
     position: relative;
-    width: 28%;
+    width: 33%;
     height: 100%;
     padding: var(--small-padding);
     border: var(--one-border) solid var(--carousel-border-color);
@@ -68,7 +68,7 @@
 
 .product-page__slider {
     position: relative;
-    width: var(--width-max);
+    width: 90%;
     height: 100%;
     overflow: visible;
 }
