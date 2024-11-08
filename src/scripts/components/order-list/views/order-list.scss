@@ -1,36 +1,36 @@
-@use "../../../../../public/css/parametrs/parameters";
+@import "/public/css/parametrs/parameters.css";
 
 .order-list {
   max-width: 1081px;
   margin: auto;
 
   &__title {
-    font-size: parameters.$big-font-size;
+    font-size: var(--big-font-size);
     text-align: left;
-    margin-bottom: parameters.$big-margin-bottom;
-    margin-top: parameters.$big-margin-bottom;
+    margin-bottom: var(--big-margin-bottom);
+    margin-top: var(--big-margin-bottom);
   }
 
   &__card {
-    background-color: parameters.$card-background-color;
-    border: 1px solid parameters.$card-border-color;
-    border-radius: parameters.$container-border-radius;
-    box-shadow: parameters.$card-box-shadow parameters.$hard-shadow-color;
-    padding: parameters.$padding;
-    transition: transform parameters.$short-duration ease;
+    background-color: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--container-border-radius);
+    box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
+    padding: var(--padding);
+    transition: transform var(--short-duration) ease;
     /* Возможно вынесение в переменную */
     height: 200px;
-    margin-bottom: parameters.$big-margin-bottom;
+    margin-bottom: var(--big-margin-bottom);
 
     &:hover {
-      transform: scale(parameters.$litle-scale);
+      transform: scale(var(--litle-scale));
     }
 
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: parameters.$small-margin;
+      margin-bottom: var(--small-margin);
     }
 
     &__dates {
@@ -39,19 +39,19 @@
 
       &-order-date {
         font-size: 22px;
-        color: parameters.$text-color;
+        color: var(--text-color);
       }
 
       &-delivery-date {
-        margin-top: parameters.$big-margin;
-        font-size: parameters.$font-size-base;
-        color: parameters.$text-color;
+        margin-top: var(--big-margin);
+        font-size: var(--font-size-base);
+        color: var(--text-color);
       }
     }
 
     &-total {
-      font-size: parameters.$default-font-size;
-      font-weight: parameters.$litle-font-weight;
+      font-size: var(--default-font-size);
+      font-weight: var(--little-font-weight);
     }
   }
 
@@ -62,17 +62,17 @@
   }
 
   &__review-button {
-    padding: parameters.$button-padding;
-    font-size: parameters.$font-size_label;
-    background-color: parameters.$base-background-color;
-    color: parameters.$text-inv;
+    padding: var(--button-padding);
+    font-size: var(--font-size_label);
+    background-color: var(--base-background-color);
+    color: var(--text-inv);
     border: none;
     border-radius: 12px;
     cursor: pointer;
 
     &:hover {
-      background-color: parameters.$darker-background-color;
-      transform: scale(parameters.$litle-scale);
+      background-color: var(--darker-background-color);
+      transform: scale(var(--litle-scale));
     }
   }
 
@@ -90,10 +90,10 @@
 
   &__details {
     display: flex;
-    gap: parameters.$gap;
+    gap: var(--gap);
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: parameters.$big-margin-bottom;
+    margin-bottom: var(--big-margin-bottom);
 
     &-status {
       font-size: 14px;

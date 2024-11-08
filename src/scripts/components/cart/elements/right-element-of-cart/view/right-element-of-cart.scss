@@ -1,75 +1,73 @@
-@use "../../../../../../../public/css/parametrs/parameters";
-
 // Блок для карточки (корневая обертка)
 .right-card {
-  background-color: parameters.$card-background-color;
-  border-radius: parameters.$card-border-radius;
-  box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
-  padding: parameters.$card-padding;
-  width: parameters.$width-max;
-  margin-top: parameters.$card-margin-top;
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-top: var(--card-margin-top);
 
   &__total-items {
-    font-size: parameters.$total-items-font-size;
-    color: parameters.$default-text-color;
+    font-size: var(--total-items-font-size);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
-    margin-bottom: parameters.$total-item-margin-bottom;
+    margin-bottom: var(--total-item-margin-bottom);
   }
 
   &__divider {
     border: none;
-    border-top: 1px solid parameters.$divider-color;
-    margin: parameters.$divider-margin;
+    border-top: 1px solid var(--divider-color);
+    margin: var(--divider-margin);
   }
 
   &__benefit {
-    font-size: parameters.$benefit-font-size;
-    color: parameters.$default-text-color;
+    font-size: var(--benefit-font-size);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
-    margin-bottom: parameters.$benefit-margin-bottom;
+    margin-bottom: var(--benefit-margin-bottom);
   }
 
   &__grand-total {
-    font-size: parameters.$grand-total-items-font-size;
-    font-weight: parameters.$grand-total-font-weight;
+    font-size: var(--grand-total-items-font-size);
+    font-weight: var(--grand-total-font-weight);
     display: flex;
     justify-content: space-between;
-    color: parameters.$default-text-color;
+    color: var(--default-text-color);
   }
 }
 
 // Блок для кнопки
 .cart-checkout-btn {
-  background-color: parameters.$base-background-color;
+  background-color: var(--base-background-color);
   color: white;
   border: none;
-  font-size: parameters.$button-font-size;
+  font-size: var(--button-font-size);
   cursor: pointer;
-  border-radius: parameters.$card-border-radius;
-  padding: parameters.$chrckout-padding;
-  width: parameters.$width-max;
-  transition: background-color parameters.$short-duration ease, color parameters.$short-duration;
+  border-radius: var(--card-border-radius);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+  transition: background-color var(--short-duration) ease, color var(--short-duration);
 
   &:hover {
-    background-color: parameters.$darker-background-color; // Более темный фон при наведении
-    color: parameters.$text-inv;
+    background-color: var(--darker-background-color); // Более темный фон при наведении
+    color: var(--text-inv);
   }
 
   &:active {
-    background-color: parameters.$darkest-background-color; // Самый темный фон при нажатии
-    color: parameters.$text-inv;
+    background-color: var(--darkest-background-color); // Самый темный фон при нажатии
+    color: var(--text-inv);
   }
 
   &.disabled {
-    background-color: parameters.$disabled-background-color; // Серый фон для заблокированной кнопки
-    color: parameters.$disabled-color;            // Серый цвет текста
+    background-color: var(--disabled-background-color); // Серый фон для заблокированной кнопки
+    color: var(--disabled-color);            // Серый цвет текста
     cursor: not-allowed;    // Иконка неактивности
 
     &:hover {
-      background-color: parameters.$disabled-background-color; // Оставляем тот же цвет при наведении
-      color: parameters.$disabled-color;
+      background-color: var(--disabled-background-color); // Оставляем тот же цвет при наведении
+      color: var(--disabled-color);
     }
   }
 }

@@ -1,58 +1,57 @@
-@use "../../../../../../../public/css/parametrs/parameters";
-
+// Блок для карточки (корневая обертка)
 .right-element-card {
-  background-color: parameters.$card-background-color;
-  border-radius: parameters.$card-border-radius;
-  box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
-  padding: parameters.$card-padding;
-  width: parameters.$width-max;
-  margin-bottom: parameters.$main-gap;
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-bottom: var(--main-gap);
 
   &__total-items {
-    font-size: parameters.$total-items-font-size;
-    color: parameters.$default-text-color;
+    font-size: var(--total-items-font-size);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
-    margin-bottom: parameters.$total-item-margin-bottom;
+    margin-bottom: var(--total-item-margin-bottom);
   }
 
   &__divider {
     border: none;
-    border-top: 1px solid parameters.$divider-color;
-    margin: parameters.$divider-margin;
+    border-top: 1px solid var(--divider-color);
+    margin: var(--divider-margin);
   }
 
   &__benefit {
-    font-size: parameters.$benefit-font-size;
-    color: parameters.$default-text-color;
+    font-size: var(--benefit-font-size);
+    color: var(--default-text-color);
     display: flex;
     justify-content: space-between;
-    margin-bottom: parameters.$benefit-margin-bottom;
+    margin-bottom: var(--benefit-margin-bottom);
   }
 
   &__grand-total {
-    font-size: parameters.$grand-total-items-font-size;
-    font-weight: parameters.$grand-total-font-weight;
+    font-size: var(--grand-total-items-font-size);
+    font-weight: var(--grand-total-font-weight);
     display: flex;
     justify-content: space-between;
-    margin-top: parameters.$mini-gap;
-    color: parameters.$default-text-color;
+    margin-top: var(--mini-gap);
+    color: var(--default-text-color);
   }
 
   &__promo-input {
-    background-color: parameters.$header-background;
+    background-color: var(--header-background);
     border: none;
-    border-radius: parameters.$card-border-radius;
-    color: parameters.$text-color;
-    padding: parameters.$chrckout-padding;
-    width: parameters.$width-max;
-    height: parameters.$right-order-height;
-    font-size: parameters.$input-font-size;
-    padding-left: parameters.$padding15;
+    border-radius: var(--card-border-radius);
+    color: var(--text-color);
+    padding: var(--chrckout-padding);
+    width: var(--width-max);
+    height: var(--right-order-height);
+    font-size: var(--input-font-size);
+    padding-left: var(--padding15);
+  }
 
-    &::placeholder {
-      color: parameters.$delete-color;
-    }
+  &__promo-input::placeholder {
+    color: var(--delete-color);
   }
 
   &__payment-method {
@@ -60,77 +59,76 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: parameters.$path-width;
-    border: 2px solid #EEEEEE;
-    border-radius: parameters.$card-border-radius;
-    padding: parameters.$padding15;
+    width: var(--path-width); /* Половина строки */
+    border: 2px solid #EEEEEE; /* Стандартная обводка */
+    border-radius: var(--card-border-radius);
+    padding: var(--padding15);
     cursor: pointer;
-    transition: border-color parameters.$short-duration ease-in-out;
-
-    &:hover {
-      border-color: parameters.$select-color;
-    }
-
-    &--selected {
-      border-color: parameters.$base-background-color;
-
-      &:hover {
-        border-color: parameters.$base-background-color;
-      }
-    }
+    transition: border-color var(--short-duration) ease-in-out; /* Плавное изменение обводки */
   }
 
-  &__payment-method {
-    &-icon {
-      font-size: parameters.$font-size-payment-method;
-      color: parameters.$text-color;
-    }
+  &__payment-method:hover {
+    border-color: var(--select-color); /* Более темная обводка при наведении */
+  }
 
-    &-text {
-      margin-top: parameters.$mini-gap;
-      color: parameters.$text-color;
-      font-size: parameters.$font-size_label;
-    }
+  &__payment-method--selected {
+    border-color: var(--base-background-color); /* Цвет обводки для выбранного метода */
+  }
 
-    &s {
-      display: flex;
-      justify-content: space-between;
-      gap: parameters.$main-gap;
-      align-items: center;
-    }
+  &__payment-method--selected:hover {
+    border-color: var(--base-background-color);
+  }
+
+  &__payment-method-icon {
+    font-size: var(--font-size-payment-method);
+    color: var(--text-color);
+  }
+
+  &__payment-method-text {
+    margin-top: var(--mini-gap);
+    color: var(--text-color);
+    font-size: var(--font-size_label);
+  }
+
+  /* Контейнер для размещения двух иконок на одной строке */
+  &__payment-methods {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--main-gap); /* Разделение между иконками */
+    align-items: center; /* Иконки на одной высоте */
   }
 }
 
 // Блок для кнопки
 .checkout-btn {
-  background-color: parameters.$base-background-color;
-  color: parameters.$text-inv;
+  background-color: var(--base-background-color);
+  color: var(--text-inv);
   border: none;
-  font-size: parameters.$button-font-size;
+  font-size: var(--button-font-size);
   cursor: pointer;
-  border-radius: parameters.$card-border-radius;
-  padding: parameters.$chrckout-padding;
-  width: parameters.$width-max;
-  height: parameters.$right-order-height;
+  border-radius: var(--card-border-radius);
+  padding: var(--chrckout-padding);
+  width: var(--width-max);
+  height: var(--right-order-height);
 
   &:hover {
-    background-color: parameters.$darker-background-color;
-    color: parameters.$text-inv;
+    background-color: var(--darker-background-color); // Более темный фон при наведении
+    color: var(--text-inv);
   }
 
   &:active {
-    background-color: parameters.$darkest-background-color;
-    color: parameters.$text-inv;
+    background-color: var(--darkest-background-color); // Самый темный фон при нажатии
+    color: var(--text-inv);
   }
 
   &.disabled {
-    background-color: parameters.$disabled-background-color;
-    color: parameters.$disabled-color;
-    cursor: not-allowed;
+    background-color: var(--disabled-background-color); // Серый фон для заблокированной кнопки
+    color: var(--disabled-color);            // Серый цвет текста
+    cursor: not-allowed;    // Иконка неактивности
 
     &:hover {
-      background-color: parameters.$disabled-background-color;
-      color: parameters.$disabled-color;
+      background-color: var(--disabled-background-color); // Оставляем тот же цвет при наведении
+      color: var(--disabled-color);
     }
   }
 }

@@ -1,0 +1,234 @@
+@import '/public/css/parametrs/parameters.css';
+
+.cards-view-title {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    font-size: 30px;
+    font-weight: var(--font-weight-bold);
+    color: black;
+    font-family: var(--mega-font-family), sans-serif ;
+}
+
+.container {
+    margin: var(--margin-auto);
+    justify-content: center;
+    display: flex;
+    max-width: 1300px;
+    flex-direction: column;
+}
+.cards-view-title {
+    margin: var(--margin-auto);
+}
+
+.catalog {
+    max-width: 1300px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    gap: var(--gap);
+    padding: var(--padding) 0;
+    display: grid;
+}
+
+/* Карточка товара */
+.card {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--default-border-radius);
+    box-shadow: 0 1px 6px var(--color-shadow);
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+    position: relative;
+    max-width: var(--card-width);
+    overflow: hidden;
+    cursor: pointer;
+    background-clip: border-box;
+}
+
+/* Эффект при наведении на карточку */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px var(--color-shadow-hover);
+    z-index: var(--z-index-hover);
+}
+
+/* Изображение товара */
+.card-image {
+    width: 100%;
+    height: var(--image-height);
+    border-radius: var(--default-border-radius);
+    overflow: hidden;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--gap);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-duration) ease;
+}
+
+.card:hover .card-image img {
+    transform: scale(1.1); /* Лёгкое увеличение изображения при наведении */
+}
+
+/* Информация о товаре */
+.card-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Цена, скидка и старая цена */
+.price {
+    font-size: var(--font-size-price);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-discount);
+    font-family: var(--mega-font-family), sans-serif ;
+    margin-bottom: var(--gap);
+}
+
+.old-price {
+    font-family: var(--mega-font-family), sans-serif ;
+    font-size: var(--font-size-description);
+    color: var(--color-old-price);
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+.discount {
+    font-family: var(--mega-font-family), sans-serif ;
+    font-size: 16px;
+    color: var(--color-discount);
+    margin-left: 8px;
+}
+
+/* Описание товара */
+.card-title {
+    font-family: var(--mega-font-family), sans-serif ;
+    font-size: var(--font-size-price);
+    color: var(--color-text);
+    margin-bottom: var(--gap);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Ограничение до 2 строк */
+    -webkit-box-orient: vertical;
+    transition: -webkit-line-clamp var(--transition-duration) ease;
+}
+
+.card:hover .card-title {
+    -webkit-line-clamp: 4; /* Разворачивает описание до 4 строк при наведении */
+}
+
+/* Кнопка "В корзину" */
+.buy-button {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: var(--button-text-color);
+    border: 2px solid var(--button-text-color);
+    border-radius: var(--default-border-radius);
+    font-size: var(--font-size-button);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+    text-decoration: none;
+}
+
+.buy-button:hover {
+    color: var(--text-buy-color);
+    background-color: var(--button-text-color);
+}
+
+/* Центрирование и стили для сообщения ожидания */
+.center-container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.buy-button:focus, .buy-button:hover {
+    transform: none;
+}
+
+
+.center-container .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--color-button-background);
+    border-radius: var(--default-border-radius);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-size: var(--font-size-description);
+    color: var(--color-text);
+    margin: var(--gap) 0;
+}
+
+/* Оформление заголовков и параграфов */
+h1, p {
+    color: var(--color-text);
+    margin-bottom: var(--gap);
+}
+
+/* Медиазапросы для адаптивности */
+@media (max-width: 820px) {
+    .catalog {
+        grid-template-columns: repeat(auto-fit, minmax(var(200px), 1fr));;
+        width: 100%;
+        padding: var(--padding) 10px;
+    }
+
+    .card {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .card-image {
+        height: 300px;
+    }
+
+    .buy-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 430px) {
+    .catalog {
+        grid-template-columns: 1fr;
+        width: 100%;
+        padding: var(--padding) 10px;
+    }
+
+    .card {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .card-image {
+        height: 300px;
+    }
+
+    .buy-button {
+        width: 100%;
+        text-align: center;
+    }
+}

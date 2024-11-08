@@ -1,11 +1,11 @@
 <!--<div id="loading-placeholder" class="center-container">-->
-<!--    <div class="center-container__spinner"></div>-->
-<!--    <h1 class="center-container__loading-text">Скоро</h1>-->
-<!--    <p class="center-container__loading-text">Товары будут добавлены позже.</p>-->
+<!--    <div class="spinner"></div>-->
+<!--    <h1 class="loading-text">Скоро</h1>-->
+<!--    <p class="loading-text">Товары будут добавлены позже.</p>-->
 <!--</div>-->
 
 <div class="container">
-  <div class="container__cards-view-title">
+  <div class="cards-view-title" style="display: block; margin-bottom: 10px; margin-left: 20px;">
     {{page_title}}
   </div>
 
@@ -13,31 +13,30 @@
 <div class="catalog" id="cards">
 
   {{#each products}}
-    <div class="catalog__card" href="/product/{{id}}" router="changed-active">
-      <div class="catalog__card__card-image">
+    <div class="card" href="/product/{{id}}" router="changed-active">
+      <div class="card-image">
         <img
-          class="catalog__card__card-image__img"
           src="{{image_url}}"
           loading="lazy"
         />
         <!--                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"-->
         <!--                />-->
       </div>
-      <div class="catalog__card-info">
-        <div class="catalog__card-info__price">
-          <span class="catalog__card-info__price__current-price">{{price}}₽</span>
+      <div class="card-info">
+        <div class="price">
+          <span class="current-price">{{price}}₽</span>
           {{#if original_price}}
-            <span class="catalog__card-info__price__old-price">{{original_price}}₽</span>
+            <span class="old-price">{{original_price}}₽</span>
           {{/if}}
           {{#if discount}}
-            <span class="catalog__card-info__price__discount">-{{discount}}%</span>
+            <span class="discount">-{{discount}}%</span>
           {{/if}}
         </div>
-        <div class="catalog__card-info__card-title">
+        <div class="card-title">
           {{title}}
         </div>
 
-<!--        <a class="catalog__card-info__buy-button">В корзину</a>-->
+<!--        <a class="buy-button">В корзину</a>-->
       </div>
     </div>
     {{/each}}

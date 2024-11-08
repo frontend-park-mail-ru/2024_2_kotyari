@@ -1,45 +1,44 @@
-@use "../../../../../public/css/parametrs/parameters";
-
 // Импортируем нужные файлы
-@use '../elements/data-sampling/view/data-sampling';
-@use '../elements/left-cards/view/left-cards';
-@use '../elements/right-element-of-cart/view/right-element-of-cart';
+@import '/src/scripts/components/cart/elements/data-sampling/view/data-sampling.css';
+@import '/src/scripts/components/cart/elements/left-cards/view/left-cards.css';
+@import '/src/scripts/components/cart/elements/right-element-of-cart/view/right-element-of-cart.css';
+@import '/public/css/parametrs/parameters.css';
 
 // Основной контейнер корзины
 .cart-container {
-  width: parameters.$container-width;
-  margin: parameters.$container-margin;
+  width: var(--container-width);
+  margin: var(--container-margin);
 
   // Заголовок корзины
   &__title {
-    font-size: parameters.$strong-font-size;
-    font-weight: parameters.$container-title-font-weight;
-    margin-bottom: parameters.$conteiner-title-margin-bottom;
-    color: parameters.$default-text-color;
+    font-size: var(--strong-font-size);
+    font-weight: var(--container-title-font-weight);
+    margin-bottom: var(--conteiner-title-margin-bottom);
+    color: var(--default-text-color);
   }
 
   // Контент корзины
   &__content {
     display: flex;
     justify-content: space-between;
-    gap: parameters.$main-gap;
+    gap: var(--main-gap);
   }
 
   // Левая часть корзины (список товаров)
   &__left {
-    width: parameters.$left-width;
+    width: var(--left-width);
     height: 100%;
   }
 
   // Правая часть корзины (элемент справа)
   &__right {
-    width: parameters.$right-width;
+    width: var(--right-width);
   }
 
   // Элемент с фиксированным позиционированием
   &__right-absolute {
     position: fixed;
-    width: calc(0.9*var(parameters.$right-width));
+    width: calc(0.9*var(--right-width));
   }
 }
 
@@ -50,11 +49,11 @@
       flex-direction: column;
     }
     &__left, &__right {
-      width: parameters.$width-max;
+      width: var(--width-max);
     }
     &__right-absolute {
       position: relative;
-      width: parameters.$width-max;
+      width: var(--width-max);
     }
   }
 }

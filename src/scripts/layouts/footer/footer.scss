@@ -1,9 +1,0 @@
-@use '../../../../public/css/parametrs/parameters';
-
-.footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: parameters.$width-max;
-    height: parameters.$footer-height;
-}

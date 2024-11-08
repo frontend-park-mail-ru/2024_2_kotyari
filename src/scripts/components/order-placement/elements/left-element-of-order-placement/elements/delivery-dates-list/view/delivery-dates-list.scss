@@ -1,13 +1,12 @@
-@use "../elements/product-item/view/product-item";
-@use "../../../../../../../../../public/css/parametrs/parameters";
+@import "/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item/view/product-item.css";
 
 .delivery-card {
-  background-color: parameters.$card-background-color;
-  border-radius: parameters.$card-border-radius;
-  box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
-  padding: parameters.$card-padding;
-  width: parameters.$width-max;
-  margin-bottom: parameters.$main-gap;
+  background-color: var(--card-background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
+  padding: var(--card-padding);
+  width: var(--width-max);
+  margin-bottom: var(--main-gap);
 
   &__date-row {
     display: flex;
@@ -18,36 +17,36 @@
   &__index-wrapper {
     display: flex;
     align-items: center;
-    gap: parameters.$index-gap;
+    gap: var(--index-gap);
   }
 
   &__index {
-    width: parameters.$order-index-width-plus; /* Увеличим размер для лучшего восприятия */
-    height: parameters.$order-index-height-plus;
-    border-radius: parameters.$ring-border-radius;
-    background-color: parameters.$header-background; /* Серый фон */
+    width: var(--order-index-width-plus); /* Увеличим размер для лучшего восприятия */
+    height: var(--order-index-height-plus);
+    border-radius: var(--ring-border-radius);
+    background-color: var(--header-background); /* Серый фон */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: parameters.$min-font-size;
-    color: parameters.$default-text-color;
+    font-size: var(--min-font-size);
+    color: var(--default-text-color);
   }
 
   &__date {
-    font-size: parameters.$font-size_label;
+    font-size: var(--font-size_label);
   }
 
   &__weight {
-    font-size: parameters.$font-size_label;
+    font-size: var(--font-size_label);
   }
 
   &__divider {
     border: none;
-    border-top: 1px solid parameters.$divider-color;
-    margin: parameters.$divider-margin;
+    border-top: 1px solid var(--divider-color);
+    margin: var(--divider-margin);
   }
 
   &__items {
-    margin-top: parameters.$main-gap;
+    margin-top: var(--main-gap);
   }
 }
