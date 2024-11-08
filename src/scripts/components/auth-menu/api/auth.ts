@@ -6,7 +6,8 @@ import {
   SignUpCredentials,
 } from '../types/types.js';
 import { backurl } from '@/services/app/config.ts';
-import { IUser } from '../../../../services/types/types';
+import { IUser, User } from '../../../../services/types/types';
+import { post } from '../../../../services/api/without-csrf';
 
 export default class AuthAPI {
   private config = AUTH_URLS;
@@ -17,30 +18,31 @@ export default class AuthAPI {
   }
 
   login = (credentials: LoginCredentials): Promise<authResponse> => {
-    return fetch(this.backUrl + this.config.LOGIN.route, {
-      credentials: 'include',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    })
+    const user = {
+      email: credentials.email,
+      password: credentials.password,
+    }
+
+    return post(this.backUrl + this.config.LOGIN.route, user)
       .then((res) => {
+        switch (res.status){
+          case 200:
+            return { status: res.status, body: res.body as IUser };
+          case 401:
+            return { status: res.status, body: { error_message: 'Пользователя не существует' } as ErrorResponse };
+          // case:
+
+        }
         if (res.ok) {
           return res.json().then((resJSON) => {
             if ('username' in resJSON) {
-              return { status: res.status, body: resJSON.body as IUser };
+
             } else {
               console.error('Ошибка авторизации:', resJSON.error_message);
               return { status: res.status, body: resJSON.body as ErrorResponse };
             }
           });
         } else if (res.status === 401) {
-          return { status: res.status, body: { error_message: 'Пользователя не существует' } as ErrorResponse };
         } else {
           return res.json().then((resJSON) => {
             console.error('Ошибка авторизации:', resJSON.body.error_message);

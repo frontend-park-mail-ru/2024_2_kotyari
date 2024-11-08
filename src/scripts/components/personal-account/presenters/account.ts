@@ -5,6 +5,7 @@ import { AddressModal } from '../../modal/presenters/modal-address';
 import { backurl } from '../../../../services/app/config';
 import { storageUser } from '../../../../services/storage/user';
 import { updateAfterAuth } from '../../../layouts/body';
+import { csrf } from '../../../../services/api/CSRFService';
 
 
 export class AccountPresenter {
@@ -25,9 +26,9 @@ export class AccountPresenter {
 
   public async initialize() {
     try {
+      await csrf.refreshToken();
+
       this.userData = await this.accountAPI.fetchUserData();
-
-
 
       this.userData.avatar_url = `${backurl}/${this.userData.avatar_url}`;
 
@@ -162,8 +163,6 @@ export class AccountPresenter {
         updateAfterAuth(storageUser.getUserData());
       }
     );
-
-
 
     userInfoModal.open();
   }

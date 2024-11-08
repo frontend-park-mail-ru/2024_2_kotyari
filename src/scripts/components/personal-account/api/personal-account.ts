@@ -1,3 +1,7 @@
+import { PERSONAL_ACCOUNT } from '../configs/config';
+import { getWithCred } from '../../../../services/api/without-csrf';
+import { csrf } from '../../../../services/api/CSRFService';
+
 export interface UserData {
   id: number;
   email: string;
@@ -23,73 +27,38 @@ export class AccountAPI {
   }
 
   public async fetchUserData(): Promise<UserData> {
-
-
-
-    const response = await fetch(`${this.baseUrl}/account`, {
-      method: 'GET',
-      credentials: 'include',
-    });
-
-    if (!response.ok) {
-      const errorBody = await response.json();
-      throw { status: response.status, body: errorBody };
-    }
-
-    const data = await response.json();
-    return data.body;
+    return getWithCred(`${this.baseUrl}${PERSONAL_ACCOUNT.MAIN.ROUTE}`)
+      .then(response => response.body as UserData)
   }
 
   public async updateAvatar(file: File): Promise<string> {
     const formData = new FormData();
     formData.append('avatar', file);
 
-    const response = await fetch(`${this.baseUrl}/account/avatar`, {
-      method: 'PUT',
-      body: formData,
-      credentials: 'include',
-    });
+    return csrf.put(`${this.baseUrl}${PERSONAL_ACCOUNT.AVATAR.ROUTE}`, formData)
+      .then(response => {
+        if (response.status !==200) {
+          throw { status: response.status, body: response.body }
+        }
 
-    if (!response.ok) {
-      const errorBody = await response.json();
-
-      throw { status: response.status, body: errorBody.body };
-    }
-
-    const result = await response.json();
-    return result.body.avatar_url;
+        return response.body.avatar_url as string;
+      })
   }
 
   public async getNearestDeliveryDate(): Promise<string> {
+    return getWithCred(`${this.baseUrl}`)
+      .then(response => {
+        if (response.status !== 200) {
+          return response.body.error_message || 'Error fetching delivery date';
+        }
 
-
-    const url = `${this.baseUrl}/orders/nearest`;
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        // If response is not OK, handle error only once
-        const errorData = await response.json();
-        return errorData.body?.error_message || 'Error fetching delivery date';
-      }
-
-      // Read the response body only once
-      const data = await response.json();
-      const deliveryDate = new Date(data.body.delivery_date);
-      return `Ожидаемая дата доставки: ${deliveryDate.toLocaleDateString('ru-RU', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })}`;
-    } catch (error) {
-      console.error('Failed to fetch nearest delivery date:', error);
-      return 'Не удалось получить дату доставки';
-    }
+        const data = response.body;
+        const deliveryDate = new Date(data.delivery_date);
+        return `Ожидаемая дата доставки: ${deliveryDate.toLocaleDateString('ru-RU', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}`;
+      })
   }
 }

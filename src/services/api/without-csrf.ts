@@ -1,5 +1,5 @@
 import { apiResponse, parseJsonResponse } from './utils';
-import { requestGetInfo, requestGetWithCredInfo, requestPostInfo } from './config';
+import { requestGetInfo, requestGetWithCredInfo, requestInfo, requestPostInfo } from './config';
 
 /**
  * Функция выполняет GET-запрос с использованием настроек для аутентифицированных запросов.
@@ -27,9 +27,17 @@ export const get = (url: string): Promise<apiResponse> => {
  * Функция выполняет POST-запрос.
  *
  * @param {string} url - URL-адрес, к которому будет отправлен запрос.
+ * @param body - тело
  * @returns {Promise<apiResponse>} Возвращает промис, который разрешается в объект apiResponse.
  */
-export const post = (url: string): Promise<apiResponse> => {
-  return fetch(url, requestPostInfo)
+export const post = (url: string, body: any): Promise<apiResponse> => {
+  const requestBody = body instanceof FormData ? body : JSON.stringify(body);
+
+  const request:RequestInit = {
+    body: requestBody,
+    ...requestPostInfo
+  }
+
+  return fetch(url, request)
     .then(parseJsonResponse);
 }

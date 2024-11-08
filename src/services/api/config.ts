@@ -68,11 +68,11 @@ export const requestGetWithCredInfo: RequestInit = {
   /** Используемый HTTP-метод */
   method: method.GET,
 
-  /** Распаковываем базовую конфигурацию запроса */
-  ...requestInfo,
-
   /** Указываем, что учётные данные (например, куки) должны быть включены в запрос */
   credentials: 'include',
+
+  /** Распаковываем базовую конфигурацию запроса */
+  ...requestInfo,
 };
 
 /**

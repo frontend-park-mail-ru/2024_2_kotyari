@@ -1,5 +1,6 @@
 import { apiResponse, parseJsonResponse } from './utils';
 import { method, requestGetWithCredInfo, requestInfo } from './config';
+import { backurl } from '../app/config';
 
 export class CSRFService {
   private token: string | null = null;
@@ -18,10 +19,12 @@ export class CSRFService {
         if (!response.ok) {
           throw new Error(`Ошибка при получении CSRF-токена: ${response.statusText}`);
         }
+
         const csrfToken = response.headers.get('X-CSRF-Token');
         if (!csrfToken) {
           throw new Error('CSRF-токен не найден в ответе сервера');
         }
+
         this.token = csrfToken;
       })
       .catch(err => {
@@ -123,3 +126,7 @@ export class CSRFService {
     await this.fetchToken();
   }
 }
+
+const csrfRoute = `${backurl}/csrf`
+
+export const csrf = new CSRFService(csrfRoute);
