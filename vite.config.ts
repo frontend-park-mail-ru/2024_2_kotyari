@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import string from 'vite-plugin-string';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Функция для поиска всех файлов .hbs во вложенных папках
 function findHandlebarsTemplates(dir) {
@@ -39,6 +44,9 @@ export default defineConfig({
     string({ include: '**/*.hbs' }), // Добавляем поддержку импорта файлов .hbs как строк
     handlebars({
       partialDirectory: path.resolve(__dirname, 'src/scripts'),
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
     }),
   ],
   build: {

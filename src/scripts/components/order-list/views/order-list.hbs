@@ -2,7 +2,7 @@
   <div id="order-list-container" class="order-list">
     <h2 class="order-list__title">Мои заказы</h2>
     {{#each orders}}
-      <div class="order-list__card" data-order-id="{{id}}" data-delivery-date_req="{{delivery_date_req}}" href="/order/{{id}}/{{delivery_date_req}}" router="changed-active">
+      <div class="order-list__card" data-order-id="{{id}}" data-delivery-date_req="{{delivery_date_req}}" href="/order/{{id}}" router="changed-active">
       <div class="order-list__card__header">
           <div class="order-list__card__dates">
             <span class="order-list__card__dates-order-date">Заказ от &nbsp;{{formatDate order_date}}</span>

@@ -1,4 +1,6 @@
 import {OrderPlacementApiInterface} from "../../../api/order-placement";
+import { router } from '../../../../../../services/app/init';
+import { add } from 'husky';
 
 /**
  * Класс для управления элементами правой части страницы оформления заказа.
@@ -21,6 +23,8 @@ export class RightElementOfOrderPlacementView {
   constructor(address: string) {
     // Инициализация: получаем все элементы способов оплаты
     this.paymentMethods = document.querySelectorAll('.right-element-card__payment-method');
+    console.log(address);
+
     this.init(address);
   }
 
@@ -76,7 +80,15 @@ export class RightElementOfOrderPlacementView {
     this.addEventListeners();
 
     document.getElementById('order-button')?.addEventListener('click', async () => {
-      await OrderPlacementApiInterface.placeOrder(address);
+      console.log(address);
+
+      OrderPlacementApiInterface.placeOrder(address)
+        .then(() => {
+          router.navigate('/order_list');
+        })
+        .catch(err => {
+          console.error('что-то пошло не так', err);
+        })
     });
   }
 }

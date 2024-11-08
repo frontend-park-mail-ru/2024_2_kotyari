@@ -19,6 +19,7 @@
 }
 .cart-container__left {
   width: var(--left-width);
+  height: 100%;
 }
 .cart-container__right {
   width: var(--right-width);

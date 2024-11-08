@@ -2,6 +2,7 @@ import { editNameGenderEmailConfig, ModalControllerParams, ModalField } from '..
 import { BaseModal } from './base-modal';
 import { ModalRenderer } from '../views/modal-render';
 import { backurl } from '../../../../services/app/config';
+import { csrf } from '../../../../services/api/CSRFService';
 
 export class PersonalDataModal extends BaseModal {
   private readonly onSubmitCallback: (updatedUser: Record<string, string>) => void;
@@ -74,25 +75,25 @@ export class PersonalDataModal extends BaseModal {
       return;
     }
 
-    try {
-      const response = await fetch(`${backurl}/account`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedData),
-        credentials: 'include',
+    return csrf.put(`${backurl}/account`, updatedData)
+      .then(res => {
+        switch (res.status) {
+          case 200:
+            this.onSubmitCallback(updatedData);
+            this.close();
+            return;
+          case 403:
+            csrf.refreshToken();
+            throw new Error('попробуйте еще раз');
+            return;
+          default:
+            throw new Error(`${res.status} - ${res.body.error_message}`);
+        }
+      })
+      .catch(err => {
+        console.error('Error updating profile:', err);
+        this.displayBackError(err || 'ошибка, попробуйте еще раз');
       });
-
-      if (response.ok) {
-        this.onSubmitCallback(updatedData);
-        this.close();
-      } else {
-        console.error('Failed to update profile:', response.statusText);
-        this.displayBackError('Failed to update the data');
-      }
-    } catch (error) {
-      console.error('Error updating profile:', error);
-      this.displayBackError('An error occurred while updating the data');
-    }
   }
 
   private displayBackError(message: string) {

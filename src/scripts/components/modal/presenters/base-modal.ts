@@ -26,9 +26,14 @@ export abstract class BaseModal {
       if (!this.config.btnClose){
         this.config.btnClose = 'btn__close';
       }
-
-      const closeButton = this.modalElement.querySelector(this.config.btnClose);
-      closeButton?.addEventListener('click', this.close.bind(this));
+      //
+      // const closeButton = this.modalElement.querySelector(this.config.btnClose);
+      // if (!closeButton) {
+      //   console.error(closeButton, this.config.btnClose);
+      //   return;
+      // }
+      //
+      // closeButton?.addEventListener('click', this.close.bind(this));
 
       this.modalElement.addEventListener('click', this.handleOutsideClick.bind(this));
     }
@@ -49,6 +54,7 @@ export abstract class BaseModal {
       console.error(this.modalElement, ' not found');
       return;
     }
+
     const modalContent = this.modalElement.querySelector('.modal__container');
     if (modalContent && !modalContent.contains(event.target as Node)) {
       this.close();

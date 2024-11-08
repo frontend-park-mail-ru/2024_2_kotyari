@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "/src/scripts/components/order-placement/elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item/view/product-item.css";
+@import "/src/scripts/components/order-placement/view/elements/product-item/product-item.css";
 .delivery-card {
   background-color: var(--card-background-color);
   border-radius: var(--card-border-radius);
@@ -16,18 +16,18 @@
 .delivery-card__index-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px; /* Регулирует расстояние между индексом и датой */
+  gap: var(--index-gap);
 }
 .delivery-card__index {
-  width: 32px; /* Увеличим размер для лучшего восприятия */
-  height: 32px;
-  border-radius: 50%;
-  background-color: #f0f0f0; /* Серый фон */
+  width: var(--order-index-width-plus); /* Увеличим размер для лучшего восприятия */
+  height: var(--order-index-height-plus);
+  border-radius: var(--ring-border-radius);
+  background-color: var(--header-background); /* Серый фон */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--min-font-size);
-  color: #000000;
+  color: var(--default-text-color);
 }
 .delivery-card__date {
   font-size: var(--font-size_label);

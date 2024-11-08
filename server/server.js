@@ -16,6 +16,14 @@ const imgPath = path.join(__dirname, '../src/assets');
 const basePath = path.join(__dirname, '../');
 // Используем middleware для статики
 
+app.use(express.static(path.join(__dirname, 'dist')));
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+
 app.use(express.static(imgPath));
 app.use(express.static(publicPath));
 app.use(express.static(cssPath));

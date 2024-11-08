@@ -2,7 +2,7 @@ import Handlebars from 'handlebars';
 import carouselSliderTemplate from './carousel-slider.hbs?raw';
 
 export class CarouselSlider {
-  private compiledTemplate: Handlebars.TemplateDelegate;
+  private readonly compiledTemplate: any;
 
   constructor() {
     this.compiledTemplate = Handlebars.compile(carouselSliderTemplate);

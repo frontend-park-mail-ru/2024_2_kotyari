@@ -1,7 +1,8 @@
-import { backurl } from "../../../../services/app/config";
-import { ORDER_PLACEMENT_URLS } from "./config";
+import { backurl } from '../../../../services/app/config';
+import { ORDER_PLACEMENT_URLS } from './config';
 import { OrderData } from '../types/types';
-import { router } from '../../../../services/app/init';
+import { getWithCred } from '../../../../services/api/without-csrf';
+import { csrf } from '../../../../services/api/CSRFService';
 
 export class OrderPlacementApiInterface {
   /**
@@ -10,23 +11,19 @@ export class OrderPlacementApiInterface {
    * @returns {Promise<OrderData>} Возвращает данные корзины.
    */
   static async getCartProducts(): Promise<OrderData> {
-    try {
-      const response = await fetch(`${backurl}${ORDER_PLACEMENT_URLS.getCartProducts.route}`, {
-        method: ORDER_PLACEMENT_URLS.getCartProducts.method,
-        credentials: 'include',
-        headers: ORDER_PLACEMENT_URLS.getCartProducts.headers,
+    return getWithCred(`${backurl}${ORDER_PLACEMENT_URLS.getCartProducts.route}`)
+      .then(res => {
+        switch (res.status) {
+          case 200:
+            return this.transformCartData(res.body) as OrderData;
+          default:
+            throw new Error(`${res.status} - ${res.body.error_message}`);
+        }
+      })
+      .catch(err => {
+        console.error('Ошибка получения данных: ', err);
+        throw err;
       });
-
-      if (!response.ok) {
-        throw new Error(`Ошибка получения данных: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return this.transformCartData(data.body);
-    } catch (error) {
-      console.error('Ошибка:', error);
-      throw error;
-    }
   }
 
   /**
@@ -35,22 +32,20 @@ export class OrderPlacementApiInterface {
    * @param {string} paymentMethod - Название метода оплаты ("Наличными" или "Картой").
    * @returns {Promise<void>}
    */
-  static async updatePaymentMethod(paymentMethod: string): Promise<void> {
-    try {
-      const response = await fetch(`${backurl}${ORDER_PLACEMENT_URLS.updatePaymentMethod.route}`, {
-        method: ORDER_PLACEMENT_URLS.updatePaymentMethod.method,
-        credentials: 'include',
-        headers: ORDER_PLACEMENT_URLS.updatePaymentMethod.headers,
-        body: JSON.stringify({ payment_method: paymentMethod }),
+  static updatePaymentMethod(paymentMethod: string): Promise<void> {
+    return csrf.patch(`${backurl}${ORDER_PLACEMENT_URLS.updatePaymentMethod.route}`, { payment_method: paymentMethod })
+      .then(res => {
+        switch (res.status) {
+          case 200:
+            return;
+          default:
+            throw new Error(`Ошибка обновления метода оплаты: ${res.status} - ${res.body.error_message}`);
+        }
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
+        throw error;
       });
-
-      if (!response.ok) {
-        throw new Error(`Ошибка обновления метода оплаты: ${response.status}`);
-      }
-    } catch (error) {
-      console.error('Ошибка:', error);
-      throw error;
-    }
   }
 
   /**
@@ -60,24 +55,22 @@ export class OrderPlacementApiInterface {
    * @returns {Promise<void>} Промис без возвращаемого значения.
    */
   public static async placeOrder(address: string): Promise<void> {
-    try {
-      const response = await fetch(`${backurl}${ORDER_PLACEMENT_URLS.placeOrder.route}`, {
-        method: ORDER_PLACEMENT_URLS.placeOrder.method,
-        credentials: 'include',
-        headers: ORDER_PLACEMENT_URLS.placeOrder.headers,
-        body: JSON.stringify({
-          address: address,
-        }),
-      });
+    console.log(address);
 
-      if (response.ok) {
-        router.navigate('/order_list'); // Перенаправление на страницу заказов
-      } else {
-        console.error('Ошибка при размещении заказа:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Ошибка при отправке заказа:', error);
-    }
+    return csrf.post(`${backurl}${ORDER_PLACEMENT_URLS.placeOrder.route}`, { address: address })
+      .then(res => {
+        console.log(res.status, res.body);
+
+        switch (res.status) {
+          case 200:
+            return {status: res.status, body: {id: res.body.id, order_date: res.body.order_date}};
+          default:
+            throw new Error(`${res.status} - ${res.body.error_message}`);
+        }
+      })
+      .catch(err => {
+        console.error('Ошибка при отправке заказа:', err);
+      });
   }
 
   /**

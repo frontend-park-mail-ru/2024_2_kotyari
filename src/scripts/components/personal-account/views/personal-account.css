@@ -125,10 +125,15 @@
 .account__user-details {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: var(--gap20);
     margin-left: var(--big-margin);
     vertical-align: top;
     font-family: 'UbuntuSans', sans-serif;
+}
+
+.account__address_update{
+    margin-bottom: 60px;
 }
 
 .account__notification {

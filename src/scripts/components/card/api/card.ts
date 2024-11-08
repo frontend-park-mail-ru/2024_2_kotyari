@@ -1,4 +1,5 @@
 import { CARD_URLS } from './config.js';
+import { get } from '../../../../services/api/without-csrf';
 
 interface Response {
   status: number;
@@ -21,8 +22,6 @@ interface Product {
   image_url: string;
 }
 
-
-
 export interface CardApiInterface {
   fetchCards(): Promise<Product[]>;
 }
@@ -36,30 +35,13 @@ export default class CardAPI implements CardApiInterface {
   }
 
   fetchCards(): Promise<Product[]> {
-    return fetch(this.backUrl + this.config.CATALOG.route, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          throw new Error('Ошибка при получении карточек');
+    return get(this.backUrl + this.config.CATALOG.route)
+      .then(response => {
+        if (response.status === 200) {
+          return response.body as Product[];
         }
 
-        return res.json();
+        throw new Error(`Ошибка при получении карточек ${response.status} - ${response.body.error_message}`);
       })
-      .then(data => {
-        if (data.status === 200) {
-          console.log('1123124',data.body)
-          return data.body;
-        } else {
-          throw new Error('Непредвиденный статус ответа');
-        }
-      })
-      .catch(err => {
-        console.error('Ошибка при запросе:', err.message);
-        throw err;
-      });
   }
 }
