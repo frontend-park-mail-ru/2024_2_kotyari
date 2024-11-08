@@ -30,7 +30,7 @@ export default class AuthAPI {
             return { status: res.status, body: res.body as IUser };
           case 401:
             return { status: res.status, body: { error_message: 'Пользователя не существует' } as ErrorResponse };
-          // case:
+
 
         }
         if (res.ok) {
