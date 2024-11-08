@@ -58,28 +58,11 @@
 
 .product {
     display: flex;
+    height: 100%;
     justify-content: space-between;
     padding: var(--padding);
     max-width: 1360px;
     margin: var(--margin-zero) auto;
-}
-
-.product-page__carousel-slider-container {
-    flex: 2;
-    display: flex;
-    gap: var(--gap);
-    height: auto;
-}
-
-.product-page__carousel {
-    position: relative;
-    width: var(--proc-slider-width);
-    height: 100%;
-    padding: var(--small-padding);
-    border: var(--one-border) solid var(--carousel-border-color);
-    border-radius: var(--default-border-radius);
-    background: var(--background-color);
-    overflow: hidden;
 }
 
 .product-page__carousel img:hover {
@@ -102,19 +85,13 @@
     gap: var(--gap20);
 }
 
-.product-page__slide{
-    border-radius: var(--default-border-radius);
-    width: 40%;
-    height: 100%;
-}
-
 .product-page__characteristics{
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .product-page__product-info {
-    flex: 1;
+    flex: 1.25;
     margin-left: 30px;
     /*max-width: 300px;*/
     word-break: break-all;
@@ -127,7 +104,9 @@
     font-weight: bolder;
     color: black;
     margin-bottom: var(--default-margin);
+    word-break: break-word;
 }
+
 
 .product-page__rating svg {
     vertical-align: middle;
@@ -201,6 +180,7 @@
     width: 55px;
     height: 55px;
     margin-right: 7px;
+    object-fit: contain;
     border-radius: calc(var(--default-border-radius) - 7px);
 }
 
@@ -305,12 +285,14 @@
     color: var(--text-color);
     font-weight: bold;
     margin-right: var(--middle-margin);
+    word-break: break-word;
 }
 
 .product-page__description-value {
     font-size: var(--font-size-description-product);
     font-weight: 390;
     color: black;
+    word-break: break-word;
 }
 
 .product-page__more-description-link {
@@ -319,7 +301,7 @@
 }
 
 .product-page__purchase-info {
-    flex: 1;
+    flex: 0.75;
     width: 20%;
     margin-left: var(--big-margin);
 }
@@ -344,6 +326,7 @@
     font-weight: bold;
     color: red;
     margin-bottom: var(--default-margin);
+    white-space: nowrap;
 }
 
 .product-page__old-price {

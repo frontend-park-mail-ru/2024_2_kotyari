@@ -13,6 +13,9 @@
         <div class="msg">{{avatarErrorMessage}}</div>
 
         <h2 class="account__user-name">{{username}}</h2>
+        <button id="edit-user-info" class="account__edit-btn user-info" type="button">
+          <span class="material-icons account__edit">edit</span>
+        </button>
 <!--        <span class="material-icons account__notification">{{#if user.notifications}}notifications_unread{{else}}notifications{{/if}}</span>-->
       </div>
       <div class="account__user-details">
@@ -24,9 +27,6 @@
             <span class="product-page__description-key">Почта:</span> <span class="product-page__description-value email">{{email}}</span>
           </div>
         </div>
-        <button id="edit-user-info" class="account__edit-btn user-info" type="button">
-          <span class="material-icons account__edit">edit</span>
-        </button>
       </div>
       <button class="account__logout-button-personal-account" href="/logout" router="changed-active">Выход</button>
 
@@ -45,9 +45,11 @@
           <p class="{{this.textClass}}">{{this.text}}</p>
         </div>
         {{#if this.editable}}
-          <button id="edit-user-address" class="account__edit-btn user-info" type="button">
-            <span class="material-icons account__edit">edit</span>
-          </button>
+          <div class="account__address_update">
+            <button id="edit-user-address" class="account__edit-btn user-info" type="button">
+              <span class="material-icons account__edit">edit</span>
+            </button>
+          </div>
         {{/if}}
       </div>
     {{/each}}

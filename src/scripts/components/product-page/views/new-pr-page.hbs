@@ -1,7 +1,5 @@
 <div class="product">
-  <div class="product-page__carousel-slider-container">
     {{> carousel-slider images=images }}
-  </div>
   <div class="product-page__product-info">
     <h1 class="product-page__product-name">{{title}}</h1>
     <div class="product-page__rating">
@@ -60,9 +58,9 @@
     </div>
 
 <!--    <div class="product-page__more-description-link">Перейти к описанию</div>-->
-    <div class="product-page__description-product-page">
-      <span style="width: 90%">{{description}}</span>
-    </div>
+<!--    <div class="product-page__description-product-page">-->
+<!--      <span style="width: 90%">{{description}}</span>-->
+<!--    </div>-->
   </div>
 
   <div class="product-page__purchase-info">
@@ -82,4 +80,8 @@
 <!--      <span class="product-page__description-value">Примерка</span>-->
 <!--    </div>-->
   </div>
+</div>
+
+<div class="product-page__description-product-page">
+  <span style="width: 90%">{{description}}</span>
 </div>
