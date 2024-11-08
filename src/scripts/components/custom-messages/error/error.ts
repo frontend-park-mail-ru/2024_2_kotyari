@@ -23,8 +23,6 @@ export function errorPage(name: string): void {
 
   const compiled = Handlebars.compile(errorTmp);
 
-  console.log(config);
-
   const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
     console.error(`Element ID = ${rootId} not found`);

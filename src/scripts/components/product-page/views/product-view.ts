@@ -4,14 +4,12 @@ import { rootId } from '../../../../services/app/config';
 import carouselSliderTemplate from '../../carousel/views/carousel-slider.hbs?raw';
 
 export class ProductPage {
-  private readonly rootElement: HTMLElement | null;
+  private rootElement: HTMLElement | null;
   private readonly compiledTemplate = Handlebars.compile(product);
 
-  constructor() {
-    this.rootElement = document.getElementById(rootId);
-  }
-
   async render(data: any) {
+    this.rootElement = document.getElementById(rootId);
+
     if (!this.rootElement) {
       console.error(`Элемент root ${rootId} не найден`);
       return;

@@ -83,7 +83,6 @@ export class Helper {
    * @returns {boolean} Возвращает true, если значения равны, иначе false.
    */
   public static eq(a: any, b: any): boolean {
-    console.log(a, b)
     return a === b;
   }
 

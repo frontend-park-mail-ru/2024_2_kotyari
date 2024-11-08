@@ -16,10 +16,12 @@ export class SingleOrderView {
 
   public render(data: SingleOrder) {
     this.rootElement = document.getElementById(this.rootId);
+
     if (!this.rootElement) {
       console.error(`Root element with id ${this.rootId} not found`);
       return;
     }
+
     this.rootElement.innerHTML = this.compiledTemplate(data);
   }
 
@@ -37,8 +39,7 @@ export class SingleOrderView {
         const productId = orderElement.getAttribute('data-product-id');
 
         if (productId) {
-          const url = `/product/${productId}`;
-          router.navigate(url);
+          router.navigate(`/product/${productId}`);
         } else {
           console.error('Product ID не найден');
         }

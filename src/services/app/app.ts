@@ -2,12 +2,19 @@ import { router } from './init.js';
 import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
-import { registerFunctions } from '../../scripts/constprograms/helperName';
-import { ErrorResponse } from '../../scripts/components/auth-menu/types/types';
+import { registerFunctions } from '../../scripts/utils/helperName';
 import { categoryStorage } from '../storage/category';
 import { buildBody, updateAfterAuth, updateAfterLogout } from '../../scripts/layouts/body';
+import { get, getWithCred } from '../api/without-csrf';
+import { Category } from '../../scripts/components/category/api/category';
 
 
+/**
+ * Функция строит основной интерфейс приложения на основе данных пользователя.
+ *
+ * @param {User} user - Объект пользователя.
+ * @returns {Promise<void>} Возвращает промис, который завершается после построения интерфейса.
+ */
 export const buildMain = (user: User): Promise<void> => {
   return buildBody({ rootId }).then(() => {
     if (user.username === '') {
@@ -18,40 +25,32 @@ export const buildMain = (user: User): Promise<void> => {
   });
 };
 
+/**
+ * Обработчик события загрузки DOMContentLoaded.
+ * Инициализирует приложение: регистрирует функции, выполняет авторизацию пользователя,
+ * строит интерфейс и настраивает маршрутизацию.
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
   return registerFunctions()
     .then(() => {
-      fetch(backurl, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-        .then((res) => res.json())
+      getWithCred(backurl)
         .then(res => {
-
-          console.log(res.status);
           switch (res.status) {
             case 200:
               return res.body as User;
             case 401:
-              console.log(res.body as ErrorResponse);
               return defaultUser;
           }
 
           throw Error(`ошибка ${res.status}`);
         })
-        .then((user) => {
+        .then(user => {
           storageUser.saveUserData(user as User);
 
           return user;
         })
-        .then((user: User) => {
-          console.log('USER: ', user);
-
+        .then(user => {
           buildMain(user)
             .then(() => {
               router.init();
@@ -70,29 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           return user;
         })
+        .then(() => {
+          get(backurl + '/categories')
+            .then(res => {
+              if (res.status !== 200) {
+                throw Error('ошибка при загрузке категорий');
+              }
 
-        .catch((err) => {
-          console.error('Error during app initialization:', err);
-        });
-    })
-    .then(() => {
-      fetch(backurl + '/categories', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-        .then(r => {
-          if (!r.ok) {
-            throw new Error(r.statusText);
-          }
-
-          return r.json();
+              return res.body as Category[];
+            })
+            .then(data => {
+              categoryStorage.setCategories(data as Category[]);
+            });
         })
-        .then((data) => data.body)
-        .then(data => {
-          categoryStorage.setCategories(data);
-        });
+        .catch((err) => {
+          console.error('ошибка инициализации приложения:', err);
+        })
     });
 });

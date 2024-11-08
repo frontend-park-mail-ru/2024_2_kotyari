@@ -5,6 +5,7 @@ import { RightCartPresenter } from '../elements/right-element-of-cart/presenter/
 import { RightCartView } from '../elements/right-element-of-cart/view/calculate-cart-totals.js';
 import { DataSamplingPresenter } from '../elements/data-sampling/presenter/data-sampling.js';
 import { CartData } from "../types/types";
+import { csrf } from '../../../../services/api/CSRFService';
 
 /**
  * Класс CartPresenter управляет логикой работы с корзиной товаров,
@@ -71,14 +72,16 @@ export class CartPresenter {
    * Инициализация работы с корзиной. Загружает состояние корзины и добавляет слушатели событий.
    */
   async initializeCart() {
-    // Инициализируем чекбоксы на основе данных корзины
-    this.cartView.initializeCheckboxes(this.cartData.products);
+    csrf.fetchToken().then(() =>{
+      // Инициализируем чекбоксы на основе данных корзины
+      this.cartView.initializeCheckboxes(this.cartData.products);
 
-    // Инициализируем работу с выборкой данных.
-    this.dataSamplingPresenter.initializeDataSampling();
+      // Инициализируем работу с выборкой данных.
+      this.dataSamplingPresenter.initializeDataSampling();
 
-    // Выполняем дополнительные настройки.
-    this.leftCardsPresenter.updateSelectedCount();
-    await this.rightCartPresenter.calculateCartTotals(this.cartData);
+      // Выполняем дополнительные настройки.
+      this.leftCardsPresenter.updateSelectedCount();
+      this.rightCartPresenter.calculateCartTotals(this.cartData);
+    });
   }
 }

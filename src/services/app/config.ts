@@ -1,3 +1,9 @@
+/**
+ * Идентификатор корневого элемента приложения.
+ *
+ * @constant {string}
+ * @default 'app'
+ */
 export const rootId: string = 'app';
 /**
  * URL-адрес бекенд-сервера, используемый для отправки запросов с фронтенда.
@@ -6,7 +12,7 @@ export const rootId: string = 'app';
  * @default 'http://localhost:8000/'
  */
 export const backurl = 'http://localhost:8000';
-//export const backurl = 'http://94.139.246.241:8000';
+// export const backurl = 'http://94.139.246.241:8000';
 
 /**
  * Значение атрибуда router для элементов с кликабельными ссылками.

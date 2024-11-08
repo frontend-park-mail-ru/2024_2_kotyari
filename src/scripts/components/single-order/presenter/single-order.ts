@@ -13,7 +13,7 @@ export class SingleOrderPresenter {
     this.singleOrderView = new SingleOrderView(rootId);
   }
 
-  public async initialize() {
+  public async initialize():Promise<void> {
     try {
       const keys = router.getRouteParams();
       if (keys === null) {
@@ -21,9 +21,8 @@ export class SingleOrderPresenter {
       }
 
       const orderId = keys["id"];
-      const deliveryDate = keys["deliveryDate"];
 
-      this.orderData = await this.singleOrderApi.getOrderData(orderId, deliveryDate);
+      this.orderData = await this.singleOrderApi.getOrderData(orderId);
       this.singleOrderView.render(this.orderData);
     } catch (error) {
       console.error('Не удалось инициализировать заказ', error);
