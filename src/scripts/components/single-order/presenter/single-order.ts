@@ -21,9 +21,8 @@ export class SingleOrderPresenter {
       }
 
       const orderId = keys["id"];
-      const deliveryDate = keys["deliveryDate"];
 
-      this.orderData = await this.singleOrderApi.getOrderData(orderId, deliveryDate);
+      this.orderData = await this.singleOrderApi.getOrderData(orderId);
       this.singleOrderView.render(this.orderData);
     } catch (error) {
       console.error('Не удалось инициализировать заказ', error);

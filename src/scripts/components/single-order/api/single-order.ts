@@ -1,5 +1,6 @@
 import { backurl } from '../../../../services/app/config';
 import { Product, SingleOrder } from '../types/types';
+import { getWithCred } from '../../../../services/api/without-csrf';
 
 export class SingleOrderApiInterface {
   static transformSingleOrderData(data: any): SingleOrder {
@@ -37,28 +38,25 @@ export class SingleOrderApiInterface {
       case 'cancelled':
         return 'Отменен';
       default:
-        return '';
+        return 'Что-то сломалось... Попробуйте позже';
     }
   }
 
-  public async getOrderData(orderId: string, deliveryDate: string): Promise<SingleOrder> {
-    try {
-      const response = await fetch(`${backurl}/order/${orderId}/${deliveryDate}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
+  public getOrderData(orderId: string): Promise<SingleOrder> {
+    return getWithCred(`${backurl}/order/${orderId}`)
+      .then(res => {
+        switch (res.status) {
+          case 200:
+            console.log(res.body);
 
-      if (!response.ok) {
-        throw new Error(`Ошибка при получении данных: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const body = data.body; // Данные заказа находятся внутри 'body'
-
-      return SingleOrderApiInterface.transformSingleOrderData(body);
-    } catch (error) {
-      console.error('Ошибка: ', error);
-      throw error;
-    }
+            return SingleOrderApiInterface.transformSingleOrderData(res.body);
+          default:
+            throw new Error(`Ошибка при получении данных: ${res.status} - ${res.body}`);
+        }
+      })
+      .catch(err => {
+        console.error('Ошибка: ', err);
+        throw err;
+      })
   }
 }

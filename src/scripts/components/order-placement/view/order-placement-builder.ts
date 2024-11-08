@@ -1,16 +1,14 @@
 import { rootId } from "@/services/app/config.ts";
 import orderPlacement from './order-placement.hbs?raw';
-import rightElementOfOrderPlacement from '../elements/right-element-of-order-placement/view/right-element-of-order-placement.hbs?raw';
-import leftElementOfOrderPlacement from '../elements/left-element-of-order-placement/view/left-element-of-order-placement.hbs?raw';
-import deliveryDatesList from '../elements/left-element-of-order-placement/elements/delivery-dates-list/view/delivery-dates-list.hbs?raw';
-import productItem from '../elements/left-element-of-order-placement/elements/delivery-dates-list/elements/product-item/view/product-item.hbs?raw';
+import rightElementOfOrderPlacement from './elements/right-element-of-order-placement/right-element-of-order-placement.hbs?raw';
+import leftElementOfOrderPlacement from './elements/left-element-of-order-placement/left-element-of-order-placement.hbs?raw';
+import deliveryDatesList from './elements/delivery-dates-list/delivery-dates-list.hbs?raw';
+import productItem from './elements/product-item/product-item.hbs?raw';
 import Handlebars from "handlebars";
 import {OrderData} from "../types/types";
 import { router } from '../../../../services/app/init';
 import {OrderPlacementApiInterface} from "../api/order-placement";
-import {
-    RightElementOfOrderPlacementView
-} from '../elements/right-element-of-order-placement/view/right-element-of-order-placement';
+import { RightElementOfOrderPlacementView } from './elements/right-element-of-order-placement/right-element-of-order-placement';
 
 /**
  * Класс для построения и управления процессом оформления заказа.
@@ -155,6 +153,7 @@ export class OrderPlacementBuilder {
     private async renderOrderPlacement(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             this.rootElement = document.getElementById(rootId);
+            if (!this.rootElement) return;
 
             this.rootElement.innerHTML='';
             this.rootElement!.insertAdjacentHTML('beforeend', this.orderPlacementTemplate([]));
@@ -202,7 +201,7 @@ export class OrderPlacementBuilder {
             // Рендерим список дат доставки с товарами
             this.deliveryDatesListRoot.insertAdjacentHTML(
                 'beforeend',
-                this.deliveryDatesListTemplate({deliveryDates: this.orderData.deliveryDates})
+                this.deliveryDatesListTemplate({deliveryDates: this.orderData?.deliveryDates})
             );
         }
     };
@@ -213,7 +212,17 @@ export class OrderPlacementBuilder {
      * @private
      * @returns {void}
      */
-    private initializeOrderPlacement(): void {
-        new RightElementOfOrderPlacementView();
+    private async initializeOrderPlacement(): Promise<void> {
+        try {
+            this.orderData = await OrderPlacementApiInterface.getCartProducts();
+
+            if (!this.orderData.deliveryDates) {
+                router.navigate('/cart')
+            }
+
+            this.rightElementsView = new RightElementOfOrderPlacementView(this.orderData.recipient.address);
+        } catch {
+            console.error('что-то не так');
+        }
     }
 }

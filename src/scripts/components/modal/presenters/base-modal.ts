@@ -49,6 +49,7 @@ export abstract class BaseModal {
       console.error(this.modalElement, ' not found');
       return;
     }
+
     const modalContent = this.modalElement.querySelector('.modal__container');
     if (modalContent && !modalContent.contains(event.target as Node)) {
       this.close();

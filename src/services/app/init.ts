@@ -24,7 +24,7 @@ import { OrderListPresenter } from '../../scripts/components/order-list/presente
 import { SingleOrderPresenter } from '../../scripts/components/single-order/presenter/single-order';
 import { HandlebarsRegEqual } from '../../scripts/utils/handlebars-reg-equal';
 import { isAuth } from '../storage/user';
-import { PERSONAL_ACCOUNT, PERSONAL_ACCOUNT_ROUTES } from '../../scripts/components/personal-account/configs/config';
+import { PERSONAL_ACCOUNT } from '../../scripts/components/personal-account/configs/config';
 
 HandlebarsRegEqual();
 
@@ -97,9 +97,9 @@ router.addRoute('/order_list',
   new RegExp('^/order_list$'),
   true, false)
 
-router.addRoute('/order/:id/:deliveryDate',
+router.addRoute('/order/:id',
   () => singleOrderPresenter.initialize(),
-  new RegExp('^\\/order\\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\\/(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z)$'),
+  new RegExp('^\\/order\\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$'),
   true, false)
 
 router.addRoute('/soon',

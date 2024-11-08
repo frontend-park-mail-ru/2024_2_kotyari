@@ -53,7 +53,6 @@ export class AccountPresenter {
       userData.Address?.flat?.trim()
     ].filter(Boolean).join(', ') || 'Добавьте адресс';
 
-
     let msg: string;
 
     msg = await this.accountAPI.getNearestDeliveryDate()

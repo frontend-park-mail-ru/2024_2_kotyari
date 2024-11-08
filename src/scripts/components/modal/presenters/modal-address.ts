@@ -2,6 +2,7 @@ import { BaseModal } from './base-modal';
 import { editAddressConfig, ModalControllerParams } from '../views/types';
 import { ModalRenderer } from '../views/modal-render';
 import { backurl } from '../../../../services/app/config';
+import { csrf } from '../../../../services/api/CSRFService';
 
 export class AddressModal extends BaseModal {
   private readonly onSubmitCallback: (updatedAddress: Record<string, string>) => void;
@@ -40,27 +41,30 @@ export class AddressModal extends BaseModal {
         updatedAddress[key] = value as string;
       });
 
-      try {
-        const response = await fetch(`${backurl}/address`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedAddress),
-          credentials: 'include',
-        });
+      return csrf.put(`${backurl}/address`, updatedAddress)
+        .then(res => {
+          switch (res.status){
+            case 200:
+              this.onSubmitCallback(updatedAddress);
+              this.close();
+              return;
+            case 403:
+              csrf.refreshToken();
+              throw new Error('протух csrf токен, попробуйте еще раз')
+            default:
+              throw new Error(`${res.status} - ${res.body.error_message}`);
+          }
+        })
+        .then(() => {
+          if (!this.modalElement) throw new Error('нет элемента модалки');
 
-        if (response.ok) {
-          this.onSubmitCallback(updatedAddress);
-          this.close();
-        } else {
-          console.error('Failed to update address:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error updating address:', error);
-      }
+          const closeButton = this.modalElement.querySelector('.btn__close');
+          closeButton?.addEventListener('click', this.close.bind(this));
+        })
+        .catch((err) => {
+          console.error('Error updating address:', err);
+        })
     });
-
-    const closeButton = this.modalElement.querySelector('.btn__close');
-    closeButton?.addEventListener('click', this.close.bind(this));
   }
 
   private validateForm(): boolean {

@@ -1,5 +1,6 @@
-import { OrderProduct, Order } from '../types/types'
+import { Order, OrderProduct } from '../types/types';
 import { backurl } from '../../../../services/app/config';
+import { getWithCred } from '../../../../services/api/without-csrf';
 
 export class OrderListApiInterface {
   static transformOrderData(orders: any[]): Order[] {
@@ -37,26 +38,17 @@ export class OrderListApiInterface {
     }
   }
 
-
   public async getOrderData(): Promise<Order[]> {
-    try {
-      const response = await fetch(`${backurl}/orders`, {
-        method: 'GET',
-        credentials: 'include',
+    return getWithCred(`${backurl}/orders`)
+      .then(data => {
+        switch (data.status) {
+          case 200:
+            const orders = data.body.orders;
+
+            return OrderListApiInterface.transformOrderData(orders);
+          default:
+            throw new Error(`Ошибка при получении данных: ${data.status} - ${data.body.error_message}`);
+        }
       });
-
-      if (!response.ok) {
-        throw new Error(`Ошибка при получении данных: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const orders = data.body.orders;
-
-      return OrderListApiInterface.transformOrderData(orders);
-    } catch (error) {
-      console.error('Ошибка: ', error);
-      throw error;
-    }
   }
-
 }

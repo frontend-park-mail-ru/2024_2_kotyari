@@ -46,13 +46,16 @@ export class AccountAPI {
   }
 
   public async getNearestDeliveryDate(): Promise<string> {
-    return getWithCred(`${this.baseUrl}`)
+    return getWithCred(`${this.baseUrl}/orders/nearest`)
       .then(response => {
         if (response.status !== 200) {
           return response.body.error_message || 'Error fetching delivery date';
         }
 
         const data = response.body;
+
+        console.log(data, data.delivery_date);
+
         const deliveryDate = new Date(data.delivery_date);
         return `Ожидаемая дата доставки: ${deliveryDate.toLocaleDateString('ru-RU', {
           year: 'numeric',

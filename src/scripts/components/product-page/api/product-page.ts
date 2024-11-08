@@ -43,7 +43,6 @@ interface ProductData {
 }
 
 export class ProductPageApi {
-
   getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
     return getWithCred(`${backurl}/product/${productId}`)
       .then((res) => {
@@ -68,10 +67,15 @@ export class ProductPageApi {
             return { ok: true };
           case 401:
             return { ok: false, unauthorized: true };
+          case 403:
+            csrf.refreshToken()
+              .catch(err => console.log(err));
+
+            return { ok: false };
           case 409:
             return { ok: false };
           default:
-            throw new Error(`${res.status} - ${res}`);
+            throw new Error(`${res.status} - ${res.body.error_message}`);
         }
       })
       .catch((error) => {
@@ -89,9 +93,13 @@ export class ProductPageApi {
             return { ok: true };
           case 401:
             return { ok: false, unauthorized: true };
+          case 403:
+            csrf.refreshToken()
+              .catch(err => console.log(err));
 
+            return { ok: false };
           default:
-            throw new Error(`${res.status} - ${res}`);
+            throw new Error(`${res.status} - ${res.body.error_message}`);
         }
       })
       .catch((error) => {
@@ -102,8 +110,21 @@ export class ProductPageApi {
 
   static async updateProductQuantity(productId: string, count: number = 1): Promise<void> {
     return csrf.patch(`${backurl}/cart/product/${productId}`, { count })
-      .then((res) => {
-        throw new Error(`Ошибка при обновлении количества: ${res.status}`);
+      .then(res =>{
+        switch (res.status) {
+          case 204:
+            return;
+          case 403:
+            csrf.refreshToken()
+              .catch(err => console.log(err));
+            
+            return;
+          default:
+            throw new Error(`${res.status} - ${res.body.error_message}`);
+        }
+      })
+      .catch((res) => {
+        throw new Error(`Ошибка при обновлении количества: ${res}`);
       });
   }
 }
