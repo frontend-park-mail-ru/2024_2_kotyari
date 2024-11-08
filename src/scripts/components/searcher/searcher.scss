@@ -1,0 +1,37 @@
+@use '../../../../public/css/parametrs/parameters';
+
+#searcher {
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.search-container {
+    flex: 0 0 50%;
+    display: flex;
+    position: relative;
+
+    &__search-input {
+        width: 100%;
+        padding: 11px;
+        font-size: parameters.$input-font-size;
+        border: parameters.$one-border solid parameters.$input-border-color;
+        border-radius: 5px 0 0 5px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__search-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        background-color: oklch(0.49 0.25 299.6);
+        border: none;
+        color: parameters.$text-buy-color;
+        font-size: parameters.$font-size;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+}

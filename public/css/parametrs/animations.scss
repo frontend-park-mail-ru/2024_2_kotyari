@@ -1,14 +1,14 @@
-@import "parameters.css";
+@use "./parameters";
 
 /* Спиннер для ожидания */
 .spinner {
-    border: var(--spinner-border-width) solid var(--spinner-border-color);
+    border: parameters.$spinner-border-width solid parameters.$spinner-border-color;
     border-radius: 50%;
-    border-top: var(--spinner-border-width) solid var(--spinner-top-border-color);
-    width: var(--spinner-size);
-    height: var(--spinner-size);
+    border-top: parameters.$spinner-border-width solid parameters.$spinner-top-border-color;
+    width: parameters.$spinner-size;
+    height: parameters.$spinner-size;
     animation: spin 1s linear infinite;
-    margin: 0 auto var(--mini-padding);
+    margin: 0 auto parameters.$mini-padding;
 }
 
 @keyframes spin {

@@ -1,34 +1,35 @@
-@import "/src/scripts/components/order-placement/view/elements/delivery-dates-list/delivery-dates-list.scss";
+@use "../delivery-dates-list/delivery-dates-list";
+@use "../../../../../../../public/css/parametrs/parameters";
 
 .recipient-card {
-  background-color: var(--card-background-color);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
-  padding: var(--card-padding);
-  width: var(--width-max);
-  margin-bottom: var(--main-gap);
+  background-color: parameters.$card-background-color;
+  border-radius: parameters.$card-border-radius;
+  box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
+  padding: parameters.$card-padding;
+  width: parameters.$width-max;
+  margin-bottom: parameters.$main-gap;
 
   &__title {
-    font-size: var(--card-title-font-size);
-    color: var(--default-text-color);
+    font-size: parameters.$card-title-font-size;
+    color: parameters.$default-text-color;
   }
 
   &__divider {
     border: none;
-    border-top: 1px solid var(--divider-color);
-    margin: var(--divider-margin);
+    border-top: 1px solid parameters.$divider-color;
+    margin: parameters.$divider-margin;
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--total-item-margin-bottom);
+    margin-bottom: parameters.$total-item-margin-bottom;
   }
 
   &__label {
-    color: var(--default-text-color);
-    font-size: var(--font-size_label);
+    color: parameters.$default-text-color;
+    font-size: parameters.$font-size_label;
   }
 
   &__details {
@@ -36,8 +37,9 @@
     align-items: center;
   }
 
-  &__address, &__name {
-    font-size: var(--input-font-size);
+  &__address,
+  &__name {
+    font-size: parameters.$input-font-size;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -49,6 +51,6 @@
 
   &__edit-icon {
     cursor: pointer;
-    margin-left: var(--main-gap);
+    margin-left: parameters.$main-gap;
   }
 }
