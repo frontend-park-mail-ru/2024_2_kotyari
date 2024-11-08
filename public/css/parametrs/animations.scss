@@ -1,0 +1,40 @@
+@use "./parameters";
+
+/* Спиннер для ожидания */
+.spinner {
+  border: parameters.$spinner-border-width solid parameters.$spinner-border-color;
+  border-radius: 50%;
+  border-top: parameters.$spinner-border-width solid parameters.$spinner-top-border-color;
+  width: parameters.$spinner-size;
+  height: parameters.$spinner-size;
+  animation: spin 1s linear infinite;
+  margin: 0 auto parameters.$mini-padding;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}

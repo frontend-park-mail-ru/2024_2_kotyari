@@ -1,0 +1,100 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+.product-page {
+  &__gallery {
+    align-content: center;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    position: relative;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  &__gallery ul {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: top 0.3s ease-in-out;
+  }
+
+  &__gallery ul li {
+    height: 25%;
+    flex: 1;
+    margin-bottom: 10px;
+  }
+
+  &__thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: parameters.$default-border-radius;
+    margin-bottom: parameters.$middle-margin;
+  }
+
+  &__arrow-button {
+    display: flex;
+    justify-content: center;
+    width: parameters.$width-max;
+    height: 5%;
+  }
+
+  &__carousel img.active-thumbnail {
+    border: parameters.$carousel-border solid parameters.$carousel-border-color-active;
+  }
+
+  &__slider {
+    position: relative;
+    width: parameters.$width-max;
+    height: parameters.$slider-height;
+    overflow: visible;
+  }
+
+  &__slide {
+    position: absolute;
+    width: parameters.$width-max;
+    height: parameters.$width-max;
+    opacity: 0;
+  }
+
+  &__slider-button {
+    position: absolute;
+    top: parameters.$proc-top-sliders;
+    transform: translateY(parameters.$y-coord-proc);
+    border: none;
+    border-radius: parameters.$default-border-radius;
+    padding: parameters.$micro-padding;
+    cursor: pointer;
+    z-index: parameters.$button-slider-z-index;
+  }
+
+  &__slide:first-child {
+    opacity: 1;
+  }
+
+  &__scroll-up,
+  &__scroll-down {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: parameters.$micro-padding;
+    cursor: pointer;
+    margin: parameters.$micro-padding 0;
+  }
+}
+
+#product-page {
+  &__prev-button {
+    left: parameters.$sliders-button-place;
+  }
+
+  &__next-button {
+    right: parameters.$sliders-button-place;
+  }
+}

@@ -1,64 +1,66 @@
+@use "../../../../../../../public/css/parametrs/parameters";
+
 .cart-item {
   display: flex;
-  background-color: var(--card-background-color);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--card-box-shadow) var(--card-shadow-color);
-  margin-bottom: var(--card-margin-top);
-  padding: var(--small-padding);
+  background-color: parameters.$card-background-color;
+  border-radius: parameters.$card-border-radius;
+  box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
+  margin-bottom: parameters.$card-margin-top;
+  padding: parameters.$small-padding;
   position: relative;
-  transition: transform var(--short-duration) ease;
+  transition: transform parameters.$short-duration ease;
 
   &:hover {
-    transform: translateY(var(--y-coord-min));
+    transform: translateY(parameters.$y-coord-min);
   }
 
   &__checkbox {
-    margin-top: var(--checkbox-margin-top);
+    margin-top: parameters.$checkbox-margin-top;
   }
 
   &__image {
-    width: var(--card-image-width);
-    padding: var(--micro-padding);
-    min-width: var(--min-card-image-width);
+    width: parameters.$card-image-width;
+    padding: parameters.$micro-padding;
+    min-width: parameters.$min-card-image-width;
 
     img {
-      width: var(--width-max);
+      width: parameters.$width-max;
       height: auto;
       aspect-ratio: 1 / 1;
-      border-radius: var(--card-border-radius);
-      min-height: var(--min-card-image-width);
-      background: var(--header-background) center center / cover no-repeat;
+      border-radius: parameters.$card-border-radius;
+      min-height: parameters.$min-card-image-width;
+      background: parameters.$header-background center center / cover no-repeat;
     }
   }
 
   &__details {
-    width: var(--details-width);
-    padding: var(--small-padding);
+    width: parameters.$details-width;
+    padding: parameters.$small-padding;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
   &__title {
-    font-size: var(--card-title-font-size);
-    margin-bottom: var(--card-title-margin-bottom);
+    font-size: parameters.$card-title-font-size;
+    margin-bottom: parameters.$card-title-margin-bottom;
   }
 
   &__price {
-    font-size: var(--card-price-font-size);
-    font-weight: var(--card-prise-font-weight);
-    color: var(--text-color);
-    margin-bottom: var(--card-price-margin-bottom);
+    font-size: parameters.$card-price-font-size;
+    font-weight: parameters.$card-prise-font-weight;
+    color: parameters.$text-color;
+    margin-bottom: parameters.$card-price-margin-bottom;
   }
 
   &__current-price {
-    margin-right: var(--mini-padding);
+    margin-right: parameters.$mini-padding;
     white-space: nowrap;
   }
 
   &__old-price {
     text-decoration: line-through;
-    margin-right: var(--mini-padding);
+    margin-right: parameters.$mini-padding;
     white-space: nowrap;
   }
 
@@ -70,13 +72,13 @@
     display: flex;
     justify-content: space-between;
     margin-top: auto;
-    margin-bottom: var(--info-margin-bottom);
+    margin-bottom: parameters.$info-margin-bottom;
   }
 
   &__delivery-date,
   &__delivery-date-right {
-    font-size: var(--font-size-date-right);
-    color: var(--info-margin-bottom);
+    font-size: parameters.$font-size-date-right;
+    color: parameters.$info-margin-bottom;
   }
 
   &__quantity-wrapper {
@@ -89,15 +91,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--base-background-color);
-    border-radius: var(--card-border-radius);
+    background-color: parameters.$base-background-color;
+    border-radius: parameters.$card-border-radius;
     padding: 10px 20px;
-    height: var(--quantity-height);
-    width: var(--quantity-width); /* Ширина блока кнопок и количества */
-    transition: background-color var(--short-duration) ease;
+    height: parameters.$quantity-height;
+    width: parameters.$quantity-width; /* Ширина блока кнопок и количества */
+    transition: background-color parameters.$short-duration ease;
 
     &:hover {
-      background-color: var(--darker-background-color);
+      background-color: parameters.$darker-background-color;
     }
   }
 
@@ -105,23 +107,23 @@
     background-color: transparent;
     color: white;
     border: none;
-    font-size: var(--card-price-font-size);
+    font-size: parameters.$card-price-font-size;
     cursor: pointer;
-    padding: var(--micro-padding);
-    transition: color var(--short-duration) ease;
+    padding: parameters.$micro-padding;
+    transition: color parameters.$short-duration ease;
 
     &:hover {
-      color: var(--text-hover-color);
+      color: parameters.$text-hover-color;
     }
 
     &:active {
-      color: var(--text-actife-color);
+      color: parameters.$text-actife-color;
     }
   }
 
   &__quantity-count {
-    font-size: var(--quanity-font-size);
-    color: var(--text-inv);
+    font-size: parameters.$quanity-font-size;
+    color: parameters.$text-inv;
   }
 
   &__btn-favorite {
@@ -130,8 +132,8 @@
   }
 
   &__wishlist-icon {
-    color: var(--text-another-color);
-    font-size: var(--card-icon-font-size);
+    color: parameters.$text-another-color;
+    font-size: parameters.$card-icon-font-size;
     cursor: pointer;
   }
 
@@ -141,8 +143,8 @@
     right: 10px;
     background-color: transparent;
     border: none;
-    font-size: var(--card-remove-font-size);
-    color: var(--text-another-color);
+    font-size: parameters.$card-remove-font-size;
+    color: parameters.$text-another-color;
     cursor: pointer;
   }
 
@@ -150,23 +152,23 @@
     width: auto;
     display: flex;
     justify-content: center;
-    margin-right: var(--checkbox-margin-right);
+    margin-right: parameters.$checkbox-margin-right;
   }
 
   &__select-item {
     appearance: none;
-    width: var(--checkbox-width);
-    height: var(--checkbox-height);
-    background-color: var(--card-background-color);
-    border: 2px solid var(--main-border-color);
-    border-radius: var(--select-item-border-radius);
+    width: parameters.$checkbox-width;
+    height: parameters.$checkbox-height;
+    background-color: parameters.$card-background-color;
+    border: 2px solid parameters.$main-border-color;
+    border-radius: parameters.$select-item-border-radius;
     cursor: pointer;
     position: relative;
   }
 
   // Состояние чекбокса при выборе
   &__select-item:checked {
-    color: var(--checkbox-text-color);
+    color: parameters.$checkbox-text-color;
   }
 
   // Отображение галочки при выборе чекбокса
@@ -192,7 +194,7 @@
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    color: var(--default-text-color);
+    color: parameters.$default-text-color;
     background-color: #f9f9f9;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

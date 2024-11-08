@@ -1,0 +1,21 @@
+@use '../../../../../public/css/parametrs/parameters';
+@use '../../../../../public/css/parametrs/animations';
+
+.center-container {
+    text-align: center;
+    margin-top: 20%;
+
+    &__soon-bounce-link,
+    &__soon-bounce-title {
+        color: parameters.$base-background-color;
+        animation: bounce parameters.$two-seconds-duration ease-in;
+    }
+
+    &__soon-bounce-text {
+        animation: bounce parameters.$two-seconds-duration ease-in;
+    }
+
+    &__soon-bounce-link {
+        cursor: pointer;
+    }
+}
