@@ -5,6 +5,7 @@ import { backurl } from '../../../../services/app/config';
 import { router } from '../../../../services/app/init';
 import { ProductData } from '../types/types';
 import { isAuth } from '../../../../services/storage/user';
+import { csrf } from '../../../../services/api/CSRFService';
 
 export class ProductPageBuilder {
   private productPage: ProductPage;
@@ -17,6 +18,9 @@ export class ProductPageBuilder {
   async build() {
     try {
       const id = this.getProductId();
+
+      await csrf.refreshToken();
+
       if (id === ''){
         router.navigate('/')
         return;
@@ -82,7 +86,6 @@ export class ProductPageBuilder {
       });
     });
 
-    // Обработка кнопок размера
     const sizeButtons = Array.from(document.querySelectorAll('.product-page__size-button')).filter(
       (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
     );
@@ -97,7 +100,6 @@ export class ProductPageBuilder {
       });
     });
 
-    // Обработка текстовых опций (ссылок)
     const textOptions = Array.from(document.querySelectorAll('.product-page__text-option')).filter(
       (el): el is HTMLAnchorElement => el instanceof HTMLAnchorElement
     );
@@ -120,7 +122,7 @@ export class ProductPageBuilder {
       return '';
     }
 
-    return  keys["id"];
+    return keys['id'];
   }
 
   private initializeCartButtons(isInCart: boolean) {
@@ -191,26 +193,28 @@ export class ProductPageBuilder {
       return;
     }
 
-    this.api.rmFromCart(id).then((result) => {
-      if (result.unauthorized) {
-        cartButton.textContent = 'Войдите в аккаунт';
-        cartButton.setAttribute('router', 'changed-active');
-        cartButton.setAttribute('href', '/login');
-        return;
-      }
+    this.api.rmFromCart(id)
+      .then((result) => {
+        console.log(result);
 
-      if (result.ok) {
-        cartButton.textContent = 'В корзину';
-        incrementButton.style.display = 'none';
-        this.productPage.setButtonDefaultState(cartButton);
-      }
+        if (result.unauthorized) {
+          cartButton.textContent = 'Войдите в аккаунт';
+          cartButton.setAttribute('router', 'changed-active');
+          cartButton.setAttribute('href', '/login');
+          return;
+        }
+
+        if (result.ok) {
+          cartButton.textContent = 'В корзину';
+          incrementButton.style.display = 'none';
+          this.productPage.setButtonDefaultState(cartButton);
+        }
     });
   }
 
   private async increaseCartCount(cartButton: HTMLElement, incrementButton: HTMLElement) {
     const id = this.getProductId();
     if (id === '') {
-      router.navigate('/')
       return;
     }
 

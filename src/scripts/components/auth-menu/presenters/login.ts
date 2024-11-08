@@ -41,7 +41,6 @@ export class LoginPresenter {
   private attachLoginHandler = () => {
     const loginButton = document.getElementById(menuSignIn.formId);
     if (loginButton) {
-      console.log(loginButton);
       loginButton.addEventListener('submit', this.handleLogin);
     }
   };

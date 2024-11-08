@@ -84,7 +84,7 @@ export class CSRFService {
    * @param body Тело запроса.
    * @returns Ответ API.
    */
-  post = (url: string, body: any): Promise<apiResponse> => {
+  post = (url: string, body: any = undefined): Promise<apiResponse> => {
     return this.protectedFetch(url, method.POST, body);
   };
 
@@ -94,7 +94,7 @@ export class CSRFService {
    * @param body Тело запроса.
    * @returns Ответ API.
    */
-  put = (url: string, body: any): Promise<apiResponse> => {
+  put = (url: string, body: any = undefined): Promise<apiResponse> => {
     return this.protectedFetch(url, method.PUT, body);
   };
 
@@ -104,7 +104,7 @@ export class CSRFService {
    * @param body Тело запроса.
    * @returns Ответ API.
    */
-  patch = (url: string, body: any): Promise<apiResponse> => {
+  patch = (url: string, body: any = undefined): Promise<apiResponse> => {
     return this.protectedFetch(url, method.PATCH, body);
   };
 
@@ -114,7 +114,7 @@ export class CSRFService {
    * @param body Тело запроса.
    * @returns Ответ API.
    */
-  delete = (url: string, body: any): Promise<apiResponse> => {
+  delete = (url: string, body: any = undefined): Promise<apiResponse> => {
     return this.protectedFetch(url, method.DELETE, body);
   };
 

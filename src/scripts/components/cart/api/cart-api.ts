@@ -1,37 +1,24 @@
 import { CartData, CartProduct } from '../types/types'; // Импорт интерфейсов
 import { backurl } from "../../../../services/app/config";
 import { CART_URLS } from "./config";
-import { CSRFService } from '../../../../services/api/CSRFService';
+import { getWithCred } from '../../../../services/api/without-csrf';
+import { csrf } from '../../../../services/api/CSRFService';
 
 export class CartApiInterface {
-  private csrf: CSRFService;
-
   /**
    * Получение данных корзины.
    *
    * @returns {Promise<CartData>} Возвращает данные корзины
    */
   static async getCartData(): Promise<CartData> {
-    try {
-      const response = await fetch(`${backurl}${CART_URLS.getCarts.route}`, {
-        method: CART_URLS.getCarts.method,
-        credentials: 'include',
-        headers: CART_URLS.getCarts.headers,
-      });
+    return getWithCred(`${backurl}${CART_URLS.getCarts.route}`)
+      .then(res => {
+        if (res.status !== 200){
+          throw Error(`Ошибка при получении данных: ${res.status} - ${res.body.error_message}`);
+        }
 
-      if (!response.ok) {
-        throw Error(`Ошибка при получении данных: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      console.log(data);
-
-      return CartApiInterface.transformCartData(data.body.products);
-    } catch (error) {
-      console.error('Ошибка:', error);
-      throw error;
-    }
+        return CartApiInterface.transformCartData(res.body.products);
+      })
   }
 
   /**
@@ -42,16 +29,12 @@ export class CartApiInterface {
    * @returns {Promise<void>}
    */
   static async updateProductQuantity(productId: string, count: number): Promise<void> {
-    const response = await fetch(`${backurl}${CART_URLS.updateProductQuantity.route}${productId}`, {
-      method: CART_URLS.updateProductQuantity.method,
-      credentials: 'include',
-      headers: CART_URLS.updateProductQuantity.headers,
-      body: JSON.stringify({ count }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Ошибка при обновлении количества: ${response.status}`);
-    }
+    return csrf.patch(`${backurl}${CART_URLS.updateProductQuantity.route}${productId}`, count)
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error(`Ошибка при обновлении количества: ${res.status} - ${res.body.error_message}`);
+        }
+      })
   }
 
   /**
@@ -62,16 +45,14 @@ export class CartApiInterface {
    * @returns {Promise<void>}
    */
   static async selectProduct(productId: string, isSelected: boolean): Promise<void> {
-    const response = await fetch(`${backurl}${CART_URLS.selectProduct.route}${productId}`, {
-      method: CART_URLS.selectProduct.method,
-      credentials: 'include',
-      headers: CART_URLS.selectProduct.headers,
-      body: JSON.stringify({ 'is_selected' :isSelected }),
-    });
+    return csrf.patch(`${backurl}${CART_URLS.selectProduct.route}${productId}`, { 'is_selected' :isSelected })
+      .then(res => {
+        if (res.status !== 200) {
+          console.error(`ошибка при выборе: ${res.status} - ${res.body.error_message}`);
 
-    if (!response.ok) {
-      throw new Error(`Ошибка при выборе продукта: ${response.status}`);
-    }
+          throw new Error(`${res.body.error_message}`)
+        }
+      })
   }
 
   /**
@@ -159,11 +140,8 @@ export class CartApiInterface {
     });
 
     if (!response.ok) {
-      console.log('123');
       throw new Error(`Ошибка при удалении продукта: ${response.status}`);
     }
-
-    console.log('321');
 
     return Promise.resolve();
   }

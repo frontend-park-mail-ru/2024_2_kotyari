@@ -1,4 +1,6 @@
 import { backurl } from '../../../../services/app/config';
+import { getWithCred } from '../../../../services/api/without-csrf';
+import { csrf } from '../../../../services/api/CSRFService';
 
 interface ProductOption {
   title: string;
@@ -40,55 +42,37 @@ interface ProductData {
   in_cart: boolean;
 }
 
-interface ApiResponse {
-  status: number;
-  body: ProductData;
-}
-
 export class ProductPageApi {
 
   getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
-    const url = `${backurl}/product/${productId}`;
-
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`Error fetching product data: ${res.statusText}`);
+    return getWithCred(`${backurl}/product/${productId}`)
+      .then((res) => {
+        switch (res.status) {
+          case 200:
+            return { ok: true, body: res.body };
+          default:
+            throw new Error(`${res.status} -- ${res.body.error_message}`);
         }
-
-        return res.json();
-      })
-      .then(data => {
-        return {ok: true, body: data.body};
       })
       .catch(e => {
-        console.error('Fetch error:', e);
+        console.error('Error fetching product data:', e);
         return { ok: false };
       })
   }
 
   addToCart = (productId: string): Promise<{ ok: boolean; unauthorized?: boolean }> =>{
-    const url = `${backurl}/cart/product/${productId}`;
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
-      .then((response) => {
-        if (response.status === 401) {
-          return { ok: false, unauthorized: true };
+    return csrf.post(`${backurl}/cart/product/${productId}`)
+      .then((res) => {
+        switch (res.status) {
+          case 204:
+            return { ok: true };
+          case 401:
+            return { ok: false, unauthorized: true };
+          case 409:
+            return { ok: false };
+          default:
+            throw new Error(`${res.status} - ${res}`);
         }
-        return { ok: response.ok };
       })
       .catch((error) => {
         console.error('Error adding to cart:', error);
@@ -98,19 +82,17 @@ export class ProductPageApi {
 
   rmFromCart = (productId: string): Promise<{ ok: boolean; unauthorized?: boolean }> => {
     const url = `${backurl}/cart/product/${productId}`;
-    return fetch(url, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
-      .then((response) => {
-        if (response.status === 401) {
-          return { ok: false, unauthorized: true };
+    return csrf.delete(url)
+      .then((res) => {
+        switch (res.status) {
+          case 204:
+            return { ok: true };
+          case 401:
+            return { ok: false, unauthorized: true };
+
+          default:
+            throw new Error(`${res.status} - ${res}`);
         }
-        return { ok: response.ok };
       })
       .catch((error) => {
         console.error('Error removing from cart:', error);
@@ -118,20 +100,10 @@ export class ProductPageApi {
       });
   }
 
-  static async updateProductQuantity(productId: string, count: number = 1): Promise<void>{
-    const response = await fetch(`${backurl}/cart/product/${productId}`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ count }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Ошибка при обновлении количества: ${response.status}`);
-    }
+  static async updateProductQuantity(productId: string, count: number = 1): Promise<void> {
+    return csrf.patch(`${backurl}/cart/product/${productId}`, { count })
+      .then((res) => {
+        throw new Error(`Ошибка при обновлении количества: ${res.status}`);
+      });
   }
-
 }
