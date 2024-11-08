@@ -1,5 +1,5 @@
 import { apiResponse, parseJsonResponse } from './utils';
-import { method, requestGetWithCredInfo, requestInfo } from './config';
+import { method, requestGetWithCredInfo } from './config';
 import { backurl } from '../app/config';
 
 export class CSRFService {
@@ -40,6 +40,7 @@ export class CSRFService {
    */
   private getRequestInfo(method: string, body: any): RequestInit | undefined {
     if (!this.token) {
+      console.log(this.token);
       return undefined;
     }
 

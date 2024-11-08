@@ -1,6 +1,6 @@
 import { CartData, CartProduct } from '../types/types'; // Импорт интерфейсов
-import { backurl } from "../../../../services/app/config";
-import { CART_URLS } from "./config";
+import { backurl } from '../../../../services/app/config';
+import { CART_URLS } from './config';
 import { getWithCred } from '../../../../services/api/without-csrf';
 import { csrf } from '../../../../services/api/CSRFService';
 
@@ -31,7 +31,7 @@ export class CartApiInterface {
   static async updateProductQuantity(productId: string, count: number): Promise<void> {
     return csrf.patch(`${backurl}${CART_URLS.updateProductQuantity.route}${productId}`, count)
       .then(res => {
-        if (res.status !== 200) {
+        if (res.status !== 204) {
           throw new Error(`Ошибка при обновлении количества: ${res.status} - ${res.body.error_message}`);
         }
       })
@@ -47,11 +47,19 @@ export class CartApiInterface {
   static async selectProduct(productId: string, isSelected: boolean): Promise<void> {
     return csrf.patch(`${backurl}${CART_URLS.selectProduct.route}${productId}`, { 'is_selected' :isSelected })
       .then(res => {
-        if (res.status !== 200) {
-          console.error(`ошибка при выборе: ${res.status} - ${res.body.error_message}`);
-
-          throw new Error(`${res.body.error_message}`)
+        switch (res.status) {
+          case 204:
+            return;
+          case 403:
+            csrf.refreshToken();
         }
+
+        console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
+        throw new Error(`${res.body}`);
+
+      })
+      .catch(err => {
+        console.error(err);
       })
   }
 
@@ -62,16 +70,22 @@ export class CartApiInterface {
    * @returns {Promise<void>}
    */
   static async selectAllProducts(is_selected: boolean): Promise<void> {
-    const response = await fetch(`${backurl}${CART_URLS.selectAllProducts.route}`, {
-      method: CART_URLS.selectAllProducts.method,
-      credentials: 'include',
-      headers: CART_URLS.selectAllProducts.headers,
-      body: JSON.stringify({'is_selected': is_selected}),
-    });
+    return csrf.patch(`${backurl}${CART_URLS.selectAllProducts.route}`, { 'is_selected': is_selected })
+      .then(res => {
+        switch (res.status) {
+          case 204:
+            return;
+          case 403:
+            csrf.refreshToken();
+        }
 
-    if (!response.ok) {
-      throw new Error(`Ошибка при выборе всех продуктов: ${response.status}`);
-    }
+        console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
+        throw new Error(`${res.body}`);
+
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }
 
   /**
@@ -80,20 +94,14 @@ export class CartApiInterface {
    * @returns {Promise<void>}
    */
   static async deleteSelectedProducts(): Promise<void> {
-    const response = await fetch(`${backurl}${CART_URLS.deleteSelectedProducts.route}`, {
-      method: CART_URLS.deleteSelectedProducts.method,
-      credentials: 'include',
-      headers: CART_URLS.deleteSelectedProducts.headers,
-    });
+    return csrf.delete(`${backurl}${CART_URLS.deleteSelectedProducts.route}`, undefined)
+      .then(res => {
+        if (res.status !== 204) {
+          throw new Error(`Ошибка при удалении выбранных продуктов: ${res.status} - ${res.body}`);
+        }
 
-    if (!response.ok) {
-      console.log('123');
-      throw new Error(`Ошибка при удалении выбранных продуктов: ${response.status}`);
-    }
-
-    console.log('321');
-
-    return Promise.resolve();
+        return Promise.resolve();
+      })
   }
 
   /**
@@ -133,16 +141,14 @@ export class CartApiInterface {
    * @returns {Promise<void>}
    */
   static async deleteProduct(productId: string): Promise<void> {
-    const response = await fetch(`${backurl}${CART_URLS.deleteProduct.route}${productId}`, {
-      method: CART_URLS.deleteProduct.method,
-      credentials: 'include',
-      headers: CART_URLS.deleteProduct.headers,
-    });
+    return csrf.delete(`${backurl}${CART_URLS.deleteProduct.route}${productId}`)
+      .then(res => {
 
-    if (!response.ok) {
-      throw new Error(`Ошибка при удалении продукта: ${response.status}`);
-    }
+        if (res.status !== 204) {
+          throw new Error(`Ошибка при удалении продукта: ${res.status} - ${res.body}`);
+        }
 
-    return Promise.resolve();
+        return Promise.resolve();
+      })
   }
 }
