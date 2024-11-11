@@ -1,0 +1,322 @@
+$card-align-items: center;
+
+/* Цветовая палитра */
+$default-color-input: #EEEEEE;
+$auth-menu-color: #fff;
+$background-color: #f9f9f9;
+$background-color-catalog-button: #ffffff00;
+$border-color-condition-product: #ffffff;
+$card-background-color: #fff;
+$card-border-color: #ddd;
+$input-border-color: #ccc;
+$disabled-background-color: #ccc;
+$disabled-color: #999;
+$main-border-color: oklch(0.49 0.25 299.6);
+$carousel-border-color: #ccc;
+$carousel-border-color-active: #7a16d5;
+$description-color-product: #7a16d5;
+$card-shadow-color: rgba(0, 0, 0, 0.1);
+$hard-shadow-color: rgba(0, 0, 0, 0.2);
+$image-placeholder-color: #c4c4c4;
+$text-color: #333;
+$old-price-color: #888;
+$link-color: #555;
+$discount-color: oklch(0.68 0.24 27.98);
+$button-text-color: oklch(0.49 0.25 299.6);
+$checkbox-text-color: oklch(0.49 0.25 299.6);
+$spinner-border-color: rgba(0, 0, 0, 0.1);
+$spinner-top-border-color: oklch(0.49 0.25 299.6);
+$base-background-color: oklch(0.49 0.25 299.6);
+$darker-background-color: oklch(0.41 0.19 301.59);
+$darkest-background-color: oklch(0.33 0.15 303.45);
+$background-color-site-new: oklch(0.35 0.16 303.3);
+$background-color-modal: rgba(0, 0, 0, 0.5);
+$hover-button-color: oklch(0.95 0 0);
+$container-background-color: oklch(0.95 0 0);
+$error-color: red;
+$global-error-color: #721c24;
+$error-background-color: #daa5a5;
+$global-error-background-color: #f8d7da;
+$global-error-border-color: #f5c6cb;
+$default-text-color: #000;
+$text-another-color: oklch(0.49 0.25 299.6);
+$text-password-color: oklch(0.47 0.23 300.73);
+$rating-color: yellow;
+$text-buy-color: oklab(0.93 0.03 -0.04);
+$text-inv: white;
+$header-background: oklch(0.95 0 0);
+$name-buy-color: oklab(0.93 0.03 -0.04);
+$delete-color: #888888;
+$select-color: #a8a6a6;
+$divider-color: #ACABAB;
+$text-hover-color: #dcd3ef;
+$text-actife-color: #b09ace;
+
+/* Размеры карточек */
+$card-width: 370px; /* Увеличенная ширина карточки */
+$card-height: 500px; /* Увеличенная высота карточки */
+$gap: 20px; /* Расстояние между карточками */
+$padding: 20px;
+$card-aspect-ratio: "16 / 9";
+
+/* Отступы */
+$main-gap: 20px;
+$gap20: 20px;
+/* $gap: 16px; */
+$mini-gap: 12px;
+$index-gap: 8px;
+$form-gap: 5px;
+$card-padding: 20px;
+$big-padding: 16px;
+/* $padding: 16px; */
+$padding15: 15px;
+$mini-padding: 12px;
+$small-padding: 10px;
+$large-padding: 20px;
+$micro-padding: 5px;
+$one-padding: 1px;
+$middle-padding-top: 15px;
+$xl-margin-bottom: 1em;
+$title-profile: 1.2em;
+$benefit-margin-bottom: 40px;
+$big-margin-bottom: 20px;
+$card-title-margin-bottom: 10px;
+$card-price-margin-bottom: 20px;
+$card-margin-top: 20px;
+$conteiner-title-margin-bottom: 20px;
+$divider-margin: 10px 0;
+$button-margin-bottom: 15px;
+$info-margin-bottom: 15px;
+$description-margin-bottom: 10px;
+$total-item-margin-bottom: 10px;
+$midle-button-margin-bottom: 10px;
+$checkbox-margin-top: 8px;
+$midle-margin-top: 5px;
+$delete-margin-left: 20px;
+$container-margin: 20px auto;
+$lable-margin-left: 15px;
+$icon-margin-left: 14px;
+$icon-margin-right: 14px;
+$checkbox-margin-left: 10px;
+$checkbox-margin-right: 10px;
+$midle-margin-left: 5px;
+$litle-margin-top: 2px;
+$name-margin-top: 4px;
+$price-margin-bottom: 4px;
+$micro-margin-left: 5px;
+$litle-margin-left: 7px;
+$big-margin-right: 20px;
+$normal-margin-top: 10px;
+$one-margin-botton: 1px;
+$big-margin: 20px;
+$middle-margin: 5px;
+$small-margin: 2px;
+$default-margin: 10px;
+$one-px-margin: 1px;
+$margin-zero: 0;
+$margin-right-material-icons: -142px;
+$margin-left-material-icons: 55px;
+$margin-text-article: 120px;
+
+/* Тени и размеры */
+/* $card-box-shadow: 0 2px 5px; */
+$card-box-shadow: 0 1px 6px;
+$m-group-padding: 30px 60px 60px;
+$zero: 0;
+$icon-dropdown-padding: 8px 12px;
+$name-padding: 5px;
+$chrckout-padding: 15px 40px;
+$margin-right-catalog-btn: 20px;
+$space-description: 8px;
+$font-size-mat-icons-profile: 100px;
+
+/* Радиусы и размеры */
+$card-border-radius: 25px;
+$ring-border-radius: 50%;
+$mini-card-border-radius: 6px;
+$card-image-height: 150px;
+$mini-card-image-height: 115px;
+/* $card-width: 220px; /* Фиксированная ширина карточки */
+$mini-card-width: 170px;
+$min-width: 400px;
+/* $card-height: 250px; /* Фиксированная высота карточки */
+$mini-card-height: 185px;
+$footer-height: 80px;
+$description-max-height: 20px;
+$mini-description-max-height: 12px;
+$description-expanded-height: 40px; /* Максимум на 2 строки */
+$quantity-height: 40px; /* Максимум на 2 строки */
+$right-order-height: 48px; /* Максимум на 2 строки */
+$mini-description-expanded-height: 32px; /* Максимум на 2 строки */
+$button-padding: 10px 15px;
+$container-padding: 30px 60px 30px;
+$order-image-padding-down: 10px;
+$button-border-radius: 5px;
+$colors-product-border-radius: 50%;
+$button-border-radius4: 4px;
+$button-font-weight: bold;
+/* $card-aspect-ratio: 4 / 5; */
+$input-border-radius: 6px;
+$auth-button-border-radius: 6px;
+$container-border-radius: 20px;
+$default-border-radius: 25px;
+$icon-dropdown-border-radius: 3px;
+$select-item-border-radius: 3px;
+$one-border: 1px;
+$icon-dropdown-border-width: 0 10px 10px 10px;
+$max-width-px-long: 1150px;
+$max-width-px-long-product: 1500px;
+$max-width-px-mid: 840px;
+$carousel-border: 3px;
+$arrow-line-height: 24px;
+$slider-height: 650px;
+$checkbox-width: 16px;
+$checkbox-height: 16px;
+$card-image-width: 23%;
+$order-image-width: 75px;
+$order-image-height: 75px;
+$order-index-width-plus: 32px;
+$order-index-height-plus: 32px;
+$min-card-image-width: 155px;
+$details-width: 70%;
+
+$carousel-height: 650px;
+$carousel-img-height: 150px;
+$proc-slider-width: 25%;
+$proc-carousel-slider-container-width: 45%;
+$proc-min-width: 30%;
+$proc-max-width: 60%;
+$proc-max-width-70: 70%;
+$proc-max-width-full: 90%;
+$width-max: 100%;
+$container-width: 1300px;
+
+$left-width: 60%;
+$quantity-width: 60%;
+$right-width: 35%;
+$path-width: 45%;
+
+$left-center: 50%;
+$proc-top-sliders: 50%;
+$proc-full-width: 100%;
+
+/* Текстовые параметры */
+$font-family: Arial, sans-serif;
+$mega-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+'Open Sans', 'Helvetica Neue', sans-serif;
+$button-font-size: 18px;
+$price-font-size: 20px; /* Обновлено для согласованности с $card-price-font-size */
+$input-font-size: 16px;
+$total-items-font-size: 15px;
+$grand-total-items-font-size: 25px;
+$benefit-font-size: 15px;
+$quanity-font-size: 15px;
+$description-font-size: 12px;
+$min-font-size: 12px;
+$loading-text-font-size: 16px;
+$font-size-catalog-button: 35px;
+$font-size-rating: 16px;
+$font-size-payment-method: 36px;
+$font-size_label: 14px;
+$font-size-span-catalog-button: 16px;
+$font-size: 18px;
+$font-size-date-right: 14px;
+$small-font-size: 14px;
+/* $default-font-size: 18px; */
+$font-size20: 20px;
+$card-title-font-size: 20px;
+$card-price-font-size: 20px;
+$card-icon-font-size: 20px;
+$card-remove-font-size: 20px;
+$strong-font-size: 25px;
+$big-font-size: 28px;
+$big-font-size_another: 35px;
+$mega-font-size: 40px;
+$max-font-size: 50px;
+$error-font-size: 0.875em;
+$default-font-size: 25px;
+$font-size-brand-product: 16px;
+$font-size-description-product: 16px;
+$litle-font-weight: 400;
+$midle-font-weight: 550;
+$card-prise-font-weight: 500;
+$container-title-font-weight: 600;
+$grand-total-font-weight: 700;
+$middle-font-weight: 550;
+
+/* Расположение */
+$catalog-justify-content: center;
+$card-justify-content: space-between;
+$card-allign-items: center;
+$card-text-align: center;
+$card-z-index_on: 10;
+$card-z-index: 1;
+$header-z-index: 10;
+$before-card-z-index: -1;
+$button-slider-z-index: 10;
+$before-card-tlrb: -10px;
+$before-icon-dropdown: -10px;
+$y-coord-min: -4px;
+$y-coord-mid: -10px;
+$left-coord: +70px;
+$left-coord-min: +19px;
+$y-coord-proc: -50%;
+$sliders-button-place: 5px;
+
+/* Анимация */
+$spinner-size: 40px;
+$spinner-border-width: 4px;
+$litle-scale: 1.01;
+$midle-scale: 1.02;
+$big-scale: 1.05;
+
+/* Время */
+$short-duration: 0.3s;
+$middle-duration: 0.5s;
+$one-second-duration: 1s;
+$two-seconds-duration: 2s;
+
+// Позиции смены
+$smallest-phone: 430px;
+$small-phone: 480px;
+$phone: 768px;
+$phone-smallest-header: 820px;
+$phone-header: 840px;
+
+// Цветовая палитра
+$color-background: #f9f9f9;
+$color-card-background: #fff;
+$color-border: #ddd;
+$color-text: #333;
+$color-old-price: #bcbcbc;
+$color-discount: #4e3173;
+$color-button-text: #fff;
+$color-button-background: #7a16d5;
+$color-hover-background: #b09ace;
+$color-error: red;
+$color-shadow: rgba(0, 0, 0, 0.1);
+$color-shadow-hover: rgba(0, 0, 0, 0.2);
+
+// Размеры карточек
+$border-radius: 25px;
+
+// Размеры изображений
+$image-height: 300px;
+$image-border-radius: 20px;
+
+// Шрифты и размеры текста
+$font-size-base: 16px;
+$font-size-price: 20px;
+$font-size-description: 14px;
+$font-size-button: 18px;
+$font-weight-bold: bold;
+
+// Анимация
+$transition-duration: 0.3s;
+
+// Отступы
+$margin-auto: auto;
+
+// Другие переменные
+$z-index-card: 1;
+$z-index-hover: 2;

@@ -1,0 +1,133 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: parameters.$form-gap;
+
+    &__error-feedback {
+        color: parameters.$error-color;
+        font-size: parameters.$error-font-size;
+        margin-top: parameters.$middle-margin;
+        display: block;
+    }
+
+    &__input_invalid {
+        border-color: parameters.$error-color;
+        background-color: parameters.$error-background-color;
+    }
+
+    &__error-feedback {
+        color: parameters.$error-color;
+        font-size: parameters.$error-font-size;
+        margin-top: parameters.$middle-margin;
+        display: block;
+    }
+
+    &__label {
+        font-size: parameters.$default-font-size;
+        margin-bottom: parameters.$one-px-margin;
+        padding-bottom: parameters.$one-padding;
+    }
+
+    &__input {
+        background-color: parameters.$default-color-input;
+        border-radius: parameters.$default-border-radius;
+        margin-top: parameters.$one-px-margin;
+        padding: parameters.$mini-padding;
+        font-size: parameters.$default-font-size;
+        border: 0;
+        box-shadow: 0 1px 3px parameters.$card-shadow-color;
+        transition: border-color parameters.$short-duration ease, box-shadow parameters.$short-duration ease;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__submit-button {
+        padding: parameters.$mini-padding;
+        font-size: parameters.$default-font-size;
+        font-weight: bold;
+        background-color: parameters.$base-background-color;
+        color: parameters.$text-inv;
+        border-width: 0;
+        border-radius: parameters.$default-border-radius;
+        cursor: pointer;
+        margin-bottom: parameters.$midle-button-margin-bottom;
+        transition: background-color parameters.$middle-duration ease, color parameters.$middle-duration ease;
+
+        &:hover {
+            background-color: parameters.$darker-background-color;
+            color: parameters.$text-inv;
+            border: 2px solid parameters.$darker-background-color;
+            transform: scale(parameters.$big-scale);
+        }
+
+        &:active {
+            background-color: parameters.$darkest-background-color;
+            color: parameters.$text-inv;
+            border: 2px solid parameters.$darkest-background-color;
+        }
+    }
+}
+
+.auth-container {
+    &__error {
+        padding: parameters.$small-padding;
+        background-color: parameters.$global-error-background-color;
+        color: parameters.$global-error-color;
+        border: parameters.$one-border solid parameters.$global-error-border-color;
+        border-radius: parameters.$button-border-radius4;
+        margin-bottom: parameters.$big-margin-bottom;
+        display: none;
+    }
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px parameters.$default-color-input inset;
+}
+
+
+@media (max-width: 768px) {
+    .auth-container {
+        max-width: 100%;
+        padding: 15px;
+
+        &__title {
+            font-size: 20px;
+        }
+    }
+
+    .form {
+        &__label {
+            font-size: 14px;
+        }
+
+        &__input {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        &__submit-button {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .form {
+        &__input {
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        &__submit-button {
+            padding: 8px;
+            font-size: 12px;
+        }
+    }
+}
