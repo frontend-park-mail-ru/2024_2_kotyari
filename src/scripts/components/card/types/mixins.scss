@@ -1,0 +1,9 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+@mixin card-styles($background-color, $border-color, $box-shadow-color, $transition-duration) {
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: parameters.$default-border-radius;
+  box-shadow: 0 1px 6px $box-shadow-color;
+  transition: transform $transition-duration ease, box-shadow $transition-duration ease;
+}

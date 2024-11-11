@@ -1,4 +1,5 @@
 @use "../../../../../public/css/parametrs/parameters";
+@use "../types/mixins";
 
 .container {
     margin: parameters.$margin-auto;
@@ -25,17 +26,13 @@
     display: grid;
 
     &__card {
-        background-color: parameters.$color-card-background;
-        border: 1px solid parameters.$color-border;
-        border-radius: parameters.$default-border-radius;
-        box-shadow: 0 1px 6px parameters.$color-shadow;
+        @include mixins.card-styles(parameters.$color-card-background, parameters.$color-border, parameters.$color-shadow, parameters.$transition-duration);
         padding: parameters.$padding;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         text-align: center;
-        transition: transform parameters.$transition-duration ease, box-shadow parameters.$transition-duration ease;
         position: relative;
         max-width: parameters.$card-width;
         overflow: hidden;

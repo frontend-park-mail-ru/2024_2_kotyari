@@ -14,6 +14,10 @@ $animation-iteration: infinite;
     animation: spin $animation-duration $animation-timing $animation-iteration;
 }
 
+@mixin apply-animation($animation-name, $duration, $timing-function, $fill-mode: forwards) {
+    animation: $animation-name $duration $timing-function $fill-mode;
+}
+
 .spinner {
     @include spinner(parameters.$spinner-size, parameters.$spinner-border-width, parameters.$spinner-border-color, parameters.$spinner-top-border-color);
 }

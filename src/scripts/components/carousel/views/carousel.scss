@@ -1,14 +1,21 @@
 @use "../../../../../public/css/parametrs/parameters";
+@use "../types/mixins";
 
 .product-page {
     &__gallery {
         align-content: center;
-        width: 100%;
-        height: 90%;
-        overflow: hidden;
-        position: relative;
-        overflow-y: auto;
-        scrollbar-width: thin;
+        @include mixins.gallery-container();
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: top 0.3s ease-in-out;
+        }
     }
 
     &__carousel-slider-container {
@@ -31,17 +38,6 @@
         & img.active-thumbnail {
             border: parameters.$carousel-border solid parameters.$carousel-border-color-active;
         }
-    }
-
-    &__gallery ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: top 0.3s ease-in-out;
     }
 
     &__thumbnail {
@@ -90,19 +86,12 @@
         position: absolute;
         top: parameters.$proc-top-sliders;
         transform: translateY(parameters.$y-coord-proc);
-        border: none;
-        border-radius: parameters.$default-border-radius;
-        padding: parameters.$micro-padding;
-        cursor: pointer;
+        @include mixins.button-style(parameters.$color-button-background, white, parameters.$micro-padding, parameters.$default-border-radius);
         z-index: parameters.$button-slider-z-index;
     }
 
     &__scroll-up {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: parameters.$micro-padding;
-        cursor: pointer;
+        @include mixins.button-style(rgba(0, 0, 0, 0.5), white, parameters.$micro-padding, parameters.$default-border-radius);
         margin: parameters.$micro-padding 0;
     }
 

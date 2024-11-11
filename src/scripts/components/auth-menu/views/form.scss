@@ -1,4 +1,5 @@
 @use "../../../../../public/css/parametrs/parameters";
+@use "../types/mixins";
 
 .form {
     display: flex;
@@ -46,27 +47,19 @@
     }
 
     &__submit-button {
-        padding: parameters.$mini-padding;
-        font-size: parameters.$default-font-size;
+        @include mixins.button-styles(parameters.$base-background-color, parameters.$text-inv, parameters.$default-border-radius, parameters.$default-font-size, parameters.$mini-padding);
+
         font-weight: bold;
-        background-color: parameters.$base-background-color;
-        color: parameters.$text-inv;
-        border-width: 0;
-        border-radius: parameters.$default-border-radius;
-        cursor: pointer;
         margin-bottom: parameters.$midle-button-margin-bottom;
-        transition: background-color parameters.$middle-duration ease, color parameters.$middle-duration ease;
 
         &:hover {
             background-color: parameters.$darker-background-color;
-            color: parameters.$text-inv;
             border: 2px solid parameters.$darker-background-color;
             transform: scale(parameters.$big-scale);
         }
 
         &:active {
             background-color: parameters.$darkest-background-color;
-            color: parameters.$text-inv;
             border: 2px solid parameters.$darkest-background-color;
         }
     }

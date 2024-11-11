@@ -24,14 +24,4 @@
         margin-bottom: parameters.$big-margin-bottom;
         display: none;
     }
-
-    &__error {
-        padding: parameters.$small-padding;
-        background-color: parameters.$global-error-background-color;
-        color: parameters.$global-error-color;
-        border: parameters.$one-border solid parameters.$global-error-border-color;
-        border-radius: parameters.$button-border-radius4;
-        margin-bottom: parameters.$big-margin-bottom;
-        display: none;
-    }
 }

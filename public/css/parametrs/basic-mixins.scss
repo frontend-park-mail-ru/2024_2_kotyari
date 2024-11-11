@@ -1,0 +1,16 @@
+@use "parameters";
+
+@mixin center-text($margin-top) {
+  text-align: center;
+  margin-top: $margin-top;
+}
+
+@mixin position-center() {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin max-width() {
+  @include position-center();
+  max-height: parameters.$max-width;
+}

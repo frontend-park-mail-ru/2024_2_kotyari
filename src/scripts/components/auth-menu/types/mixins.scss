@@ -1,0 +1,36 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+@mixin button-styles($bg-color, $text-color, $border-radius, $font-size, $padding) {
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  padding: $padding;
+  border-color: parameters.$darkest-background-color;
+  border-width: 0;
+  cursor: pointer;
+  transition: background-color parameters.$middle-duration ease, color parameters.$middle-duration ease;
+}
+
+@mixin flex-container($direction: column, $align-items: center, $justify-content: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+@mixin text-style($font-size, $color, $text-align: left, $font-weight: normal) {
+  font-size: $font-size;
+  color: $color;
+  text-align: $text-align;
+  font-weight: $font-weight;
+}
+
+@mixin hover-effect($hover-color, $transform: scale(1.05)) {
+  transition: color parameters.$short-duration ease, transform parameters.$short-duration ease;
+
+  &:hover {
+    color: $hover-color;
+    transform: $transform;
+  }
+}
