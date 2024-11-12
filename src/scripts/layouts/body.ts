@@ -4,7 +4,7 @@ import head from './header/header.hbs?raw';
 import body from './body.hbs?raw';
 import search from '@/scripts/components/searcher/searcher.hbs';
 import Handlebars from 'handlebars';
-import { AddDropDown } from './header/header';
+import {AddDropDown, handleHeaderScroll} from './header/header';
 import { User } from '../../services/types/types';
 import { defaultUser } from '../../services/storage/user';
 
@@ -47,6 +47,7 @@ export function buildBody(data: any): Promise<void> {
     })
       .then(() => {
           AddDropDown()
+          handleHeaderScroll()
       })
       .catch((err) => {
         console.error(err);

@@ -1,5 +1,6 @@
 @use '../../../../public/css/parametrs/parameters';
 @use '../../components/searcher/searcher';
+@use "../../../../public/css/parametrs/basic-mixins";
 
 /* Закрепляем хедер */
 header {
@@ -35,6 +36,7 @@ header {
 }
 
 .header-top {
+    @include basic-mixins.max-width();
     padding: parameters.$small-padding;
     text-align: left;
     font-size: parameters.$font-size_label;
@@ -55,6 +57,7 @@ header {
 }
 
 .header-bottom {
+    @include basic-mixins.max-width();
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -355,4 +358,13 @@ txt {
         height: 310px; /* Это значение можно обновить через JS для динамической высоты */
         width: parameters.$width-max;
     }
+}
+
+header {
+    transition: transform 0.3s ease;
+    transform: translateY(0);
+}
+
+header.hidden {
+    transform: translateY(-100%);
 }
