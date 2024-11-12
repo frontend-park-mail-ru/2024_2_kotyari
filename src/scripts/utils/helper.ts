@@ -105,4 +105,14 @@ export class Helper {
   public static isNotNull(value: any): boolean {
     return Boolean(value !== 0);
   }
+
+  /**
+   * Увеличивает переданное значение на 1.
+   *
+   * @param {number} value - Значение, которое нужно увеличить.
+   * @returns {number} Увеличенное значение.
+   */
+  public static increment(value: number): number {
+    return value + 1;
+  }
 }

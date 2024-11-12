@@ -39,6 +39,9 @@ const helperName: Array<iHelper> = [
     }, {
         name: 'isNotNull',
         function: Helper.isNotNull.bind(Helper)
+    }, {
+        name: 'increment',
+        function: Helper.increment.bind(Helper)
     }
 ];
 

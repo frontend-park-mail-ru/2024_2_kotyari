@@ -1,26 +1,26 @@
-@import '/public/css/parametrs/parameters.css';
-@import '/src/scripts/components/searcher/searcher.css';
+@use '../../../../public/css/parametrs/parameters';
+@use '../../components/searcher/searcher';
 
 /* Закрепляем хедер */
 header {
     position: fixed;
-    top: var(--zero);
-    left: var(--zero);
-    right: var(--zero);
-    z-index: var(--header-z-index);
-    background-color: var(--header-background);
-    padding-bottom: var(--padding15);
-    width: var(--width-max); /* Чтобы хедер растягивался на всю ширину */
+    top: parameters.$zero;
+    left: parameters.$zero;
+    right: parameters.$zero;
+    z-index: parameters.$header-z-index;
+    background-color: parameters.$header-background;
+    padding-bottom: parameters.$padding15;
+    width: parameters.$width-max; /* Чтобы хедер растягивался на всю ширину */
 }
 
 /* Плейсхолдер с динамической высотой */
 .header-placeholder {
     height: 140px; /* Это значение можно обновить через JS для динамической высоты */
-    width: var(--width-max);
+    width: parameters.$width-max;
 }
 
 /* Для мобильных устройств или разных экранов можно адаптировать */
-@media (max-width: var(--phone-header)) {
+@media (max-width: parameters.$phone-header) {
     .header-placeholder {
         height: auto; /* Можно указать другую высоту или оставить авто */
     }
@@ -35,16 +35,16 @@ header {
 }
 
 .header-top {
-    padding: var(--small-padding);
+    padding: parameters.$small-padding;
     text-align: left;
-    font-size: var(--font-size_label);
+    font-size: parameters.$font-size_label;
     background-color: inherit;
-    margin-left: calc(var(--small-margin) + 2);
+    margin-left: calc(var(parameters.$small-margin) + 2);
     font-weight: bold;
 }
 
 .header-top a {
-    color: var(--text-another-color);
+    color: parameters.$text-another-color;
     text-decoration: none;
     font-weight: normal;
     white-space: nowrap;
@@ -70,9 +70,9 @@ header {
 
 .logo {
     flex: 0 0 13%;
-    color: var(--text-another-color);
-    font-size: var(--mega-font-size);
-    max-font-size: var(--max-font-size);
+    color: parameters.$text-another-color;
+    font-size: parameters.$mega-font-size;
+    max-font-size: parameters.$max-font-size;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -85,7 +85,7 @@ header {
 
 .logo-part {
     display: inline-block;
-    transition: all var(--two-seconds-duration) ease;
+    transition: all parameters.$two-seconds-duration ease;
 }
 
 .catalog-button {
@@ -93,26 +93,26 @@ header {
     display: flex;
     align-items: center; /* Выравнивание по центру */
     justify-content: center;
-    color: var(--text-another-color);
-    background-color: var(--background-color-catalog-button);
+    color: parameters.$text-another-color;
+    background-color: parameters.$background-color-catalog-button;
     border: none;
-    border-radius: var(--button-border-radius);
-    font-size: var(--big-font-size_another);
+    border-radius: parameters.$button-border-radius;
+    font-size: parameters.$big-font-size_another;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    margin-right: var(--big-margin);
-    padding: var(--micro-padding);
+    margin-right: parameters.$big-margin;
+    padding: parameters.$micro-padding;
 }
 
 .catalog-button span {
-    margin-left: var(--middle-margin);
-    font-size: var(--loading-text-font-size);
+    margin-left: parameters.$middle-margin;
+    font-size: parameters.$loading-text-font-size;
     line-height: 1; /* Выравнивание текста */
 }
 
 .catalog-button:hover {
-    color: var(--background-color-site-new); /* Более темный оттенок для текста */
-    background-color: var(--background-color-catalog-button); /* Оставляем прозрачный фон */
+    color: parameters.$background-color-site-new; /* Более темный оттенок для текста */
+    background-color: parameters.$background-color-catalog-button; /* Оставляем прозрачный фон */
 }
 
 .icons {
@@ -133,7 +133,7 @@ header {
 }
 
 .icon:hover .material-icons {
-    color: var(--background-color-site-new); /* Затемняем цвет иконки */
+    color: parameters.$background-color-site-new; /* Затемняем цвет иконки */
 }
 
 #name {
@@ -141,15 +141,15 @@ header {
     width: 50px; /* Максимальная ширина для имени */
     white-space: nowrap;
     overflow: hidden;
-    transition: opacity var(--short-duration) ease;
+    transition: opacity parameters.$short-duration ease;
     opacity: 1;
     text-align: center;
 }
 
 .icon-label, .icon-label-hidden {
-    font-size: var(--small-font-size);
+    font-size: parameters.$small-font-size;
     display: block;
-    margin-top: var(--middle-margin);
+    margin-top: parameters.$middle-margin;
 }
 
 .icon:hover .icon-label {
@@ -174,14 +174,14 @@ header {
     top: 45px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--card-background-color);
-    box-shadow: 0 4px 8px var(--card-shadow-color);
-    border-radius: var(--button-border-radius);
+    background-color: parameters.$card-background-color;
+    box-shadow: 0 4px 8px parameters.$card-shadow-color;
+    border-radius: parameters.$button-border-radius;
     z-index: 1000;
     min-width: 150px;
-    padding: var(--small-padding);
+    padding: parameters.$small-padding;
     opacity: 0;
-    transition: opacity var(--short-duration) ease, transform var(--short-duration) ease, visibility 0s var(--middle-duration); /* Задержка исчезновения */
+    transition: opacity parameters.$short-duration ease, transform parameters.$short-duration ease, visibility 0s parameters.$middle-duration; /* Задержка исчезновения */
 }
 
 .icon-dropdown.show {
@@ -189,33 +189,33 @@ header {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
     visibility: visible;
-    transition: opacity var(--short-duration) ease, transform var(--short-duration) ease;
+    transition: opacity parameters.$short-duration ease, transform parameters.$short-duration ease;
 }
 
 .icon-dropdown::before {
     content: '';
     position: absolute;
-    top: var(--before-icon-dropdown);
+    top: parameters.$before-icon-dropdown;
     left: 50%;
     transform: translateX(-50%);
-    border-width: var(--icon-dropdown-border-width);
+    border-width: parameters.$icon-dropdown-border-width;
     border-style: solid;
     border-color: transparent transparent #fff transparent;
 }
 
 .icon-dropdown a {
     display: block;
-    padding: var(--icon-dropdown-padding);
-    color: var(--button-text-color);
+    padding: parameters.$icon-dropdown-padding;
+    color: parameters.$button-text-color;
     text-decoration: none;
-    font-size: var(--font-size_label);
+    font-size: parameters.$font-size_label;
     font-weight: normal;
 }
 
 .icon-dropdown a:hover {
-    background-color: var(--button-text-color);
-    color: var(--text-buy-color);
-    border-radius: var(--icon-dropdown-border-radius);
+    background-color: parameters.$button-text-color;
+    color: parameters.$text-buy-color;
+    border-radius: parameters.$icon-dropdown-border-radius;
 }
 
 .icon:hover .icon-dropdown {
@@ -225,7 +225,7 @@ header {
 }
 
 .icon-dropdown {
-    transform: translateX(-50%) translateY(var(--y-coord-mid));
+    transform: translateX(-50%) translateY(parameters.$y-coord-mid);
 }
 
 /* Скрываем label, когда окно открыто */
@@ -245,14 +245,14 @@ header {
     white-space: nowrap;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--button-text-color);
-    color: var(--name-buy-color);
-    padding: var(--name-padding);
-    border-radius: var(--button-border-radius);
-    font-size: var(--small-font-size);
+    background-color: parameters.$button-text-color;
+    color: parameters.$name-buy-color;
+    padding: parameters.$name-padding;
+    border-radius: parameters.$button-border-radius;
+    font-size: parameters.$small-font-size;
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--short-duration) ease, visibility var(--short-duration) ease;
+    transition: opacity parameters.$short-duration ease, visibility parameters.$short-duration ease;
 }
 
 #name:hover::after {
@@ -265,7 +265,7 @@ header {
 }
 
 txt {
-    transform: translateY(var(--y-coord-min));
+    transform: translateY(parameters.$y-coord-min);
 }
 
 @media (max-width: 1150px) {
@@ -290,47 +290,47 @@ txt {
 
     .logo {
         flex: 0 0 auto;
-        margin-bottom: var(--middle-button-margin-bottom);
+        margin-bottom: parameters.$midle-button-margin-bottom;
     }
 
     .catalog-button {
-        margin-bottom: var(--middle-button-margin-bottom);
-        width: var(--proc-full-width);
+        margin-bottom: parameters.$midle-button-margin-bottom;
+        width: parameters.$proc-full-width;
         flex: 0 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--text-buy-color);
-        background-color: var(--text-another-color);
+        color: parameters.$text-buy-color;
+        background-color: parameters.$text-another-color;
         border: none;
-        border-radius: var(--button-border-radius);
-        font-size: var(--font-size-catalog-button);
+        border-radius: parameters.$button-border-radius;
+        font-size: parameters.$font-size-catalog-button;
         cursor: pointer;
-        transition: background-color var(--short-duration) ease, color var(--short-duration) ease;
-        margin-right: var(--margin-right-catalog-btn);
-        padding: var(--middle-margin);
+        transition: background-color parameters.$short-duration ease, color parameters.$short-duration ease;
+        margin-right: parameters.$margin-right-catalog-btn;
+        padding: parameters.$middle-margin;
     }
 
     .catalog-button span {
-        margin-left: var(--middle-margin);
-        font-size: var(--font-size-span-catalog-button);
+        margin-left: parameters.$middle-margin;
+        font-size: parameters.$font-size-span-catalog-button;
     }
 
     .catalog-button:hover {
-        color: var(--button-text-color);
-        background-color: var(--background-color-catalog-button);
+        color: parameters.$button-text-color;
+        background-color: parameters.$background-color-catalog-button;
     }
 
     .search-container {
         flex: 0 0 auto;
-        margin-top: var(--default-margin);
-        width: var(--proc-full-width);
+        margin-top: parameters.$default-margin;
+        width: parameters.$proc-full-width;
     }
 
     .icons {
         flex-direction: row;
         flex: 0 0 auto;
-        margin-top: var(--default-margin);
+        margin-top: parameters.$default-margin;
         justify-content: space-between;
     }
 
@@ -343,20 +343,18 @@ txt {
     }
 
     .icon-dropdown {
-        left: var(--left-coord);
+        left: parameters.$left-coord;
         transform: translateX(0);
     }
 
     .icon-dropdown::before {
-        left: var(--left-coord-min);
+        left: parameters.$left-coord-min;
         transform: translateX(0);
     }
 
     /* Плейсхолдер с динамической высотой */
     .header-placeholder {
         height: 310px; /* Это значение можно обновить через JS для динамической высоты */
-        width: var(--width-max);
+        width: parameters.$width-max;
     }
 }
-
-

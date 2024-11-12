@@ -1,0 +1,264 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+.error-message {
+    background-color: #F5C6CBFF;
+    color: red;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    z-index: 10;
+}
+
+.account {
+    display: flex;
+    justify-content: space-between;
+    padding: parameters.$padding;
+    max-width: 1360px;
+    margin: parameters.$margin-zero auto;
+
+    &__avatar-container {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        cursor: pointer;
+        border-radius: parameters.$default-border-radius;
+        overflow: hidden;
+    }
+
+    &__user-photo {
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: parameters.$default-border-radius;
+        transition: opacity 0.3s ease;
+    }
+
+    &__avatar-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &__avatar-container {
+        &:hover .account__avatar-overlay {
+            opacity: 1;
+        }
+    }
+
+    &__avatar-camera {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 8px;
+        fill: #ffffff;
+    }
+
+    &__avatar-text {
+        font-size: 1em;
+        text-align: center;
+    }
+
+    &__avatar-container:hover .account__user-photo {
+        opacity: 0.7;
+    }
+
+    &__user-photo {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+
+        &.avatar-hover::after {
+            content: 'Изменить аватар';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+    }
+
+    &__edit-btn{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    &__column-personal-account {
+        flex: 1;
+        margin: 0 parameters.$default-margin;
+    }
+
+    &__box-personal-account {
+        background-color: parameters.$card-background-color;
+        border: parameters.$one-border solid parameters.$card-border-color;
+        border-radius: parameters.$default-font-size;
+        box-shadow: parameters.$card-box-shadow parameters.$hard-shadow-color;
+        padding: parameters.$large-padding;
+        margin-bottom: parameters.$big-margin-bottom;
+        position: relative;
+    }
+
+    &__user-photo {
+        width: 200px;
+        flex: 3;
+        border-radius: parameters.$default-border-radius;
+    }
+
+    &__user-details {
+        display: flex;
+        justify-content: space-between;
+        gap: parameters.$gap20;
+        margin-left: parameters.$big-margin;
+        vertical-align: top;
+        font-family: 'UbuntuSans', sans-serif;
+        align-items: flex-start;
+    }
+
+    &__notification {
+        flex: 1;
+        margin-right: -170px;
+    }
+
+    &__user-name {
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: ellipsis;
+        margin: 0;
+        flex: 4;
+    }
+
+    &__icons-personal-account {
+        display: grid;
+        color: parameters.$base-background-color;
+        flex: 1;
+    }
+
+    &__logout-button-personal-account {
+        margin-top: parameters.$default-margin;
+        padding: parameters.$button-padding;
+        font-size: parameters.$font-size_label;
+        font-family: 'UbuntuSans', sans-serif;
+        font-weight: bold;
+        background-color: parameters.$base-background-color;
+        color: parameters.$text-inv;
+        border: none;
+        border-radius: parameters.$default-border-radius;
+        flex-grow: 1;
+        cursor: pointer;
+        margin-left: parameters.$default-margin;
+        white-space: nowrap;
+        text-align: center;
+
+        &:hover {
+            background-color: parameters.$darker-background-color;
+            transform: scale(parameters.$litle-scale);
+        }
+    }
+
+    &__logout-button-personal-account .account__local_shipping {
+        font-size: 70px;
+    }
+
+    &__delivery-info,
+    &__address-info,
+    &__favorites-info,
+    &__purchases-info {
+        display: flex;
+        align-items: center;
+        background-color: parameters.$card-background-color;
+        border: parameters.$one-border solid parameters.$card-border-color;
+        border-radius: parameters.$default-border-radius;
+        box-shadow: parameters.$card-box-shadow parameters.$hard-shadow-color;
+        padding: parameters.$large-padding;
+        margin-bottom: parameters.$big-margin-bottom;
+        height: 45%;
+    }
+
+    &__delivery-title,
+    &__address-title,
+    &__favorites-title,
+    &__purchases-title {
+        margin: 0;
+        font-size: parameters.$title-profile;
+    }
+
+    &__delivery-status,
+    &__address-description,
+    &__favorites-count,
+    &__purchases-status {
+        margin: parameters.$middle-margin 0 0;
+    }
+
+    &__delivery-details,
+    &__address-details,
+    &__favorites-details,
+    &__purchases-details {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: parameters.$gap20;
+    }
+
+    &__purchases-text,
+    &__favorites-text {
+        color: parameters.$base-background-color;
+    }
+
+    &__address_update{
+        margin-bottom: 60px;
+    }
+}
+
+.material-icons {
+    &.account__notification {
+        color: parameters.$base-background-color;
+    }
+
+    &.account {
+        &__local-shipping {
+            font-size: parameters.$font-size-mat-icons-profile;
+            color: parameters.$base-background-color;
+            margin-right: parameters.$padding15;
+        }
+
+        &__pin-drop {
+            font-size: parameters.$font-size-mat-icons-profile;
+            color: parameters.$base-background-color;
+            margin-right: parameters.$padding15;
+        }
+
+        &__favorite {
+            font-size: parameters.$font-size-mat-icons-profile;
+            color: parameters.$base-background-color;
+            margin-right: parameters.$padding15;
+        }
+
+        &__shopping-basket {
+            font-size: parameters.$font-size-mat-icons-profile;
+            color: parameters.$base-background-color;
+            margin-right: parameters.$padding15;
+        }
+
+        &__edit {
+            color: parameters.$base-background-color;
+        }
+    }
+}
