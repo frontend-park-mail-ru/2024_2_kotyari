@@ -1,0 +1,18 @@
+@use '../../../../../public/css/parametrs/parameters';
+@use '../../../../../public/css/parametrs/animations';
+@use '../../../../../public/css/parametrs/basic-mixins';
+
+.center-container {
+    @include basic-mixins.center-text(20%);
+
+    &__error-fade-in-text {
+        color: parameters.$base-background-color;
+        opacity: 0;
+        @include animations.apply-animation(fadeIn, parameters.$one-second-duration, ease-in);
+
+        &__p {
+            color: parameters.$color-text;
+            @include animations.apply-animation(fadeIn, parameters.$one-second-duration, ease-in);
+        }
+    }
+}
