@@ -1,5 +1,5 @@
 import { router } from './init.js';
-import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
+import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
 import { registerFunctions } from '../../scripts/utils/helperName';
@@ -25,17 +25,17 @@ export const buildMain = (user: User): Promise<void> => {
   });
 };
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.ts')
-      .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch((error) => {
-        console.error('Service Worker registration failed:', error);
-      });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/sw.ts')
+//       .then((registration) => {
+//         console.log('Service Worker registered with scope:', registration.scope);
+//       })
+//       .catch((error) => {
+//         console.error('Service Worker registration failed:', error);
+//       });
+//   });
+// }
 
 /**
  * Обработчик события загрузки DOMContentLoaded.
