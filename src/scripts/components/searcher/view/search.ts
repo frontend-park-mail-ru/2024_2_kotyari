@@ -49,6 +49,10 @@ export class SearcherView implements SearcherViewInterface {
     const suggestionsList = document.getElementById('suggestions') as HTMLUListElement;
 
     suggestionsList.innerHTML = '';
+    if (suggestions.length > 0) {
+      suggestionsList.classList.add('suggestions-active');
+    }
+
     suggestions.slice(0, 7).forEach(item => {
       const li = document.createElement('li');
       li.textContent = item;
@@ -63,4 +67,6 @@ export class SearcherView implements SearcherViewInterface {
       suggestionsList.appendChild(li);
     });
   };
+
+  de
 }
