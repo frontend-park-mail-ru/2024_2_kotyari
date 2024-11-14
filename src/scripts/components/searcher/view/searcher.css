@@ -1,8 +1,8 @@
 @import '/public/css/parametrs/parameters.css';
 
 #searcher {
-    flex-grow: 1; /* Расширяет элемент, занимая все доступное пространство */
-    max-width: 100%; /* Ограничивает максимальную ширину, чтобы не выходить за пределы */
+    flex-grow: 1;
+    max-width: 100%;
 }
 
 .search-input {
@@ -10,7 +10,8 @@
     padding: 11px;
     font-size: var(--input-font-size);
     border: var(--one-border) solid var(--input-border-color);
-    border-radius: 5px 0 0 5px;
+    border-radius: 20px 0 0 20px;
+    box-sizing: border-box;
 }
 
 .search-input:focus {
@@ -26,7 +27,7 @@
     border: none;
     color: var(--text-buy-color);
     font-size: var(--font-size);
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 20px 20px 0;
     cursor: pointer;
 }
 
@@ -34,4 +35,29 @@
     flex: 0 0 50%;
     display: flex;
     position: relative;
+}
+
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    max-height: calc(7 * 40px); /* Adjust if each item is ~40px high */
+    overflow: hidden;
+}
+
+#suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background-color: #f0f0f0;
 }
