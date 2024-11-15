@@ -1,4 +1,4 @@
-import { router } from './init.js';
+import { router, searcher } from './init.js';
 import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';

@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 import searchMenu from './searcher.hbs?raw';
-import { backurl, rootId } from '../../../../services/app/config';
+import { rootId } from '../../../../services/app/config';
 import { Product } from '../../card/api/card';
 import { CardViewInterface } from '../../card/view/card';
 
@@ -48,25 +48,25 @@ export class SearcherView implements SearcherViewInterface {
   displaySuggestions = (suggestions: Array<any>) => {
     const suggestionsList = document.getElementById('suggestions') as HTMLUListElement;
 
+    if (!suggestionsList) return;
+
     suggestionsList.innerHTML = '';
-    if (suggestions.length > 0) {
-      suggestionsList.classList.add('suggestions-active');
-    }
+    suggestionsList.classList.add('suggestions--active');
 
     suggestions.slice(0, 7).forEach(item => {
       const li = document.createElement('li');
-      li.textContent = item;
+      li.classList.add('suggestions__item');
 
-      const param = new URLSearchParams({
-        q: item,
-      });
+      const link = document.createElement('a');
+      link.textContent = item;
+      link.classList.add('suggestions__item--link')
 
-      li.setAttribute('href', `/search/catalog?${param.toString()}`);
-      li.setAttribute('router', 'changed-active');
+      const param = new URLSearchParams({ q: item });
+      link.setAttribute('href', `/search/catalog?${param.toString()}`);
+      link.setAttribute('router', 'changed-active');
 
+      li.appendChild(link);
       suggestionsList.appendChild(li);
     });
   };
-
-  de
 }

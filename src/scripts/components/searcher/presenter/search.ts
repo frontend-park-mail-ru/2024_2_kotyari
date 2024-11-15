@@ -16,8 +16,8 @@ export class Searcher {
   public initializeListeners() {
     console.log(123);
 
-    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
-    const searchButton = document.querySelector('.search-button') as HTMLButtonElement;
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const searchButton = document.getElementById('search-button') as HTMLButtonElement;
     const suggestionsList = document.getElementById('suggestions') as HTMLUListElement;
 
     console.log(searchInput, searchButton);
