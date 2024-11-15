@@ -32,7 +32,7 @@
     "dev": "vite",
     "build": "vite build",
     "start": "vite preview",
-    "scss": "sass C:\\Users\\DimaK\\untitled\\2024_2_kotyari\\public\\index.scss C:\\Users\\DimaK\\untitled\\2024_2_kotyari\\public\\index.css"
+    "scss": "sass public/index.scss public/index.css"
   },
   "husky": {
     "hooks": {
