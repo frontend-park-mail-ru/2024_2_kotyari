@@ -81,7 +81,7 @@ export const updateAfterAuth = (user: User): void => {
 
   if (nameElement) {
     nameElement.textContent = user.username;
-    nameElement.classList.add('icon-label-hidden', 'catalog-link');
+    nameElement.classList.add('icon-label-hidden', 'catalog-link', 'single-line-text');
   }
 
   if (cityElement) {
