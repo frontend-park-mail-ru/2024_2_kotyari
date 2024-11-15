@@ -12,5 +12,5 @@
 
 @mixin max-width() {
   @include position-center();
-  max-height: parameters.$max-width;
+  max-width: parameters.$max-width;
 }

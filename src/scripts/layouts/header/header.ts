@@ -17,6 +17,7 @@
  * // Пример использования
  * document.addEventListener("DOMContentLoaded", function() {
  *   AddDropDown();
+ *   handleHeaderScroll();
  * });
  */
 export function AddDropDown(): void {
@@ -56,5 +57,33 @@ export function AddDropDown(): void {
         resolve(true);
       });
     }
+  });
+}
+
+/**
+ * Добавляет функциональность скрытия и показа хедера при скролле.
+ *
+ * Хедер скрывается при скролле вниз и показывается при скролле вверх.
+ *
+ * @function handleHeaderScroll
+ */
+export function handleHeaderScroll(): void {
+  const header = document.querySelector('header') as HTMLElement | null;
+  if (!header) return;
+
+  let lastScrollTop = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      // Скролл вниз, скрываем хедер
+      header.classList.add('hidden');
+    } else {
+      // Скролл вверх, показываем хедер
+      header.classList.remove('hidden');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
 }

@@ -31,7 +31,8 @@
     "lint:fix": "npm run format && npm run lint -- --fix",
     "dev": "vite",
     "build": "vite build",
-    "start": "vite preview"
+    "start": "vite preview",
+    "scss": "sass C:\\Users\\DimaK\\untitled\\2024_2_kotyari\\public\\index.scss C:\\Users\\DimaK\\untitled\\2024_2_kotyari\\public\\index.css"
   },
   "husky": {
     "hooks": {

@@ -75,7 +75,7 @@
 .catalog__card:hover .catalog__card-title {
   -webkit-line-clamp: 4;
 }
-.catalog__card__card-image {
+.catalog__card-image {
   width: 100%;
   height: 300px;
   border-radius: 25px;
@@ -86,7 +86,7 @@
   justify-content: center;
   margin-bottom: 20px;
 }
-.catalog__card__card-image__img {
+.catalog__card-image__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -473,6 +473,9 @@ header {
 }
 
 .header-top {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1300px;
   padding: 10px;
   text-align: left;
   font-size: 14px;
@@ -493,6 +496,9 @@ header {
 }
 
 .header-bottom {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1300px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -779,6 +785,15 @@ txt {
     width: 100%;
   }
 }
+header {
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+}
+
+header.hidden {
+  transform: translateY(-100%);
+}
+
 .cart-header {
   display: flex;
   justify-content: flex-start;
@@ -2513,10 +2528,12 @@ input[type=password] {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  border: none;
-  border-radius: 25px;
+  background-color: #7a16d5;
+  color: white;
   padding: 5px;
+  border-radius: 25px;
   cursor: pointer;
+  border: none;
   z-index: 10;
 }
 .product-page__scroll-up {

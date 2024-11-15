@@ -53,7 +53,7 @@
             -webkit-line-clamp: 4;
         }
 
-        &__card-image {
+        &-image {
             width: 100%;
             height: parameters.$image-height;
             border-radius: parameters.$default-border-radius;
