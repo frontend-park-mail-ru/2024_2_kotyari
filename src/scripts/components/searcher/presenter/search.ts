@@ -14,8 +14,6 @@ export class Searcher {
   }
 
   public initializeListeners() {
-    console.log(123);
-
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const searchButton = document.getElementById('search-button') as HTMLButtonElement;
     const suggestionsList = document.getElementById('suggestions') as HTMLUListElement;
@@ -27,8 +25,18 @@ export class Searcher {
       return;
     }
 
-    searchInput.addEventListener('input', () => this.debounceSuggest(searchInput.value, 300));
+    // Слушатель для ввода текста
+    searchInput.addEventListener('input', () => this.debounceSuggest(searchInput.value, 200));
 
+    // Слушатель для фокуса (показываем предложения)
+    searchInput.addEventListener('focus', () => {
+      const query = searchInput.value.trim();
+      if (query) {
+        this.debounceSuggest(query, 200);
+      }
+    });
+
+    // Слушатель для нажатия кнопки поиска
     searchButton.addEventListener('click', () => {
       const query = searchInput.value.trim();
       if (query) {
@@ -36,9 +44,20 @@ export class Searcher {
       }
     });
 
+    // Обработчик нажатия клавиши Enter
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query) {
+          this.searchProducts(query);
+        }
+      }
+    });
+
+    // Скрытие предложений при клике вне поля поиска или предложений
     document.addEventListener('click', (event) => {
       if (!searchInput.contains(event.target as Node) && !suggestionsList.contains(event.target as Node)) {
-        this.view.displaySuggestions([]); // Clear suggestions
+        this.view.displaySuggestions([]);
       }
     });
   }
@@ -80,7 +99,6 @@ export class Searcher {
       }
     }, delay);
   }
-
 
   private updateBreadcrumbs = (label: string, url: string) => {
     console.log(`Updating breadcrumbs with label: ${label} and url: ${url}`);
