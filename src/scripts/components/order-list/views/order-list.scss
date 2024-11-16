@@ -102,8 +102,132 @@
 }
 
 .order-item-image {
-  /* Возможно вынесение в переменную */
   width: 60px;
   height: 50px;
   border-radius: 50%;
+}
+
+
+@media (max-width: 1024px) {
+  .order-list {
+    padding: 0 16px;
+
+    &__card {
+      height: auto;
+      padding: 16px;
+      margin-bottom: 16px;
+
+      &__header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      &__dates {
+        &-order-date,
+        &-delivery-date {
+          font-size: 18px;
+        }
+      }
+
+      &-total {
+        font-size: 16px;
+        margin-top: 8px;
+      }
+    }
+
+    &__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    &__items {
+      margin-left: 0;
+      flex-wrap: wrap;
+
+      &-item {
+        margin: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .order-list {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__card {
+      height: auto;
+
+      &__header {
+        &__dates {
+          &-order-date,
+          &-delivery-date {
+            font-size: 16px;
+          }
+        }
+      }
+
+      &-total {
+        font-size: 14px;
+      }
+    }
+
+    &__footer {
+      margin-top: 12px;
+    }
+
+    &__review-button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+
+    &__items {
+      display: none; // Скрываем блок с фотографиями товаров
+    }
+  }
+
+  .order-item-image {
+    display: none; // Скрываем сами изображения товаров
+  }
+}
+
+@media (max-width: 1024px) {
+  .order-list {
+    &__footer {
+      flex-direction: row; /* Выстраиваем элементы в строку */
+      justify-content: space-between;
+      align-items: center; /* Центрируем по вертикали */
+
+      &__review-button {
+        margin-right: 16px; /* Добавляем отступ между кнопкой и фотографиями */
+      }
+    }
+
+    &__items {
+      display: flex;
+      margin-left: 0;
+      flex-wrap: nowrap;
+    }
+  }
+
+  .order-item-image {
+    display: block;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+  .order-list {
+    &__items {
+      display: none; /* Скрываем блок с фотографиями товаров */
+    }
+  }
+
+  .order-item-image {
+    display: none; /* Скрываем сами изображения товаров */
+  }
 }
