@@ -2,6 +2,7 @@
 @use "../types/mixins";
 
 .form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: parameters.$form-gap;
@@ -28,7 +29,7 @@
     &__label {
         font-size: parameters.$default-font-size;
         margin-bottom: parameters.$one-px-margin;
-        padding-bottom: parameters.$one-padding;
+        padding-bottom: 3px;
     }
 
     &__input {
@@ -67,7 +68,7 @@
 
 .auth-container {
     &__error {
-        padding: parameters.$small-padding;
+        padding:15px;
         background-color: parameters.$global-error-background-color;
         color: parameters.$global-error-color;
         border: parameters.$one-border solid parameters.$global-error-border-color;
@@ -86,17 +87,17 @@ select:-webkit-autofill {
 
 @media (max-width: 768px) {
     .auth-container {
-        max-width: 100%;
+        max-width: 95%;
         padding: 15px;
 
         &__title {
-            font-size: 20px;
+            font-size: 25px;
         }
     }
 
     .form {
         &__label {
-            font-size: 14px;
+            font-size: 20px;
         }
 
         &__input {
@@ -114,13 +115,13 @@ select:-webkit-autofill {
 @media (max-width: 480px) {
     .form {
         &__input {
-            padding: 8px;
-            font-size: 12px;
+            padding: 10px;
+            font-size: 20px;
         }
 
         &__submit-button {
-            padding: 8px;
-            font-size: 12px;
+            padding: 10px;
+            font-size: 20px;
         }
     }
 }
