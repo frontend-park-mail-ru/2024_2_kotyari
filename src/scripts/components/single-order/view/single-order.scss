@@ -11,10 +11,17 @@
   }
 
   &__summary {
+    flex-direction: column; // Элементы всегда располагаются вертикально
+    align-items: stretch;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
     margin-bottom: parameters.$big-margin;
+  }
+
+  &__info,
+  &__total {
+    width: 100%; // Полная ширина
+    margin-bottom: 10px;
   }
 
   &__info {
@@ -23,8 +30,6 @@
     border-radius: parameters.$container-border-radius;
     box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
     padding: calc(#{parameters.$padding} + 2px);
-    width: 600px;
-    height: 150px;
 
     &__status {
       display: flex;
@@ -56,8 +61,6 @@
     border-radius: parameters.$container-border-radius;
     box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
     padding: parameters.$padding;
-    width: 500px;
-    height: 100px;
 
     &-header {
       display: flex;
@@ -81,12 +84,13 @@
   }
 
   &__details {
-    width: 600px;
+    width: 100%;
     background-color: parameters.$card-background-color;
     border: parameters.$one-border solid parameters.$card-border-color;
     border-radius: parameters.$container-border-radius;
     box-shadow: parameters.$card-box-shadow parameters.$card-shadow-color;
     padding: parameters.$padding;
+    margin-bottom: parameters.$big-margin-bottom;
 
     &-title {
       font-size: parameters.$default-font-size;
@@ -122,6 +126,60 @@
       &-price {
         font-weight: parameters.$middle-font-weight;
       }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .order {
+    &__summary {
+      flex-direction: column; // Элементы всегда вертикально
+    }
+
+    &__info,
+    &__total {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+
+  .order__details {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .order {
+    &__title {
+      font-size: calc(#{parameters.$big-font-size} - 4px);
+      padding: 0 18px;
+    }
+
+    &__summary {
+      flex-direction: column;
+    }
+
+    &__details__item {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__details__item-image {
+      width: 60px;
+      height: 60px;
+      margin-right: 8px;
+    }
+
+    &__details__item-name {
+      font-size: calc(#{parameters.$small-font-size} + 1px);
+    }
+  }
+}
+
+@media (orientation: landscape) {
+  .order {
+    &__summary {
+      flex-direction: column; // Даже в ландшафтной ориентации элементы вертикально
     }
   }
 }
