@@ -12,12 +12,15 @@
 
         <div class="msg">{{avatarErrorMessage}}</div>
 
-        <h2 class="account__user-name">{{username}}</h2>
-        <button id="edit-user-info" class="account__edit-btn user-info" type="button">
-          <span class="material-icons account__edit">edit</span>
-        </button>
-<!--        <span class="material-icons account__notification">{{#if user.notifications}}notifications_unread{{else}}notifications{{/if}}</span>-->
+        <div class="account__user-info">
+          <h2 class="account__user-name">{{username}}</h2>
+          <button id="edit-user-info" class="account__edit-btn user-info" type="button">
+            <span class="material-icons account__edit">edit</span>
+          </button>
+        </div>
+
       </div>
+      <br class="mobile-break">
       <div class="account__user-details">
         <div class="product-page__description-wrapper">
           <div class="product-page__description-item">
@@ -70,3 +73,5 @@
     {{/each}}
   </div>
 </div>
+<br>
+<br>

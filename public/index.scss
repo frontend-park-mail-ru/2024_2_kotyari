@@ -19,6 +19,8 @@
 @use '../src/scripts/components/searcher/view/searcher.scss';
 @use "../src/scripts/components/category/view/category";
 @use '../src/scripts/components/custom-messages/soon/soon';
+@use "src/scripts/components/personal-account/views/personal-account__mobile.scss";
+@use 'src/scripts/components/personal-account/views/personal-account__middle.scss';
 
 @font-face {
     font-family: 'UbuntuSans';
