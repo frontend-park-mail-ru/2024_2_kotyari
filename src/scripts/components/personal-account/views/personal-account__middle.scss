@@ -1,0 +1,67 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+
+@media (max-width: 1000px) {
+  .account {
+    // Уменьшаем размеры фотографий и текста для уменьшенных экранов
+    &__avatar-container {
+      width: 120px;
+      height: 120px;
+    }
+
+    .account__icon-personal-account {
+      display: none;
+    }
+
+    &__user-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: parameters.$default-border-radius;
+    }
+
+    &__user-name {
+      font-size: 18px;
+    }
+
+    &__user-info {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__edit-btn {
+      font-size: 12px;
+    }
+
+    &__logout-button-personal-account {
+      font-size: 14px;
+      padding: 8px;
+      margin: 15px auto;
+      width: 100%;
+    }
+
+    .account__avatar-container:hover .account__avatar-overlay {
+      font-size: 1em;  // Уменьшаем размер текста в overlay
+    }
+
+    .account__avatar-overlay .account__avatar-text {
+      font-size: 1em;  // Уменьшаем размер текста подсказки
+    }
+
+    &__user-details {
+      gap: 10px;  // Уменьшаем расстояние между элементами
+    }
+
+    .material-icons.account__edit {
+      font-size: 18px;
+      margin-left: 5px;
+    }
+
+    .material-icons.account__local-shipping,
+    .material-icons.account__pin-drop,
+    .material-icons.account__favorite,
+    .material-icons.account__shopping-basket {
+      font-size: 24px;  // Уменьшаем размер иконок
+    }
+  }
+}

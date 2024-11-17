@@ -2,7 +2,7 @@
 
 @use '../src/scripts/components/card/view/catalog';
 @use '../src/scripts/components/custom-messages/error/error';
-@use '../src/scripts/components/modal/views/modal';
+@use 'src/scripts/components/modal/views/modal';
 @use '../src/scripts/layouts/footer/footer';
 @use '../src/scripts/layouts/header/header';
 @use '../src/scripts/components/cart/view/cart';
@@ -13,12 +13,14 @@
 @use '../src/scripts/components/product-page/views/product-page';
 @use '../src/scripts/components/auth-menu/views/container';
 @use '../src/scripts/components/auth-menu/views/error' as auth-err;
-@use '../src/scripts/components/auth-menu/views/form';
-@use '../src/scripts/components/auth-menu/views/toggle-password';
-@use '../src/scripts/components/carousel/views/carousel';
-@use '../src/scripts/components/searcher/view/searcher.scss';
-@use "../src/scripts/components/category/view/category";
-@use '../src/scripts/components/custom-messages/soon/soon';
+@use 'src/scripts/components/auth-menu/views/form';
+@use 'src/scripts/components/auth-menu/views/toggle-password';
+@use 'src/scripts/components/carousel/views/carousel';
+@use 'src/scripts/components/searcher/view/searcher';
+@use "src/scripts/components/category/view/category";
+@use 'src/scripts/components/custom-messages/soon/soon';
+@use "src/scripts/components/personal-account/views/personal-account__mobile";
+@use 'src/scripts/components/personal-account/views/personal-account__middle';
 
 @font-face {
     font-family: 'UbuntuSans';

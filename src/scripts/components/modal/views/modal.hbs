@@ -3,7 +3,7 @@
     <div class="modal__container">
       <span class="btn__close" data-action="close">&times;</span>
 
-      <h2 class="auth-container__title">{{title}}</h2>
+      <h2 class="modal-container__title">{{title}}</h2>
 
       <div class="auth-container__error" id="global_error" style="display: none;">
         <span class="form__error-feedback" id="global_error_message">{{error_msg}}</span>
@@ -11,7 +11,7 @@
 
       <form id="{{formId}}" action="{{action}}" method="post" class="form">
         <span class="form__error-feedback" id="error"></span>
-
+        <br/>
         {{#each fields as |field|}}
           <div class="input-container">
             <label for="{{field.id}}" class="form__label">{{field.label}}</label>
