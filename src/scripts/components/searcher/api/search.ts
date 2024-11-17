@@ -9,16 +9,12 @@ export interface SearcherApiInterface {
 }
 
 export class SearcherApi implements SearcherApiInterface {
-  getProductsByQuery = (query: string): Promise<Product[] | null> => {
-    const param = new URLSearchParams({
-      q: query,
-    });
-
-    return get(`${backurl}/search/catalog?` + param.toString())
+  getProductsByQuery = (url: string): Promise<Product[] | null> => {
+    return get(url)
       .then((res) => {
         return res.body as Product[];
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e);
         return null;
       });

@@ -3,11 +3,12 @@ import searchMenu from './searcher.hbs?raw';
 import { rootId } from '../../../../services/app/config';
 import { Product } from '../../card/api/card';
 import { CardViewInterface } from '../../card/view/card';
+import { DropdownConfig, DropdownPresenter } from '../../dropdown-btn/presenter/dropdown';
 
 export interface SearcherViewInterface {
   render(): void;
 
-  renderProducts(data: { products: Product[] }, query: string): void;
+  renderProducts(data: { products: Product[] }, query: string,  config: DropdownConfig): void;
 
   displaySuggestions(suggestions: Array<any>): void;
 }
@@ -38,17 +39,25 @@ export class SearcherView implements SearcherViewInterface {
     rootElement.appendChild(templateElement);
   }
 
-  public renderProducts = (data: { products: Product[] , page_title?: string}, query: string) => {
-
+  public renderProducts = (data: { products: Product[] , page_title?: string}, query: string, config: DropdownConfig) => {
     data.page_title = 'Результаты поиска: '
 
     this.cardView.render(data, query);
+
+    const dropdownPresenter = new DropdownPresenter(config);
+    dropdownPresenter.initView();
   };
 
   displaySuggestions = (suggestions: Array<any>) => {
     const suggestionsList = document.getElementById('suggestions') as HTMLUListElement;
 
     if (!suggestionsList) return;
+
+    if (suggestions.length === 0) {
+      suggestionsList.innerHTML = '';
+      suggestionsList.classList.remove('suggestions--active');
+      return;
+    }
 
     suggestionsList.innerHTML = '';
     suggestionsList.classList.add('suggestions--active');
@@ -57,15 +66,12 @@ export class SearcherView implements SearcherViewInterface {
       const li = document.createElement('li');
       li.classList.add('suggestions__item');
 
-      const link = document.createElement('a');
-      link.textContent = item;
-      link.classList.add('suggestions__item--link')
+      li.textContent = item;
 
       const param = new URLSearchParams({ q: item });
-      link.setAttribute('href', `/search/catalog?${param.toString()}`);
-      link.setAttribute('router', 'changed-active');
+      li.setAttribute('href', `/search/catalog?${param.toString()}`);
+      li.setAttribute('router', 'changed-active');
 
-      li.appendChild(link);
       suggestionsList.appendChild(li);
     });
   };

@@ -28,7 +28,6 @@ export class SingleOrderView {
   private setupListeners() {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
       return;
     }
 
