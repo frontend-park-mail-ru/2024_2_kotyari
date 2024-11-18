@@ -1,4 +1,5 @@
 @use "../../../../../../../public/css/parametrs/parameters";
+@use "../../../../../../../public/css/parametrs/basic-mixins";
 
 // Блок для карточки (корневая обертка)
 .right-card {
@@ -42,34 +43,5 @@
 
 // Блок для кнопки
 .cart-checkout-btn {
-  background-color: parameters.$base-background-color;
-  color: white;
-  border: none;
-  font-size: parameters.$button-font-size;
-  cursor: pointer;
-  border-radius: parameters.$card-border-radius;
-  padding: parameters.$chrckout-padding;
-  width: parameters.$width-max;
-  transition: background-color parameters.$short-duration ease, color parameters.$short-duration;
-
-  &:hover {
-    background-color: parameters.$darker-background-color; // Более темный фон при наведении
-    color: parameters.$text-inv;
-  }
-
-  &:active {
-    background-color: parameters.$darkest-background-color; // Самый темный фон при нажатии
-    color: parameters.$text-inv;
-  }
-
-  &.disabled {
-    background-color: parameters.$disabled-background-color; // Серый фон для заблокированной кнопки
-    color: parameters.$disabled-color;            // Серый цвет текста
-    cursor: not-allowed;    // Иконка неактивности
-
-    &:hover {
-      background-color: parameters.$disabled-background-color; // Оставляем тот же цвет при наведении
-      color: parameters.$disabled-color;
-    }
-  }
+  @include basic-mixins.checkout-btn;
 }

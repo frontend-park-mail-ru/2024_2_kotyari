@@ -1,0 +1,98 @@
+<div class="reviews" xmlns:http="http://www.w3.org/1999/xhtml">
+    <h2 class="reviews__header">Отзывы</h2>
+
+    <div class="reviews__rating-wrapper">
+        <div class="rating">
+            <div class="rating__rating">
+                <span class="rating__value">{{total_review_rating}}</span>
+                {{#each (calculateStars total_review_rating)}}
+                    <span class="rating__star">
+                      <!-- Серый фон звезды -->
+                      <svg class="rating__star--background" xmlns="http://www.w3.org/2000/svg" viewBox="-10 -960 980 980">
+                        <path d="m378-330 102-60 103 60-29-113 89-75-116-10-47-108-47 109-116 9 90 74-29 114ZM185-65l80-331L3-620l343-29 134-313 134 314 343 28-262 224 80 331-295-176L185-65Zm295-408Z"/>
+                      </svg>
+                        <!-- Заполненная часть звезды -->
+                      <svg class="rating__star--filled" style="--fill-percentage: {{this}}%;" xmlns="http://www.w3.org/2000/svg" viewBox="-10 -960 980 980">
+                        <path d="m378-330 102-60 103 60-29-113 89-75-116-10-47-108-47 109-116 9 90 74-29 114ZM185-65l80-331L3-620l343-29 134-313 134 314 343 28-262 224 80 331-295-176L185-65Zm295-408Z"/>
+                      </svg>
+                    </span>
+                {{/each}}
+            </div>
+
+            <div class="reviews__reviews-count">
+                {{formatNumber total_review_count}} {{pluralize total_review_count 'отзыв' 'отзыва' 'отзывов'}}
+            </div>
+        </div>
+        <div class="reviews__sort">
+            <span class="reviews__sort-title">Сортировка:</span>
+            <span class="reviews__sort-button" data-sort="asc" id="main-sort">по возрастанию</span>
+            <span class="reviews__sort-button" data-sort="desc">по убыванию</span>
+            <span class="reviews__sort-label">рейтинга</span>
+        </div>
+    </div>
+</div>
+
+<div class="review-card">
+    <div class="review">
+        <div>
+            <div class="review__avatar">
+                <img src="{{reviews.user.url}}" onerror="this.style.backgroundColor='#D9D9D9'; this.src='/public/assets/img/static/avatar.svg'" alt="">
+            </div>
+            <div class="review__rating">
+                <div class="review__stars">
+                    {{#each (range 5)}}
+                        <span class="review__star" data-value="{{increment @index}}" title="Rate {{increment @index}}" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="-10 -960 980 980">
+                          <path d="m378-330 102-60 103 60-29-113 89-75-116-10-47-108-47 109-116 9 90 74-29 114ZM185-65l80-331L3-620l343-29 134-313 134 314 343 28-262 224 80 331-295-176L185-65Zm295-408Z"/>
+                        </svg>
+                    </span>
+                    {{/each}}
+                </div>
+                <div class="review__name" id="review__name">{{reviews.user.name}}</div>
+            </div>
+        </div>
+        <textarea class="review__comment" placeholder="Что вам понравилось?"></textarea>
+        <div class="review__footer">
+            <button class="review__submit">Прокомментировать</button>
+            <label class="review__checkbox">
+                <input type="checkbox" class="review__select-item review__anonymous-checkbox" id="review-checkbox"> <part>Отправить отзыв анонимно</part>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="review__message-box" style="display: none;"></div>
+
+{{# each reviews }}
+    <div class="product-card">
+        <div class="product-card__header">
+            <div class="product-card__avatar">
+                <img src="{{avatar_url}}" onerror="this.style.backgroundColor='#D9D9D9'; this.src='/public/assets/img/static/avatar.svg'" alt="">
+            </div>
+            <div class="product-card__info">
+                <div class="product-card__rating">
+                    {{#each (calculateStars rating)}}
+                        <span class="product-card__star {{#ifEquals this 100}}product-card__star--filled{{/ifEquals}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -960 980 980">
+                                <path d="m378-330 102-60 103 60-29-113 89-75-116-10-47-108-47 109-116 9 90 74-29 114ZM185-65l80-331L3-620l343-29 134-313 134 314 343 28-262 224 80 331-295-176L185-65Zm295-408Z"/>
+                            </svg>
+                        </span>
+                    {{/each}}
+                </div>
+                <div class="product-card__name">{{name}}</div>
+                <div class="product-card__date">{{formatDateAgo created_at}}</div>
+            </div>
+        </div>
+
+        <div class="product-card__text" data-truncated="true">
+            {{text}}
+        </div>
+        {{#if (isTextLong text)}}
+            <button class="product-card__show-more">Показать больше <span class="icon-arrow-down"></span></button>
+        {{/if}}
+    </div>
+{{/each}}
+
+{{#gt reviews.length 5}}
+    <div class="show-more-products">Показать ещё товары</div>
+{{/gt}}

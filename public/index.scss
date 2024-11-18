@@ -17,8 +17,11 @@
 @use '../src/scripts/components/auth-menu/views/toggle-password';
 @use '../src/scripts/components/carousel/views/carousel';
 @use '../src/scripts/components/searcher/searcher';
-@use "../src/scripts/components/category/view/category";
+@use '../src/scripts/components/category/view/category';
 @use '../src/scripts/components/custom-messages/soon/soon';
+@use '../src/scripts/components/reviews/views/reviews';
+@use '../src/scripts/components/reviews/views/add_review';
+
 
 @font-face {
     font-family: 'UbuntuSans';
