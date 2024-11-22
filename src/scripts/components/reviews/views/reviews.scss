@@ -86,6 +86,54 @@
       color: parameters.$default-text-color;
       font-weight: bold;
     }
+
+    &-dropdown {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      min-width: 91px;
+
+      .material-icons {
+        font-size: 18px;
+        vertical-align: middle;
+        margin-left: 4px;
+        transition: transform 0.3s ease;
+      }
+
+      &-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        display: none;
+        width: 150px;
+        transition: opacity 0.3s ease;
+        justify-content: flex-end;
+
+        &.show {
+          display: block;
+          opacity: 1;
+        }
+
+        .reviews__sort-dropdown-option {
+          padding: 8px 12px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #7a16d5;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  &-header-scroll {
+    cursor: pointer;
   }
 
   &__header {
@@ -93,5 +141,60 @@
     font-weight: bold;
     margin-bottom: 2px;
     color: #333;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews {
+    padding: 10px;
+
+    &__rating-wrapper {
+      display: block;
+      align-items: flex-start;
+    }
+
+    .review-card {
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    &__header {
+      font-size: 20px;
+    }
+
+    .reviews__sort {
+      width: 100%;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .review__rating {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .review__stars {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews__header {
+    font-size: 18px;
+  }
+
+  .review-card {
+    margin-bottom: 15px;
+  }
+
+  .review__comment {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .review__footer {
+    flex-direction: column;
+    gap: 10px;
   }
 }

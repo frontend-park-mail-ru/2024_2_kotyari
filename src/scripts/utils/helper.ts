@@ -47,32 +47,31 @@ export class Helper {
   }
 
   /**
-   * Функция для выбора правильной формы существительного в зависимости от числа.
+   * Склоняет слово в зависимости от числа.
    *
-   * @param {number} number - Число, для которого нужно выбрать правильную форму существительного.
-   * @param {string} one - Форма существительного для числа 1.
-   * @param {string} two - Форма существительного для чисел 2-4.
-   * @param {string} five - Форма существительного для чисел 5 и больше, а также для 0.
-   *
-   * @returns {string} Правильная форма существительного.
+   * @param {number} count - Число для склонения.
+   * @param {string} singular - Форма слова для единственного числа.
+   * @param {string} few - Форма слова для нескольких объектов (2-4).
+   * @param {string} many - Форма слова для множества объектов (5+).
+   * @returns {string} Слово в правильной форме.
    */
-  public static pluralize(number: number, one: string, two: string, five: string): string {
-    const n = Math.abs(number) % 100;
+  public static pluralize(count: number, singular: string, few: string, many: string): string {
+    const n = Math.abs(count) % 100;
     const lastDigit = n % 10;
 
     if (n >= 11 && n <= 14) {
-      return five; // Исключения для 11-14
+      return many; // Исключения для 11-14
     }
 
     if (lastDigit === 1) {
-      return one;
+      return singular;
     }
 
     if (lastDigit >= 2 && lastDigit <= 4) {
-      return two;
+      return few;
     }
 
-    return five;
+    return many;
   }
 
   /**
@@ -135,12 +134,17 @@ export class Helper {
     const partialStar = Math.round((rating - fullStars) * 100); // Converts fractional part to percentage.
     const starsArray = new Array(5).fill(0).map((_, i) => (i < fullStars ? 100 : 0));
 
-    // Add the partial star only if it is within the bounds.
     if (partialStar > 0 && fullStars < 5) starsArray[fullStars] = partialStar;
 
     return starsArray;
   }
 
+  /**
+   * Создает массив чисел от 0 до count - 1.
+   *
+   * @param {number} count - Количество элементов в массиве.
+   * @returns {number[]} Массив чисел.
+   */
   public static range(count: number): number[] {
     return Array.from({ length: count }, (_, i) => i);
   }
@@ -150,19 +154,28 @@ export class Helper {
    *
    * @param {string} dateStr - Дата в формате строки 'YYYY-MM-DD HH:mm:ss' или ISO-формате.
    * @returns {string} Строка с форматом 'вчера', '3 дня назад', '5 часов назад', '10 минут назад' и т.д.
+   * @throws {Error} Если формат даты неверный.
    */
   public static formatDateAgo(dateStr: string): string {
-    console.log(dateStr)
-    const [datePart, timePart] = dateStr.split(', ');
-    const [day, month, year] = datePart.split('.');
+    // Пытаемся распознать и корректно обработать дату
+    let date: Date;
 
-    const formattedDateStr = `${year}-${month}-${day}T${timePart}`;
-    console.log(formattedDateStr)
-    const date = new Date(formattedDateStr);
+    // Если дата передана в формате DD.MM.YYYY, HH:mm:ss
+    if (/^\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}:\d{2}$/.test(dateStr)) {
+      const [datePart, timePart] = dateStr.split(', ');
+      const [day, month, year] = datePart.split('.');
+      date = new Date(`${year}-${month}-${day}T${timePart}`);
+    } else {
+      // Пытаемся преобразовать как стандартный формат ISO или другие валидные форматы
+      date = new Date(dateStr);
+    }
+
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date format');
+    }
+
     const now = new Date();
     const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-    console.log(date, now, diffInSeconds)
 
     const secondsInMinute = 60;
     const secondsInHour = 3600;
@@ -192,22 +205,44 @@ export class Helper {
     }
   }
 
+  /**
+   * Проверяет, превышает ли текст три строки.
+   *
+   * @param {string} text - Текст для проверки.
+   * @returns {boolean} true, если текст превышает три строки; иначе false.
+   */
   public static isTextLong(text: string): boolean {
-    const lineCount = text.split(/\n/).length; // Пример для подсчёта строк
+    const lineCount = text.split(/\n/).length;
     return lineCount > 3;
   }
 
+  /**
+   * Сравнивает два значения и выполняет функции из Handlebars.
+   *
+   * @param {any} value1 - Первое значение.
+   * @param {any} value2 - Второе значение.
+   * @param {object} options - Объект с методами fn и inverse.
+   * @returns {any} Результат выполнения переданной функции.
+   */
   public static gt(value1: any, value2: any, options?: any) {
-    // Inline usage: return true/false directly
     if (!options || typeof options !== 'object' || !options.fn) {
       return value1 > value2;
     }
 
-    // Block usage: render based on condition
     if (value1 > value2) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
+  }
+
+  /**
+   * Форматирует число как денежную сумму в русской локали.
+   *
+   * @param {number} num - Число для форматирования.
+   * @returns {string} Форматированная строка.
+   */
+  public static costFormat(num: number) {
+    return num.toLocaleString('ru-RU');
   }
 }

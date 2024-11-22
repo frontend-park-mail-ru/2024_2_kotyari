@@ -1,16 +1,30 @@
-import {ReviewData, ReviewsViewInterface} from "../types/types";
+import {ReviewsViewInterface} from "../types/types";
 import { ReviewsApi } from "../api/api";
 import {AddReviewView} from "../views/add_review";
 import {AddReviewPresenter} from "./AddReviewPresenter";
 
 export class ReviewsPresenter {
+    /** @type {ReviewsApi} API для работы с отзывами */
     private api: any;
+
+    /** @type {ReviewsViewInterface} Представление для отображения отзывов */
     private view: ReviewsViewInterface;
 
+    private static readonly SORT_BY: string = 'rating'; // Параметр сортировки
+    private static readonly SORT_ORDER: string = 'desc'; // Порядок сортировки
+
+    /**
+     * Конструктор ReviewsPresenter.
+     * @param {ReviewsViewInterface} view - Интерфейс представления отзывов.
+     */
     constructor(view: ReviewsViewInterface) {
         this.view = view;
     }
 
+    /**
+     * Инициализация презентера.
+     * @param {string} id - Идентификатор объекта, для которого загружаются отзывы.
+     */
     init = (id: string) => {
         this.api = ReviewsApi;
 
@@ -19,9 +33,15 @@ export class ReviewsPresenter {
         });
     };
 
+    /**
+     * Загружает отзывы с сервера.
+     * @private
+     * @param {string} id - Идентификатор объекта, для которого загружаются отзывы.
+     * @returns {Promise<void>} Промис, который выполняется после загрузки отзывов.
+     */
     private loadReviews = async (id: string) => {
         return this.api
-            .fetchReviews(id)
+            .fetchReviews(id, ReviewsPresenter.SORT_BY, ReviewsPresenter.SORT_ORDER)
             .then((reviewsData: any) => {
                 const formattedReviews = {
                     total_review_count: reviewsData.total_review_count,
@@ -35,9 +55,9 @@ export class ReviewsPresenter {
                     }))
                 };
 
-                this.view.render(formattedReviews);
+                this.view.render(id, formattedReviews);
                 const view = new AddReviewView();
-                new AddReviewPresenter(id, view);
+                new AddReviewPresenter(id, view, this.loadReviews);
             })
             .catch((err: Error) => {
                 console.error(err);

@@ -61,6 +61,9 @@ const helperName: Array<iHelper> = [
     }, {
         name: 'gt',
         function: Helper.gt.bind(Helper)
+    }, {
+        name: 'costFormat',
+        function: Helper.costFormat.bind(Helper)
     }
 ];
 
