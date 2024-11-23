@@ -1,0 +1,14 @@
+<div class="voting-frame">
+    <div class="voting-frame__header">
+        <span class="btn__close" data-action="close">&times;</span>
+    </div>
+    <div class="voting-frame__content">
+        <h3 class="voting-frame__title">{{title}}</h3>
+        <div class="voting-frame__stars">
+            {{#each stars}}
+                <span class="voting-frame__star {{#if this.active}}voting-frame__star--active{{/if}}">&#9733;</span>
+            {{/each}}
+        </div>
+        <button class="voting-frame__vote-button">Vote</button>
+    </div>
+</div>

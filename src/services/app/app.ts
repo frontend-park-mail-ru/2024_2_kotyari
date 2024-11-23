@@ -7,6 +7,7 @@ import { categoryStorage } from '../storage/category';
 import { buildBody, updateAfterAuth, updateAfterLogout } from '../../scripts/layouts/body';
 import { get, getWithCred } from '../api/without-csrf';
 import { Category } from '../../scripts/components/category/api/category';
+import {CSATPresenter} from "../../scripts/components/csat/presenter/csat";
 
 
 /**
@@ -22,6 +23,8 @@ export const buildMain = (user: User): Promise<void> => {
     } else {
       updateAfterAuth(user);
     }
+
+    let csat = new CSATPresenter('csat', 'main');
   });
 };
 

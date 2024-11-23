@@ -1,0 +1,103 @@
+$voting-frame-bg-color: #f4f4f4;
+$voting-frame-border-color: #cccccc;
+$voting-frame-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$voting-frame-transition: 0.3s ease-in-out;
+$voting-frame-color-primary: #6a0dad;
+$voting-frame-color-gray: #8c8c8c;
+
+.voting-frame {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: $voting-frame-bg-color;
+  border: 1px solid $voting-frame-border-color;
+  box-shadow: $voting-frame-shadow;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  transition: transform $voting-frame-transition, opacity $voting-frame-transition;
+  opacity: 1;
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    flex-direction: row-reverse;
+
+    &__close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color $voting-frame-transition;
+
+      &:hover {
+        color: $voting-frame-color-gray;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
+    align-self: flex-start;
+  }
+
+  &__content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__stars {
+    display: flex;
+    margin-bottom: 1rem;
+
+    &__star {
+      font-size: 1.5rem;
+      color: $voting-frame-color-gray;
+      margin: 0 0.25rem;
+      transition: color $voting-frame-transition;
+
+      &--active {
+        color: $voting-frame-color-primary;
+      }
+    }
+  }
+
+  &__vote-button {
+    background-color: $voting-frame-color-primary;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color $voting-frame-transition;
+
+    &:hover {
+      background-color: darken($voting-frame-color-primary, 10%);
+    }
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &--visible {
+      transform: translate(-50%, 0);
+    }
+  }
+}
