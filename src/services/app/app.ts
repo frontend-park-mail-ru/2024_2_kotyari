@@ -23,8 +23,6 @@ export const buildMain = (user: User): Promise<void> => {
     } else {
       updateAfterAuth(user);
     }
-
-    let csat = new CSATPresenter('csat', 'main');
   });
 };
 
@@ -84,6 +82,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           return user;
         })
+        // .then(() => {
+        //   getWithCred(backurl + '/can_csat')
+        //     .then(res => {
+        //       if (res.status === 200) {
+        //         if (/*res.body.status*/ 1){
+        //           let csat = new CSATPresenter('csat', 'main');
+        //
+        //           return;
+        //         }
+        //       }
+        //
+        //       console.error('ошибка при запросе на сервис статистики');
+        //     })
+        // })
         .then(() => {
           get(backurl + '/categories')
             .then(res => {

@@ -1,5 +1,5 @@
 @use '../public/css/parametrs/parameters';
-
+@use 'src/scripts/components/admin-panel/view/admin.scss';
 @use '../src/scripts/components/card/view/catalog';
 @use '../src/scripts/components/custom-messages/error/error';
 @use '../src/scripts/components/modal/views/modal';
