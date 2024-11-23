@@ -6,10 +6,15 @@ export interface RatingRequest {
 
 export interface RatingResponse {
     status: number;
-    message: string;
-    body?: {
-        rating: number[];
-    };
+    body: Statistic | ResponseErr;
+}
+
+interface Statistic {
+    rating: number[];
+}
+
+interface ResponseErr {
+    error_message: string;
 }
 
 export interface CheckResponse {

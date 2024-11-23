@@ -13,8 +13,8 @@ import { CardPresenter } from '@/scripts/components/card/presenter/card';
 import { menuSignIn, menuSignUp } from '@/scripts/components/auth-menu/views/configs';
 import { errorPage } from '@/scripts/components/custom-messages/error/error';
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
-import { CartBuilder } from "@/scripts/components/cart/view/cart-builder";
-import { OrderPlacementBuilder } from "@/scripts/components/order-placement/view/order-placement-builder";
+import { CartBuilder } from '@/scripts/components/cart/view/cart-builder';
+import { OrderPlacementBuilder } from '@/scripts/components/order-placement/view/order-placement-builder';
 import { CategoryView } from '../../scripts/components/category/view/category';
 import { CategoryApi } from '../../scripts/components/category/api/category';
 import { CategoryPresenter } from '../../scripts/components/category/presenter/category';
@@ -25,6 +25,8 @@ import { SingleOrderPresenter } from '../../scripts/components/single-order/pres
 import { HandlebarsRegEqual } from '../../scripts/utils/handlebars-reg-equal';
 import { isAuth } from '../storage/user';
 import { PERSONAL_ACCOUNT } from '../../scripts/components/personal-account/configs/config';
+import { AdminPanelPresenter } from '../../scripts/components/admin-panel/presenter/presenter';
+import { AdminPanelView } from '../../scripts/components/admin-panel/view/view';
 
 HandlebarsRegEqual();
 
@@ -56,6 +58,15 @@ const accountPresenter = new AccountPresenter(backurl, rootId);
 const orderListPresenter = new OrderListPresenter(rootId);
 
 const singleOrderPresenter = new SingleOrderPresenter(rootId)
+
+const adminView = new AdminPanelView();
+const adminPage = new AdminPanelPresenter(adminView);
+
+router.addRoute(
+  '/csat_admin',
+  () => adminPage.init(),
+  new RegExp('^\\/csat_admin$'),
+  true, false);
 
 router.addRoute(AUTH_URLS.LOGIN.route,
   () => loginPresenter.init(),
@@ -135,3 +146,5 @@ router.addRoute('/category/:link',
   () => categoryPresenter.loadCategoryProducts(),
   new RegExp('^/category/([^/]+)$'),
   false, false);
+
+

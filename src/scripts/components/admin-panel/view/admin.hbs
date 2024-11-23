@@ -1,0 +1,26 @@
+<div class="survey-container" >
+  {{#each questions}}
+    <div >
+      <div class="survey-item" data-type="{{type}}">
+        <div class="survey-result">
+          <p><strong>Тип:</strong> {{type}}</p>
+          <p><strong>Оценка:</strong> {{rating}}</p>
+          <p><strong>Количество:</strong> {{count}}</p>
+        </div>
+        <div class="survey-config">
+          <p><strong>Конфигурация</strong></p>
+          <p><strong>Текст вопроса:</strong> <span class="question-title">{{question}}</span></p>
+          <div class="config-actions">
+            <button class="btn btn-primary btn-restart" data-type="{{type}}">Запустить заново</button>
+            <button class="btn btn-danger btn-delete" data-type="{{type}}">Удалить</button>
+            <button class="btn btn-secondary btn-edit" data-type="{{type}}">Изменить</button>
+          </div>
+          <div class="edit-section" style="display: none;">
+            <input type="text" class="edit-input" data-type="{{type}}" value="{{question}}" />
+            <button class="btn btn-success btn-save" data-type="{{type}}">Сохранить</button>
+            <button class="btn btn-light btn-cancel" data-type="{{type}}">Отмена</button>
+          </div>
+        </div>
+      </div>
+  {{/each}}
+</div>

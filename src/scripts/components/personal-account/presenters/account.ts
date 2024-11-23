@@ -6,6 +6,16 @@ import { backurl } from '../../../../services/app/config';
 import { storageUser } from '../../../../services/storage/user';
 import { updateAfterAuth } from '../../../layouts/body';
 import { csrf } from '../../../../services/api/CSRFService';
+import { User } from '../../../../services/types/types';
+import { pageCache } from 'workbox-recipes';
+
+
+interface pageConfig {
+  icon: string
+  title: string
+  text: string
+  href: string
+}
 
 
 export class AccountPresenter {
@@ -33,7 +43,10 @@ export class AccountPresenter {
       this.userData.avatar_url = `${backurl}/${this.userData.avatar_url}`;
 
       this.deliveryInfo = await this.buildDeliveryInfo(this.userData);
-      this.rightColumnInfo = this.buildRightColumnInfo();
+
+      const conf = this.getConfig();
+
+      this.rightColumnInfo = this.buildRightColumnInfo(conf);
 
       this.view.render({
         ...this.userData,
@@ -83,18 +96,40 @@ export class AccountPresenter {
     ];
   }
 
-  private buildRightColumnInfo() {
+  getConfig = (): pageConfig => {
+    const user = storageUser.getUserData();
+
+    let conf: pageConfig ={
+      icon: 'favorite_outline',
+      title: 'Избранное',
+      text: 'скоро',
+      href: '/soon',
+    }
+
+    if (user.username) {
+      conf = {
+        icon: 'admin_panel_settings',
+        title: 'Статистика',
+        text: 'Посмотреть',
+        href: '/csat_admin',
+      }
+    }
+
+    return conf;
+  }
+
+  private buildRightColumnInfo(conf: pageConfig) {
     return [
       {
         class: 'account__favorites-info',
         iconClass: ' account__favorite',
-        icon: 'favorite_outline',
+        icon: conf.icon,
         detailsClass: 'account__favorites-details',
         titleClass: 'account__favorites-title',
         textClass: 'account__favorites-text',
-        title: 'Избранное',
-        text: 'скоро',
-        href: '/soon'
+        title: conf.title,
+        text: conf.text,
+        href: conf.href
       },
       {
         class: 'account__purchases-info',

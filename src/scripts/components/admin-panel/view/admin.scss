@@ -1,0 +1,108 @@
+.survey-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px;
+  flex-direction: row;
+}
+
+.edit-section {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px; // Add spacing between buttons
+
+  .edit-input {
+    flex: 1; // Make the input take up available space
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .btn-save {
+    background-color: #28a745; // Green for save
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #218838; // Darker green on hover
+    }
+
+    &:disabled {
+      background-color: #94d3a2; // Muted green for disabled state
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-cancel {
+    background-color: #f8f9fa; // Light gray for cancel
+    color: #6c757d; // Gray text
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #e2e6ea; // Slightly darker gray on hover
+    }
+  }
+}
+
+
+.survey-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 1000px;
+  background-color: #f9f9f9;
+
+  .survey-result, .survey-config {
+    width: 45%;
+  }
+
+  .survey-config {
+    .config-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+
+      .btn {
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+
+        &.btn-primary {
+          background-color: #6200ea;
+          color: white;
+          border: none;
+
+          &:hover {
+            background-color: #4500b5;
+          }
+        }
+
+        &.btn-danger {
+          background-color: #fafafa;
+          color: black;
+          border: 1px solid red;
+
+          &:hover {
+            background-color: #ab000d;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

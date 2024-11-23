@@ -1,19 +1,13 @@
 import {CheckResponse, RatingRequest, RatingResponse} from "../types/types";
 import {csrf} from "../../../../services/api/CSRFService";
+import { getWithCred } from '../../../../services/api/without-csrf';
 
 export class CSATApi {
-    static async postRating(data: RatingRequest): Promise<RatingResponse> {
-        const response = await csrf.post("/csat", data);
-        return response;
+    static voteCSAT = (data: RatingRequest): Promise<RatingResponse> => {
+        return csrf.post("/csat", data);
     }
 
-    static async getRatingStats(): Promise<RatingResponse> {
-        const response = await fetch("/csat", { method: "GET" });
-        return response.json();
-    }
-
-    static async checkIfRated(): Promise<CheckResponse> {
-        const response = await fetch("/csat", { method: "PATCH" });
-        return response.json();
+    static getRatingStats = (): Promise<RatingResponse> => {
+        return getWithCred("/csat");
     }
 }
