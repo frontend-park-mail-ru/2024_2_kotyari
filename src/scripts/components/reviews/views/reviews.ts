@@ -5,6 +5,8 @@ import { ReviewsViewInterface } from "../types/types";
 import {ReviewsApi} from "../api/api";
 import {Helper} from "../../../utils/helper";
 import {isAuth} from "../../../../services/storage/user";
+import {AddReviewView} from "./add_review";
+import {AddReviewPresenter} from "../presenters/AddReviewPresenter";
 
 const DEFAULT_DISPLAYED_COUNT = 5;
 const DISPLAY_INCREMENT = 10;
@@ -222,7 +224,23 @@ export class ReviewsView implements ReviewsViewInterface {
     loadSortedReviews = async (id: string, sortBy: string, sortOrder: string) => {
         try {
             console.log('data: ', sortBy, sortOrder)
-            const response = await ReviewsApi.fetchReviews(id, sortBy, sortOrder);
+            const response = await ReviewsApi.fetchReviews(id, sortBy, sortOrder).then((reviewsData: any) => {
+                return {
+                    total_review_count: reviewsData.total_review_count,
+                    total_review_rating: reviewsData.total_review_rating,
+                    reviews: reviewsData.reviews.map((review: any) => ({
+                        name: review.is_private ? 'Аноним' : review.username,
+                        avatar_url: review.avatar_url,
+                        text: review.text,
+                        rating: review.rating,
+                        created_at: new Date(review.created_at).toLocaleString('ru-RU')
+                    }))
+                };
+            })
+                .catch((err: Error) => {
+                    console.error(err);
+                    this.renderError('Не удалось загрузить отзывы. Попробуйте позже.');
+                });;
             this.rerenderList(id, response);
         } catch (error) {
             console.error('Ошибка при загрузке отсортированных отзывов:', error);
