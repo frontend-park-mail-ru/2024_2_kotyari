@@ -1,6 +1,8 @@
 import {OrderPlacementApiInterface} from "../../../api/order-placement";
 import { router } from '../../../../../../services/app/init';
 import { add } from 'husky';
+import {CSATPresenter} from "../../../../csat/presenter/csat";
+import {csat} from "../../../../../../services/app/app";
 
 /**
  * Класс для управления элементами правой части страницы оформления заказа.
@@ -80,7 +82,7 @@ export class RightElementOfOrderPlacementView {
     this.addEventListeners();
 
     document.getElementById('order-button')?.addEventListener('click', async () => {
-      console.log(address);
+      csat.renderStats('csat', 'purchase')
 
       OrderPlacementApiInterface.placeOrder(address)
         .then(() => {

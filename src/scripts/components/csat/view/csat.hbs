@@ -1,7 +1,7 @@
-<div class="voting-frame">
-    <div class="voting-frame__content">
-        <h3 class="voting-frame__title">{{title}} <span class="voting-frame__title__close" data-action="close">&times;</span></h3>
-        <div class="rating-circles">
+<div class="voting-frame" id="voting-frame">
+    <div class="voting-frame__content" id="voting-frame__content">
+        <h3 class="voting-frame__title"><span id="voting-frame__title__text">{{title}}</span><span class="voting-frame__title__close" data-action="close">&times;</span></h3>
+        <div class="rating-circles" id="rating-circles">
             <div class="rating-circles__labels">
                 <span style="margin-left: 10px">1</span>
                 <span style="margin-right: 23px;">5</span>
@@ -16,6 +16,13 @@
                 {{/each}}
             </div>
         </div>
-        <button class="voting-frame__vote-button">Проголосовать</button>
+        <div style="display: flex; gap: 6px;">
+            <div id="back">
+                <button class="voting-frame__vote-button" id="voting-frame__back" style="display: none">Назад</button>
+            </div>
+            <div id="subm">
+                <button class="voting-frame__vote-button" id="voting-frame__submit">Проголосовать</button>
+            </div>
+        </div>
     </div>
 </div>

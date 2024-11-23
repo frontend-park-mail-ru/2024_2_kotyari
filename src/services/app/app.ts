@@ -9,6 +9,7 @@ import { get, getWithCred } from '../api/without-csrf';
 import { Category } from '../../scripts/components/category/api/category';
 import {CSATPresenter} from "../../scripts/components/csat/presenter/csat";
 
+export let csat = new CSATPresenter();
 
 /**
  * Функция строит основной интерфейс приложения на основе данных пользователя.
@@ -82,20 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           return user;
         })
-        // .then(() => {
-        //   getWithCred(backurl + '/can_csat')
-        //     .then(res => {
-        //       if (res.status === 200) {
-        //         if (/*res.body.status*/ 1){
-        //           let csat = new CSATPresenter('csat', 'main');
-        //
-        //           return;
-        //         }
-        //       }
-        //
-        //       console.error('ошибка при запросе на сервис статистики');
-        //     })
-        // })
+        .then(() => {
+          getWithCred(backurl + '/can_csat')
+            .then(res => {
+              if (res.status === 200) {
+                if (res.body.status){
+                    csat.renderStats('csat', 'main')
+
+                    return;
+                }
+              }
+
+              console.error('ошибка при запросе на сервис статистики');
+            })
+        })
         .then(() => {
           get(backurl + '/categories')
             .then(res => {
