@@ -245,4 +245,8 @@ export class Helper {
   public static costFormat(num: number) {
     return num.toLocaleString('ru-RU');
   }
+
+  public static  multiplication(n1: number, n2: number) {
+    return n1 * n2;
+  }
 }

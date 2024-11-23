@@ -64,6 +64,9 @@ const helperName: Array<iHelper> = [
     }, {
         name: 'costFormat',
         function: Helper.costFormat.bind(Helper)
+    }, {
+        name: 'multiplication',
+        function: Helper.multiplication.bind(Helper)
     }
 ];
 

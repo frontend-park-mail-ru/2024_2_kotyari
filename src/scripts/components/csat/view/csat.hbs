@@ -1,14 +1,21 @@
 <div class="voting-frame">
-    <div class="voting-frame__header">
-        <span class="btn__close" data-action="close">&times;</span>
-    </div>
     <div class="voting-frame__content">
-        <h3 class="voting-frame__title">{{title}}</h3>
-        <div class="voting-frame__stars">
-            {{#each stars}}
-                <span class="voting-frame__star {{#if this.active}}voting-frame__star--active{{/if}}">&#9733;</span>
-            {{/each}}
+        <h3 class="voting-frame__title">{{title}} <span class="voting-frame__title__close" data-action="close">&times;</span></h3>
+        <div class="rating-circles">
+            <div class="rating-circles__labels">
+                <span style="margin-left: 10px">1</span>
+                <span style="margin-right: 23px;">5</span>
+                <span style="margin-right: 6px;">10</span>
+            </div>
+            <div class="rating-circles__wrapper">
+                {{#each (range 10)}}
+                    <div
+                            class="rating-circles__circle rating-circles__circle-{{@index}}"
+                            data-index="{{@index}}">
+                    </div>
+                {{/each}}
+            </div>
         </div>
-        <button class="voting-frame__vote-button">Vote</button>
+        <button class="voting-frame__vote-button">Проголосовать</button>
     </div>
 </div>

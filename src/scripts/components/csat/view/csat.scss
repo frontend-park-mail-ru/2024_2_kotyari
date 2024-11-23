@@ -1,9 +1,13 @@
+@use '../../../../../public/css/parametrs/basic-mixins';
+
 $voting-frame-bg-color: #f4f4f4;
 $voting-frame-border-color: #cccccc;
 $voting-frame-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $voting-frame-transition: 0.3s ease-in-out;
 $voting-frame-color-primary: #6a0dad;
 $voting-frame-color-gray: #8c8c8c;
+
+$voting-slider-gradient: linear-gradient(to right, red, yellow, green);
 
 .voting-frame {
   position: fixed;
@@ -17,40 +21,30 @@ $voting-frame-color-gray: #8c8c8c;
   width: 300px;
   display: flex;
   flex-direction: column;
+  z-index: 900;
   transition: transform $voting-frame-transition, opacity $voting-frame-transition;
   opacity: 1;
-
-  &--visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    flex-direction: row-reverse;
-
-    &__close {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color $voting-frame-transition;
-
-      &:hover {
-        color: $voting-frame-color-gray;
-      }
-    }
-  }
 
   &__title {
     font-size: 1rem;
     margin: 0;
     font-weight: 400;
     align-self: flex-start;
+    justify-content: space-between;
+
+    &__close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color $voting-frame-transition;
+      color: $voting-frame-color-gray;
+      margin-left: 150px;
+
+      &:hover {
+        color: black;
+      }
+    }
   }
 
   &__content {
@@ -60,35 +54,8 @@ $voting-frame-color-gray: #8c8c8c;
     align-items: center;
   }
 
-  &__stars {
-    display: flex;
-    margin-bottom: 1rem;
-
-    &__star {
-      font-size: 1.5rem;
-      color: $voting-frame-color-gray;
-      margin: 0 0.25rem;
-      transition: color $voting-frame-transition;
-
-      &--active {
-        color: $voting-frame-color-primary;
-      }
-    }
-  }
-
   &__vote-button {
-    background-color: $voting-frame-color-primary;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color $voting-frame-transition;
-
-    &:hover {
-      background-color: darken($voting-frame-color-primary, 10%);
-    }
+    @include basic-mixins.button(250px);
   }
 
   @media (max-width: 600px) {
@@ -98,6 +65,55 @@ $voting-frame-color-gray: #8c8c8c;
 
     &--visible {
       transform: translate(-50%, 0);
+    }
+  }
+}
+
+.rating-circles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 8px 2px;
+
+  &__labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+
+    span {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+
+    .rating-circles {
+      &__circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &:not(.rating-circles__circle--active) {
+          background: gray;
+        }
+      }
+    }
+  }
+}
+
+@for $i from 0 through 9 {
+  .rating-circles {
+    &__circle-#{$i} {
+      background: hsl((120 / 10) * $i, 100%, 50%);
     }
   }
 }
