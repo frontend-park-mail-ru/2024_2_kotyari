@@ -1,0 +1,28 @@
+{{# each reviews }}
+    <div class="product-card">
+        <div class="product-card__header">
+            <div class="product-card__avatar">
+                <img src="{{avatar_url}}" onerror="this.style.backgroundColor='#D9D9D9'; this.src='/public/assets/img/static/avatar.svg'" alt="">
+            </div>
+            <div class="product-card__info">
+                <div class="product-card__rating">
+                    {{#each (calculateStars rating)}}
+                        <span class="product-card__star {{#ifEquals this 100}}product-card__star--filled{{/ifEquals}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -960 980 980">
+                                <path d="m378-330 102-60 103 60-29-113 89-75-116-10-47-108-47 109-116 9 90 74-29 114ZM185-65l80-331L3-620l343-29 134-313 134 314 343 28-262 224 80 331-295-176L185-65Zm295-408Z"/>
+                            </svg>
+                        </span>
+                    {{/each}}
+                </div>
+                <div class="product-card__name">{{name}}</div>
+                <div class="product-card__date">{{formatDateAgo created_at}}</div>
+            </div>
+        </div>
+
+        <div class="product-card__text" style="">{{text}}</div>
+    </div>
+{{/each}}
+
+{{#gt reviews.length displayedCount}}
+    <div class="show-more-products">Показать ещё</div>
+{{/gt}}

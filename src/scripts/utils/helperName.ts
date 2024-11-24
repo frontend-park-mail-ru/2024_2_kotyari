@@ -1,5 +1,6 @@
 import {Helper} from "./helper";
 import Handlebars from "handlebars";
+import * as buffer from "buffer";
 
 /**
  * Интерфейс для описания объекта помощника, содержащего имя и функцию.
@@ -16,7 +17,7 @@ interface iHelper {
      * Функция, зарегистрированная как помощник.
      * @type {(...args: any[]) => string | boolean}
      */
-    function: (...args: any[]) => string | boolean
+    function: (...args: any[]) => string | boolean | number | number[]
 }
 
 /**
@@ -42,6 +43,27 @@ const helperName: Array<iHelper> = [
     }, {
         name: 'increment',
         function: Helper.increment.bind(Helper)
+    }, {
+        name: 'formatNumber',
+        function: Helper.formatNumber.bind(Helper)
+    }, {
+        name: 'calculateStars',
+        function: Helper.calculateStars.bind(Helper)
+    }, {
+        name: 'range',
+        function: Helper.range.bind(Helper)
+    }, {
+        name: 'formatDateAgo',
+        function: Helper.formatDateAgo.bind(Helper)
+    }, {
+        name: 'isTextLong',
+        function: Helper.isTextLong.bind(Helper)
+    }, {
+        name: 'gt',
+        function: Helper.gt.bind(Helper)
+    }, {
+        name: 'costFormat',
+        function: Helper.costFormat.bind(Helper)
     }
 ];
 

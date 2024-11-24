@@ -24,13 +24,13 @@
                     <!--                />-->
                 </div>
                 <div class="catalog__card-info">
-                    <div class="price">
-                        <span class="catalog__current-price">{{price}}₽</span>
+                    <div class="catalog__card-info__price">
+                        <span class="catalog__card-info__price__current-price">{{costFormat price}}₽</span>
                         {{#if original_price}}
-                            <span class="catalog__old-price">{{original_price}}₽</span>
+                            <span class="catalog__card-info__price__old-price">{{costFormat original_price}}₽</span>
                         {{/if}}
                         {{#if discount}}
-                            <span class="catalog__discount">-{{discount}}%</span>
+                            <span class="catalog__card-info__price__discount">-{{discount}}%</span>
                         {{/if}}
                     </div>
                     <div class="catalog__card-title">

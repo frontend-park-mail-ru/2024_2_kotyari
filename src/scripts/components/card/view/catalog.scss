@@ -1,5 +1,5 @@
 @use "../../../../../public/css/parametrs/parameters";
-@use "../types/mixins";
+@use "../../../../../public/css/parametrs/basic-mixins" as mixins;
 
 .container {
     margin: parameters.$margin-auto;

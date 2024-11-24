@@ -6,13 +6,23 @@ import { router } from '../../../../services/app/init';
 import { ProductData } from '../types/types';
 import { isAuth } from '../../../../services/storage/user';
 import { csrf } from '../../../../services/api/CSRFService';
+import {ReviewsView} from "../../reviews/views/reviews";
+import {ReviewsPresenter} from "../../reviews/presenters/reviews";
+import {ReviewsApi} from "../../reviews/api/api";
 
 export class ProductPageBuilder {
+  private readonly reviewsId = 'reviews';
+
   private productPage: ProductPage;
   private api = new ProductPageApi();
+  private reviewsPresenter: ReviewsPresenter
 
   constructor() {
     this.productPage = new ProductPage();
+
+    new ReviewsApi();
+    const reviewsView = new ReviewsView(this.reviewsId);
+    this.reviewsPresenter = new ReviewsPresenter(reviewsView);
   }
 
   async build() {
@@ -49,6 +59,8 @@ export class ProductPageBuilder {
       this.initializeCartButtons(productData.in_cart);
       // this.initializeFavoriteIcon();
       new Carousel();
+
+      this.reviewsPresenter.init(id);
 
     } catch (error) {
       console.error('Error building product page:', error);

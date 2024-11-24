@@ -3,7 +3,7 @@
   <div class="product-page__product-info">
     <h1 class="product-page__product-name">{{title}}</h1>
     <div class="product-page__rating">
-      <span router="changed-active" href="/soon" class="text-rating">
+      <span class="text-rating reviews-header-scroll">
         <svg xmlns="http://www.w3.org/2000/svg"
              height="24px"
              viewBox="0 -960 960 960"
@@ -14,9 +14,9 @@
            134-313 134 314 343 28-262 224 80
            331-295-176L185-65Zm295-408Z" />
         </svg>
-        <span>{{rating}}</span>
+        <span id="rating-header">{{rating}}</span>
       </span>
-      <span router="changed-active" href="/soon" class="text-review" href="/comments">{{review_count}} отзывов</span>
+      <span class="text-review reviews-header-scroll" id="reviews-header">{{formatNumber review_count}} {{pluralize review_count 'отзыв' 'отзыва' 'отзывов'}}</span>
       <!--      <span router="" class="material-icons" href="/videos">videocam_outlined</span>-->
       <!--      <span router="stability-active" href="/videos">{{videoCount}} видео</span>-->
     </div>
@@ -82,6 +82,11 @@
   </div>
 </div>
 
+
 <div class="product-page__description-product-page">
-  <span style="width: 90%">{{description}}</span>
+    <h2 class="product-page__description__header">Описание</h2>
+    <div class="product-page__description">{{description}}</div>
+</div>
+
+<div id="reviews">
 </div>

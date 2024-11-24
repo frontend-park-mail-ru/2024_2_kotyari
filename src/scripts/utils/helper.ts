@@ -47,32 +47,31 @@ export class Helper {
   }
 
   /**
-   * Функция для выбора правильной формы существительного в зависимости от числа.
+   * Склоняет слово в зависимости от числа.
    *
-   * @param {number} number - Число, для которого нужно выбрать правильную форму существительного.
-   * @param {string} one - Форма существительного для числа 1.
-   * @param {string} two - Форма существительного для чисел 2-4.
-   * @param {string} five - Форма существительного для чисел 5 и больше, а также для 0.
-   *
-   * @returns {string} Правильная форма существительного.
+   * @param {number} count - Число для склонения.
+   * @param {string} singular - Форма слова для единственного числа.
+   * @param {string} few - Форма слова для нескольких объектов (2-4).
+   * @param {string} many - Форма слова для множества объектов (5+).
+   * @returns {string} Слово в правильной форме.
    */
-  public static pluralize(number: number, one: string, two: string, five: string): string {
-    const n = Math.abs(number) % 100;
+  public static pluralize(count: number, singular: string, few: string, many: string): string {
+    const n = Math.abs(count) % 100;
     const lastDigit = n % 10;
 
     if (n >= 11 && n <= 14) {
-      return five; // Исключения для 11-14
+      return many; // Исключения для 11-14
     }
 
     if (lastDigit === 1) {
-      return one;
+      return singular;
     }
 
     if (lastDigit >= 2 && lastDigit <= 4) {
-      return two;
+      return few;
     }
 
-    return five;
+    return many;
   }
 
   /**
@@ -114,5 +113,136 @@ export class Helper {
    */
   public static increment(value: number): number {
     return value + 1;
+  }
+
+  /**
+   * Преобразует число в формат "1K", если оно больше 1000.
+   * @param {number} value - Число для преобразования.
+   * @returns {string} Преобразованное значение.
+   */
+  public static formatNumber(value: number): string {
+    return value >= 1000 ? `${Math.floor(value / 1000)}K` : value.toString();
+  }
+
+  /**
+   * Преобразует рейтинг в массив для отрисовки звёзд.
+   * @param {number} rating - Рейтинг от 0 до 5.
+   * @returns {number[]} Массив с процентами для заполнения звёзд.
+   */
+  public static calculateStars(rating: number): number[] {
+    const fullStars = Math.floor(rating);
+    const partialStar = Math.round((rating - fullStars) * 100); // Converts fractional part to percentage.
+    const starsArray = new Array(5).fill(0).map((_, i) => (i < fullStars ? 100 : 0));
+
+    if (partialStar > 0 && fullStars < 5) starsArray[fullStars] = partialStar;
+
+    return starsArray;
+  }
+
+  /**
+   * Создает массив чисел от 0 до count - 1.
+   *
+   * @param {number} count - Количество элементов в массиве.
+   * @returns {number[]} Массив чисел.
+   */
+  public static range(count: number): number[] {
+    return Array.from({ length: count }, (_, i) => i);
+  }
+
+  /**
+   * Форматирует дату относительно текущего времени.
+   *
+   * @param {string} dateStr - Дата в формате строки 'YYYY-MM-DD HH:mm:ss' или ISO-формате.
+   * @returns {string} Строка с форматом 'вчера', '3 дня назад', '5 часов назад', '10 минут назад' и т.д.
+   * @throws {Error} Если формат даты неверный.
+   */
+  public static formatDateAgo(dateStr: string): string {
+    // Пытаемся распознать и корректно обработать дату
+    let date: Date;
+
+    // Если дата передана в формате DD.MM.YYYY, HH:mm:ss
+    if (/^\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}:\d{2}$/.test(dateStr)) {
+      const [datePart, timePart] = dateStr.split(', ');
+      const [day, month, year] = datePart.split('.');
+      date = new Date(`${year}-${month}-${day}T${timePart}`);
+    } else {
+      // Пытаемся преобразовать как стандартный формат ISO или другие валидные форматы
+      date = new Date(dateStr);
+    }
+
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date format');
+    }
+
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    const secondsInMinute = 60;
+    const secondsInHour = 3600;
+    const secondsInDay = 86400;
+    const secondsInMonth = 2592000;
+    const secondsInYear = 31536000;
+
+    if (diffInSeconds < secondsInMinute) {
+      return 'только что';
+    } else if (diffInSeconds < secondsInHour) {
+      const minutesAgo = Math.floor(diffInSeconds / secondsInMinute);
+      return `${minutesAgo} ${Helper.pluralize(minutesAgo, 'минуту', 'минуты', 'минут')} назад`;
+    } else if (diffInSeconds < secondsInDay) {
+      const hoursAgo = Math.floor(diffInSeconds / secondsInHour);
+      return `${hoursAgo} ${Helper.pluralize(hoursAgo, 'час', 'часа', 'часов')} назад`;
+    } else if (diffInSeconds < 2 * secondsInDay) {
+      return 'вчера';
+    } else if (diffInSeconds < secondsInMonth) {
+      const daysAgo = Math.floor(diffInSeconds / secondsInDay);
+      return `${daysAgo} ${Helper.pluralize(daysAgo, 'день', 'дня', 'дней')} назад`;
+    } else if (diffInSeconds < secondsInYear) {
+      const monthsAgo = Math.floor(diffInSeconds / secondsInMonth);
+      return `${monthsAgo} ${Helper.pluralize(monthsAgo, 'месяц', 'месяца', 'месяцев')} назад`;
+    } else {
+      const yearsAgo = Math.floor(diffInSeconds / secondsInYear);
+      return `${yearsAgo} ${Helper.pluralize(yearsAgo, 'год', 'года', 'лет')} назад`;
+    }
+  }
+
+  /**
+   * Проверяет, превышает ли текст три строки.
+   *
+   * @param {string} text - Текст для проверки.
+   * @returns {boolean} true, если текст превышает три строки; иначе false.
+   */
+  public static isTextLong(text: string): boolean {
+    const lineCount = text.split(/\n/).length;
+    return lineCount > 3;
+  }
+
+  /**
+   * Сравнивает два значения и выполняет функции из Handlebars.
+   *
+   * @param {any} value1 - Первое значение.
+   * @param {any} value2 - Второе значение.
+   * @param {object} options - Объект с методами fn и inverse.
+   * @returns {any} Результат выполнения переданной функции.
+   */
+  public static gt(value1: any, value2: any, options?: any) {
+    if (!options || typeof options !== 'object' || !options.fn) {
+      return value1 > value2;
+    }
+
+    if (value1 > value2) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  }
+
+  /**
+   * Форматирует число как денежную сумму в русской локали.
+   *
+   * @param {number} num - Число для форматирования.
+   * @returns {string} Форматированная строка.
+   */
+  public static costFormat(num: number) {
+    return num.toLocaleString('ru-RU');
   }
 }
