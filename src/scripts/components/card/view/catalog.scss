@@ -45,8 +45,16 @@
             z-index: parameters.$z-index-hover;
         }
 
+
+        .catalog__card-image{
+            img {
+                height: 100%;
+            }
+        }
+
         &:hover .catalog__card-image img {
             transform: scale(1.1);
+
         }
 
         &:hover .catalog__card-title {
