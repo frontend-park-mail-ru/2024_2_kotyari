@@ -1,12 +1,14 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-right: 25px;
 
   .dropdown-trigger {
     padding: 10px;
-    background-color: #7916d4;
+    background-color: #fafafa;
     border-radius: 10px;
-    color: #fff;
+    border: 1px solid #7916d4;
+    color: #000000;
     font-weight: 600;
     cursor: pointer;
     min-width: 160px; // Минимальная ширина кнопки
@@ -19,11 +21,11 @@
     position: absolute;
     background-color: white;
     min-width: 100%; // Ширина совпадает с кнопкой
-    border: 2px solid #7916d4;
-    z-index: 1;
+    border: 1px solid #7916d4;
+    z-index: 100;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 3px 0 0 0 ;
 
     &.show {
       display: block;

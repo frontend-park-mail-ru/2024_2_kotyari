@@ -65,6 +65,7 @@ export class AddReviewPresenter {
                 this.view.displayMessage(AddReviewPresenter.ERROR_MESSAGE_SUBMIT, 'error');
             }
         } catch (error) {
+
             if (error.message) {
                 switch (error.message) {
                     case '400':

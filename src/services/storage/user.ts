@@ -38,6 +38,8 @@ class StorageUser {
    * @param data - Объект IUser с новыми данными пользователя.
    */
   public saveUserData(data: IUser): void {
+    console.log(data);
+
     this.userData = data;
   }
 

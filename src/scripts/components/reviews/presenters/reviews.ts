@@ -61,7 +61,22 @@ export class ReviewsPresenter {
                 new AddReviewPresenter(id, view, this.loadReviews);
             })
             .catch((err: Error) => {
-                console.error(err);
+                console.error(123, err);
+
+                if (err.message === 'Ошибка при загрузке отзывов: 404'){
+                    const formattedReviews = {
+                        total_review_count: 0,
+                        total_review_rating: 0,
+                        reviews: []
+                    };
+
+                    this.view.render(id, formattedReviews);
+                    const view = new AddReviewView();
+                    new AddReviewPresenter(id, view, this.loadReviews);
+
+                    return;
+                }
+
                 this.view.renderError('Не удалось загрузить отзывы. Попробуйте позже.');
             });
     };

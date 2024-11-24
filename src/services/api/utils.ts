@@ -21,8 +21,7 @@ export interface apiResponse {
  * @throws {Error} Выбрасывает ошибку, если не удалось распарсить тело ответа в JSON.
  */
 export const parseJsonResponse = async (res: Response): Promise<apiResponse> => {
-  if (res.status === 204) return {status: res.status, body: undefined};
-
+  if (res.status === 204 || res.status === 201) return {status: res.status, body: undefined};
 
   try {
     const responseJson = await res.json();

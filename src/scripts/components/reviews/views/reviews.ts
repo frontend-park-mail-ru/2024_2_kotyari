@@ -1,13 +1,11 @@
 import reviewsTemplate from './reviews.hbs?raw';
 import reviewsListTemplate from './reviews-card.hbs?raw';
 import Handlebars from 'handlebars';
-import { ReviewsViewInterface } from "../types/types";
-import {ReviewsApi} from "../api/api";
-import {Helper} from "../../../utils/helper";
-import {isAuth} from "../../../../services/storage/user";
-import {AddReviewView} from "./add_review";
-import {AddReviewPresenter} from "../presenters/AddReviewPresenter";
-import {backurl} from "../../../../services/app/config";
+import { ReviewsViewInterface } from '../types/types';
+import { ReviewsApi } from '../api/api';
+import { Helper } from '../../../utils/helper';
+import { isAuth, storageUser } from '../../../../services/storage/user';
+import { backurl } from '../../../../services/app/config';
 
 const DEFAULT_DISPLAYED_COUNT = 5;
 const DISPLAY_INCREMENT = 10;
@@ -91,12 +89,20 @@ export class ReviewsView implements ReviewsViewInterface {
             value = 'Войдите в аккаунт'
         }
 
+        const user = storageUser.getUserData();
+
+        console.log('nen', user);
+
         // Генерация шаблона с проверкой и передачей параметров
         templateElement.innerHTML = this.compiled({
             total_review_count: data.total_review_count,
             total_review_rating: data.total_review_rating,
             flag: flag,
-            value: value
+            value: value,
+            user: {
+                name: user.username,
+                avatar_url: `${backurl}/${user.avatar_url}`,
+            },
         });
 
         rootElement.appendChild(templateElement);
@@ -157,7 +163,11 @@ export class ReviewsView implements ReviewsViewInterface {
      * @param {number} [displayedStart=0] - Индекс начала отображения.
      * @param {number} [num=0] - Порядковый номер группы отзывов.
      */
-    rerenderList = (id: string, data: { reviews: any[]; total_review_count: number; total_review_rating: number }, displayedCount: number = DEFAULT_DISPLAYED_COUNT, displayedStart: number = 0, num: number = 0) => {
+    rerenderList = (id: string,
+                    data: { reviews: any[]; total_review_count: number; total_review_rating: number },
+                    displayedCount: number = DEFAULT_DISPLAYED_COUNT,
+                    displayedStart: number = 0,
+                    num: number = 0) => {
         document.getElementById('review-list').innerHTML = this.compiledList({ // TODO: +=
             reviews: data.reviews
                 .slice(displayedStart, displayedCount)
@@ -168,8 +178,21 @@ export class ReviewsView implements ReviewsViewInterface {
             displayedCount: displayedCount - 1,
         })
 
+        const reviewListElement = document.getElementById('review-list');
+        if (!reviewListElement) {
+            console.error('Ошибка: Элемент списка отзывов (review-list) не найден.');
+            return;
+        }
+
+
         // Логика для "Показать ещё товары"
         const loadMoreButton = document.querySelector('.show-more-products');
+
+        if (!data.reviews || data.reviews.length === 0) {
+            reviewListElement.innerHTML = ''; // Очищаем содержимое
+            console.log('Нет отзывов для отображения.');
+            return;
+        }
 
         if (loadMoreButton) {
             const newLoadMoreButton = loadMoreButton.cloneNode(true) as HTMLElement;
@@ -225,11 +248,21 @@ export class ReviewsView implements ReviewsViewInterface {
     loadSortedReviews = async (id: string, sortBy: string, sortOrder: string) => {
         try {
             console.log('data: ', sortBy, sortOrder)
-            const response = await ReviewsApi.fetchReviews(id, sortBy, sortOrder).then((reviewsData: any) => {
+
+            const user = storageUser.getUserData();
+
+            console.log('nen', user);
+
+            const response = await ReviewsApi.fetchReviews(id, sortBy, sortOrder)
+              .then((reviewsData: any) => {
                 return {
                     total_review_count: reviewsData.total_review_count,
                     total_review_rating: reviewsData.total_review_rating,
                     reviews: reviewsData.reviews.map((review: any) => ({
+                        user: {
+                            name: user.username,
+                            avatar: `${backurl}/${user.avatar_url}`,
+                        },
                         name: review.is_private ? 'Аноним' : review.username,
                         avatar_url: `${backurl}/${review.avatar_url}`,
                         text: review.text,
@@ -241,7 +274,7 @@ export class ReviewsView implements ReviewsViewInterface {
                 .catch((err: Error) => {
                     console.error(err);
                     this.renderError('Не удалось загрузить отзывы. Попробуйте позже.');
-                });;
+                });
             this.rerenderList(id, response);
         } catch (error) {
             console.error('Ошибка при загрузке отсортированных отзывов:', error);

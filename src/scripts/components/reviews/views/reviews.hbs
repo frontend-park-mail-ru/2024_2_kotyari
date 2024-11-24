@@ -42,19 +42,22 @@
     <div class="review">
         <div>
             <div class="review__avatar">
-                <img src="{{reviews.user.url}}" onerror="this.style.backgroundColor='#D9D9D9'; this.src='/public/assets/img/static/avatar.svg'" alt="">
+                <img src="{{user.avatar_url}}"
+                     onerror="this.style.backgroundColor='#D9D9D9';
+                     this.src='/public/assets/img/static/avatar.svg'" alt="">
             </div>
             <div class="review__rating">
                 <div class="review__stars">
                     {{#each (range 5)}}
-                        <span class="review__star" data-value="{{increment @index}}" title="Rate {{increment @index}}" aria-hidden="true">
+                        <span class="review__star" data-value="{{increment @index}}"
+                              title="Rate {{increment @index}}" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="-10 -960 980 980">
                           <path d="m378-330 102-60 103 60-29-113 89-75-116-10-47-108-47 109-116 9 90 74-29 114ZM185-65l80-331L3-620l343-29 134-313 134 314 343 28-262 224 80 331-295-176L185-65Zm295-408Z"/>
                         </svg>
                     </span>
                     {{/each}}
                 </div>
-                <div class="review__name" id="review__name">{{reviews.user.name}}</div>
+                <div class="review__name" id="review__name">{{user.name}}</div>
             </div>
         </div>
         <textarea class="review__comment" placeholder="Что вам понравилось?"></textarea>
