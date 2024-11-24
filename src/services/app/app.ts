@@ -84,18 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
           return user;
         })
         .then(() => {
-          getWithCred(backurl + '/can_csat')
-            .then(res => {
-              if (res.status === 200) {
-                if (res.body.status){
-                    csat.renderStats('csat', 'main')
+          csat.renderStats('csat', 'main')
 
-                    return;
-                }
-              }
-
-              console.error('ошибка при запросе на сервис статистики');
-            })
+          // getWithCred(backurl + '/can_csat')
+          //   .then(res => {
+          //     if (res.status === 200) {
+          //       if (res.body.status){
+          //
+          //           return;
+          //       }
+          //     }
+          //
+          //     console.error('ошибка при запросе на сервис статистики');
+          //   })
         })
         .then(() => {
           get(backurl + '/categories')

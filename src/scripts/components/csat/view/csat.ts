@@ -110,7 +110,14 @@ export class CSATView {
 
     async submitRating(container: HTMLElement, rating: number, type: string, comment: string | null): Promise<void> {
         const request: RatingRequest = { rating, comment, type: type };
-        const response = await CSATApi.voteCSAT(request);
+        CSATApi.voteCSAT(request)
+          .then(() => {
+              console.log('123');
+          })
+          .catch((err) => {
+              console.error('ошибка при запросе', err);
+          })
+
         if (response.status === 200) {
             const stats = await CSATApi.getRatingStats();
             if (stats.status === 200 && stats.body) {

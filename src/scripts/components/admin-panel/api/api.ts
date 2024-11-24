@@ -17,7 +17,7 @@ export class AdminPanelApi {
     return csrf.delete(backurl + '/csat_admin', {type: type});
   }
 
-  static repeatPassword = (type: string):Promise<apiResponse>  => {
+  static repeatSurvey = (type: string):Promise<apiResponse>  => {
     return csrf.put(backurl + '/csat_admin', {type: type});
   }
 }

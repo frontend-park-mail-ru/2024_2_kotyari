@@ -15,42 +15,23 @@ export class AdminPanelPresenter {
    * Initializes the presenter by fetching data and binding view events.
    */
   init() {
-    console.log('init');
 
-    const questions = [
-      {
-        type: 'Site Feedback',
-        rating: '5',
-        count: 10,
-        question: 'How satisfied are you with the website performance?',
-      },
-      {
-        type: 'Customer Support',
-        rating: '4.5',
-        count: 8,
-        question: 'How would you rate our customer support service?',
-      },
-    ];
+    this.fetchQuestions()
+      .then((questions) => {
+        this.view.renderQuestions(questions);
 
-    this.view.renderQuestions(questions);
+        console.log(questions);
 
-    this.view.bindRestartQuestion((type) => this.handleRestart(type));
-    this.view.bindDeleteQuestion((type) => this.handleDelete(type));
-    this.view.bindEditQuestion((type) => this.handleEdit(type));
-    this.view.bindSaveQuestion((type, newTitle) => this.handleSave(type, newTitle));
-    this.view.bindCancelEdit((type) => this.handleCancelEdit(type));
+        this.view.bindRestartQuestion((type) => this.handleRestart(type));
+        this.view.bindDeleteQuestion((type) => this.handleDelete(type));
+        this.view.bindEditQuestion((type) => this.handleEdit(type));
+        this.view.bindSaveQuestion((type, newTitle) => this.handleSave(type, newTitle));
+        this.view.bindCancelEdit((type) => this.handleCancelEdit(type));
+      })
+      .catch(err => {
+        console.error(err);
+      });
 
-    // csrf.fetchToken().then(() => {
-    //   this.fetchQuestions()
-    //     .then((questions) => {
-    //       this.view.renderQuestions(questions);
-    //       this.view.bindRestartQuestion((type) => this.handleRestart(type));
-    //       this.view.bindDeleteQuestion((type) => this.handleDelete(type));
-    //     })
-    //     .catch(err => {
-    //       console.error(err);
-    //     });
-    // });
   }
 
   private handleEdit(type: string) {
