@@ -1,6 +1,13 @@
 @use '../../../../public/css/parametrs/parameters';
-@use '../../components/searcher/searcher';
+@use '../../components/searcher/view/searcher';
 @use "../../../../public/css/parametrs/basic-mixins";
+
+.single-line-text {
+    white-space: nowrap; /* Без переносов */
+    overflow: hidden; /* Скрываем лишнее */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    width: 100%; /* Растягиваем на всю доступную ширину */
+}
 
 /* Закрепляем хедер */
 header {

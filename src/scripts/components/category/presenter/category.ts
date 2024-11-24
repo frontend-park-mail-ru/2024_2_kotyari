@@ -10,6 +10,7 @@ export class CategoryPresenter {
   private categoryView: CategoryViewInterface;
   private cardView: CardViewInterface;
   private router: IRouter;
+  private breadcrumbs: { title: string, link: string }[] = []; // массив для хлебных крошек
 
   constructor(
     api: CategoryApiInterface,
@@ -23,13 +24,9 @@ export class CategoryPresenter {
     this.router = router;
   }
 
-
   renderCategories = (): void => {
     this.api.getCategories()
-
       .then((data) => {
-        console.log('123', data);
-
         if (typeof data === 'string') {
           console.error(data);
         } else {
@@ -38,6 +35,7 @@ export class CategoryPresenter {
           });
 
           this.categoryView.build({ categories: data });
+          this.updateBreadcrumbs('Каталог', '/categories'); // добавляем крошку
         }
       });
   };
@@ -58,19 +56,31 @@ export class CategoryPresenter {
           });
 
           const category = categoryStorage.getCategoryByLink(categoryLink);
-          if (!category?.name)
-            return;
+          if (!category?.name) return;
 
           this.categoryView.renderCategoryProducts({ products: res }, category.name);
-          return;
+          this.updateBreadcrumbs(category.name, `/category/${categoryLink}`); // добавляем крошку
+        } else {
+          console.log(res.error_message);
         }
-
-        console.log(res.error_message);
-      })
+      });
   };
 
+  // Обновление хлебных крошек
+  private updateBreadcrumbs(title: string, link: string) {
+    this.breadcrumbs.push({ title, link });
+    this.categoryView.renderBreadcrumbs(this.breadcrumbs);
+  }
 
+  goToBreadcrumb = (index: number): void => {
+    const breadcrumb = this.breadcrumbs[index];
+    if (breadcrumb) {
+      this.breadcrumbs = this.breadcrumbs.slice(0, index + 1);
+      this.router.navigate(breadcrumb.link);
+    }
+  };
 }
+
 
 function isProductArray(res: Product[] | ProductError): res is Product[] {
   return Array.isArray(res);

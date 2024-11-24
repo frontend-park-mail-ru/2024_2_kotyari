@@ -10,7 +10,7 @@ export class Route {
   /**
    * Функция-обработчик маршрута.
    */
-  public readonly handler: () => void;
+  public readonly handler: (params?: { [key: string]: string }) => void;
 
   /**
    * Флаг, указывающий, требуется ли вход пользователя для доступа к маршруту.
@@ -57,7 +57,9 @@ export class Route {
    * @returns Возвращает true, если URL соответствует шаблону, иначе false.
    */
   matches = (url: string): boolean => {
-    return this.pattern.test(url);
+    const path = url.split('?')[0];
+
+    return this.pattern.test(path);
   };
 
   /**
@@ -66,16 +68,22 @@ export class Route {
    * @param url - URL для извлечения параметров.
    * @returns Объект с параметрами или null, если параметры не найдены.
    */
-  getParams(url: string): { [key: string]: string } | null {
-    const match = this.pattern.exec(url);
-    if (match) {
-      const params: { [key: string]: string } = {};
+  getParams(url: string): { [key: string]: string } | undefined {
+    const params: { [key: string]: string } = {};
+
+    const pathMatch = this.pattern.exec(url.split('?')[0]);
+    if (pathMatch) {
       const keys = this.route.match(/:(\w+)/g) || [];
       keys.forEach((key, index) => {
-        params[key.substring(1)] = match[index + 1]; // index + 1, так как первый элемент - полное совпадение
+        params[key.substring(1)] = pathMatch[index + 1];
       });
-      return params;
     }
-    return null;
+
+    const queryParams = new URLSearchParams(url.split('?')[1]);
+    queryParams.forEach((value, key) => {
+      params[key] = value;
+    });
+
+    return Object.keys(params).length ? params : undefined;
   }
 }
