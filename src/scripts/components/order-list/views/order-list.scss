@@ -19,7 +19,6 @@
     padding: parameters.$padding;
     transition: transform parameters.$short-duration ease;
     /* Возможно вынесение в переменную */
-    height: 200px;
     margin-bottom: parameters.$big-margin-bottom;
 
     &:hover {
@@ -50,7 +49,10 @@
     }
 
     &-total {
-      font-size: parameters.$default-font-size;
+      margin-top: parameters.$big-margin;
+      font-size: parameters.$font-size-base;
+      color: parameters.$text-color;
+
     }
   }
 
@@ -102,9 +104,13 @@
 }
 
 .order-item-image {
-  width: 60px;
-  height: 50px;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 25px;
+
+  img {
+    height: 100%;
+  }
 }
 
 
@@ -196,30 +202,27 @@
 
 @media (max-width: 1024px) {
   .order-list {
-    &__footer {
-      flex-direction: row; /* Выстраиваем элементы в строку */
-      justify-content: space-between;
-      align-items: center; /* Центрируем по вертикали */
-
-      &__review-button {
-        margin-right: 16px; /* Добавляем отступ между кнопкой и фотографиями */
-      }
-    }
-
     &__items {
       display: flex;
-      margin-left: 0;
-      flex-wrap: nowrap;
+      margin-left: auto; /* Перемещаем товары вправо */
+      flex-wrap: nowrap; /* Изображения остаются в одной строке */
+    }
+
+    &__card {
+      &__header {
+        flex-direction: row; /* Сохраняем заголовок в строку */
+        align-items: center;
+      }
     }
   }
 
   .order-item-image {
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 80px; /* Уменьшаем размер изображений */
+    height: 80px; /* Уменьшаем размер изображений */
+    border-radius: 10px; /* Немного уменьшили радиус */
   }
 }
-
 @media (max-width: 600px) and (orientation: portrait) {
   .order-list {
     &__items {

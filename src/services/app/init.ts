@@ -109,10 +109,18 @@ router.addRoute('/error/404',
   new RegExp('^/error/404$'),
   false, false);
 
-router.addRoute('/product/:id',
-  () => productPageBuilder.build().catch(e => console.error(e)),
-  new RegExp('^\\/product\\/(\\d+)$'),
-  false, false);
+router.addRoute(
+  '/product/:id:hash',
+  (params) => {
+    let hash = window.location.hash; // Извлекаем текущий хэш
+    console.log('Параметры маршрута:', params, 'Хэш:', hash);
+    if (hash) hash = hash.replace(/^#/, '');
+    productPageBuilder.build({ hash }).catch(e => console.error(e));
+  },
+  new RegExp('^\\/product\\/(\\d+)(#.*)?$'), // Регулярное выражение с поддержкой хэша
+  false,
+  false
+);
 
 router.addRoute(PERSONAL_ACCOUNT.MAIN.ROUTE,
   () => accountPresenter.initialize(),

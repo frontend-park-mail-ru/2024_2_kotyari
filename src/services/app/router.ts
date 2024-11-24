@@ -99,12 +99,13 @@ export default class Router {
    * @param replaceState - Флаг, указывающий, нужно ли заменить текущее состояние (по умолчанию false).
    */
   navigate(path: string, pushState: boolean = true, replaceState: boolean = false): void {
-    const url = this.getFormattedURL(path);
+    const [url, hash] = path.split('#');
+    const formattedUrl = this.getFormattedURL(url) + (hash ? `#${hash}` : '');
 
     if (replaceState) {
-      history.replaceState({ page: url }, '', url);
+      history.replaceState({ page: formattedUrl }, '', formattedUrl);
     } else if (pushState) {
-      history.pushState({ page: url }, '', url);
+      history.pushState({ page: formattedUrl }, '', formattedUrl);
     }
 
     this.clearContainer();

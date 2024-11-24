@@ -44,6 +44,14 @@ export const buildMain = (user: User): Promise<void> => {
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+  if (hash && hash === '#review') {
+    const reviewElement = document.getElementById('review');
+    if (reviewElement) {
+      reviewElement.scrollIntoView({ behavior: 'smooth' }); // Плавный скролл
+    }
+  }
+
   return registerFunctions()
     .then(() => {
       getWithCred(backurl)

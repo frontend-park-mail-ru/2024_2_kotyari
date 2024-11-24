@@ -98,9 +98,26 @@
 
     &__item {
       display: flex;
-      justify-content: flex-start;
       align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc;
       padding: calc(#{parameters.$padding} + 5px);
+
+      &-review-button{
+        padding: 8px 12px;
+        font-size: 14px;
+        color: #7916d4;
+        background-color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: font-weight 0.4s;
+        font-weight: 500;
+
+        &:hover {
+          font-weight: 600;
+        }
+      }
 
       &-image {
         width: 75px;
@@ -182,4 +199,24 @@
       flex-direction: column; // Даже в ландшафтной ориентации элементы вертикально
     }
   }
+}
+
+.order__details__item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.order__details__item-info {
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.order__details__item-price-and-quantity {
+  display: flex;
+  gap: 10px;
+}
+
+.order__details__item-actions {
+  margin-left: 20px;
 }

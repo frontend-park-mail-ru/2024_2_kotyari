@@ -25,8 +25,10 @@ export class ProductPageBuilder {
     this.reviewsPresenter = new ReviewsPresenter(reviewsView);
   }
 
-  async build() {
+  async build({ hash }: { hash?: string }) {
     try {
+      console.log(hash);
+
       const id = this.getProductId();
 
       await csrf.refreshToken();
@@ -60,7 +62,9 @@ export class ProductPageBuilder {
       // this.initializeFavoriteIcon();
       new Carousel();
 
-      this.reviewsPresenter.init(id);
+      this.reviewsPresenter.init(id, hash);
+
+
 
     } catch (error) {
       console.error('Error building product page:', error);

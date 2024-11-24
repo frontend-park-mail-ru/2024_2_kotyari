@@ -30,7 +30,7 @@ header {
 @media (max-width: 840px) {
     .header-placeholder {
         height: 230px; /* Автоматическая высота на мобильных */
-        min-height: 60px; /* Устанавливаем минимальную высоту */
+        min-height: 120px; /* Устанавливаем минимальную высоту */
     }
 
     header {
@@ -379,7 +379,7 @@ header {
 }
 
 header.hidden {
-    transform: translateY(-100%);
+    transform: translateY(-300%);
 }
 
 

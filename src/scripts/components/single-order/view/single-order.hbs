@@ -39,6 +39,12 @@
                         <span class="order__details__item-quantity">&nbsp;{{count}} шт</span>
                     </div>
                 </div>
+              <div class="order__details__item-actions">
+                <button class="order__details__item-review-button"
+                        href="/product/{{id}}#review" router="changed-active">
+                  Перейти к отзывам
+                </button>
+              </div>
             </div>
         {{/each}}
     </div>

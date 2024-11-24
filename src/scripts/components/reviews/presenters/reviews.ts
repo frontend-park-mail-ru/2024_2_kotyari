@@ -1,8 +1,8 @@
-import {ReviewsViewInterface} from "../types/types";
-import { ReviewsApi } from "../api/api";
-import {AddReviewView} from "../views/add_review";
-import {AddReviewPresenter} from "./AddReviewPresenter";
-import {backurl} from "../../../../services/app/config";
+import { ReviewsViewInterface } from '../types/types';
+import { ReviewsApi } from '../api/api';
+import { AddReviewView } from '../views/add_review';
+import { AddReviewPresenter } from './AddReviewPresenter';
+import { backurl } from '../../../../services/app/config';
 
 export class ReviewsPresenter {
     /** @type {ReviewsApi} API для работы с отзывами */
@@ -25,12 +25,23 @@ export class ReviewsPresenter {
     /**
      * Инициализация презентера.
      * @param {string} id - Идентификатор объекта, для которого загружаются отзывы.
+     * @param hash
      */
-    init = (id: string) => {
+    init = (id: string, hash: any) => {
         this.api = ReviewsApi;
 
-        this.loadReviews(id).then(() => {
+        this.loadReviews(id)
+          .then(() => {
+              if (hash) {
+                  console.log(hash);
 
+                  const targetElement = document.getElementById(hash);
+                  console.log(targetElement);
+
+                  if (targetElement) {
+                      targetElement.scrollIntoView({ behavior: 'smooth' });
+                  }
+              }
         });
     };
 

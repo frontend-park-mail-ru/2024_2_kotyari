@@ -7,12 +7,18 @@
     padding: 10px;
     background-color: #fafafa;
     border-radius: 10px;
-    border: 1px solid #7916d4;
-    color: #000000;
+    color: #7916d4;
     font-weight: 600;
     cursor: pointer;
     min-width: 160px; // Минимальная ширина кнопки
     text-align: center; // Центровка текста
+    transition: background-color 0.4s, color 0.4s;
+
+
+    &:hover {
+      background-color: #7916d4;
+      color: white;
+    }
   }
 
   .dropdown-list {
@@ -24,8 +30,14 @@
     border: 1px solid #7916d4;
     z-index: 100;
     list-style: none;
+    font-weight: 600;
     padding: 0;
-    margin: 3px 0 0 0 ;
+    margin: 3px 0 0 0;
+    transition: background-color 0.4s; // Плавный переход для изменений цвета
+
+    &:hover {
+      background-color: #f9f9ff; // Лёгкий оттенок при наведении
+    }
 
     &.show {
       display: block;
@@ -35,9 +47,10 @@
   .dropdown-item {
     padding: 10px;
     cursor: pointer;
-
+    transition: background-color 0.4s, color 0.4s;
     &:hover {
-      background-color: #f1f1f1;
+      background-color: #f1f1f1; // Более яркий фон при наведении
+      color: #7916d4; // Цвет текста меняется при наведении
     }
   }
 }

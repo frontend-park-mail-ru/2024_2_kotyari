@@ -12,6 +12,7 @@
 }
 
 /* Карточка категории */
+/* Карточка категории с эффектом при наведении */
 .category-card {
     background-color: parameters.$card-background-color;
     border: 1px solid parameters.$card-border-color;
@@ -22,14 +23,22 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: transform parameters.$transition-duration ease, box-shadow parameters.$transition-duration ease;
+    transition: transform parameters.$transition-duration ease,
+    box-shadow parameters.$transition-duration ease;
     position: relative;
     overflow: hidden;
     cursor: pointer;
     height: 330px; /* Фиксированная высота для всех карточек */
     width: 100%; /* Полная ширина столбца в сетке */
     min-width: 250px;
+
+    /* Эффект при наведении */
+    &:hover {
+        transform: scale(1.05); /* Легкое увеличение карточки */
+        box-shadow: 0 4px 12px parameters.$card-box-shadow; /* Глубокая тень */
+    }
 }
+
 
 .category-card-image {
     width: 100%;
