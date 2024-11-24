@@ -23,7 +23,7 @@
 @use '../src/scripts/components/reviews/views/add_review';
 @use "src/scripts/components/personal-account/views/personal-account__mobile";
 @use 'src/scripts/components/personal-account/views/personal-account__middle';
-
+@use "src/scripts/layouts/tab-bar.scss";
 @font-face {
     font-family: 'UbuntuSans';
     src: url('/public/assets/fonts/UbuntuSans.ttf');

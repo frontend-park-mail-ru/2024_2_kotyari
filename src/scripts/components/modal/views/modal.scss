@@ -27,7 +27,7 @@
         transform: translate(-50%, -50%);
         cursor: default;
         padding: parameters.$big-padding;
-        z-index: 10;
+        z-index:5000;
     }
 
     &__container {
@@ -128,110 +128,3 @@
     }
 }
 
-
-@media (max-height: 500px) {
-    .modal {
-        &__main {
-            min-width: 90%;
-            max-width: 100%;
-            position: fixed;
-            overflow-y: auto;
-            border-radius: parameters.$container-border-radius;
-            background-color: parameters.$auth-menu-color;
-        }
-
-        &__container {
-            max-height: 80%;
-            border-radius: parameters.$container-border-radius;
-            background-color: parameters.$auth-menu-color;
-        }
-    }
-
-    .form {
-        &__label {
-            font-size: 14px;
-        }
-
-        &__input {
-            font-size: 16px;
-        }
-
-        &__submit-button {
-            font-size: 16px;
-        }
-
-        &__error-feedback {
-            font-size: 12px;
-        }
-    }
-}
-
-@media (min-aspect-ratio: 1/1) {
-    .modal {
-        &__main {
-            min-width: 80%;
-            max-width: 90%;
-            overflow-y: auto;
-            border-radius: parameters.$container-border-radius;
-            background-color: parameters.$auth-menu-color;
-        }
-
-        &__container {
-            max-height: 80%;
-            border-radius: parameters.$container-border-radius;
-            background-color: parameters.$auth-menu-color;
-        }
-    }
-
-    .form {
-        &__label {
-            font-size: 18px;
-        }
-
-        &__input {
-            font-size: 20px;
-        }
-
-        &__submit-button {
-            font-size: 22px;
-        }
-
-        &__error-feedback {
-            font-size: 14px;
-        }
-    }
-}
-
-@media (max-height: 400px) {
-    .modal {
-        &__main {
-            min-width: 95%;
-            max-width: 100%;
-            overflow-y: auto;
-            border-radius: parameters.$container-border-radius;
-        }
-
-        &__container {
-            max-height: 70%;
-            border-radius: parameters.$container-border-radius;
-        }
-    }
-
-    .form {
-        &__label {
-            font-size: 12px;
-        }
-
-        &__input {
-            font-size: 14px;
-        }
-
-        &__submit-button {
-            font-size: 14px;
-        }
-
-        &__error-feedback {
-            font-size: 10px;
-        }
-    }
-}

@@ -1,0 +1,61 @@
+@use '../../../public/css/parametrs/parameters';
+@use '../components/searcher/view/searcher';
+@use "../../../public/css/parametrs/basic-mixins";
+
+
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Высота таб-бара */
+  display: flex;
+  justify-content: space-around; /* Равномерное размещение иконок */
+  align-items: center;
+  background-color: parameters.$header-background; /* Цвет фона таб-бара */
+  box-shadow: 0 -2px 5px parameters.$card-shadow-color; /* Тень сверху таб-бара */
+  z-index: 10; /* Поверх других элементов */
+}
+
+.tab-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: parameters.$font-size_label; /* Размер шрифта для текста под иконками */
+  color: parameters.$text-another-color;
+  text-decoration: none;
+  flex: 1; /* Равное распределение ширины */
+  cursor: pointer;
+}
+
+.tab-icon .material-icons {
+  font-size: 24px; /* Размер иконки */
+  margin-bottom: 4px; /* Расстояние между иконкой и текстом */
+  color: oklch(0.49 0.25 299.6); /* Цвет иконки */
+}
+
+.tab-icon:hover .material-icons {
+  color: parameters.$background-color-site-new; /* Цвет иконки при наведении */
+}
+
+.tab-label {
+  font-size: parameters.$small-font-size;
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .tab-bar {
+    display: none; /* Скрываем таб-бар на больших экранах */
+  }
+}
+
+@media (max-width: 900px) {
+  .tab-bar {
+    display: flex; /* Скрываем таб-бар на больших экранах */
+  }
+}
+
+
+

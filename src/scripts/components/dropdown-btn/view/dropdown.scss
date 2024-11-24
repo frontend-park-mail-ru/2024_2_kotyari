@@ -46,18 +46,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px; // Отступ снизу
-  margin-left: 20px; // Отступ слева
+  margin-top: 10px;
+  margin-left: 20px;
 
   .cards-view-title {
     font-size: 20px;
     font-weight: bold;
-    white-space: nowrap; // Предотвращение переноса текста
-    text-overflow: ellipsis; // Троеточие для длинных текстов
-    overflow: hidden; // Обрезка текста
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .sort-container {
-    margin-left: auto; // Сдвиг сортировки вправо
+    margin-left: auto;
   }
 }

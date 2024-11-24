@@ -27,10 +27,16 @@ header {
     width: parameters.$width-max;
 }
 
-/* Для мобильных устройств или разных экранов можно адаптировать */
-@media (max-width: parameters.$phone-header) {
+@media (max-width: 840px) {
     .header-placeholder {
-        height: auto; /* Можно указать другую высоту или оставить авто */
+        height: 230px; /* Автоматическая высота на мобильных */
+        min-height: 60px; /* Устанавливаем минимальную высоту */
+    }
+
+    header {
+        height: 60px; /* Высота хедера для мобильных устройств */
+        background-color: parameters.$header-background; /* Цвет фона */
+        padding: parameters.$small-padding; /* Удобный отступ */
     }
 }
 
@@ -362,7 +368,7 @@ txt {
 
     /* Плейсхолдер с динамической высотой */
     .header-placeholder {
-        height: 310px; /* Это значение можно обновить через JS для динамической высоты */
+        height: 160px; /* Это значение можно обновить через JS для динамической высоты */
         width: parameters.$width-max;
     }
 }
@@ -374,4 +380,24 @@ header {
 
 header.hidden {
     transform: translateY(-100%);
+}
+
+
+@media (max-width: 900px) {
+    .header-bottom .icons {
+        display: none; /* Скрываем иконки хедера */
+    }
+
+    /* Скрываем текстовые метки для иконок в хедере */
+    .header-bottom .icon-label,
+    .header-bottom .icon-label-hidden,
+    .header-bottom #name {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .catalog-button {
+        display: none; /* Скрываем кнопку каталог */
+    }
 }
