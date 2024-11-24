@@ -2,6 +2,7 @@
 @use './elements/right-element-of-order-placement/right-element-of-order-placement';
 @use './elements/left-element-of-order-placement/left-element-of-order-placement';
 @use '../../../../../public/css/parametrs/parameters';
+@use './mobile';
 
 .order-placement {
   & {
@@ -35,7 +36,7 @@
     width: calc(0.9*#{parameters.$right-width});
   }
 
-  @media screen and (max-width: 858px) {
+  @media screen and (max-width: 1350px) {
     &__content {
       flex-direction: column;
     }
