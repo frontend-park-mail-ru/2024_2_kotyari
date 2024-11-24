@@ -1,9 +1,4 @@
-<!-- Первая строка -->
-    <div class="header-top">
-        <span id="user-city">{{city}}. <a href="/change_city" router="stability-active">Изменить город</a></span>
-    </div>
-
-
+<br>
 <!-- Вторая строка -->
     <div class="header-bottom">
         <div class="logo" id="logo" href="/catalog" router="stability-active">oxic</div>
@@ -18,7 +13,7 @@
                 {{#if name}}
                     <span class="icon-label-hidden catalog-link" id="name">{{username}}</span>
                     <div class="icon-dropdown" id="avatar">
-                        <a href="/account" router="stability-active" class="catalog-link">Личный кабинет</a>
+                        <a href="/account" router="stability-active" class="catalog-link single-line-text">Личный кабинет</a>
                         <a href="/logout" router="stability-active" class="catalog-link">Выход</a>
                     </div>
                 {{else}}

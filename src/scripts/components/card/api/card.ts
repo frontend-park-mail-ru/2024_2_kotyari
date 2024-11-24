@@ -10,7 +10,7 @@ interface ResponseErr {
   error_message: string;
 }
 
-interface Product {
+export interface Product {
   id: number;
   description: string;
   count: number;

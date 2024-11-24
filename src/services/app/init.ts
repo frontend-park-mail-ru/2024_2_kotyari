@@ -13,8 +13,8 @@ import { CardPresenter } from '@/scripts/components/card/presenter/card';
 import { menuSignIn, menuSignUp } from '@/scripts/components/auth-menu/views/configs';
 import { errorPage } from '@/scripts/components/custom-messages/error/error';
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
-import { CartBuilder } from "@/scripts/components/cart/view/cart-builder";
-import { OrderPlacementBuilder } from "@/scripts/components/order-placement/view/order-placement-builder";
+import { CartBuilder } from '@/scripts/components/cart/view/cart-builder';
+import { OrderPlacementBuilder } from '@/scripts/components/order-placement/view/order-placement-builder';
 import { CategoryView } from '../../scripts/components/category/view/category';
 import { CategoryApi } from '../../scripts/components/category/api/category';
 import { CategoryPresenter } from '../../scripts/components/category/presenter/category';
@@ -25,6 +25,9 @@ import { SingleOrderPresenter } from '../../scripts/components/single-order/pres
 import { HandlebarsRegEqual } from '../../scripts/utils/handlebars-reg-equal';
 import { isAuth } from '../storage/user';
 import { PERSONAL_ACCOUNT } from '../../scripts/components/personal-account/configs/config';
+import { SearcherApi } from '../../scripts/components/searcher/api/search';
+import { SearcherView } from '../../scripts/components/searcher/view/search';
+import { Searcher } from '../../scripts/components/searcher/presenter/search';
 
 HandlebarsRegEqual();
 
@@ -56,6 +59,27 @@ const accountPresenter = new AccountPresenter(backurl, rootId);
 const orderListPresenter = new OrderListPresenter(rootId);
 
 const singleOrderPresenter = new SingleOrderPresenter(rootId)
+
+const searcherApi = new SearcherApi();
+const searcherView = new SearcherView(cardView);
+export const searcher = new Searcher(searcherApi, searcherView);
+
+router.addRoute('/search/catalog',
+  (params) => {
+    const query = params ? params['q'] : null;
+
+    console.log(params);
+
+    if (query) {
+      searcher.searchProducts(query);
+    } else {
+      router.navigate('/');
+    }
+  },
+  new RegExp('^/search/catalog(\\?.*)?$'),
+  false,
+  false,
+);
 
 router.addRoute(AUTH_URLS.LOGIN.route,
   () => loginPresenter.init(),
