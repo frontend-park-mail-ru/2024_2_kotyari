@@ -20,10 +20,12 @@
 }
 
 .catalog {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(parameters.$card-width, 1fr));
     gap: parameters.$gap;
     padding: parameters.$padding 0;
-    display: grid;
+    justify-content: center;
+    align-content: start;
 
     &__card {
         @include mixins.card-styles(parameters.$color-card-background, parameters.$color-border, parameters.$color-shadow, parameters.$transition-duration);
@@ -45,8 +47,16 @@
             z-index: parameters.$z-index-hover;
         }
 
+
+        .catalog__card-image{
+            img {
+                height: 100%;
+            }
+        }
+
         &:hover .catalog__card-image img {
             transform: scale(1.1);
+
         }
 
         &:hover .catalog__card-title {

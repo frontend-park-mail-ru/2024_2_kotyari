@@ -67,10 +67,6 @@ export const updateAfterAuth = (user: User): void => {
     console.error('nameElement not found');
     return;
   }
-  const cityElement = document.getElementById('user-city');
-  if (!cityElement) {
-    console.error('cityElement not found');
-  }
 
   if (avatarElement) {
     avatarElement.innerHTML = `
@@ -84,9 +80,6 @@ export const updateAfterAuth = (user: User): void => {
     nameElement.classList.add('icon-label-hidden', 'catalog-link', 'single-line-text');
   }
 
-  if (cityElement) {
-    cityElement.textContent = user.city;
-  }
 };
 
 export const updateAfterLogout = (user: User): void => {
@@ -98,11 +91,6 @@ export const updateAfterLogout = (user: User): void => {
   const nameElement = document.getElementById('name');
   if (!nameElement) {
     console.error('nameElement not found');
-    return;
-  }
-  const cityElement = document.getElementById('user-city');
-  if (!cityElement) {
-    console.error('cityElement not found');
     return;
   }
 
@@ -118,9 +106,5 @@ export const updateAfterLogout = (user: User): void => {
   if (nameElement) {
     nameElement.textContent = 'Вход';
     nameElement.classList.add('icon-label-hidden', 'catalog-link');
-  }
-
-  if (cityElement) {
-    cityElement.textContent = user.city;
   }
 };

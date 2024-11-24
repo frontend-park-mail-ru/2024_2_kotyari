@@ -125,6 +125,11 @@ export default class Router {
     return params !== undefined ? params : null;
   }
 
+  getQueryParam(param: string): string | null {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
   /**
    * Добавляет обработчики событий для элементов с атрибутом router.
    */

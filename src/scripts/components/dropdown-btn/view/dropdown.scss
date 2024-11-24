@@ -1,0 +1,61 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-trigger {
+    padding: 10px;
+    background-color: #7916d4;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 160px; // Минимальная ширина кнопки
+    text-align: center; // Центровка текста
+  }
+
+  .dropdown-list {
+    display: none;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 100%; // Ширина совпадает с кнопкой
+    border: 2px solid #7916d4;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px; // Отступ снизу
+  margin-left: 20px; // Отступ слева
+
+  .cards-view-title {
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap; // Предотвращение переноса текста
+    text-overflow: ellipsis; // Троеточие для длинных текстов
+    overflow: hidden; // Обрезка текста
+  }
+
+  .sort-container {
+    margin-left: auto; // Сдвиг сортировки вправо
+  }
+}

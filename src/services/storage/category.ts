@@ -17,8 +17,6 @@ class CategoryStorage {
    */
   setCategories(categories: Category[]): void {
     this.storage = categories;
-
-    console.log(this.storage);
   }
 
   /**
@@ -28,8 +26,6 @@ class CategoryStorage {
    * @returns Объект типа Category, если категория найдена, иначе undefined.
    */
   getCategoryByLink(link: string): Category | undefined {
-    console.log(this.storage, link, Array.isArray(this.storage));
-
     return this.storage.find(category => category.link_to === link);
   }
 

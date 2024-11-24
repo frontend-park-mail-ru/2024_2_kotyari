@@ -64,19 +64,22 @@ const searcherApi = new SearcherApi();
 const searcherView = new SearcherView(cardView);
 export const searcher = new Searcher(searcherApi, searcherView);
 
-router.addRoute('/search/catalog',
-  (params) => {
-    const query = params ? params['q'] : null;
+router.addRoute(
+  '/search/catalog',
+  () => {
+    const query = router.getQueryParam('q');
+    const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
+    const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
 
-    console.log(params);
+    console.log({ query, sort, order });
 
     if (query) {
-      searcher.searchProducts(query);
+      searcher.searchProducts(query, sort, order); // Передаем параметры в searchProducts
     } else {
-      router.navigate('/');
+      router.navigate('/'); // Перенаправляем на главную, если нет запроса
     }
   },
-  new RegExp('^/search/catalog(\\?.*)?$'),
+  new RegExp('^/search/catalog(\\?.*(&sort=.*&order=.*)?)?$'), // Обновляем RegExp для новых параметров
   false,
   false,
 );
@@ -155,7 +158,25 @@ router.addRoute('/category',
   new RegExp('^/category$'),
   false, false);
 
-router.addRoute('/category/:link',
-  () => categoryPresenter.loadCategoryProducts(),
+router.addRoute(
+  '/category/:link',
+  () => {
+    const routeParams = router.getRouteParams();
+    if (!routeParams) {
+      router.navigate('category');
+      return;
+    }
+
+    const link = routeParams['link'];
+
+    // Извлекаем параметры сортировки из URL (если их нет, оставляем null)
+    const sort = router.getQueryParam('sort') || null;
+    const order = router.getQueryParam('order') || null;
+
+    // Загружаем продукты
+    categoryPresenter.loadCategoryProducts(link, sort, order);
+  },
   new RegExp('^/category/([^/]+)$'),
-  false, false);
+  false,
+  false
+);
