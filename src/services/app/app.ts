@@ -1,5 +1,5 @@
-import { router } from './init.js';
-import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config';
+import { router, searcher } from './init.js';
+import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
 import { registerFunctions } from '../../scripts/utils/helperName';
@@ -79,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
               });
             });
+
+          searcher.initializeListeners();
           return user;
         })
         .then(() => {

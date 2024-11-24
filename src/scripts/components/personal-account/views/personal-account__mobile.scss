@@ -1,0 +1,126 @@
+@use "../../../../../public/css/parametrs/parameters";
+
+@media (max-width: 730px) {
+  .account {
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+
+    &__column-personal-account {
+      flex: none;
+      margin: 0;
+      width: 100%;
+    }
+
+    &__user-photo {
+      margin: 0 0 0 5px;
+    }
+
+    &__user-details {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 5px;
+      width: 100%;
+      justify-content: normal;
+    }
+
+    &__box-personal-account{
+      padding: 5px;
+    }
+
+    &__avatar-container {
+      width: 85px; // Измените размер по необходимости
+      height: 85px;
+    }
+
+    &__user-info {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__user-name {
+      font-size: 18px;
+      align-self: flex-start;
+    }
+
+    .account__edit-btn {
+      align-self: flex-start;
+      margin-top: 4px;
+      padding: 0 20px 0;
+    }
+
+    .account__avatar-overlay {
+      display: none;
+    }
+
+    &__avatar-container:hover .account__avatar-overlay {
+      display: block;  // Показываем подсказку при наведении
+    }
+
+    .product-page__description-wrapper {
+      width: 100%;
+    }
+
+    .product-page__description-item {
+      display: block;  // Делает каждый элемент блока в одну строку
+      margin-bottom: 6px;
+    }
+
+    .product-page__description-key {
+      font-weight: bold;
+    }
+
+    .product-page__description-value {
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    .account__icon-personal-account {
+      display: none;
+    }
+
+    &__edit-btn {
+      margin-top: 10px;
+    }
+
+    &__logout-button-personal-account {
+      width: 90%;
+      padding: 10px;
+      margin: 10px auto;
+      font-size: 14px;
+      text-align: center;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .account__user-details {
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    // Показываем <br> только на мобильных устройствах
+    br {
+      display: none;  // Скрываем по умолчанию
+    }
+
+    br.mobile-break {
+      display: block;  // Показываем только на мобильных устройствах
+    }
+  }
+
+  .material-icons {
+    &.account {
+      &__local-shipping,
+      &__pin-drop,
+      &__favorite,
+      &__shopping-basket {
+        font-size: 24px; // Уменьшаем иконки
+      }
+
+      &__edit {
+        font-size: 20px; // Уменьшаем размер иконки редактирования
+      }
+    }
+  }
+}

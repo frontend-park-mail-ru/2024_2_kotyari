@@ -63,7 +63,7 @@ export default class Router {
    */
   addRoute(
     path: string,
-    handler: () => void,
+    handler: (params?: { [key: string]: string }) => void,
     pattern: RegExp,
     loginRequired = false,
     logoutRequired = false
@@ -120,7 +120,9 @@ export default class Router {
    */
   getRouteParams(url: string = window.location.pathname): { [key: string]: string } | null {
     const route = this.routes.find((route) => route.matches(url));
-    return route ? route.getParams(url) : null;
+
+    const params = route ? route.getParams(url) : null;
+    return params !== undefined ? params : null;
   }
 
   /**
@@ -162,25 +164,18 @@ export default class Router {
       return;
     }
 
-    if (route.loginRequired) {
-      const flag = isAuth();
-
-      if (!flag) {
-        this.navigate(AUTH_URLS.LOGIN.route, true);
-        return;
-      }
+    if (route.loginRequired && !isAuth()) {
+      this.navigate(AUTH_URLS.LOGIN.route, true);
+      return;
     }
 
-    if (route.logoutRequired) {
-      const flag = isAuth();
-
-      if (flag) {
-        this.navigate('/', false);
-        return;
-      }
+    if (route.logoutRequired && isAuth()) {
+      this.navigate('/', false);
+      return;
     }
 
-    route.handler();
+    const params = route.getParams(url);
+    route.handler(params);
   }
 
   /**
@@ -200,7 +195,7 @@ export default class Router {
     if (!path.startsWith('/')) {
       path = '/' + path;
     }
-    return new URL(path, window.location.origin).pathname;
+    return path;
   }
 
   /**

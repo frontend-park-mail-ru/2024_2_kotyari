@@ -59,6 +59,17 @@ export class AccountPresenter {
 
     return [
       {
+        class: 'account__address-info',
+        iconClass: ' account__pin-drop',
+        icon: 'pin_drop',
+        detailsClass: 'account__address-details',
+        titleClass: 'account__address-title',
+        textClass: 'account__address-text',
+        title: 'Адрес доставки',
+        text: addressText,
+        editable: true,
+      },
+      {
         class: 'account__delivery-info',
         iconClass: ' account__local-shipping',
         icon: 'local_shipping',
@@ -69,17 +80,6 @@ export class AccountPresenter {
         text: msg,
         editable: false,
       },
-      {
-        class: 'account__address-info',
-        iconClass: ' account__pin-drop',
-        icon: 'pin_drop',
-        detailsClass: 'account__address-details',
-        titleClass: 'account__address-title',
-        textClass: 'account__address-text',
-        title: 'Адрес доставки',
-        text: addressText,
-        editable: true,
-      }
     ];
   }
 

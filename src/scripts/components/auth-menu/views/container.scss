@@ -5,7 +5,7 @@
     @include mixins.flex-container();
     font-family: parameters.$mega-font-family, sans-serif;
     cursor: default;
-    min-width: parameters.$proc-min-width;
+    min-width: 60%;
     width: parameters.$min-width;
     position: relative;
     background-color: parameters.$auth-menu-color;
