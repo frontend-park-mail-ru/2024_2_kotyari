@@ -2,6 +2,7 @@ import {ReviewsViewInterface} from "../types/types";
 import { ReviewsApi } from "../api/api";
 import {AddReviewView} from "../views/add_review";
 import {AddReviewPresenter} from "./AddReviewPresenter";
+import {backurl} from "../../../../services/app/config";
 
 export class ReviewsPresenter {
     /** @type {ReviewsApi} API для работы с отзывами */
@@ -48,7 +49,7 @@ export class ReviewsPresenter {
                     total_review_rating: reviewsData.total_review_rating,
                     reviews: reviewsData.reviews.map((review: any) => ({
                         name: review.is_private ? 'Аноним' : review.username,
-                        avatar_url: review.avatar_url,
+                        avatar_url: `${backurl}/${review.avatar_url}`,
                         text: review.text,
                         rating: review.rating,
                         created_at: new Date(review.created_at).toLocaleString('ru-RU')

@@ -51,6 +51,12 @@ $select-color: #a8a6a6;
 $divider-color: #ACABAB;
 $text-hover-color: #dcd3ef;
 $text-actife-color: #b09ace;
+$color-gray: #ccc;
+$color-yellow: #ffcd42;
+$color-purple: #7a16d5;
+$color-purple-hover: #551a8b;
+$color-dark: #333;
+$color-white: #fff;
 
 /* Размеры карточек */
 $card-width: 370px; /* Увеличенная ширина карточки */
@@ -58,6 +64,13 @@ $card-height: 500px; /* Увеличенная высота карточки */
 $gap: 20px; /* Расстояние между карточками */
 $padding: 20px;
 $card-aspect-ratio: "16 / 9";
+
+$size-avatar: 50px;
+$size-small-avatar: 36px;
+$size-star: 24px;
+$size-dropdown-width: 120px;
+$size-dropdown-min-width: 91px;
+$size-dropdown-max-width: 150px;
 
 /* Отступы */
 $main-gap: 20px;
@@ -117,6 +130,13 @@ $margin-zero: 0;
 $margin-right-material-icons: -142px;
 $margin-left-material-icons: 55px;
 $margin-text-article: 120px;
+
+$padding-small: 10px;
+$padding-medium: 15px;
+$padding-large: 20px;
+$gap-small: 5px;
+$gap-medium: 10px;
+$gap-large: 20px;
 
 /* Тени и размеры */
 /* $card-box-shadow: 0 2px 5px; */
@@ -199,6 +219,10 @@ $path-width: 45%;
 $left-center: 50%;
 $proc-top-sliders: 50%;
 $proc-full-width: 100%;
+
+$radius-circle: 50%;
+$radius-small: 4px;
+$radius-default: 25px;
 
 /* Текстовые параметры */
 $font-family: Arial, sans-serif;

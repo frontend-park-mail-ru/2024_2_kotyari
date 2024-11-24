@@ -7,6 +7,7 @@ import {Helper} from "../../../utils/helper";
 import {isAuth} from "../../../../services/storage/user";
 import {AddReviewView} from "./add_review";
 import {AddReviewPresenter} from "../presenters/AddReviewPresenter";
+import {backurl} from "../../../../services/app/config";
 
 const DEFAULT_DISPLAYED_COUNT = 5;
 const DISPLAY_INCREMENT = 10;
@@ -230,7 +231,7 @@ export class ReviewsView implements ReviewsViewInterface {
                     total_review_rating: reviewsData.total_review_rating,
                     reviews: reviewsData.reviews.map((review: any) => ({
                         name: review.is_private ? 'Аноним' : review.username,
-                        avatar_url: review.avatar_url,
+                        avatar_url: `${backurl}/${review.avatar_url}`,
                         text: review.text,
                         rating: review.rating,
                         created_at: new Date(review.created_at).toLocaleString('ru-RU')
