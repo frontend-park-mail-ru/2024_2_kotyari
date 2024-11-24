@@ -162,6 +162,7 @@
 
     &__footer {
       gap: 10px;
+      flex-direction: column-reverse;
     }
 
     &__submit {

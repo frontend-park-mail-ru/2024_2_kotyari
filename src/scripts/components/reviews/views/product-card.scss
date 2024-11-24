@@ -50,6 +50,10 @@
       font-size: 12px;
       color: #777;
       display: inline-block;
+
+      & .product-card__name {
+        font-weight: 500;
+      }
     }
 
     @media screen and (max-width: 768px) {
@@ -97,8 +101,9 @@
     max-height: 4.2em;
     overflow: hidden;
     transition: max-height 0.3s ease, opacity 0.3s ease;
-    word-break: break-word;
-    hyphens: manual;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
     display: block;
     width: 100%;
 
@@ -151,7 +156,7 @@
   cursor: pointer;
   margin-top: 20px;
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     font-size: 14px;
     margin-top: 15px;
   }

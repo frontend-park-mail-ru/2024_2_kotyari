@@ -59,7 +59,7 @@
     }
 
     &__carousel img:hover {
-        border: parameters.$carousel-border solid parameters.$base-background-color;
+        border: parameters.$carousel-border solid parameters.$select-color;
     }
 
     &__arrow {
@@ -284,6 +284,9 @@
 
     &__description {
         margin-top: 20px;
+        word-break: normal;
+        overflow-wrap: break-word;
+        hyphens: auto;
 
         &__header {
             font-size: 25px;
@@ -412,59 +415,20 @@
     width: 2/3 * 100%;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .product {
         flex-direction: column;
         padding: 10px;
         margin: 0 auto;
         height: auto;
+        display: block;
     }
 
     .product-page {
-        &__carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch; /* плавная прокрутка для iOS */
-
-            & img {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                scroll-snap-align: center; /* каждый элемент фиксируется по центру */
-            }
-
-            &::-webkit-scrollbar {
-                display: none; /* скрытие скроллбара */
-            }
-        }
-
-        &__carousel-navigation {
-            display: none; /* скрываем кнопки навигации */
-        }
-
-        &__carousel-dots {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-            gap: 5px;
-
-            & .dot {
-                width: 8px;
-                height: 8px;
-                background-color: #ddd;
-                border-radius: 50%;
-                cursor: pointer;
-
-                &.active {
-                    background-color: #7a16d5;
-                }
-            }
-        }
-
         &__product-info {
             margin-left: 0;
             margin-bottom: 20px;
+            display: none;
         }
 
         &__product-name {
@@ -498,7 +462,6 @@
             &__header {
                 font-size: 18px;
                 margin-bottom: 10px;
-                text-align: center;
             }
 
             font-size: 14px;
@@ -552,12 +515,21 @@
         &__favorite-icon {
             font-size: 20px;
         }
+
+        &__slider {
+            width: 100% !important;
+        }
     }
 
     .product-page__description-product-page {
         font-size: 14px;
         margin-top: 15px;
         padding: 10px;
+    }
+
+    .product-page__carousel-slider-container {
+        height: 300px !important;
+        flex-direction: column-reverse;
     }
 
     #reviews {
