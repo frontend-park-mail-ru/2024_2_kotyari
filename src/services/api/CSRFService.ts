@@ -62,6 +62,15 @@ export class CSRFService {
     };
   }
 
+  private protectedFetchWithoutResponse = async (url: string, method: string, body: any): Promise<Response> => {
+    const info = this.getRequestInfo(method, body);
+    if (!info) {
+      return Promise.reject(new Error('Отсутствует конфигурация запроса (RequestInit)'));
+    }
+
+    return await fetch(url, info);
+  };
+
   /**
    * Выполняет защищённый запрос с использованием CSRF-токена.
    * @param url URL-адрес запроса.
@@ -70,12 +79,8 @@ export class CSRFService {
    * @returns Ответ API.
    */
   private protectedFetch = async (url: string, method: string, body: any): Promise<apiResponse> => {
-    const info = this.getRequestInfo(method, body);
-    if (!info) {
-      return Promise.reject(new Error('Отсутствует конфигурация запроса (RequestInit)'));
-    }
+    const response = await this.protectedFetchWithoutResponse(url, method, body);
 
-    const response = await fetch(url, info);
     return parseJsonResponse(response);
   };
 

@@ -20,12 +20,18 @@ export class CardView implements CardViewInterface {
       return;
     }
 
+    console.log(data.page_title, title);
+
     rootElement.innerHTML = '';
+
     const templateElement = document.createElement('div');
-    data.page_title = 'Каталог'
-    if (title !== '' && title != undefined) {
-      data.page_title = 'Категория: ' + title;
+
+    if (data.page_title!= undefined ) {
+      data.page_title += title;
+    }else {
+      data.page_title = 'Каталог';
     }
+
     templateElement.innerHTML = this.compiled(data);
     rootElement.appendChild(templateElement);
   };

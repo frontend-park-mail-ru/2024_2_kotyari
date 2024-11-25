@@ -13,8 +13,8 @@ import { CardPresenter } from '@/scripts/components/card/presenter/card';
 import { menuSignIn, menuSignUp } from '@/scripts/components/auth-menu/views/configs';
 import { errorPage } from '@/scripts/components/custom-messages/error/error';
 import { ProductPageBuilder } from '../../scripts/components/product-page/presenters/product-page';
-import { CartBuilder } from "@/scripts/components/cart/view/cart-builder";
-import { OrderPlacementBuilder } from "@/scripts/components/order-placement/view/order-placement-builder";
+import { CartBuilder } from '@/scripts/components/cart/view/cart-builder';
+import { OrderPlacementBuilder } from '@/scripts/components/order-placement/view/order-placement-builder';
 import { CategoryView } from '../../scripts/components/category/view/category';
 import { CategoryApi } from '../../scripts/components/category/api/category';
 import { CategoryPresenter } from '../../scripts/components/category/presenter/category';
@@ -25,6 +25,9 @@ import { SingleOrderPresenter } from '../../scripts/components/single-order/pres
 import { HandlebarsRegEqual } from '../../scripts/utils/handlebars-reg-equal';
 import { isAuth } from '../storage/user';
 import { PERSONAL_ACCOUNT } from '../../scripts/components/personal-account/configs/config';
+import { SearcherApi } from '../../scripts/components/searcher/api/search';
+import { SearcherView } from '../../scripts/components/searcher/view/search';
+import { Searcher } from '../../scripts/components/searcher/presenter/search';
 
 HandlebarsRegEqual();
 
@@ -57,6 +60,30 @@ const orderListPresenter = new OrderListPresenter(rootId);
 
 const singleOrderPresenter = new SingleOrderPresenter(rootId)
 
+const searcherApi = new SearcherApi();
+const searcherView = new SearcherView(cardView);
+export const searcher = new Searcher(searcherApi, searcherView);
+
+router.addRoute(
+  '/search/catalog',
+  () => {
+    const query = router.getQueryParam('q');
+    const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
+    const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
+
+    console.log({ query, sort, order });
+
+    if (query) {
+      searcher.searchProducts(query, sort, order); // Передаем параметры в searchProducts
+    } else {
+      router.navigate('/'); // Перенаправляем на главную, если нет запроса
+    }
+  },
+  new RegExp('^/search/catalog(\\?.*(&sort=.*&order=.*)?)?$'), // Обновляем RegExp для новых параметров
+  false,
+  false,
+);
+
 router.addRoute(AUTH_URLS.LOGIN.route,
   () => loginPresenter.init(),
   AUTH_URLS.LOGIN.REG_EXP,
@@ -82,10 +109,18 @@ router.addRoute('/error/404',
   new RegExp('^/error/404$'),
   false, false);
 
-router.addRoute('/product/:id',
-  () => productPageBuilder.build().catch(e => console.error(e)),
-  new RegExp('^\\/product\\/(\\d+)$'),
-  false, false);
+router.addRoute(
+  '/product/:id:hash',
+  (params) => {
+    let hash = window.location.hash; // Извлекаем текущий хэш
+    console.log('Параметры маршрута:', params, 'Хэш:', hash);
+    if (hash) hash = hash.replace(/^#/, '');
+    productPageBuilder.build({ hash }).catch(e => console.error(e));
+  },
+  new RegExp('^\\/product\\/(\\d+)(#.*)?$'), // Регулярное выражение с поддержкой хэша
+  false,
+  false
+);
 
 router.addRoute(PERSONAL_ACCOUNT.MAIN.ROUTE,
   () => accountPresenter.initialize(),
@@ -131,7 +166,25 @@ router.addRoute('/category',
   new RegExp('^/category$'),
   false, false);
 
-router.addRoute('/category/:link',
-  () => categoryPresenter.loadCategoryProducts(),
+router.addRoute(
+  '/category/:link',
+  () => {
+    const routeParams = router.getRouteParams();
+    if (!routeParams) {
+      router.navigate('category');
+      return;
+    }
+
+    const link = routeParams['link'];
+
+    // Извлекаем параметры сортировки из URL (если их нет, оставляем null)
+    const sort = router.getQueryParam('sort') || null;
+    const order = router.getQueryParam('order') || null;
+
+    // Загружаем продукты
+    categoryPresenter.loadCategoryProducts(link, sort, order);
+  },
   new RegExp('^/category/([^/]+)$'),
-  false, false);
+  false,
+  false
+);

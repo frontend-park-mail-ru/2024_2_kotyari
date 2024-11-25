@@ -1,14 +1,14 @@
-<!-- Первая строка -->
-    <div class="header-top">
-        <span id="user-city">{{city}}. <a href="/change_city" router="stability-active">Изменить город</a></span>
-    </div>
-
-
+<br>
 <!-- Вторая строка -->
     <div class="header-bottom">
-        <div class="logo" id="logo" href="/catalog" router="stability-active">oxic</div>
-        <button class="catalog-link catalog-button" title="Каталог" href="/category" router="stability-active"><txt class="catalog-simbol">&#8801;
-        </txt><span>Каталог</span></button>
+      <div class="logo" id="logo" href="/catalog" router="stability-active">
+        OXIC
+      </div>
+      <button class="catalog-link catalog-button" title="Каталог" href="/category" router="stability-active">
+        <txt class="catalog-simbol">&#8801;
+        </txt>
+        <span>Каталог</span>
+      </button>
       <div id="searcher">
 
       </div>
@@ -18,7 +18,7 @@
                 {{#if name}}
                     <span class="icon-label-hidden catalog-link" id="name">{{username}}</span>
                     <div class="icon-dropdown" id="avatar">
-                        <a href="/account" router="stability-active" class="catalog-link">Личный кабинет</a>
+                        <a href="/account" router="stability-active" class="catalog-link single-line-text">Личный кабинет</a>
                         <a href="/logout" router="stability-active" class="catalog-link">Выход</a>
                     </div>
                 {{else}}
@@ -33,10 +33,6 @@
                 <span class="material-icons">shopping_cart</span>
                 <span class="icon-label catalog-link">Корзина</span>
             </div>
-<!--            <div router="stability-active" class="icon" href="/category" title="Категории">-->
-<!--              <span class="material-icons">category</span>-->
-<!--              <span class="icon-label catalog-link">Категории</span>-->
-<!--            </div>-->
             <div router="stability-active" class="icon" href="/favorites" title="Избранное">
                 <span class="material-icons">favorite</span>
                 <span class="icon-label catalog-link">Избранное</span>

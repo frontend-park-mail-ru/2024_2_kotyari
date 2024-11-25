@@ -63,7 +63,7 @@ export default class Router {
    */
   addRoute(
     path: string,
-    handler: () => void,
+    handler: (params?: { [key: string]: string }) => void,
     pattern: RegExp,
     loginRequired = false,
     logoutRequired = false
@@ -99,12 +99,13 @@ export default class Router {
    * @param replaceState - Флаг, указывающий, нужно ли заменить текущее состояние (по умолчанию false).
    */
   navigate(path: string, pushState: boolean = true, replaceState: boolean = false): void {
-    const url = this.getFormattedURL(path);
+    const [url, hash] = path.split('#');
+    const formattedUrl = this.getFormattedURL(url) + (hash ? `#${hash}` : '');
 
     if (replaceState) {
-      history.replaceState({ page: url }, '', url);
+      history.replaceState({ page: formattedUrl }, '', formattedUrl);
     } else if (pushState) {
-      history.pushState({ page: url }, '', url);
+      history.pushState({ page: formattedUrl }, '', formattedUrl);
     }
 
     this.clearContainer();
@@ -120,7 +121,14 @@ export default class Router {
    */
   getRouteParams(url: string = window.location.pathname): { [key: string]: string } | null {
     const route = this.routes.find((route) => route.matches(url));
-    return route ? route.getParams(url) : null;
+
+    const params = route ? route.getParams(url) : null;
+    return params !== undefined ? params : null;
+  }
+
+  getQueryParam(param: string): string | null {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
   }
 
   /**
@@ -162,25 +170,18 @@ export default class Router {
       return;
     }
 
-    if (route.loginRequired) {
-      const flag = isAuth();
-
-      if (!flag) {
-        this.navigate(AUTH_URLS.LOGIN.route, true);
-        return;
-      }
+    if (route.loginRequired && !isAuth()) {
+      this.navigate(AUTH_URLS.LOGIN.route, true);
+      return;
     }
 
-    if (route.logoutRequired) {
-      const flag = isAuth();
-
-      if (flag) {
-        this.navigate('/', false);
-        return;
-      }
+    if (route.logoutRequired && isAuth()) {
+      this.navigate('/', false);
+      return;
     }
 
-    route.handler();
+    const params = route.getParams(url);
+    route.handler(params);
   }
 
   /**
@@ -200,7 +201,7 @@ export default class Router {
     if (!path.startsWith('/')) {
       path = '/' + path;
     }
-    return new URL(path, window.location.origin).pathname;
+    return path;
   }
 
   /**

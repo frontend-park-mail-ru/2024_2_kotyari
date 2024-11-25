@@ -5,40 +5,63 @@
 <!--</div>-->
 
 <div class="container">
-  <div class="cards-view-title" style="display: block; margin-bottom: 10px; margin-left: 20px;">
-    {{page_title}}
-  </div>
-
-
-<div class="catalog" id="cards">
-
-  {{#each products}}
-    <div class="card" href="/product/{{id}}" router="changed-active">
-      <div class="card-image">
-        <img
-          src="{{image_url}}"
-          loading="lazy"
-        />
-        <!--                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"-->
-        <!--                />-->
-      </div>
-      <div class="card-info">
-        <div class="price">
-          <span class="current-price">{{price}}₽</span>
-          {{#if original_price}}
-            <span class="old-price">{{original_price}}₽</span>
-          {{/if}}
-          {{#if discount}}
-            <span class="discount">-{{discount}}%</span>
-          {{/if}}
-        </div>
-        <div class="card-title">
-          {{title}}
-        </div>
-
-<!--        <a class="buy-button">В корзину</a>-->
-      </div>
+  <div class="header-container">
+    <div class="cards-view-title">
+      {{page_title}}
     </div>
-    {{/each}}
-</div>
+    <div id="sort-container" class="sort-container"></div>
+  </div>
+<!--  <div class="cards-view-title" style="display: block; margin-bottom: 10px; margin-left: 20px;">-->
+<!--    <div id="breadcrumbs" class="breadcrumbs-container"></div>-->
+<!--  </div>-->
+
+    <div class="catalog" id="cards">
+        {{#each products}}
+            <div class="catalog__card" href="/product/{{id}}" router="changed-active">
+                <div class="catalog__card-image">
+                    <img
+                            src="{{image_url}}"
+                            loading="lazy"
+                    />
+                    <!--                        onerror="this.onerror=null;this.src='https://via.placeholder.com/150';"-->
+                    <!--                />-->
+                </div>
+                <div class="catalog__card-info">
+                  <div>
+                    <div class="catalog__card-info__price">
+                      <span class="catalog__card-info__price__current-price">{{costFormat price}}₽</span>
+                      {{#if original_price}}
+                        <span class="catalog__card-info__price__old-price">{{costFormat original_price}}₽</span>
+                      {{/if}}
+                      {{#if discount}}
+                        <span class="catalog__card-info__price__discount">-{{discount}}%</span>
+                      {{/if}}
+                      <div class="product-page__rating">
+                        <span class="text-rating reviews-header-scroll">
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                               height="24px"
+                               viewBox="0 -960 960 960"
+                               width="24px" fill="#ffcd42">
+                              <path
+                                d="m378-330 102-60 103 60-29-113
+                                  89-75-116-10-47-108-47 109-116
+                                  9 90 74-29 114ZM185-65l80-331L3-620l343-29
+                                   134-313 134 314 343 28-262 224 80
+                                   331-295-176L185-65Zm295-408Z"
+                              />
+                          </svg>
+                          <span id="rating-header">{{rating}}</span>
+                        </span>
+                      </div>
+                    </div>
+                    </div>
+                  <div class="catalog__card-title">
+                        {{title}}
+                    </div>
+
+                  <!--        <a class="buy-button">В корзину</a>-->
+                </div>
+            </div>
+        {{/each}}
+    </div>
 </div>

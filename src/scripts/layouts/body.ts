@@ -2,9 +2,9 @@ import { rootId } from '@/services/app/config';
 import foot from './footer/footer.hbs?raw';
 import head from './header/header.hbs?raw';
 import body from './body.hbs?raw';
-import search from '@/scripts/components/searcher/searcher.hbs';
+import search from '@/scripts/components/searcher/view/searcher.hbs?raw';
 import Handlebars from 'handlebars';
-import { AddDropDown } from './header/header';
+import {AddDropDown, handleHeaderScroll} from './header/header';
 import { User } from '../../services/types/types';
 import { defaultUser } from '../../services/storage/user';
 
@@ -47,6 +47,7 @@ export function buildBody(data: any): Promise<void> {
     })
       .then(() => {
           AddDropDown()
+          handleHeaderScroll()
       })
       .catch((err) => {
         console.error(err);
@@ -66,10 +67,6 @@ export const updateAfterAuth = (user: User): void => {
     console.error('nameElement not found');
     return;
   }
-  const cityElement = document.getElementById('user-city');
-  if (!cityElement) {
-    console.error('cityElement not found');
-  }
 
   if (avatarElement) {
     avatarElement.innerHTML = `
@@ -80,12 +77,9 @@ export const updateAfterAuth = (user: User): void => {
 
   if (nameElement) {
     nameElement.textContent = user.username;
-    nameElement.classList.add('icon-label-hidden', 'catalog-link');
+    nameElement.classList.add('icon-label-hidden', 'catalog-link', 'single-line-text');
   }
 
-  if (cityElement) {
-    cityElement.textContent = user.city;
-  }
 };
 
 export const updateAfterLogout = (user: User): void => {
@@ -97,11 +91,6 @@ export const updateAfterLogout = (user: User): void => {
   const nameElement = document.getElementById('name');
   if (!nameElement) {
     console.error('nameElement not found');
-    return;
-  }
-  const cityElement = document.getElementById('user-city');
-  if (!cityElement) {
-    console.error('cityElement not found');
     return;
   }
 
@@ -117,9 +106,5 @@ export const updateAfterLogout = (user: User): void => {
   if (nameElement) {
     nameElement.textContent = 'Вход';
     nameElement.classList.add('icon-label-hidden', 'catalog-link');
-  }
-
-  if (cityElement) {
-    cityElement.textContent = user.city;
   }
 };

@@ -1,36 +1,35 @@
-@import "/public/css/parametrs/parameters.css";
+@use "../../../../../public/css/parametrs/parameters";
 
 .order-list {
   max-width: 1081px;
   margin: auto;
 
   &__title {
-    font-size: var(--big-font-size);
+    font-size: parameters.$big-font-size;
     text-align: left;
-    margin-bottom: var(--big-margin-bottom);
-    margin-top: var(--big-margin-bottom);
+    margin-bottom: parameters.$big-margin-bottom;
+    margin-top: parameters.$big-margin-bottom;
   }
 
   &__card {
-    background-color: var(--card-background-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: var(--container-border-radius);
-    box-shadow: var(--card-box-shadow) var(--hard-shadow-color);
-    padding: var(--padding);
-    transition: transform var(--short-duration) ease;
+    background-color: parameters.$card-background-color;
+    border: 1px solid parameters.$card-border-color;
+    border-radius: parameters.$container-border-radius;
+    box-shadow: parameters.$card-box-shadow parameters.$hard-shadow-color;
+    padding: parameters.$padding;
+    transition: transform parameters.$short-duration ease;
     /* Возможно вынесение в переменную */
-    height: 200px;
-    margin-bottom: var(--big-margin-bottom);
+    margin-bottom: parameters.$big-margin-bottom;
 
     &:hover {
-      transform: scale(var(--litle-scale));
+      transform: scale(parameters.$litle-scale);
     }
 
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: var(--small-margin);
+      margin-bottom: parameters.$small-margin;
     }
 
     &__dates {
@@ -39,19 +38,21 @@
 
       &-order-date {
         font-size: 22px;
-        color: var(--text-color);
+        color: parameters.$text-color;
       }
 
       &-delivery-date {
-        margin-top: var(--big-margin);
-        font-size: var(--font-size-base);
-        color: var(--text-color);
+        margin-top: parameters.$big-margin;
+        font-size: parameters.$font-size-base;
+        color: parameters.$text-color;
       }
     }
 
     &-total {
-      font-size: var(--default-font-size);
-      font-weight: var(--little-font-weight);
+      margin-top: parameters.$big-margin;
+      font-size: parameters.$font-size-base;
+      color: parameters.$text-color;
+
     }
   }
 
@@ -62,17 +63,17 @@
   }
 
   &__review-button {
-    padding: var(--button-padding);
-    font-size: var(--font-size_label);
-    background-color: var(--base-background-color);
-    color: var(--text-inv);
+    padding: parameters.$button-padding;
+    font-size: parameters.$font-size_label;
+    background-color: parameters.$base-background-color;
+    color: parameters.$text-inv;
     border: none;
     border-radius: 12px;
     cursor: pointer;
 
     &:hover {
-      background-color: var(--darker-background-color);
-      transform: scale(var(--litle-scale));
+      background-color: parameters.$darker-background-color;
+      transform: scale(parameters.$litle-scale);
     }
   }
 
@@ -90,10 +91,10 @@
 
   &__details {
     display: flex;
-    gap: var(--gap);
+    gap: parameters.$gap;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: var(--big-margin-bottom);
+    margin-bottom: parameters.$big-margin-bottom;
 
     &-status {
       font-size: 14px;
@@ -103,8 +104,133 @@
 }
 
 .order-item-image {
-  /* Возможно вынесение в переменную */
-  width: 60px;
-  height: 50px;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 25px;
+
+  img {
+    height: 100%;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .order-list {
+    padding: 0 16px;
+
+    &__card {
+      height: auto;
+      padding: 16px;
+      margin-bottom: 16px;
+
+      &__header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      &__dates {
+        &-order-date,
+        &-delivery-date {
+          font-size: 18px;
+        }
+      }
+
+      &-total {
+        font-size: 16px;
+        margin-top: 8px;
+      }
+    }
+
+    &__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    &__items {
+      margin-left: 0;
+      flex-wrap: wrap;
+
+      &-item {
+        margin: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .order-list {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__card {
+      height: auto;
+
+      &__header {
+        &__dates {
+          &-order-date,
+          &-delivery-date {
+            font-size: 16px;
+          }
+        }
+      }
+
+      &-total {
+        font-size: 14px;
+      }
+    }
+
+    &__footer {
+      margin-top: 12px;
+    }
+
+    &__review-button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+
+    &__items {
+      display: none; // Скрываем блок с фотографиями товаров
+    }
+  }
+
+  .order-item-image {
+    display: none; // Скрываем сами изображения товаров
+  }
+}
+
+@media (max-width: 1024px) {
+  .order-list {
+    &__items {
+      display: flex;
+      margin-left: auto; /* Перемещаем товары вправо */
+      flex-wrap: nowrap; /* Изображения остаются в одной строке */
+    }
+
+    &__card {
+      &__header {
+        flex-direction: row; /* Сохраняем заголовок в строку */
+        align-items: center;
+      }
+    }
+  }
+
+  .order-item-image {
+    display: block;
+    width: 80px; /* Уменьшаем размер изображений */
+    height: 80px; /* Уменьшаем размер изображений */
+    border-radius: 10px; /* Немного уменьшили радиус */
+  }
+}
+@media (max-width: 600px) and (orientation: portrait) {
+  .order-list {
+    &__items {
+      display: none; /* Скрываем блок с фотографиями товаров */
+    }
+  }
+
+  .order-item-image {
+    display: none; /* Скрываем сами изображения товаров */
+  }
 }

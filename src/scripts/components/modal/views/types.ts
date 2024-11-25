@@ -13,7 +13,7 @@ export interface ModalField {
 
 export const editNameGenderEmailConfig = {
   id: 'edit_info',
-  title: 'Редактировать информацию',
+  title: 'Редактировать',
   formId: 'user-edit-form',
   fields: [
     {
@@ -50,7 +50,7 @@ export const editNameGenderEmailConfig = {
 
 export const editAddressConfig = {
   id: 'edit_address',
-  title: 'Редактировать адрес',
+  title: 'Редактировать',
   formId: 'address-edit-form',
   fields: [
     {

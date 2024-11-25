@@ -1,50 +1,51 @@
 // Импортируем нужные файлы
-@import '/src/scripts/components/order-placement/view/elements/right-element-of-order-placement/right-element-of-order-placement.scss';
-@import '/src/scripts/components/order-placement/view/elements/left-element-of-order-placement/left-element-of-order-placement.scss';
-@import '/public/css/parametrs/parameters.css';
+@use './elements/right-element-of-order-placement/right-element-of-order-placement';
+@use './elements/left-element-of-order-placement/left-element-of-order-placement';
+@use '../../../../../public/css/parametrs/parameters';
+@use './mobile';
 
 .order-placement {
   & {
-    width: var(--container-width);
-    margin: var(--container-margin);
+    width: parameters.$container-width;
+    margin: parameters.$container-margin;
   }
 
   &__title {
-    font-size: var(--strong-font-size);
-    font-weight: var(--container-title-font-weight);
-    margin-bottom: var(--conteiner-title-margin-bottom);
-    color: var(--default-text-color);
+    font-size: parameters.$strong-font-size;
+    font-weight: parameters.$container-title-font-weight;
+    margin-bottom: parameters.$conteiner-title-margin-bottom;
+    color: parameters.$default-text-color;
   }
 
   &__content {
     display: flex;
     justify-content: space-between;
-    gap: var(--main-gap);
+    gap: parameters.$main-gap;
   }
 
   &__left {
-    width: var(--left-width);
+    width: parameters.$left-width;
   }
 
   &__right {
-    width: var(--right-width);
+    width: parameters.$right-width;
   }
 
   &__right-absolute {
     position: fixed;
-    width: calc(0.9*var(--right-width));
+    width: calc(0.9*#{parameters.$right-width});
   }
 
-  @media screen and (max-width: 858px) {
+  @media screen and (max-width: 1350px) {
     &__content {
       flex-direction: column;
     }
     &__left, &__right {
-      width: var(--width-max);
+      width: parameters.$width-max;
     }
     &__right-absolute {
       position: relative;
-      width: var(--width-max);
+      width: parameters.$width-max;
     }
   }
 }

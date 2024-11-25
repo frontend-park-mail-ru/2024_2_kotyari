@@ -54,7 +54,7 @@ export class CategoryApi implements CategoryApiInterface {
   }
 
   getCategoryProducts = (categoryLink: string): Promise<Product[]| ProductError>  => {
-    return fetch(`${backurl}/category/${categoryLink}`)
+    return fetch(categoryLink)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

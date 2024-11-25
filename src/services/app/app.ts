@@ -1,4 +1,4 @@
-import { router } from './init.js';
+import { router, searcher } from './init.js';
 import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
@@ -25,17 +25,17 @@ export const buildMain = (user: User): Promise<void> => {
   });
 };
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.ts')
-      .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch((error) => {
-        console.error('Service Worker registration failed:', error);
-      });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/sw.ts')
+//       .then((registration) => {
+//         console.log('Service Worker registered with scope:', registration.scope);
+//       })
+//       .catch((error) => {
+//         console.error('Service Worker registration failed:', error);
+//       });
+//   });
+// }
 
 /**
  * Обработчик события загрузки DOMContentLoaded.
@@ -44,6 +44,14 @@ if ('serviceWorker' in navigator) {
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+  if (hash && hash === '#review') {
+    const reviewElement = document.getElementById('review');
+    if (reviewElement) {
+      reviewElement.scrollIntoView({ behavior: 'smooth' }); // Плавный скролл
+    }
+  }
+
   return registerFunctions()
     .then(() => {
       getWithCred(backurl)
@@ -79,6 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
               });
             });
+
+          searcher.initializeListeners();
           return user;
         })
         .then(() => {

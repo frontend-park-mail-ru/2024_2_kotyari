@@ -12,6 +12,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
+    "sass": "^1.81.0",
     "vite": "^5.4.9",
     "vite-plugin-handlebars": "^2.0.0",
     "vite-plugin-pwa": "^0.20.5",
@@ -31,7 +32,8 @@
     "lint:fix": "npm run format && npm run lint -- --fix",
     "dev": "vite",
     "build": "vite build",
-    "start": "vite preview"
+    "start": "vite preview",
+    "scss": "sass public/index.scss public/index.css"
   },
   "husky": {
     "hooks": {
@@ -39,7 +41,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "*.{js,jsx,ts,tsx,json,css,scss}": [
       "prettier --write",
       "eslint --fix"
     ]

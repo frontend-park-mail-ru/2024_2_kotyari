@@ -74,7 +74,7 @@ export class AddressModal extends BaseModal {
     editAddressConfig.fields.forEach((field) => {
       const inputElement = this.modalElement?.querySelector(`[name="${field.name}"]`) as HTMLInputElement;
 
-      if (inputElement && field.name !== 'apartment' && !inputElement.value.trim()) {
+      if (inputElement && field.name !== 'flat' && !inputElement.value.trim()) {
         this.addInputError(inputElement, `Поле "${field.label}" не должно быть пустым`);
         isValid = false;
       } else {
