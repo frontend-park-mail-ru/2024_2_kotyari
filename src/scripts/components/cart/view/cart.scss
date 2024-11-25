@@ -58,4 +58,75 @@
       width: parameters.$width-max;
     }
   }
+
+
+  .cart-item__quantity {
+    width: 100%;  // Делает блок с количеством товаров на всю ширину
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;  // Добавим отступ сверху
+  }
+
+  .cart-item__quantity-wrapper {
+    width: 100%;  // Разворачиваем блок с количеством на всю ширину
+  }
+
+  .cart-item__quantity-btn {
+    width: 100%;  // Кнопки займут всю ширину
+    display: block;  // Переносим кнопки на новую строку
+    padding: 10px;  // Устанавливаем удобный размер кнопок
+    font-size: 16px;  // Размер шрифта на кнопках
+  }
+
+  .cart-item__quantity-btn--minus, .cart-item__quantity-btn--plus {
+    text-align: center;  // Выравнивание текста по центру кнопки
+  }
+
+  .cart-item__quantity-count {
+    width: auto;
+    text-align: center;  // Выравниваем текст (количество) по центру
+    margin: 0 10px;  // Отступы от кнопок
+
+    white-space: nowrap;  // Запрещаем перенос текста на новую строку
+    text-overflow: ellipsis;  // Обрезаем текст и показываем многоточие, если не помещается
+  }
+
+  // Устанавливаем ограничение для изображения, чтобы оно не мешало остальным элементам
+  .cart-item__image {
+    max-height: 150px;  // Ограничиваем высоту изображения
+    object-fit: contain;  // Сохраняем пропорции изображения
+    margin-bottom: 10px;  // Добавляем отступ снизу, чтобы не перекрывало следующие элементы
+  }
+
+  // Убедимся, что сам контейнер карточки не растягивает контент
+  .cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  // Выровнять элементы по левому краю
+    padding: 10px;
+  }
+
+
+  .cart-item__details{
+    width: 100%;
+  }
+
+  .cart-item__title,
+  .cart-item__price{
+    font-size: 15px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .cart-header {
+    flex-direction: row;  // Убедимся, что элементы остаются в одной линии
+    align-items: center;   // Выравнивание элементов по вертикали
+
+    &__left-part,
+    &__delete-selected {
+      width: auto;  // Убираем фиксацию ширины
+      margin-left: 0;  // Убираем отступы на мобильных устройствах
+    }
+  }
 }
