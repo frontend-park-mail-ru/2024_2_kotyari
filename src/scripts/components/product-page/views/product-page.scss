@@ -339,6 +339,12 @@
     }
 
     &__cart-button {
+        display: -webkit-box; /* Устанавливаем flexbox для текста */
+        -webkit-box-orient: vertical; /* Направление контейнера */
+        overflow: hidden; /* Скрываем лишний текст */
+        text-overflow: ellipsis; /* Добавляем троеточие */
+        -webkit-line-clamp: 3; /* Ограничиваем количество строк */
+
         padding: parameters.$button-padding;
         font-size: parameters.$font-size_label;
         font-family: 'UbuntuSans', sans-serif;

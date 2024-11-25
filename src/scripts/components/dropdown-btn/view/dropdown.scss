@@ -33,10 +33,10 @@
     font-weight: 600;
     padding: 0;
     margin: 3px 0 0 0;
-    transition: background-color 0.4s; // Плавный переход для изменений цвета
+    transition: background-color 0.4s;
 
     &:hover {
-      background-color: #f9f9ff; // Лёгкий оттенок при наведении
+      background-color: #f9f9ff;
     }
 
     &.show {
@@ -49,8 +49,8 @@
     cursor: pointer;
     transition: background-color 0.4s, color 0.4s;
     &:hover {
-      background-color: #f1f1f1; // Более яркий фон при наведении
-      color: #7916d4; // Цвет текста меняется при наведении
+      color: #7916d4;
+      font-weight: 600;
     }
   }
 }

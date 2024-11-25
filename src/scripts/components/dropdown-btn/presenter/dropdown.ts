@@ -39,6 +39,7 @@ export class DropdownPresenter {
     textSpan.textContent = 'Сортировать'
     textSpan.style.fontSize = '16px';
     textSpan.style.paddingTop = '2px';
+    textSpan.style.fontWeight = 600;
 
     dropdownTrigger.appendChild(textSpan);
     const span = document.createElement('span');
