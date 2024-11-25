@@ -112,11 +112,12 @@
 @media (max-width: 768px) {
     .product-page {
         &__carousel-slider-container {
-            flex-direction: column;
+            flex-direction: column; // Ставим элементы вертикально
             height: auto;
         }
 
         &__carousel {
+            order: 2; // Переносим галерею ниже
             width: 100%;
             height: auto;
             display: flex;
@@ -131,7 +132,6 @@
                 height: auto;
                 width: 100%;
                 overflow-x: scroll;
-                overflow-y: auto;
                 scrollbar-width: thin;
                 white-space: nowrap;
                 transition: left 0.3s ease-in-out;
@@ -149,6 +149,20 @@
                 max-height: 50px;
                 object-fit: contain;
             }
+        }
+
+        &__slider {
+            order: 1; // Основное фото будет выше галереи
+            width: 100%;
+            height: auto;
+        }
+
+        &__slide {
+            width: 100%; // Фото будет занимать всю ширину контейнера
+            height: auto; // Высота будет пропорциональна ширине
+            object-fit: contain; // Изображение масштабируется с сохранением пропорций
+            max-width: 100%; // Ограничение по максимальной ширине
+            border-radius: 0; // Уберите закругления, если хотите использовать весь доступный экран
         }
 
         &__arrow-button {
@@ -175,21 +189,8 @@
             display: inline;
         }
     }
-}
 
-@media (max-width: 768px) {
-    .product-page {
-        &__slide {
-            width: 100%; // Фото будет занимать всю ширину контейнера
-            height: auto; // Высота будет пропорциональна ширине
-            object-fit: contain; // Изображение масштабируется с сохранением пропорций
-            max-width: 100%; // Ограничение по максимальной ширине
-            border-radius: 0; // Уберите закругления, если хотите использовать весь доступный экран
-        }
-
-        &__slider {
-            width: 100%;
-            height: auto; // Подстроить высоту под содержимое
-        }
+    .product-page__carousel-slider-container{
+        margin-bottom: 20px;
     }
 }
