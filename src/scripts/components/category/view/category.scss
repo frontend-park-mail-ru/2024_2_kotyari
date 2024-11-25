@@ -58,11 +58,12 @@
     font-size: parameters.$font-size-price;
     color: black;
     font-weight: normal;
+    padding-bottom: 5px;
     margin-bottom: parameters.$mini-padding;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Ограничение до 2 строк */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     transition: -webkit-line-clamp parameters.$transition-duration ease;
 }

@@ -73,7 +73,12 @@ export class AccountView {
 
     const addressElement = this.rootElement.querySelector('.account__address-details .account__address-text');
     if (addressElement) {
-      addressElement.textContent = `г.${address.city}, ул.${address.street}, д.${address.house}, кв.${address.flat}`;
+      addressElement.textContent = `${address.city}, ${address.street}, ${address.house}`;
+      if (address.flat) {
+        console.log(address.flat);
+
+        addressElement.textContent += `, ${address.flat}`;
+      }
     }
   }
 

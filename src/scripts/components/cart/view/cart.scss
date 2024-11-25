@@ -6,8 +6,9 @@
 
 // Основной контейнер корзины
 .cart-container {
-  width: parameters.$container-width;
+  max-width: parameters.$container-width;
   margin: parameters.$container-margin;
+  padding: 1rem;
 
   // Заголовок корзины
   &__title {
@@ -43,8 +44,9 @@
 }
 
 // Медиазапрос для мобильных устройств
-@media screen and (max-width: 858px) {
+@media screen and (max-width: 900px) {
   .cart-container {
+    width: auto !important;
     &__content {
       flex-direction: column;
     }

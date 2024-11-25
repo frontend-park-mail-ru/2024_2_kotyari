@@ -64,7 +64,7 @@ export class Carousel {
 
   private updateSlideVisibility() {
     this.slides.forEach((slide, i) => {
-      slide.style.opacity = i === this.currentIndex ? '1' : '0';
+      slide.style.display = i === this.currentIndex ? 'block' : 'none';
     });
   }
 

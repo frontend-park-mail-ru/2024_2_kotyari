@@ -19,7 +19,7 @@
     }
 
     &__carousel-slider-container {
-        flex: 1.25;
+        flex: 2;
         display: flex;
         gap: parameters.$gap;
         height: 700px;
@@ -74,18 +74,12 @@
         height: 100%;
         width: 100%;
         object-fit: contain;
-        position: absolute;
-        opacity: 0;
-
-        &:first-child {
-            opacity: 1;
-        }
     }
 
     &__slider-button {
         position: absolute;
         top: parameters.$proc-top-sliders;
-        transform: translateY(parameters.$y-coord-proc);
+        transform: translateY(50%);
         @include mixins.button-style(parameters.$color-button-background, white, parameters.$micro-padding, parameters.$default-border-radius);
         z-index: parameters.$button-slider-z-index;
     }
@@ -131,18 +125,21 @@
             min-height: 95px;
 
             & ul {
+                display: flex;
                 flex-direction: row;
                 position: relative;
                 height: auto;
                 width: 100%;
-                overflow-x: auto;
-                overflow-y: hidden;
+                overflow-x: scroll;
+                overflow-y: auto;
                 scrollbar-width: thin;
                 white-space: nowrap;
                 transition: left 0.3s ease-in-out;
 
                 & li {
                     list-style: none;
+                    flex: 0 0 auto;
+                    margin-right: 10px;
                 }
             }
 
@@ -180,3 +177,19 @@
     }
 }
 
+@media (max-width: 768px) {
+    .product-page {
+        &__slide {
+            width: 100%; // Фото будет занимать всю ширину контейнера
+            height: auto; // Высота будет пропорциональна ширине
+            object-fit: contain; // Изображение масштабируется с сохранением пропорций
+            max-width: 100%; // Ограничение по максимальной ширине
+            border-radius: 0; // Уберите закругления, если хотите использовать весь доступный экран
+        }
+
+        &__slider {
+            width: 100%;
+            height: auto; // Подстроить высоту под содержимое
+        }
+    }
+}
