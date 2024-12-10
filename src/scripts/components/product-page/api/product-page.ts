@@ -54,7 +54,7 @@ export class ProductPageApi {
         }
       })
       .catch(e => {
-        console.error('Error fetching product data:', e);
+        // console.error('Error fetching product data:', e);
         return { ok: false };
       })
   }
@@ -69,7 +69,7 @@ export class ProductPageApi {
             return { ok: false, unauthorized: true };
           case 403:
             csrf.refreshToken()
-              .catch(err => console.log(err));
+              .catch(err => {/*console.log(err)*/});
 
             return { ok: false };
           case 409:
@@ -79,7 +79,7 @@ export class ProductPageApi {
         }
       })
       .catch((error) => {
-        console.error('Error adding to cart:', error);
+        // console.error('Error adding to cart:', error);
         return { ok: false };
       });
   }
@@ -95,7 +95,7 @@ export class ProductPageApi {
             return { ok: false, unauthorized: true };
           case 403:
             csrf.refreshToken()
-              .catch(err => console.log(err));
+              .catch(err => {/*console.log(err)*/});
 
             return { ok: false };
           default:
@@ -103,7 +103,7 @@ export class ProductPageApi {
         }
       })
       .catch((error) => {
-        console.error('Error removing from cart:', error);
+        // console.error('Error removing from cart:', error);
         return { ok: false };
       });
   }
@@ -116,7 +116,7 @@ export class ProductPageApi {
             return;
           case 403:
             csrf.refreshToken()
-              .catch(err => console.log(err));
+              .catch(err => {/*console.log(err)*/});
             
             return;
           default:

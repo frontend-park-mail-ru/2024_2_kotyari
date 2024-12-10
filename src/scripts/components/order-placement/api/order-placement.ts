@@ -21,7 +21,7 @@ export class OrderPlacementApiInterface {
         }
       })
       .catch(err => {
-        console.error('Ошибка получения данных: ', err);
+        // console.error('Ошибка получения данных: ', err);
         throw err;
       });
   }
@@ -43,7 +43,7 @@ export class OrderPlacementApiInterface {
         }
       })
       .catch(error => {
-        console.error('Ошибка:', error);
+        // console.error('Ошибка:', error);
         throw error;
       });
   }
@@ -55,11 +55,11 @@ export class OrderPlacementApiInterface {
    * @returns {Promise<void>} Промис без возвращаемого значения.
    */
   public static async placeOrder(address: string): Promise<void> {
-    console.log(address);
+    // console.log(address);
 
     return csrf.post(`${backurl}${ORDER_PLACEMENT_URLS.placeOrder.route}`, { address: address })
       .then(res => {
-        console.log(res.status, res.body);
+        // console.log(res.status, res.body);
 
         switch (res.status) {
           case 200:
@@ -69,7 +69,7 @@ export class OrderPlacementApiInterface {
         }
       })
       .catch(err => {
-        console.error('Ошибка при отправке заказа:', err);
+        // console.error('Ошибка при отправке заказа:', err);
       });
   }
 

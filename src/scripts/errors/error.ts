@@ -13,7 +13,7 @@ export const errors = {
    * @param {Error} error - Объект ошибки, которая возникла при загрузке шаблона.
    */
   TemplatizerError: (error: Error): void => {
-    console.error('Ошибка загрузки шаблона:', error);
+    // console.error('Ошибка загрузки шаблона:', error);
   },
 
   /**
@@ -24,7 +24,7 @@ export const errors = {
    * @param {Error} error - Объект ошибки, которая возникла при получении товаров.
    */
   GetCardsError: (error: Error): void => {
-    console.error('Не удалось получить товары с сервера:', error);
+    // console.error('Не удалось получить товары с сервера:', error);
   },
 
   /**
@@ -32,7 +32,7 @@ export const errors = {
    * @function
    */
   GetUsername: (): void => {
-    console.error('Ошибка: username не найден в ответе');
+    // console.error('Ошибка: username не найден в ответе');
   },
 
   /**
@@ -41,6 +41,6 @@ export const errors = {
    * @param {Error} error - Ошибка, возникшая при выполнении запроса.
    */
   BadGet: (error: Error): void => {
-    console.error('Ошибка при выполнении запроса:', error);
+    // console.error('Ошибка при выполнении запроса:', error);
   },
 };

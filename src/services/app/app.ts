@@ -1,5 +1,5 @@
 import { router, searcher } from './init.js';
-import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config';
+import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
 import { registerFunctions } from '../../scripts/utils/helperName';
@@ -44,13 +44,14 @@ export const buildMain = (user: User): Promise<void> => {
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash;
-  if (hash && hash === '#review') {
-    const reviewElement = document.getElementById('review');
-    if (reviewElement) {
-      reviewElement.scrollIntoView({ behavior: 'smooth' }); // Плавный скролл
-    }
-  }
+    try {
+        const hash = window.location.hash;
+        if (hash && hash === '#review') {
+            const reviewElement = document.getElementById('review');
+            if (reviewElement) {
+                reviewElement.scrollIntoView({behavior: 'smooth'}); // Плавный скролл
+            }
+        }
 
   return registerFunctions().then(() => {
     getWithCred(backurl + '/')

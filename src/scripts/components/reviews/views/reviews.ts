@@ -69,13 +69,13 @@ export class ReviewsView implements ReviewsViewInterface {
 
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) {
-            console.error(`Ошибка: rootElement не найден, rootId: ${this.rootId}`);
+            // console.error(`Ошибка: rootElement не найден, rootId: ${this.rootId}`);
             return;
         }
 
         // Проверка структуры данных
         if (!Array.isArray(data.reviews)) {
-            console.error('Ошибка: data.reviews должен быть массивом, получено:', data.reviews);
+            // console.error('Ошибка: data.reviews должен быть массивом, получено:', data.reviews);
             data.reviews = [];
         }
 
@@ -91,7 +91,7 @@ export class ReviewsView implements ReviewsViewInterface {
 
         const user = storageUser.getUserData();
 
-        console.log('nen', user);
+        // console.log('nen', user);
 
         // Генерация шаблона с проверкой и передачей параметров
         templateElement.innerHTML = this.compiled({
@@ -180,7 +180,7 @@ export class ReviewsView implements ReviewsViewInterface {
 
         const reviewListElement = document.getElementById('review-list');
         if (!reviewListElement) {
-            console.error('Ошибка: Элемент списка отзывов (review-list) не найден.');
+            // console.error('Ошибка: Элемент списка отзывов (review-list) не найден.');
             return;
         }
 
@@ -190,7 +190,7 @@ export class ReviewsView implements ReviewsViewInterface {
 
         if (!data.reviews || data.reviews.length === 0) {
             reviewListElement.innerHTML = ''; // Очищаем содержимое
-            console.log('Нет отзывов для отображения.');
+            // console.log('Нет отзывов для отображения.');
             return;
         }
 
@@ -226,7 +226,7 @@ export class ReviewsView implements ReviewsViewInterface {
                 button.addEventListener("click", () => {
                     const isExpanded = card.style.maxHeight === "none";
 
-                    console.log("card: ", card)
+                    // console.log("card: ", card)
 
                     card.style.maxHeight = isExpanded ? `${maxVisibleHeight}px` : "none";
                     button.innerHTML = isExpanded
@@ -247,11 +247,11 @@ export class ReviewsView implements ReviewsViewInterface {
      */
     loadSortedReviews = async (id: string, sortBy: string, sortOrder: string) => {
         try {
-            console.log('data: ', sortBy, sortOrder)
+            // console.log('data: ', sortBy, sortOrder)
 
             const user = storageUser.getUserData();
 
-            console.log('nen', user);
+            // console.log('nen', user);
 
             const response = await ReviewsApi.fetchReviews(id, sortBy, sortOrder)
               .then((reviewsData: any) => {
@@ -272,12 +272,12 @@ export class ReviewsView implements ReviewsViewInterface {
                 };
             })
                 .catch((err: Error) => {
-                    console.error(err);
+                    // console.error(err);
                     this.renderError('Не удалось загрузить отзывы. Попробуйте позже.');
                 });
             this.rerenderList(id, response);
         } catch (error) {
-            console.error('Ошибка при загрузке отсортированных отзывов:', error);
+            // console.error('Ошибка при загрузке отсортированных отзывов:', error);
             this.renderError('Не удалось загрузить отзывы. Попробуйте позже.');
         }
     };
@@ -289,7 +289,7 @@ export class ReviewsView implements ReviewsViewInterface {
     renderError = (errorMessage: string): void => {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) {
-            console.log(`Ошибка: rootElement ${rootElement} -- rootId ${this.rootId}`);
+            // console.log(`Ошибка: rootElement ${rootElement} -- rootId ${this.rootId}`);
             return;
         }
 

@@ -41,7 +41,7 @@ export class CategoryView implements CategoryViewInterface {
   renderBreadcrumbs = (breadcrumbs: { title: string, link: string }[]) => {
     // const breadcrumbContainer = document.getElementById('breadcrumbs');
     // if (!breadcrumbContainer) {
-    //   console.error('Не найден контейнер для хлебных крошек');
+    //   // console.error('Не найден контейнер для хлебных крошек');
     //   return;
     // }
     //

@@ -44,15 +44,16 @@
   font-size: 20px;
   font-weight: bold;
   color: white;
-  border: 2px solid #7a16d5;
+  border: 2px solid rgba(122, 22, 213, 0);
   background-color: #7a16d5;
   border-radius: parameters.$default-border-radius;
   cursor: pointer;
-  transition: transform 0.2s ease, margin 0.2s ease, background-color 0.3s ease;
+  transition: transform 0.2s ease, margin 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
 
   &:hover {
     background-color: #5e11b0;
-    transform: scale(1.05); /* Увеличение кнопки */
+    border-color: #5e11b0;
+    transform: scale(1.1);
   }
 }
 
@@ -124,5 +125,40 @@
         background-repeat: no-repeat;
       }
     }
+  }
+}
+
+@mixin placeholder() {
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: parameters.$default-text-color;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  &__icon {
+    margin-bottom: 15px;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+  }
+
+  &__placeholder-text,
+  &__placeholder-suggestion {
+    font-size: 18px;
+    color: #555;
+  }
+
+  &__placeholder:hover .cart-item__icon {
+    transform: scale(1.1);
+    opacity: 1;
   }
 }

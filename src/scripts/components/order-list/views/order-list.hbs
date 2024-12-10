@@ -1,25 +1,33 @@
 <div class="orders">
   <div id="order-list-container" class="order-list">
     <h2 class="order-list__title">Мои заказы</h2>
-    {{#each orders}}
-      <div class="order-list__card" data-order-id="{{id}}" data-delivery-date_req="{{delivery_date_req}}" href="/order/{{id}}" router="changed-active">
-      <div class="order-list__card__header">
-          <div class="order-list__card__dates">
-            <span class="order-list__card__dates-order-date">Заказ от &nbsp;{{formatDate order_date}}</span>
-            <span class="order-list__card__dates-delivery-date">Доставим &nbsp;{{formatDate delivery_date}}</span>
-            <span class="order-list__card-total">{{status}} &nbsp;{{total_price}}₽</span>
+    {{#if orders.length}}
+        {{#each orders}}
+          <div class="order-list__card" data-order-id="{{id}}" data-delivery-date_req="{{delivery_date_req}}" href="/order/{{id}}" router="changed-active">
+          <div class="order-list__card__header">
+              <div class="order-list__card__dates">
+                <span class="order-list__card__dates-order-date">Заказ от &nbsp;{{formatDate order_date}}</span>
+                <span class="order-list__card__dates-delivery-date">Доставим &nbsp;{{formatDate delivery_date}}</span>
+                <span class="order-list__card-total">{{status}} &nbsp;{{total_price}}₽</span>
 
-          </div>
-
-          <div class="order-list__items">
-            {{#each products}}
-              <div class="order-list__items-item">
-                <img src="{{image_url}}" alt="{{title}}" class="order-item-image"/>
               </div>
-            {{/each}}
+
+              <div class="order-list__items">
+                {{#each products}}
+                  <div class="order-list__items-item">
+                    <img src="{{image_url}}" alt="{{title}}" class="order-item-image"/>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
           </div>
+        {{/each}}
+    {{else}}
+        <div class="order-list__placeholder">
+            <img class="order-list__placeholder__icon" src="/public/assets/img/static/crying-man.svg" alt="Crying Man">
+            <p class="order-list__placeholder-text">Пока что у вас нет заказов...</p>
+            <p class="order-list__placeholder-suggestion">Начните покупки, чтобы видеть их здесь!</p>
         </div>
-      </div>
-    {{/each}}
+    {{/if}}
   </div>
 </div>

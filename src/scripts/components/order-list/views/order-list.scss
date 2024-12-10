@@ -1,8 +1,17 @@
 @use "../../../../../public/css/parametrs/parameters";
+@use "../../../../../public/css/parametrs/basic-mixins";
 
 .order-list {
   max-width: 1081px;
   margin: auto;
+
+  @include basic-mixins.placeholder;
+
+  &__placeholder__icon {
+    width: 90px;
+    height: auto;
+    margin-bottom: 20px;
+  }
 
   &__title {
     font-size: parameters.$big-font-size;

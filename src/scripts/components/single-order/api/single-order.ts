@@ -47,7 +47,7 @@ export class SingleOrderApiInterface {
       .then(res => {
         switch (res.status) {
           case 200:
-            console.log(res.body);
+            // console.log(res.body);
 
             return SingleOrderApiInterface.transformSingleOrderData(res.body);
           default:
@@ -55,7 +55,7 @@ export class SingleOrderApiInterface {
         }
       })
       .catch(err => {
-        console.error('Ошибка: ', err);
+        // console.error('Ошибка: ', err);
         throw err;
       })
   }
