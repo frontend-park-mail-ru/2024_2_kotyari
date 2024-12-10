@@ -73,15 +73,19 @@ export class CartPresenter {
    */
   async initializeCart() {
     csrf.fetchToken().then(() =>{
-      // Инициализируем чекбоксы на основе данных корзины
-      this.cartView.initializeCheckboxes(this.cartData.products);
+      try {
+        // Инициализируем чекбоксы на основе данных корзины
+        this.cartView.initializeCheckboxes(this.cartData.products);
 
-      // Инициализируем работу с выборкой данных.
-      this.dataSamplingPresenter.initializeDataSampling();
+        // Инициализируем работу с выборкой данных.
+        this.dataSamplingPresenter.initializeDataSampling();
 
-      // Выполняем дополнительные настройки.
-      this.leftCardsPresenter.updateSelectedCount();
-      this.rightCartPresenter.calculateCartTotals(this.cartData);
+        // Выполняем дополнительные настройки.
+        this.leftCardsPresenter.updateSelectedCount();
+        this.rightCartPresenter.calculateCartTotals(this.cartData);
+      } catch (err) {
+
+      }
     });
   }
 }

@@ -30,7 +30,7 @@ export class AddressModal extends BaseModal {
       event.preventDefault();
 
       if (!this.validateForm()) {
-        console.log("Validation failed: Some required fields are empty.");
+        // console.log("Validation failed: Some required fields are empty.");
         return;
       }
 
@@ -56,7 +56,7 @@ export class AddressModal extends BaseModal {
           }
         })
         .catch((err) => {
-          console.error('Error updating address:', err);
+          // console.error('Error updating address:', err);
         })
     });
 

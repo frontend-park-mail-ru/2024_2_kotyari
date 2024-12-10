@@ -71,8 +71,6 @@ router.addRoute(
     const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
     const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
 
-    console.log({ query, sort, order });
-
     if (query) {
       searcher.searchProducts(query, sort, order); // Передаем параметры в searchProducts
     } else {
@@ -113,9 +111,9 @@ router.addRoute(
   '/product/:id:hash',
   (params) => {
     let hash = window.location.hash; // Извлекаем текущий хэш
-    console.log('Параметры маршрута:', params, 'Хэш:', hash);
+    //console.log('Параметры маршрута:', params, 'Хэш:', hash);
     if (hash) hash = hash.replace(/^#/, '');
-    productPageBuilder.build({ hash }).catch(e => console.error(e));
+    productPageBuilder.build({ hash }).catch(e => {/*console.error(e)*/});
   },
   new RegExp('^\\/product\\/(\\d+)(#.*)?$'), // Регулярное выражение с поддержкой хэша
   false,

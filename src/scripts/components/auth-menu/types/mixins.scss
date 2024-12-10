@@ -6,10 +6,9 @@
   border-radius: $border-radius;
   font-size: $font-size;
   padding: $padding;
-  border-color: parameters.$darkest-background-color;
-  border-width: 0;
   cursor: pointer;
   transition: background-color parameters.$middle-duration ease, color parameters.$middle-duration ease;
+  border: 2px solid rgba(0, 0, 0, 0);
 }
 
 @mixin flex-container($direction: column, $align-items: center, $justify-content: center) {

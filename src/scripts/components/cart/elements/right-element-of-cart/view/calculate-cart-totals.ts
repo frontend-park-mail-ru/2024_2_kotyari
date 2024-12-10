@@ -121,7 +121,7 @@ export class RightCartView {
 
       // Обработчик клика для вывода в консоль выбранных товаров
       this.checkoutButton.addEventListener('click', () => {
-        console.log('Selected products:', selectedItems);
+        // console.log('Selected products:', selectedItems);
       });
     }
   }

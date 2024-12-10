@@ -16,11 +16,8 @@ export class CardView implements CardViewInterface {
   render = (data: { products: any[], page_title?: string }, title?: string): void => {
     const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      console.log(`ошибка rootElement ${rootElement} -- rootId ${rootId}`);
       return;
     }
-
-    console.log(data.page_title, title);
 
     rootElement.innerHTML = '';
 

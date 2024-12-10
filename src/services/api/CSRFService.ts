@@ -27,9 +27,9 @@ export class CSRFService {
 
         this.token = csrfToken;
       })
-      .catch(err => {
-        console.error(err);
-      });
+      // .catch(err => {
+      //   // console.error(err);
+      // });
   }
 
   /**
@@ -40,7 +40,6 @@ export class CSRFService {
    */
   private getRequestInfo(method: string, body: any): RequestInit | undefined {
     if (!this.token) {
-      console.log(this.token);
       return undefined;
     }
 

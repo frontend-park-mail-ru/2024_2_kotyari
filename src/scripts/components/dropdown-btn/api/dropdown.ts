@@ -22,7 +22,7 @@ export class DropdownAPI {
       order,
     });
 
-    console.log(123, `${endpoint}&${params.toString()}`);
+    // console.log(123, `${endpoint}&${params.toString()}`);
 
     return get(`${endpoint}&${params.toString()}`)
   };

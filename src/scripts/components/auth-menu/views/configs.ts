@@ -60,7 +60,7 @@ export const menuSignUp = {
   ],
   submitText: 'Регистрация',
   link: {
-    href: 'login',
+    href: '/login',
     text: 'Есть аккаунт?',
     label: 'Войти',
   },
@@ -114,7 +114,7 @@ export const menuSignIn = {
   ],
   submitText: 'Войти',
   link: {
-    href: 'signup',
+    href: '/signup',
     text: 'Нет аккаунта?',
     label: 'Зарегистрироваться',
   },

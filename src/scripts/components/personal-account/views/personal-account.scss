@@ -131,12 +131,17 @@
     }
 
     &__address_update{
-        margin-bottom: 60px;
+        height: 100%;
     }
 
     &__notification {
         flex: 1;
         margin-right: -170px;
+    }
+
+    &__user-info {
+        display: flex;
+        flex-direction: row;
     }
 
     &__user-name {
@@ -145,6 +150,7 @@
         text-overflow: ellipsis;
         margin: 0;
         flex: 4;
+        font-size: 18px;
     }
 
     &__icons-personal-account {
@@ -262,6 +268,8 @@
 
         &__edit{
             color: parameters.$base-background-color;
+            font-size: 18px;
+            margin-left: 5px;
         }
     }
 }

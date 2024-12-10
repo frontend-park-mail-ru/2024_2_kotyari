@@ -29,7 +29,7 @@ export abstract class BaseModal {
       //
       // const closeButton = this.modalElement.querySelector(this.config.btnClose);
       // if (!closeButton) {
-      //   console.error(closeButton, this.config.btnClose);
+      //   // console.error(closeButton, this.config.btnClose);
       //   return;
       // }
       //
@@ -51,7 +51,7 @@ export abstract class BaseModal {
 
   private handleOutsideClick(event: MouseEvent) {
     if (!this.modalElement) {
-      console.error(this.modalElement, ' not found');
+      // console.error(this.modalElement, ' not found');
       return;
     }
 

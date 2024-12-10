@@ -41,7 +41,7 @@ export class AccountPresenter {
         rightColumnInfo: this.rightColumnInfo,
       });
     } catch (error) {
-      console.error('Failed to initialize account data:', error);
+      // console.error('Failed to initialize account data:', error);
     }
   }
 
@@ -51,7 +51,7 @@ export class AccountPresenter {
       userData.Address?.street?.trim(),
       userData.Address?.house?.trim(),
       userData.Address?.flat?.trim()
-    ].filter(Boolean).join(', ') || 'Добавьте адресс';
+    ].filter(Boolean).join(', ') || 'Добавьте адрес';
 
     let msg: string;
 

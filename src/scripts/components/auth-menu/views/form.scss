@@ -53,12 +53,6 @@
         font-weight: bold;
         margin-bottom: parameters.$midle-button-margin-bottom;
 
-        &:hover {
-            background-color: parameters.$darker-background-color;
-            border: 2px solid parameters.$darker-background-color;
-            transform: scale(parameters.$big-scale);
-        }
-
         &:active {
             background-color: parameters.$darkest-background-color;
             border: 2px solid parameters.$darkest-background-color;

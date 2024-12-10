@@ -72,7 +72,7 @@ export class DataSamplingPresenter {
         this.cartView.initializeCheckboxes(this.cartData.products);
         this.updateSelectedCount();});
     } catch (error) {
-      console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
+      //// console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
     }
   }
 
@@ -126,7 +126,7 @@ export class DataSamplingPresenter {
         }
       })
     } catch (error) {
-      console.error("Ошибка при изменении состояния 'Удалить выбранное':", error);
+      //// console.error("Ошибка при изменении состояния 'Удалить выбранное':", error);
     }
   }
 
@@ -151,7 +151,7 @@ export class DataSamplingPresenter {
 
       this.cartView.updateSelectAllCheckbox(allChecked, isIndeterminate);
     } catch (error) {
-      console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
+      //// console.error("Ошибка при изменении состояния 'Выбрать всё':", error);
     }
   }
 }

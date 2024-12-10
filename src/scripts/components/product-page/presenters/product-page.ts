@@ -27,7 +27,7 @@ export class ProductPageBuilder {
 
   async build({ hash }: { hash?: string }) {
     try {
-      console.log(hash);
+      // console.log(hash);
 
       const id = this.getProductId();
 
@@ -67,7 +67,7 @@ export class ProductPageBuilder {
 
 
     } catch (error) {
-      console.error('Error building product page:', error);
+      // console.error('Error building product page:', error);
     }
   }
 
@@ -211,7 +211,7 @@ export class ProductPageBuilder {
 
     this.api.rmFromCart(id)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
 
         if (result.unauthorized) {
           cartButton.textContent = 'Войдите в аккаунт';
@@ -238,7 +238,7 @@ export class ProductPageBuilder {
       await ProductPageApi.updateProductQuantity(id);
       cartButton.textContent = 'Удалить из корзины';
     } catch (error) {
-      console.error('Ошибка при обновлении количества:', error);
+      // console.error('Ошибка при обновлении количества:', error);
     }
   }
 

@@ -29,10 +29,10 @@ export const buildMain = (user: User): Promise<void> => {
 //   window.addEventListener('load', () => {
 //     navigator.serviceWorker.register('/sw.ts')
 //       .then((registration) => {
-//         console.log('Service Worker registered with scope:', registration.scope);
+//         // console.log('Service Worker registered with scope:', registration.scope);
 //       })
 //       .catch((error) => {
-//         console.error('Service Worker registration failed:', error);
+//         // console.error('Service Worker registration failed:', error);
 //       });
 //   });
 // }
@@ -44,68 +44,76 @@ export const buildMain = (user: User): Promise<void> => {
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash;
-  if (hash && hash === '#review') {
-    const reviewElement = document.getElementById('review');
-    if (reviewElement) {
-      reviewElement.scrollIntoView({ behavior: 'smooth' }); // Плавный скролл
-    }
-  }
+    try {
+        const hash = window.location.hash;
+        if (hash && hash === '#review') {
+            const reviewElement = document.getElementById('review');
+            if (reviewElement) {
+                reviewElement.scrollIntoView({behavior: 'smooth'}); // Плавный скролл
+            }
+        }
 
-  return registerFunctions()
-    .then(() => {
-      getWithCred(backurl)
-        .then(res => {
-          switch (res.status) {
-            case 200:
-              return res.body as User;
-            case 401:
-              return defaultUser;
-          }
-
-          throw Error(`ошибка ${res.status}`);
-        })
-        .then(user => {
-          storageUser.saveUserData(user as User);
-
-          return user;
-        })
-        .then(user => {
-          buildMain(user)
+        return registerFunctions()
             .then(() => {
-              router.init();
+                getWithCred(backurl)
+                    .then(res => {
+                        switch (res.status) {
+                            case 200:
+                                return res.body as User;
+                            case 401:
+                                return defaultUser;
+                        }
 
-              let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
+                        throw Error(`ошибка ${res.status}`);
+                    })
+                    .then(user => {
+                        storageUser.saveUserData(user as User);
 
-              routes.forEach((route) => {
-                let href = route.getAttribute(urlAttribute);
-                if (href) {
-                  route.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    if (href) router.navigate(href, true);
-                  });
-                }
-              });
+                        return user;
+                    })
+                    .then(user => {
+                        buildMain(user)
+                            .then(() => {
+                                router.init();
+
+                                let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
+
+                                routes.forEach((route) => {
+                                    let href = route.getAttribute(urlAttribute);
+                                    if (href) {
+                                        route.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            if (href) router.navigate(href, true);
+                                        });
+                                    }
+                                });
+                            });
+
+                        searcher.initializeListeners();
+                        return user;
+                    })
+                    .then(() => {
+                        get(backurl + '/categories')
+                            .then(res => {
+                                try {
+                                    if (res.status !== 200) {
+                                        //throw Error('ошибка при загрузке категорий');
+                                    }
+
+                                    return res.body as Category[];
+                                } catch {
+                                    return;
+                                }
+                            })
+                            .then(data => {
+                                categoryStorage.setCategories(data as Category[]);
+                            });
+                    })
+                    .catch((err) => {
+                        // console.error('ошибка инициализации приложения:', err);
+                    })
             });
+    } catch (err) {
 
-          searcher.initializeListeners();
-          return user;
-        })
-        .then(() => {
-          get(backurl + '/categories')
-            .then(res => {
-              if (res.status !== 200) {
-                throw Error('ошибка при загрузке категорий');
-              }
-
-              return res.body as Category[];
-            })
-            .then(data => {
-              categoryStorage.setCategories(data as Category[]);
-            });
-        })
-        .catch((err) => {
-          console.error('ошибка инициализации приложения:', err);
-        })
-    });
+    }
 });

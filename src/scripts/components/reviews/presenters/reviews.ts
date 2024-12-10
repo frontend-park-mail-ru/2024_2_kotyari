@@ -33,10 +33,10 @@ export class ReviewsPresenter {
         this.loadReviews(id)
           .then(() => {
               if (hash) {
-                  console.log(hash);
+                  // console.log(hash);
 
                   const targetElement = document.getElementById(hash);
-                  console.log(targetElement);
+                  // console.log(targetElement);
 
                   if (targetElement) {
                       targetElement.scrollIntoView({ behavior: 'smooth' });
@@ -72,7 +72,7 @@ export class ReviewsPresenter {
                 new AddReviewPresenter(id, view, this.loadReviews);
             })
             .catch((err: Error) => {
-                console.error(123, err);
+                // console.error(123, err);
 
                 if (err.message === 'Ошибка при загрузке отзывов: 404'){
                     const formattedReviews = {

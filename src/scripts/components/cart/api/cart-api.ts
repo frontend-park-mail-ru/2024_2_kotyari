@@ -54,13 +54,13 @@ export class CartApiInterface {
             csrf.refreshToken();
         }
 
-        console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
+        //// console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
         throw new Error(`${res.body}`);
 
       })
-      .catch(err => {
-        console.error(err);
-      })
+      /*.catch(err => {
+        // console.error(err);
+      })*/
   }
 
   /**
@@ -79,13 +79,13 @@ export class CartApiInterface {
             csrf.refreshToken();
         }
 
-        console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
+        //// console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
         throw new Error(`${res.body}`);
 
       })
-      .catch(err => {
-        console.error(err);
-      })
+      /*.catch(err => {
+        // console.error(err);
+      })*/
   }
 
   /**

@@ -15,7 +15,7 @@ export class SearcherApi implements SearcherApiInterface {
         return res.body as Product[];
       })
       .catch((e) => {
-        console.error(e);
+        // console.error(e);
         return null;
       });
   };
@@ -30,12 +30,12 @@ export class SearcherApi implements SearcherApiInterface {
         if (res.status === 200) {
           return res.body.suggestions.map((suggestion: { title: string }) => suggestion.title) as Array<string>;
         } else {
-          console.error(`Failed to fetch suggestions - ${res.status} - ${query} - ${backurl}/search?${param.toString()}`, res.body);
+          // console.error(`Failed to fetch suggestions - ${res.status} - ${query} - ${backurl}/search?${param.toString()}`, res.body);
           return null;
         }
       })
       .catch(e => {
-        console.error('Error fetching suggestions:', e);
+        // console.error('Error fetching suggestions:', e);
         return null;
       });
   };
