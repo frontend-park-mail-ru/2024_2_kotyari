@@ -27,6 +27,27 @@ export class OrderPlacementApiInterface {
   }
 
   /**
+   * Получение данных о продуктах в корзине с применением промокода.
+   *
+   * @returns {Promise<OrderData>} Возвращает данные корзины.
+   */
+  static async getCartProductsWithPromocode(promocode: string): Promise<OrderData> {
+    return getWithCred(`${backurl}${ORDER_PLACEMENT_URLS.getCartProductsWithPromocode.route}${promocode}`)
+        .then(res => {
+          switch (res.status) {
+            case 200:
+              return this.transformCartData(res.body) as OrderData;
+            default:
+              throw new Error(`${res.status} - ${res.body.error_message}`);
+          }
+        })
+        .catch(err => {
+          // console.error('Ошибка получения данных: ', err);
+          throw err;
+        });
+  }
+
+  /**
    * Обновление выбранного метода оплаты.
    *
    * @param {string} paymentMethod - Название метода оплаты ("Наличными" или "Картой").
@@ -54,10 +75,10 @@ export class OrderPlacementApiInterface {
    * @async
    * @returns {Promise<void>} Промис без возвращаемого значения.
    */
-  public static async placeOrder(address: string): Promise<void> {
+  public static async placeOrder(address: string, promo: string): Promise<void> {
     // console.log(address);
 
-    return csrf.post(`${backurl}${ORDER_PLACEMENT_URLS.placeOrder.route}`, { address: address })
+    return csrf.post(`${backurl}${ORDER_PLACEMENT_URLS.placeOrder.route}`, { address: address, promocode: promo })
       .then(res => {
         // console.log(res.status, res.body);
 
@@ -107,6 +128,7 @@ export class OrderPlacementApiInterface {
           url: item.url,
         })),
       })),
+      promoStatus: data.promo_status
     };
   }
 }

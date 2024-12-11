@@ -1,4 +1,6 @@
 @use "../../../../../../../public/css/parametrs/parameters";
+@use "../../../../../../../public/css/parametrs/basic-mixins";
+@use "../../../../../../../public/css/parametrs/animations";
 
 // Блок для карточки (корневая обертка)
 .right-element-card {
@@ -46,13 +48,17 @@
     border-radius: parameters.$card-border-radius;
     color: parameters.$text-color;
     padding: parameters.$chrckout-padding;
-    width: parameters.$width-max;
+    width: 78%;
     height: parameters.$right-order-height;
     font-size: parameters.$input-font-size;
     padding-left: parameters.$padding15;
 
     &::placeholder {
       color: parameters.$delete-color;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
     }
   }
 
@@ -104,6 +110,51 @@
     font-weight: normal;
     margin-bottom: parameters.$mini-gap;
   }
+
+  &__promo-container {
+    display: flex;
+    align-items: center;
+    gap: parameters.$main-gap;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__apply-promo-btn {
+    @include basic-mixins.checkout-btn;
+    flex-shrink: 0;
+    width: 20%;
+    height: 40px;
+    padding: 0;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      margin-top: parameters.$mini-gap;
+    }
+  }
+
+  &__promo {
+    justify-content: space-around;
+    display: flex;
+
+    @media (max-width: 600px) {
+      display: contents;
+    }
+  }
+
+  &__promo-error {
+    display: none;
+    color: parameters.$error-color;
+    font-size: parameters.$error-font-size;
+    margin-top: parameters.$mini-gap;
+    animation: fade-in 0.3s ease-in-out;
+
+    &.visible {
+      display: block;
+    }
+  }
 }
 
 // Блок для кнопки
@@ -138,4 +189,12 @@
       color: parameters.$disabled-color;
     }
   }
+}
+
+#original-price {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  white-space: nowrap; /* Чтобы текст не переносился */
 }
