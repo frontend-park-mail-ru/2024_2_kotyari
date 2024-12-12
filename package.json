@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "devDependencies": {
     "@types/handlebars": "^4.0.40",
-    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
@@ -13,6 +15,7 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "sass": "^1.81.0",
+    "typescript": "^5.7.2",
     "vite": "^5.4.9",
     "vite-plugin-handlebars": "^2.0.0",
     "vite-plugin-pwa": "^0.20.5",
@@ -28,12 +31,13 @@
     "server": "node server/server.js",
     "prepare": "husky",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
-    "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "npm run format && npm run lint -- --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "dev": "vite",
     "build": "vite build",
     "start": "vite preview",
-    "scss": "sass public/index.scss public/index.css"
+    "scss": "sass public/index.scss public/index.css",
+    "precommit": "lint-staged"
   },
   "husky": {
     "hooks": {
@@ -41,9 +45,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,scss}": [
+    "*.{js,ts,tsx}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix",
+      "git add"
     ]
   }
 }

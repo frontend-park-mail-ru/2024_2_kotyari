@@ -1,5 +1,5 @@
 import { router, searcher } from './init.js';
-import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
+import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config';
 import { defaultUser, storageUser } from '../storage/user';
 import { User } from '../types/types';
 import { registerFunctions } from '../../scripts/utils/helperName';
@@ -52,60 +52,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  return registerFunctions()
-    .then(() => {
-      getWithCred(backurl)
-        .then(res => {
-          switch (res.status) {
-            case 200:
-              return res.body as User;
-            case 401:
-              return defaultUser;
-          }
+  return registerFunctions().then(() => {
+    getWithCred(backurl + '/')
+      .then((res) => {
+        switch (res.status) {
+          case 200:
+            return res.body as User;
+          case 401:
+            return defaultUser;
+        }
 
-          throw Error(`ошибка ${res.status}`);
-        })
-        .then(user => {
-          storageUser.saveUserData(user as User);
+        throw Error(`ошибка ${res.status}`);
+      })
+      .then((user) => {
+        storageUser.saveUserData(user as User);
 
-          return user;
-        })
-        .then(user => {
-          buildMain(user)
-            .then(() => {
-              router.init();
+        return user;
+      })
+      .then((user) => {
+        buildMain(user).then(() => {
+          router.init();
 
-              let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
+          const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
 
-              routes.forEach((route) => {
-                let href = route.getAttribute(urlAttribute);
-                if (href) {
-                  route.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    if (href) router.navigate(href, true);
-                  });
-                }
+          routes.forEach((route) => {
+            const href = route.getAttribute(urlAttribute);
+            if (href) {
+              route.addEventListener('click', (event) => {
+                event.preventDefault();
+                if (href) router.navigate(href, true);
               });
-            });
+            }
+          });
+        });
 
-          searcher.initializeListeners();
-          return user;
-        })
-        .then(() => {
-          get(backurl + '/categories')
-            .then(res => {
-              if (res.status !== 200) {
-                throw Error('ошибка при загрузке категорий');
-              }
+        searcher.initializeListeners();
+        return user;
+      })
+      .then(() => {
+        get(backurl + '/categories')
+          .then((res) => {
+            if (res.status !== 200) {
+              throw Error('ошибка при загрузке категорий');
+            }
 
-              return res.body as Category[];
-            })
-            .then(data => {
-              categoryStorage.setCategories(data as Category[]);
-            });
-        })
-        .catch((err) => {
-          console.error('ошибка инициализации приложения:', err);
-        })
-    });
+            return res.body as Category[];
+          })
+          .then((data) => {
+            categoryStorage.setCategories(data as Category[]);
+          });
+      })
+      .catch((err) => {
+        console.error('ошибка инициализации приложения:', err);
+      });
+  });
 });

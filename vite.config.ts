@@ -3,7 +3,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import string from 'vite-plugin-string';
-import fs from 'fs';
+import fs from "fs";
 import path from 'path';
 import { fileURLToPath } from 'url';
 

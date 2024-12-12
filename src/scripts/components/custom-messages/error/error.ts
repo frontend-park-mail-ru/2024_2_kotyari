@@ -15,7 +15,7 @@ const returnPage = '/catalog';
  * @returns {Promise} Промис, который разрешается после успешного отображения страницы ошибки.
  */
 export function errorPage(name: string): void {
-  let config = {
+  const config = {
     name: name,
     description: errorsDescriptions[name],
     return: returnPage,

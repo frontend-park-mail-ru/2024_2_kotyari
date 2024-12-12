@@ -7,13 +7,12 @@ import { storageUser } from '../../../../services/storage/user';
 import { updateAfterAuth } from '../../../layouts/body';
 import { csrf } from '../../../../services/api/CSRFService';
 
-
 export class AccountPresenter {
   private accountAPI: AccountAPI;
   private view: AccountView;
-  private userData: UserData;
-  private deliveryInfo: Array<any>;
-  private rightColumnInfo: Array<any>;
+  private userData: UserData | undefined;
+  private deliveryInfo: Array<any> | undefined;
+  private rightColumnInfo: Array<any> | undefined;
 
   constructor(apiBaseUrl: string, rootId: string) {
     this.accountAPI = new AccountAPI(apiBaseUrl);
@@ -46,16 +45,17 @@ export class AccountPresenter {
   }
 
   private async buildDeliveryInfo(userData: UserData) {
-    const addressText = [
-      userData.Address?.city?.trim(),
-      userData.Address?.street?.trim(),
-      userData.Address?.house?.trim(),
-      userData.Address?.flat?.trim()
-    ].filter(Boolean).join(', ') || 'Добавьте адресс';
+    const addressText =
+      [
+        userData.Address?.city?.trim(),
+        userData.Address?.street?.trim(),
+        userData.Address?.house?.trim(),
+        userData.Address?.flat?.trim(),
+      ]
+        .filter(Boolean)
+        .join(', ') || 'Добавьте адресс';
 
-    let msg: string;
-
-    msg = await this.accountAPI.getNearestDeliveryDate()
+    const msg = await this.accountAPI.getNearestDeliveryDate();
 
     return [
       {
@@ -94,7 +94,7 @@ export class AccountPresenter {
         textClass: 'account__favorites-text',
         title: 'Избранное',
         text: 'скоро',
-        href: '/soon'
+        href: '/soon',
       },
       {
         class: 'account__purchases-info',
@@ -106,7 +106,7 @@ export class AccountPresenter {
         title: 'Заказы',
         text: 'Смотреть',
         href: '/order_list',
-      }
+      },
     ];
   }
 
@@ -125,7 +125,6 @@ export class AccountPresenter {
           this.userData.avatar_url = `${backurl}/${newAvatarUrl}`;
           this.view.updateAvatar(newAvatarUrl);
         } catch (error) {
-
           const errorMessage = this.parseError(error);
 
           this.view.displayErrorMessage(errorMessage);
@@ -160,7 +159,7 @@ export class AccountPresenter {
 
         storageUser.changeUsername(this.userData.username);
         updateAfterAuth(storageUser.getUserData());
-      }
+      },
     );
 
     userInfoModal.open();
@@ -183,7 +182,7 @@ export class AccountPresenter {
 
         storageUser.changeCity(this.userData.Address.city);
         updateAfterAuth(storageUser.getUserData());
-      }
+      },
     );
     addressModal.open();
   }
