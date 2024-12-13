@@ -1,12 +1,12 @@
-import { router, searcher } from './init.js';
-import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config.ts';
-import { defaultUser, storageUser } from '../storage/user';
-import { User } from '../types/types';
-import { registerFunctions } from '../../scripts/utils/helperName';
-import { categoryStorage } from '../storage/category';
-import { buildBody, updateAfterAuth, updateAfterLogout } from '../../scripts/layouts/body';
-import { get, getWithCred } from '../api/without-csrf';
-import { Category } from '../../scripts/components/category/api/category';
+import {router, searcher} from './init.js';
+import {backurl, CLICK_CLASSES, rootId, urlAttribute} from './config.ts';
+import {defaultUser, storageUser} from '../storage/user';
+import {User} from '../types/types';
+import {registerFunctions} from '../../scripts/utils/helperName';
+import {categoryStorage} from '../storage/category';
+import {buildBody, updateAfterAuth, updateAfterLogout} from '../../scripts/layouts/body';
+import {get, getWithCred} from '../api/without-csrf';
+import {Category} from '../../scripts/components/category/api/category';
 
 
 /**
@@ -16,13 +16,13 @@ import { Category } from '../../scripts/components/category/api/category';
  * @returns {Promise<void>} Возвращает промис, который завершается после построения интерфейса.
  */
 export const buildMain = (user: User): Promise<void> => {
-  return buildBody({ rootId }).then(() => {
-    if (user.username === '') {
-      updateAfterLogout(user);
-    } else {
-      updateAfterAuth(user);
-    }
-  });
+    return buildBody({rootId}).then(() => {
+        if (user.username === '') {
+            updateAfterLogout(user);
+        } else {
+            updateAfterAuth(user);
+        }
+    });
 };
 
 // if ('serviceWorker' in navigator) {
@@ -52,59 +52,62 @@ document.addEventListener('DOMContentLoaded', () => {
                 reviewElement.scrollIntoView({behavior: 'smooth'}); // Плавный скролл
             }
         }
+    } catch {
 
-  return registerFunctions().then(() => {
-    getWithCred(backurl + '/')
-      .then((res) => {
-        switch (res.status) {
-          case 200:
-            return res.body as User;
-          case 401:
-            return defaultUser;
-        }
+    }
 
-        throw Error(`ошибка ${res.status}`);
-      })
-      .then((user) => {
-        storageUser.saveUserData(user as User);
+    return registerFunctions().then(() => {
+        getWithCred(backurl + '/')
+            .then((res) => {
+                switch (res.status) {
+                    case 200:
+                        return res.body as User;
+                    case 401:
+                        return defaultUser;
+                }
 
-        return user;
-      })
-      .then((user) => {
-        buildMain(user).then(() => {
-          router.init();
+                throw Error(`ошибка ${res.status}`);
+            })
+            .then((user) => {
+                storageUser.saveUserData(user as User);
 
-          const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
+                return user;
+            })
+            .then((user) => {
+                buildMain(user).then(() => {
+                    router.init();
 
-          routes.forEach((route) => {
-            const href = route.getAttribute(urlAttribute);
-            if (href) {
-              route.addEventListener('click', (event) => {
-                event.preventDefault();
-                if (href) router.navigate(href, true);
-              });
-            }
-          });
-        });
+                    const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
 
-        searcher.initializeListeners();
-        return user;
-      })
-      .then(() => {
-        get(backurl + '/categories')
-          .then((res) => {
-            if (res.status !== 200) {
-              throw Error('ошибка при загрузке категорий');
-            }
+                    routes.forEach((route) => {
+                        const href = route.getAttribute(urlAttribute);
+                        if (href) {
+                            route.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                if (href) router.navigate(href, true);
+                            });
+                        }
+                    });
+                });
 
-            return res.body as Category[];
-          })
-          .then((data) => {
-            categoryStorage.setCategories(data as Category[]);
-          });
-      })
-      .catch((err) => {
-        console.error('ошибка инициализации приложения:', err);
-      });
-  });
+                searcher.initializeListeners();
+                return user;
+            })
+            .then(() => {
+                get(backurl + '/categories')
+                    .then((res) => {
+                        if (res.status !== 200) {
+                            //throw Error('ошибка при загрузке категорий');
+                        }
+
+                        return res.body as Category[];
+                    })
+                    .then((data) => {
+                        categoryStorage.setCategories(data as Category[]);
+                    });
+            })
+            .catch((err) => {
+                //console.error('ошибка инициализации приложения:', err);
+            });
+    });
 });

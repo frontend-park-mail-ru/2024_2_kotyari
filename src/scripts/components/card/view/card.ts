@@ -42,7 +42,7 @@ export class CardView implements CardViewInterface {
   };
 
   initButton = (flag: boolean, url: string) => {
-    let button = document.getElementById('show-more')
+    const button = document.getElementById('show-more')
 
     if (flag && button) {
       button.setAttribute('href', url);
