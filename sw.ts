@@ -1,7 +1,7 @@
 const CACHE_NAME = 'cache-v2';
 const DYNAMIC_CACHE_NAME = 'dynamic';
 
-// List of URLs to precache
+// List of URLs to precache.
 const PRECACHE_URLS: string[] = [
   '/',
   '/catalog',
