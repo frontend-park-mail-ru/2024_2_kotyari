@@ -1,9 +1,10 @@
 import card from './card.hbs?raw';
 import { rootId } from '@/services/app/config';
 import Handlebars from 'handlebars';
+import {b} from "vite/dist/node/types.d-aGj9QkWt";
 
 export interface CardViewInterface {
-  render(data: { products: any[], page_title?: string  }, title?: string): void;
+  render(data: { products: any[], page_title?: string  }, title?: string, newRootId?: string, sorting?: boolean, flag?: boolean, url?: string): void;
 }
 
 export class CardView implements CardViewInterface {
@@ -13,8 +14,12 @@ export class CardView implements CardViewInterface {
     this.compiled = Handlebars.compile(card);
   }
 
-  render = (data: { products: any[], page_title?: string }, title?: string): void => {
-    const rootElement = document.getElementById(rootId);
+  render = (data: { products: any[], page_title?: string }, title?: string, newRootId: string = rootId, sorting: boolean = true, flag: boolean = false, url: string = ''): void => {
+
+    data.sorting = sorting;
+
+    const rootElement = document.getElementById(newRootId);
+
     if (!rootElement) {
       return;
     }
@@ -31,5 +36,17 @@ export class CardView implements CardViewInterface {
 
     templateElement.innerHTML = this.compiled(data);
     rootElement.appendChild(templateElement);
+
+    console.log(url)
+    this.initButton(flag, url);
+  };
+
+  initButton = (flag: boolean, url: string) => {
+    let button = document.getElementById('show-more')
+
+    if (flag && button) {
+      button.setAttribute('href', url);
+      button.setAttribute('router', 'changed-active');
+    }
   };
 }

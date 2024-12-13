@@ -247,8 +247,8 @@
         margin-bottom: parameters.$big-margin-bottom;
         font-size: 18px;
         font-weight: 440;
-        margin-top: parameters.$small-margin;
-        margin-left: 10px;
+        margin-top: 10px;
+        margin-left: 20px;
     }
 
     &__description-item {
@@ -287,6 +287,7 @@
         word-break: normal;
         overflow-wrap: break-word;
         hyphens: auto;
+        margin-left: 0.5px;
 
         &__header {
             font-size: 25px;
@@ -421,6 +422,10 @@
     width: 2/3 * 100%;
 }
 
+.recommendations-page {
+    width: 2/3 * 100%;
+}
+
 @media screen and (max-width: 768px) {
     .product {
         flex-direction: column;
@@ -470,6 +475,7 @@
                 margin-bottom: 10px;
             }
 
+            margin-left: 0.5px;
             font-size: 14px;
             padding: 10px;
         }
@@ -529,7 +535,8 @@
 
     .product-page__description-product-page {
         font-size: 14px;
-        margin-top: 15px;
+        margin-top: 10px;
+        margin-left: 20px;
         padding: 10px;
     }
 

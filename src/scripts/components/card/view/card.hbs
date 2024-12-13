@@ -9,7 +9,7 @@
     <div class="cards-view-title">
       {{page_title}}
     </div>
-    <div id="sort-container" class="sort-container"></div>
+      {{#if sorting}}<div id="sort-container" class="sort-container"></div>{{/if}}
   </div>
 <!--  <div class="cards-view-title" style="display: block; margin-bottom: 10px; margin-left: 20px;">-->
 <!--    <div id="breadcrumbs" class="breadcrumbs-container"></div>-->
@@ -64,4 +64,8 @@
             </div>
         {{/each}}
     </div>
+
+    {{#if more}}
+        <button class="catalog__show-more" id="show-more">Показать ещё</button>
+    {{/if}}
 </div>

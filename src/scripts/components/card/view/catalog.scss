@@ -158,6 +158,12 @@
     &:hover {
         transform: none;
     }
+
+    &__show-more {
+        @include mixins.checkout-btn();
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
 }
 
 /* Центрирование и стили для сообщения ожидания */

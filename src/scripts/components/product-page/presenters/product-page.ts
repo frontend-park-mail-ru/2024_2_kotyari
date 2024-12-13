@@ -9,13 +9,19 @@ import { csrf } from '../../../../services/api/CSRFService';
 import {ReviewsView} from "../../reviews/views/reviews";
 import {ReviewsPresenter} from "../../reviews/presenters/reviews";
 import {ReviewsApi} from "../../reviews/api/api";
+import {Recommendations} from "../../recomendations/presenter/recommendations";
+import {RecommendationsView} from "../../recomendations/view/recomendations";
+import {CardView} from "../../card/view/card";
+import {RecommendationsApi} from "../../recomendations/api/recommendations";
 
 export class ProductPageBuilder {
   private readonly reviewsId = 'reviews';
+  private readonly recommendationsId = 'recommendations-page';
 
   private productPage: ProductPage;
   private api = new ProductPageApi();
   private reviewsPresenter: ReviewsPresenter
+  private recommendations: Recommendations;
 
   constructor() {
     this.productPage = new ProductPage();
@@ -23,6 +29,10 @@ export class ProductPageBuilder {
     new ReviewsApi();
     const reviewsView = new ReviewsView(this.reviewsId);
     this.reviewsPresenter = new ReviewsPresenter(reviewsView);
+    const cardView = new CardView();
+    const recommendationsView = new RecommendationsView(cardView);
+    const recommendationsApi = new RecommendationsApi();
+    this.recommendations = new Recommendations(recommendationsApi, recommendationsView);
   }
 
   async build({ hash }: { hash?: string }) {
@@ -62,9 +72,9 @@ export class ProductPageBuilder {
       // this.initializeFavoriteIcon();
       new Carousel();
 
+      this.recommendations.render(productData.id, productData.title, this.recommendationsId);
+
       this.reviewsPresenter.init(id, hash);
-
-
 
     } catch (error) {
       // console.error('Error building product page:', error);

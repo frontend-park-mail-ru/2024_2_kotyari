@@ -27,8 +27,7 @@
 //           cache.put(event.request, networkResponse.clone());
 //           return networkResponse;
 //         });
-//       });
-//     })
+//       })
 //   );
 // });
 //
