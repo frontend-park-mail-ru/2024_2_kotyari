@@ -16,14 +16,22 @@ export class DropdownAPI {
   }
 
 
-  static sortProducts = (endpoint: string, sort: string, order: string): Promise<apiResponse> => {
+  static sortProducts = async (endpoint: string, sort: string, order: string): Promise<apiResponse> | undefined => {
     const params = new URLSearchParams({
       sort,
       order,
     });
 
-    // console.log(123, `${endpoint}&${params.toString()}`);
-
-    return get(`${endpoint}&${params.toString()}`)
+    try {
+      const response = await get(`${endpoint}&${params.toString()}`);
+      if (response === undefined) {
+        console.log("Response is undefined", response);
+        return undefined; // Либо можно обработать это как-то по-другому
+      } else {
+        return response;
+      }
+    } catch {
+      return undefined;
+    }
   };
 }
