@@ -64,7 +64,7 @@ export class AccountView {
       errorContainer.remove();
     }, 20000);
   }
-  public updateAddress(address: UserData['Address']) {
+  public updateAddress(address: string) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement){
       // console.error(this.rootElement, 'not found');
@@ -79,6 +79,7 @@ export class AccountView {
 
         addressElement.textContent += `, ${address.flat}`;
       }
+      addressElement.textContent = `${address}`;
     }
   }
 

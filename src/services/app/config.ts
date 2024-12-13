@@ -11,8 +11,8 @@ export const rootId: string = 'app';
  * @constant {string}
  * @default 'http://localhost:8000/'
  */
-// export const backurl = 'http://localhost:8000/api/v1/';
-export const backurl = 'https://oxic.shop/api/v1';
+export const backurl = 'http://localhost:8000/api/v1';
+// export const backurl = 'https://oxic.shop/api/v1';
 
 /**
  * Значение атрибуда router для элементов с кликабельными ссылками.

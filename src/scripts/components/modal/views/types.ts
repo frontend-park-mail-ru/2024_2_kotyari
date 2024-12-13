@@ -54,37 +54,13 @@ export const editAddressConfig = {
   formId: 'address-edit-form',
   fields: [
     {
-      id: 'user-city',
-      label: 'Город',
+      id: 'user-address',
+      label: 'Введите ваш адрес',
       type: 'text',
-      name: 'city',
+      name: 'address',
       value: '',
       error_id: 'city-error',
     },
-    {
-      id: 'user-street',
-      label: 'Улица',
-      type: 'text',
-      name: 'street',
-      value: '',
-      error_id: 'street-error',
-    },
-    {
-      id: 'user-house',
-      label: 'Дом',
-      type: 'text',
-      name: 'house',
-      value: '',
-      error_id: 'house-error',
-    },
-    {
-      id: 'user-flat',
-      label: 'Квартира',
-      type: 'text',
-      name: 'flat',
-      value: '',
-      error_id: 'flat-error',
-    }
   ],
   submitText: 'Сохранить изменения',
 };

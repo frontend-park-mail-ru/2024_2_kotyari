@@ -48,18 +48,25 @@ export abstract class BaseModal {
       }, 300);
     }
   }
-
   private handleOutsideClick(event: MouseEvent) {
+    const modalContent = this.modalElement?.querySelector('.modal__container');
+    const suggestionsList = document.querySelector('.suggestions');
+    const suggestionItem = event.target && (event.target as HTMLElement).closest('.suggestions__item');
+
     if (!this.modalElement) {
       // console.error(this.modalElement, ' not found');
       return;
     }
 
-    const modalContent = this.modalElement.querySelector('.modal__container');
-    if (modalContent && !modalContent.contains(event.target as Node)) {
+    const isClickInsideModal = modalContent && modalContent.contains(event.target as Node);
+    const isClickInsideSuggestions = suggestionsList && (suggestionsList.contains(event.target as Node) || suggestionItem);
+
+    // Close the modal only if the click is outside both modal content and suggestions
+    if (!isClickInsideModal && !isClickInsideSuggestions) {
       this.close();
     }
   }
+
 
   protected abstract renderContent(): void;
 
