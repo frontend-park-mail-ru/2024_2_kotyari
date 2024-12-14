@@ -245,8 +245,10 @@ export class ProductPageBuilder {
     }
 
     try {
-      await ProductPageApi.updateProductQuantity(id);
-      cartButton.textContent = 'Удалить из корзины';
+      const count = await ProductPageApi.updateProductQuantity(id);
+      console.log(count)
+      console.log(count.count)
+      cartButton.textContent = `Удалить из корзины (${count.count})`;
     } catch (error) {
       // console.error('Ошибка при обновлении количества:', error);
     }
