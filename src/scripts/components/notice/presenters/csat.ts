@@ -1,49 +1,44 @@
 import Handlebars from 'handlebars';
 import csatTemplate from './csat.hbs';
 import {csatView, csatViewInterface} from "../view/csat";
+import {CsatApi} from "../api/csat";
 
-export interface presenterInterface {
-    private updateData(): void;
+export interface csatPresenterInterface {
+    render(): void;
 }
 
-export class presenter implements presenterInterface {
+export class csatPresenter implements csatPresenterInterface {
     private readonly compile: HandlebarsTemplates;
     private readonly title: HTMLElement;
     private readonly text: HTMLElement;
-    private readonly endpoint: string;
-    private readonly view: csatViewInterface;
+    private readonly view: any;
 
-    constructor(containerId: string, endpoint: string) {
-        this.view = csatView()
+    constructor(containerId: string) {
+        this.view = new csatView(containerId);
 
         this.startPolling();
     }
 
     private startPolling() {
         this.updateData();
-        setInterval(() => this.updateData(), 5 * 60 * 1000); // Раз в 5 минут
+        setInterval(() => this.updateData(), 5 * 1000); // Раз в 5 минут
     }
 
     private async updateData() {
         try {
-            const response = await fetch(this.endpoint);
-
-            if (!response.ok) {
-                console.error(`Ошибка запроса: ${response.statusText}`);
-                return;
-            }
-
-            const data = await response.json();
+            console.log(1)
+            const data = await CsatApi.getData();
+            console.log(data)
 
             if (data && data.id && data.status) {
                 this.render(data.id, data.status);
             }
-        } catch (error) {
-            console.error('Ошибка при запросе данных:', error);
+        } catch {
+            return;
         }
     }
 
-    private render(id: string, status: string) {
+    public render(id: string, status: string) {
         this.view.render(id, status);
     }
 }

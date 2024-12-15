@@ -7,6 +7,7 @@ import {categoryStorage} from '../storage/category';
 import {buildBody, updateAfterAuth, updateAfterLogout} from '../../scripts/layouts/body';
 import {get, getWithCred} from '../api/without-csrf';
 import {Category} from '../../scripts/components/category/api/category';
+import {csatPresenter} from "../../scripts/components/notice/presenters/csat";
 
 
 /**
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 searcher.initializeListeners();
+                const csatPresener = new csatPresenter("notice")
                 return user;
             })
             .then(() => {

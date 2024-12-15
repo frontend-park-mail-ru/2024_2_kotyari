@@ -2,7 +2,7 @@ import Handlebars from 'handlebars';
 import csatTemplate from './csat.hbs'
 
 export interface csatViewInterface {
-    private render(id: string, status: string);
+    render(id: string, status: string): void;
 }
 
 export class csatView implements csatViewInterface {
@@ -15,7 +15,7 @@ export class csatView implements csatViewInterface {
 
         const container = document.getElementById(containerId);
 
-        container?.innerHTML = this.compile()
+        container.innerHTML = this.compile({title: '', text: ''})
 
         this.title = document.getElementById('voting-frame__title__text');
         this.text = document.getElementById('content');
@@ -23,22 +23,24 @@ export class csatView implements csatViewInterface {
         const backButton = document.getElementById('voting-frame__back');
         const closeButton = document.getElementById('frame__title__close');
 
-        this.backButton.addEventListener('click', (data) => {
+        backButton.addEventListener('click', (data) => {
             container.innerHTML = '';
             this.showRatingForm(container, data);
         });
 
-        this.closeButton?.addEventListener('click', () => {
+        closeButton?.addEventListener('click', () => {
             container.innerHTML = '';
             container.style.display = 'none';
         });
     }
 
-    private render = (id: string, status: string) => {
+    public render = (id: string, status: string) => {
         const data = {
             "title": `Заказ - ${id}`,
             "text": `Статус заказа изменился на "${status}"`,
         }
+
+        console.log(data)
 
         this.title.innerHTML = data.title;
         this.text.innerHTML = data.text;
