@@ -8,8 +8,7 @@ export interface CsatApiInterface {
 export class CsatApi {
     static async getData(): object | null {
         try {
-            //return await get(backurl + '/notice');
-            return {id: '123', status: 'dfggfd'}
+            return await get(backurl + '/orders/updates');
         } catch {
             return null;
         }
