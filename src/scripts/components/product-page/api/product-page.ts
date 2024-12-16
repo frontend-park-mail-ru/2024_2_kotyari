@@ -1,5 +1,5 @@
 import { backurl } from '../../../../services/app/config';
-import { get } from '../../../../services/api/without-csrf';
+import {get, getWithCred} from '../../../../services/api/without-csrf';
 import { csrf } from '../../../../services/api/CSRFService';
 
 interface ProductOption {
@@ -43,8 +43,8 @@ interface ProductData {
 }
 
 export class ProductPageApi {
-  getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
-    return get(`${backurl}/product/${productId}`)
+  getProductData = async (productId: string): Promise< { ok: boolean, body: ProductData }> => {
+    return await getWithCred(`${backurl}/product/${productId}`)
       .then((res) => {
         switch (res.status) {
           case 200:
@@ -59,12 +59,12 @@ export class ProductPageApi {
       })
   }
 
-  addToCart = (productId: string): Promise<{ ok: boolean; unauthorized?: boolean }> =>{
+  addToCart = async (productId: string): Promise<{ ok: boolean; unauthorized?: boolean; res?: any }> =>{
     return csrf.post(`${backurl}/cart/product/${productId}`)
       .then((res) => {
         switch (res.status) {
           case 204:
-            return { ok: true };
+            return { ok: true, unauthorized: false, res: res };
           case 401:
             return { ok: false, unauthorized: true };
           case 403:
@@ -111,9 +111,8 @@ export class ProductPageApi {
   static async updateProductQuantity(productId: string, count: number = 1): Promise<void> {
     return csrf.patch(`${backurl}/cart/product/${productId}`, { count })
       .then(res =>{
-        console.log(res)
         switch (res.status) {
-          case 204:
+          case 200:
             return res.body;
           case 403:
             csrf.refreshToken()

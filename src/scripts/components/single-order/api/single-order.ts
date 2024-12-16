@@ -13,7 +13,6 @@ export class SingleOrderApiInterface {
     }));
 
     const totalItems = products.reduce((sum, product) => sum + product.count, 0);
-    const totalPrice = products.reduce((sum, product) => sum + product.cost * product.count, 0);
 
     return {
       id: data.id,
@@ -22,7 +21,7 @@ export class SingleOrderApiInterface {
       address: data.address,
       recipient: data.recipient,
       totalItems: totalItems,
-      totalPrice: totalPrice,
+      totalPrice: data.total_price,
       products: products,
     };
   }
