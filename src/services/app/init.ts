@@ -28,6 +28,9 @@ import { PERSONAL_ACCOUNT } from '../../scripts/components/personal-account/conf
 import { SearcherApi } from '../../scripts/components/searcher/api/search';
 import { SearcherView } from '../../scripts/components/searcher/view/search';
 import { Searcher } from '../../scripts/components/searcher/presenter/search';
+import {Recommendations} from "../../scripts/components/recomendations/presenter/recommendations";
+import {RecommendationsApi} from "../../scripts/components/recomendations/api/recommendations";
+import {RecommendationsView} from "../../scripts/components/recomendations/view/recomendations";
 
 HandlebarsRegEqual();
 
@@ -64,14 +67,16 @@ const searcherApi = new SearcherApi();
 const searcherView = new SearcherView(cardView);
 export const searcher = new Searcher(searcherApi, searcherView);
 
+const recommendationsApi = new RecommendationsApi();
+const recommendationsView = new RecommendationsView(cardView);
+export const recommendations = new Recommendations(recommendationsApi, recommendationsView);
+
 router.addRoute(
   '/search/catalog',
   () => {
     const query = router.getQueryParam('q');
     const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
     const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
-
-    console.log({ query, sort, order });
 
     if (query) {
       searcher.searchProducts(query, sort, order); // Передаем параметры в searchProducts
@@ -83,6 +88,26 @@ router.addRoute(
   false,
   false,
 );
+
+// router.addRoute(
+//     '/product/:id/recommendations',
+//     () => {
+//         const routeParams = router.getRouteParams();
+//
+//         const name = router.getQueryParam('title');
+//         const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
+//         const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
+//
+//         if (routeParams['id']) {
+//             recommendations.recommendationsProducts(routeParams['id'], name, sort, order); // Передаем параметры в searchProducts
+//         } else {
+//             router.navigate('/'); // Перенаправляем на главную, если нет запроса
+//         }
+//     },
+//     new RegExp('^\\/product\\/(\\d+)\\/recommendations(\\?.*)?$'), // Обновляем RegExp для новых параметров
+//     false,
+//     false,
+// );
 
 router.addRoute(AUTH_URLS.LOGIN.route,
   () => loginPresenter.init(),
@@ -113,9 +138,9 @@ router.addRoute(
   '/product/:id:hash',
   (params) => {
     let hash = window.location.hash; // Извлекаем текущий хэш
-    console.log('Параметры маршрута:', params, 'Хэш:', hash);
+    //console.log('Параметры маршрута:', params, 'Хэш:', hash);
     if (hash) hash = hash.replace(/^#/, '');
-    productPageBuilder.build({ hash }).catch(e => console.error(e));
+    productPageBuilder.build({ hash }).catch(e => {/*console.error(e)*/});
   },
   new RegExp('^\\/product\\/(\\d+)(#.*)?$'), // Регулярное выражение с поддержкой хэша
   false,

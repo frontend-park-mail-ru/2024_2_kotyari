@@ -1,12 +1,13 @@
-import { router, searcher } from './init.js';
-import { backurl, CLICK_CLASSES, rootId, urlAttribute } from './config';
-import { defaultUser, storageUser } from '../storage/user';
-import { User } from '../types/types';
-import { registerFunctions } from '../../scripts/utils/helperName';
-import { categoryStorage } from '../storage/category';
-import { buildBody, updateAfterAuth, updateAfterLogout } from '../../scripts/layouts/body';
-import { get, getWithCred } from '../api/without-csrf';
-import { Category } from '../../scripts/components/category/api/category';
+import {router, searcher} from './init.js';
+import {backurl, CLICK_CLASSES, rootId, urlAttribute} from './config.ts';
+import {defaultUser, storageUser} from '../storage/user';
+import {User} from '../types/types';
+import {registerFunctions} from '../../scripts/utils/helperName';
+import {categoryStorage} from '../storage/category';
+import {buildBody, updateAfterAuth, updateAfterLogout} from '../../scripts/layouts/body';
+import {get, getWithCred} from '../api/without-csrf';
+import {Category} from '../../scripts/components/category/api/category';
+import {csatPresenter} from "../../scripts/components/notice/presenters/csat";
 
 
 /**
@@ -16,13 +17,13 @@ import { Category } from '../../scripts/components/category/api/category';
  * @returns {Promise<void>} Возвращает промис, который завершается после построения интерфейса.
  */
 export const buildMain = (user: User): Promise<void> => {
-  return buildBody({ rootId }).then(() => {
-    if (user.username === '') {
-      updateAfterLogout(user);
-    } else {
-      updateAfterAuth(user);
-    }
-  });
+    return buildBody({rootId}).then(() => {
+        if (user.username === '') {
+            updateAfterLogout(user);
+        } else {
+            updateAfterAuth(user);
+        }
+    });
 };
 
 // if ('serviceWorker' in navigator) {
@@ -44,66 +45,71 @@ export const buildMain = (user: User): Promise<void> => {
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash;
-  if (hash && hash === '#review') {
-    const reviewElement = document.getElementById('review');
-    if (reviewElement) {
-      reviewElement.scrollIntoView({ behavior: 'smooth' }); // Плавный скролл
-    }
-  }
-
-  return registerFunctions().then(() => {
-    getWithCred(backurl + '/')
-      .then((res) => {
-        switch (res.status) {
-          case 200:
-            return res.body as User;
-          case 401:
-            return defaultUser;
+    try {
+        const hash = window.location.hash;
+        if (hash && hash === '#review') {
+            const reviewElement = document.getElementById('review');
+            if (reviewElement) {
+                reviewElement.scrollIntoView({behavior: 'smooth'}); // Плавный скролл
+            }
         }
+    } catch {
 
-        throw Error(`ошибка ${res.status}`);
-      })
-      .then((user) => {
-        storageUser.saveUserData(user as User);
+    }
 
-        return user;
-      })
-      .then((user) => {
-        buildMain(user).then(() => {
-          router.init();
+    return registerFunctions().then(() => {
+        getWithCred(backurl + '/')
+            .then((res) => {
+                switch (res.status) {
+                    case 200:
+                        return res.body as User;
+                    case 401:
+                        return defaultUser;
+                }
 
-          const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
+                throw Error(`ошибка ${res.status}`);
+            })
+            .then((user) => {
+                storageUser.saveUserData(user as User);
 
-          routes.forEach((route) => {
-            const href = route.getAttribute(urlAttribute);
-            if (href) {
-              route.addEventListener('click', (event) => {
-                event.preventDefault();
-                if (href) router.navigate(href, true);
-              });
-            }
-          });
-        });
+                return user;
+            })
+            .then((user) => {
+                buildMain(user).then(() => {
+                    router.init();
 
-        searcher.initializeListeners();
-        return user;
-      })
-      .then(() => {
-        get(backurl + '/categories')
-          .then((res) => {
-            if (res.status !== 200) {
-              throw Error('ошибка при загрузке категорий');
-            }
+                    const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.stability}"]`);
 
-            return res.body as Category[];
-          })
-          .then((data) => {
-            categoryStorage.setCategories(data as Category[]);
-          });
-      })
-      .catch((err) => {
-        console.error('ошибка инициализации приложения:', err);
-      });
-  });
+                    routes.forEach((route) => {
+                        const href = route.getAttribute(urlAttribute);
+                        if (href) {
+                            route.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                if (href) router.navigate(href, true);
+                            });
+                        }
+                    });
+                });
+
+                searcher.initializeListeners();
+                const csatPresener = new csatPresenter("notice")
+                return user;
+            })
+            .then(() => {
+                get(backurl + '/categories')
+                    .then((res) => {
+                        if (res.status !== 200) {
+                            //throw Error('ошибка при загрузке категорий');
+                        }
+
+                        return res.body as Category[];
+                    })
+                    .then((data) => {
+                        categoryStorage.setCategories(data as Category[]);
+                    });
+            })
+            .catch((err) => {
+                //console.error('ошибка инициализации приложения:', err);
+            });
+    });
 });

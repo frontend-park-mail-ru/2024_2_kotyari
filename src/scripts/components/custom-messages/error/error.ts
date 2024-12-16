@@ -25,7 +25,7 @@ export function errorPage(name: string): void {
 
   const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
-    console.error(`Element ID = ${rootId} not found`);
+    // console.error(`Element ID = ${rootId} not found`);
   }
 
   rootElement.innerHTML = '';

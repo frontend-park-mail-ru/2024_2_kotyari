@@ -1,5 +1,5 @@
 import { backurl } from '../../../../services/app/config';
-import { getWithCred } from '../../../../services/api/without-csrf';
+import { get } from '../../../../services/api/without-csrf';
 import { csrf } from '../../../../services/api/CSRFService';
 
 interface ProductOption {
@@ -44,7 +44,7 @@ interface ProductData {
 
 export class ProductPageApi {
   getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
-    return getWithCred(`${backurl}/product/${productId}`)
+    return get(`${backurl}/product/${productId}`)
       .then((res) => {
         switch (res.status) {
           case 200:
@@ -54,7 +54,7 @@ export class ProductPageApi {
         }
       })
       .catch(e => {
-        console.error('Error fetching product data:', e);
+        // console.error('Error fetching product data:', e);
         return { ok: false };
       })
   }
@@ -69,7 +69,7 @@ export class ProductPageApi {
             return { ok: false, unauthorized: true };
           case 403:
             csrf.refreshToken()
-              .catch(err => console.log(err));
+              .catch(err => {/*console.log(err)*/});
 
             return { ok: false };
           case 409:
@@ -79,7 +79,7 @@ export class ProductPageApi {
         }
       })
       .catch((error) => {
-        console.error('Error adding to cart:', error);
+        // console.error('Error adding to cart:', error);
         return { ok: false };
       });
   }
@@ -95,7 +95,7 @@ export class ProductPageApi {
             return { ok: false, unauthorized: true };
           case 403:
             csrf.refreshToken()
-              .catch(err => console.log(err));
+              .catch(err => {/*console.log(err)*/});
 
             return { ok: false };
           default:
@@ -103,7 +103,7 @@ export class ProductPageApi {
         }
       })
       .catch((error) => {
-        console.error('Error removing from cart:', error);
+        // console.error('Error removing from cart:', error);
         return { ok: false };
       });
   }
@@ -111,14 +111,15 @@ export class ProductPageApi {
   static async updateProductQuantity(productId: string, count: number = 1): Promise<void> {
     return csrf.patch(`${backurl}/cart/product/${productId}`, { count })
       .then(res =>{
+        console.log(res)
         switch (res.status) {
           case 204:
-            return;
+            return res.body;
           case 403:
             csrf.refreshToken()
-              .catch(err => console.log(err));
+              .catch(err => {/*console.log(err)*/});
             
-            return;
+            return res.body;
           default:
             throw new Error(`${res.status} - ${res.body.error_message}`);
         }

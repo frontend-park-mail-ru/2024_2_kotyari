@@ -22,10 +22,10 @@ export class DropdownPresenter {
   initView(): void {
     const container = document.getElementById(this.config.containerId);
 
-    console.log('init view');
+    // console.log('init view');
 
     if (!container) {
-      console.error(`Контейнер с ID ${this.config.containerId} не найден`);
+      // console.error(`Контейнер с ID ${this.config.containerId} не найден`);
       return;
     }
 

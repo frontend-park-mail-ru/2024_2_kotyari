@@ -1,3 +1,5 @@
+import {c} from "vite/dist/node/types.d-aGj9QkWt";
+
 /**
  * Интерфейс, описывающий структуру ответа API.
  */
@@ -27,7 +29,6 @@ export const parseJsonResponse = async (res: Response): Promise<apiResponse> => 
     const responseJson = await res.json();
     return { status: responseJson.status, body: responseJson.body };
   } catch {
-    console.log(res);
-    throw new Error("не получилось распарсить в json");
+    //throw new Error("не получилось распарсить в json");
   }
 };

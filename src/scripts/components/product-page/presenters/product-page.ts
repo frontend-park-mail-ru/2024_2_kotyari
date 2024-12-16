@@ -9,13 +9,19 @@ import { csrf } from '../../../../services/api/CSRFService';
 import {ReviewsView} from "../../reviews/views/reviews";
 import {ReviewsPresenter} from "../../reviews/presenters/reviews";
 import {ReviewsApi} from "../../reviews/api/api";
+import {Recommendations} from "../../recomendations/presenter/recommendations";
+import {RecommendationsView} from "../../recomendations/view/recomendations";
+import {CardView} from "../../card/view/card";
+import {RecommendationsApi} from "../../recomendations/api/recommendations";
 
 export class ProductPageBuilder {
   private readonly reviewsId = 'reviews';
+  private readonly recommendationsId = 'recommendations-page';
 
   private productPage: ProductPage;
   private api = new ProductPageApi();
   private reviewsPresenter: ReviewsPresenter
+  private recommendations: Recommendations;
 
   constructor() {
     this.productPage = new ProductPage();
@@ -23,15 +29,21 @@ export class ProductPageBuilder {
     new ReviewsApi();
     const reviewsView = new ReviewsView(this.reviewsId);
     this.reviewsPresenter = new ReviewsPresenter(reviewsView);
+    const cardView = new CardView();
+    const recommendationsView = new RecommendationsView(cardView);
+    const recommendationsApi = new RecommendationsApi();
+    this.recommendations = new Recommendations(recommendationsApi, recommendationsView);
   }
 
   async build({ hash }: { hash?: string }) {
     try {
-      console.log(hash);
-
       const id = this.getProductId();
 
-      await csrf.refreshToken();
+      try {
+        await csrf.refreshToken();
+      } catch {
+
+      }
 
       if (id === ''){
         router.navigate('/')
@@ -58,16 +70,16 @@ export class ProductPageBuilder {
 
       this.initializeConditionButtons();
       // this.initializeOptionButtons();
-      this.initializeCartButtons(productData.in_cart);
+      this.initializeCartButtons(productData.in_cart, productData.count);
       // this.initializeFavoriteIcon();
       new Carousel();
 
+      this.recommendations.render(productData.id, productData.title, this.recommendationsId);
+
       this.reviewsPresenter.init(id, hash);
 
-
-
     } catch (error) {
-      console.error('Error building product page:', error);
+      // console.error('Error building product page:', error);
     }
   }
 
@@ -141,7 +153,7 @@ export class ProductPageBuilder {
     return keys['id'];
   }
 
-  private initializeCartButtons(isInCart: boolean) {
+  private initializeCartButtons(isInCart: boolean, count: number = 0) {
     const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
     const incrementButton = document.createElement('button');
     incrementButton.textContent = '+';
@@ -149,7 +161,7 @@ export class ProductPageBuilder {
     incrementButton.style.display = isInCart ? 'inline-block' : 'none';
 
     if (isInCart) {
-      cartButton.textContent = 'Удалить из корзины';
+      cartButton.textContent = `Удалить из корзины (${count})`;
       this.productPage.setButtonPressedState(cartButton);
     } else {
       if (!isAuth()) {
@@ -211,7 +223,7 @@ export class ProductPageBuilder {
 
     this.api.rmFromCart(id)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
 
         if (result.unauthorized) {
           cartButton.textContent = 'Войдите в аккаунт';
@@ -235,10 +247,12 @@ export class ProductPageBuilder {
     }
 
     try {
-      await ProductPageApi.updateProductQuantity(id);
-      cartButton.textContent = 'Удалить из корзины';
+      const count = await ProductPageApi.updateProductQuantity(id);
+      console.log(count)
+      console.log(count.count)
+      cartButton.textContent = `Удалить из корзины (${count.count})`;
     } catch (error) {
-      console.error('Ошибка при обновлении количества:', error);
+      // console.error('Ошибка при обновлении количества:', error);
     }
   }
 

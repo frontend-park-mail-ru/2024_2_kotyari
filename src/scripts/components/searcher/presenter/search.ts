@@ -64,7 +64,7 @@ export class Searcher {
 
       DropdownAPI.sortProducts(`${backurl}${this.apiEndpoint}?q=${query}`, sort, order)
         .then((productsApi) => {
-          console.log(productsApi);
+          // console.log(productsApi);
           const products = productsApi.body;
           products.forEach((card) => {
             card.image_url = `${backurl}/${card.image_url}`;
@@ -74,7 +74,7 @@ export class Searcher {
           this.view.renderProducts({products: products}, query, this.config);
         })
         .catch((error) => {
-          console.error('Ошибка сортировки:', error);
+          // console.error('Ошибка сортировки:', error);
         });
     }
   };
@@ -85,7 +85,7 @@ export class Searcher {
     const suggestionsList = document.getElementById('suggestions') as HTMLUListElement;
 
     if (!searchInput || !searchButton|| !suggestionsList) {
-      console.error('Search input or button not found');
+      // console.error('Search input or button not found');
       return;
     }
 
@@ -154,7 +154,7 @@ export class Searcher {
   public searchProducts(query: string, sort: string, order: string) {
     const searchUrl = `${backurl}${this.apiEndpoint}?q=${query}&sort=${sort}&order=${order}`;
 
-    console.log(sort, order);
+    // console.log(sort, order);
 
     this.api
       .getProductsByQuery(searchUrl)
@@ -168,11 +168,11 @@ export class Searcher {
           this.view.renderProducts({ products }, query, this.config);
           this.updateBreadcrumbs(`Результаты поиска: ${query}`, `/search/catalog?q=${query}&sort=${sort}&order=${order}`);
         } else {
-          console.error('No products found');
+          // console.error('No products found');
         }
       })
       .catch((e) => {
-        console.error('Error fetching products:', e);
+        // console.error('Error fetching products:', e);
       });
   }
 
@@ -188,7 +188,7 @@ export class Searcher {
               this.view.displaySuggestions([]);
             }
           })
-          .catch(e => console.error('Error fetching suggestions:', e));
+          .catch(e => {/*console.error('Error fetching suggestions:', e)*/});
       } else {
         this.view.displaySuggestions([]);
       }
@@ -196,11 +196,11 @@ export class Searcher {
   }
 
   private updateBreadcrumbs = (label: string, url: string) => {
-    console.log(`Updating breadcrumbs with label: ${label} and url: ${url}`);
+    // console.log(`Updating breadcrumbs with label: ${label} and url: ${url}`);
   };
 
   private hideSuggestions() {
-    console.log(111111);
+    // console.log(111111);
     this.view.displaySuggestions([]);
   }
 

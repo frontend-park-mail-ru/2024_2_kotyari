@@ -84,7 +84,7 @@ export async function registerFunctions(): Promise<boolean> {
             return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
 
         return false;
     }

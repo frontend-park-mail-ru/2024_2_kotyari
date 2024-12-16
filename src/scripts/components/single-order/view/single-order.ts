@@ -18,7 +18,7 @@ export class SingleOrderView {
     this.rootElement = document.getElementById(this.rootId);
 
     if (!this.rootElement) {
-      console.error(`Root element with id ${this.rootId} not found`);
+      // console.error(`Root element with id ${this.rootId} not found`);
       return;
     }
 
@@ -40,7 +40,7 @@ export class SingleOrderView {
         if (productId) {
           router.navigate(`/product/${productId}`);
         } else {
-          console.error('Product ID не найден');
+          // console.error('Product ID не найден');
         }
       });
     });

@@ -30,9 +30,9 @@ export class CardPresenter {
 
         this.view.render({ products: cardsData });
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      // .catch((err) => {
+      //   // console.error(err);
+      // });
   };
 
   private attachCardClickHandlers() {

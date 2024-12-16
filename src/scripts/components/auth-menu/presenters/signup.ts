@@ -43,7 +43,7 @@ export class SignUpPresenter {
     if (signUpForm) {
       signUpForm.addEventListener('submit', this.handleSignUp);
     } else {
-      console.warn('Форма для регистрации не найдена!');
+      //// console.warn('Форма для регистрации не найдена!');
     }
   };
 
@@ -84,12 +84,12 @@ export class SignUpPresenter {
         }
 
         const error = response.body as ErrorResponse;
-        console.error('Login error:', error.error_message);
+        //// console.error('Login error:', error.error_message);
         this.errorView.displayBackError(error.error_message ?? 'неизвестная ошибка');
       })
       .catch((error: authResponse) => {
         const errorBody = error.body as ErrorResponse;
-        console.error('Ошибка при логине:', errorBody.error_message);
+        //// console.error('Ошибка при логине:', errorBody.error_message);
         this.errorView.displayBackError(errorBody.error_message);
       });
   };

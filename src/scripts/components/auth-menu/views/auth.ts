@@ -17,7 +17,8 @@ export default class AuthView implements AuthViewInterface {
 
     const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      return console.error(`Элемент ID =  ${rootId} не найден`);
+      //// console.error(`Элемент ID =  ${rootId} не найден`);
+      return new Error(`Элемент ID =  ${rootId} не найден`)
     }
 
     rootElement.innerHTML = '';

@@ -31,7 +31,7 @@ export class CategoryPresenter {
     this.api.getCategories()
       .then((data) => {
         if (typeof data === 'string') {
-          console.error(data);
+          // console.error(data);
         } else {
           data.forEach((card) => {
             card.picture = `${backurl}/${card.picture}`;
@@ -93,7 +93,7 @@ export class CategoryPresenter {
     if (order) urlParams.append('order', order);
 
     const categoryUrl = `${backurl}/category/${categoryLink}${urlParams.toString() ? `?${urlParams.toString()}` : ''}`;
-    console.log(categoryUrl);
+    // console.log(categoryUrl);
     this.api.getCategoryProducts(categoryUrl)
       .then((products) => {
         if (Array.isArray(products)) {
@@ -105,7 +105,7 @@ export class CategoryPresenter {
           this.categoryView.renderCategoryProducts({ products }, categoryLink);
           this.updateBreadcrumbs(`Категория: ${categoryLink}`, `/category/${categoryLink}${urlParams.toString() ? `?${urlParams.toString()}` : ''}`);
         } else {
-          console.error('No products found in category');
+          // console.error('No products found in category');
         }
       })
       .then(() => {
@@ -128,11 +128,11 @@ export class CategoryPresenter {
           this.dropdownPresenter.initView();
 
         } else {
-          console.error('Dropdown container not found');
+          // console.error('Dropdown container not found');
         }
       })
       .catch((e) => {
-        console.error('Error fetching category products:', e);
+        // console.error('Error fetching category products:', e);
       });
   }
 

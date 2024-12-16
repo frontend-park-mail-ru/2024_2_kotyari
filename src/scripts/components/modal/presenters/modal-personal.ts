@@ -41,8 +41,8 @@ export class PersonalDataModal extends BaseModal {
       });
 
       this.handleSubmit(updatedUser)
-        .then(() => console.log("Submit successful"))
-        .catch((error) => console.error("Submit failed:", error));
+        .then(() => {/*console.log("Submit successful")*/})
+        .catch((error) => {/*console.error("Submit failed:", error)*/});
     });
 
     const inputs = form.querySelectorAll('input, select') as HTMLInputElement[];
@@ -91,7 +91,7 @@ export class PersonalDataModal extends BaseModal {
         }
       })
       .catch(err => {
-        console.error('Error updating profile:', err);
+        // console.error('Error updating profile:', err);
         this.displayBackError(err || 'ошибка, попробуйте еще раз');
       });
   }
@@ -104,7 +104,7 @@ export class PersonalDataModal extends BaseModal {
       globalErrorMessage.innerText = message;
       errorElement.style.display = 'block';
     } else {
-      console.error('Error elements not found in the modal.');
+      // console.error('Error elements not found in the modal.');
     }
   }
 
@@ -162,7 +162,7 @@ export class PersonalDataModal extends BaseModal {
   }
 
   private addInputError(element: HTMLElement, errorElement: HTMLElement | null, message: string) {
-    console.log('Adding input error for:', element.id, 'with message:', message);
+    // console.log('Adding input error for:', element.id, 'with message:', message);
 
     if (errorElement) {
       errorElement.textContent = message;
@@ -174,7 +174,7 @@ export class PersonalDataModal extends BaseModal {
   }
 
   private removeInputError(element: HTMLElement, errorElement: HTMLElement | null) {
-    console.log('Removing input error for:', element.id);
+    // console.log('Removing input error for:', element.id);
 
     if (errorElement) {
       errorElement.textContent = '';

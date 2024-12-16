@@ -20,7 +20,7 @@ export class AccountView {
   public render(data: UserData & { deliveryInfo: Array<any>; rightColumnInfo: Array<any>  }) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement) {
-      console.error(`Root element with id ${this.rootId} not found`);
+      // console.error(`Root element with id ${this.rootId} not found`);
       return;
     }
     this.rootElement.innerHTML = this.compiledTemplate(data);
@@ -30,7 +30,7 @@ export class AccountView {
   public updateAvatar(newAvatarUrl: string) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
+      // console.error(this.rootElement, 'not found');
       return;
     }
 
@@ -46,19 +46,19 @@ export class AccountView {
     errorContainer.textContent = errorMessage;
 
     if (!this.rootElement) {
-      console.error('root element with id ${this.rootId} not found');
+      // console.error('root element with id ${this.rootId} not found');
       return;
     }
     const avatarContainer = this.rootElement.querySelector('.account__user-name') as HTMLElement | null;
     if (!avatarContainer) {
-      console.error('avatar container not found');
+      // console.error('avatar container not found');
       return;
     }
 
-    console.log(avatarContainer,errorContainer);
+    // console.log(avatarContainer,errorContainer);
     avatarContainer.appendChild(errorContainer);
 
-    console.log(avatarContainer);
+    // console.log(avatarContainer);
 
     setTimeout(() => {
       errorContainer.remove();
@@ -67,7 +67,7 @@ export class AccountView {
   public updateAddress(address: UserData['Address']) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
+      // console.error(this.rootElement, 'not found');
       return;
     }
 
@@ -75,7 +75,7 @@ export class AccountView {
     if (addressElement) {
       addressElement.textContent = `${address.city}, ${address.street}, ${address.house}`;
       if (address.flat) {
-        console.log(address.flat);
+        // console.log(address.flat);
 
         addressElement.textContent += `, ${address.flat}`;
       }
@@ -85,7 +85,7 @@ export class AccountView {
   private setupListeners() {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
+      // console.error(this.rootElement, 'not found');
       return;
     }
 
