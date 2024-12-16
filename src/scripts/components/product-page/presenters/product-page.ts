@@ -37,11 +37,13 @@ export class ProductPageBuilder {
 
   async build({ hash }: { hash?: string }) {
     try {
-      // console.log(hash);
-
       const id = this.getProductId();
 
-      await csrf.refreshToken();
+      try {
+        await csrf.refreshToken();
+      } catch {
+
+      }
 
       if (id === ''){
         router.navigate('/')
@@ -68,7 +70,7 @@ export class ProductPageBuilder {
 
       this.initializeConditionButtons();
       // this.initializeOptionButtons();
-      this.initializeCartButtons(productData.in_cart);
+      this.initializeCartButtons(productData.in_cart, productData.count);
       // this.initializeFavoriteIcon();
       new Carousel();
 
@@ -151,7 +153,7 @@ export class ProductPageBuilder {
     return keys['id'];
   }
 
-  private initializeCartButtons(isInCart: boolean) {
+  private initializeCartButtons(isInCart: boolean, count: number = 0) {
     const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
     const incrementButton = document.createElement('button');
     incrementButton.textContent = '+';
@@ -159,7 +161,7 @@ export class ProductPageBuilder {
     incrementButton.style.display = isInCart ? 'inline-block' : 'none';
 
     if (isInCart) {
-      cartButton.textContent = 'Удалить из корзины';
+      cartButton.textContent = `Удалить из корзины (${count})`;
       this.productPage.setButtonPressedState(cartButton);
     } else {
       if (!isAuth()) {

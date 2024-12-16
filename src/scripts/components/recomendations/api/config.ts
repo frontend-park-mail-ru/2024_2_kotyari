@@ -1,7 +1,7 @@
 export const RECOMMENDATIONS_URLS = {
     GET_PRODUCTS: {
-        route: '/recommendations/product/',
+        route: '/product/',
         name: 'Главная oxic',
-        REG_EXP:new RegExp(`^/recomendations/product$`),
+        REG_EXP:new RegExp(`^/product/$`),
     },
 };

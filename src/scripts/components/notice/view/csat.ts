@@ -49,15 +49,38 @@ export class csatView implements csatViewInterface {
         }
     }
 
-    public render = (id: string, status: string) => {
-        const data = {
-            "title": `Заказ - ${id}`,
-            "text": `Статус заказа изменился на "${this.switchOrderStatus(status)}"`,
+    public render = (data_in: any) => {
+        let text: string = '';
+
+        for (const key in data_in) {
+            text += `\n<div class='order-status'>Статус заказа <b class='order-id'>${data_in[key].order_id}</b> изменился на <span class='order-status__highlight'>"${this.switchOrderStatus(data_in[key].new_status)}"</span></div>`;
         }
 
+        const data = {
+            "title": `Изменения значений:`,
+            "text": text.trim(),
+        };
+
+        // Style container for mobile responsiveness
         this.container.style.display = 'flex';
+        this.container.style.maxHeight = '400px';
+        this.container.style.overflowY = 'auto';
+        this.container.style.borderRadius = '10px';
+        this.container.style.padding = '10px';
+
+        // Adjust for mobile screens
+        if (window.innerWidth <= 768) {
+
+        }
 
         this.title.innerHTML = data.title;
         this.text.innerHTML = data.text;
+
+        // Ensure content does not overflow and IDs break correctly
+        this.text.style.wordWrap = 'break-word';
+        const orderIds = this.text.querySelectorAll('.order-id');
+        orderIds.forEach((id) => {
+            id.style.wordBreak = 'break-all';
+        });
     }
 }

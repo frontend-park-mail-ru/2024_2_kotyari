@@ -60,6 +60,10 @@
     @media (max-width: 600px) {
       width: 100%;
     }
+
+    @media (min-width: 1350px) {
+      width: 100%;
+    }
   }
 
   &__payment-method {
@@ -120,6 +124,11 @@
       flex-direction: column;
       align-items: stretch;
     }
+
+    @media (min-width: 1350px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 
   &__apply-promo-btn {
@@ -133,6 +142,11 @@
       width: 100%;
       margin-top: parameters.$mini-gap;
     }
+
+    @media (min-width: 1350px) {
+      width: 100%;
+      margin-top: parameters.$mini-gap;
+    }
   }
 
   &__promo {
@@ -140,6 +154,10 @@
     display: flex;
 
     @media (max-width: 600px) {
+      display: contents;
+    }
+
+    @media (min-width: 1350px) {
       display: contents;
     }
   }
@@ -197,4 +215,9 @@
   left: 0;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   white-space: nowrap; /* Чтобы текст не переносился */
+}
+
+.right-element-card__promo-title {
+  margin-bottom: 10px;
+  font-size: 16px;
 }

@@ -1,4 +1,4 @@
-import { get } from '../../../../services/api/without-csrf';
+import { getWithCred } from '../../../../services/api/without-csrf';
 import { backurl } from '../../../../services/app/config';
 import { Product } from '../../card/api/card';
 import {RECOMMENDATIONS_URLS} from "./config";
@@ -13,7 +13,7 @@ export class RecommendationsApi implements RecommendationsApiInterface {
     }
 
     getProducts = (id: number): Promise<Product[] | null> => {
-        return get(backurl + RECOMMENDATIONS_URLS.GET_PRODUCTS + id)
+        return getWithCred(backurl + RECOMMENDATIONS_URLS.GET_PRODUCTS.route + id + '/recommendations')
             .then((res) => {
                 return res.body as Product[];
             })

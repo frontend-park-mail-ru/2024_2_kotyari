@@ -92,12 +92,25 @@ $voting-frame-color-gray: #8c8c8c;
   }
 }
 
+.order-status {
+  margin-bottom: 10px;
+  font-size: 14px;
+
+  &__highlight {
+    color: $voting-frame-color-primary;
+    font-weight: bold;
+  }
+}
+
 @media (max-width: 350px) {
   .voting-frame {
     bottom: 0.5rem;
-    left: 0.5rem;
-    width: calc(100% - 1rem);
+    width: calc(100% - 20px);
     max-width: none;
+
+    margin: 0 auto;
+    left: 0;
+    right: 0;
   }
 
   .voting-frame__title {
@@ -111,5 +124,13 @@ $voting-frame-color-gray: #8c8c8c;
   .voting-frame__vote-button {
     font-size: 12px;
     padding: 10px 0;
+  }
+  .voting-frame__content {
+    min-width: calc(100% - 20px);
+    margin-top: 7px;
+  }
+
+  .order-status {
+    font-size: 12px;
   }
 }

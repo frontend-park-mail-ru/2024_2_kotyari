@@ -10,7 +10,7 @@ export class Recommendations {
     private api: RecommendationsApiInterface;
     private view: RecommendationsViewInterface;
     private dropdownPresenter: DropdownPresenter;
-    private apiEndpoint = '/recommendations/product';
+    private apiEndpoint = '/product/';
     private readonly config: DropdownConfig;
     private readonly id: number | null = null;
     private readonly name: string | null = null;
@@ -55,7 +55,7 @@ export class Recommendations {
                 break;
         }
 
-        router.navigate(`${this.apiEndpoint}/${this.id}?sort=${sort}&order=${order}`);
+        router.navigate(`${this.apiEndpoint}/${this.id}/recommendations?sort=${sort}&order=${order}`);
 
         this.recommendationsProducts(this.id, this.name, sort, order);
     };
@@ -71,11 +71,11 @@ export class Recommendations {
             products.products = products.products.slice(0, 6);
         }
 
-        this.view.renderProducts(products, 'Похожее на ' + this.name, this.config, rootId, false, true, this.apiEndpoint + `?id=${this.id}&title=${this.name}`);
+        this.view.renderProducts(products, 'Похожее на ' + this.name, this.config, rootId, false, true, this.apiEndpoint + this.id + '/recommendations' + `?id=${this.id}&title=${this.name}`);
     }
 
     public recommendationsProducts(id: number, name: string, sort: string, order: string) {
-        DropdownAPI.sortProducts(`${backurl}${this.apiEndpoint}/${id}`, sort, order)
+        DropdownAPI.sortProducts(`${backurl}${this.apiEndpoint}/${id}/recommendations`, sort, order)
             .then(async (productsApi) => {
                 let products;
 

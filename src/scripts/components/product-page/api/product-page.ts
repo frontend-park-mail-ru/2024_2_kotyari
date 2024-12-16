@@ -1,5 +1,5 @@
 import { backurl } from '../../../../services/app/config';
-import { getWithCred } from '../../../../services/api/without-csrf';
+import { get } from '../../../../services/api/without-csrf';
 import { csrf } from '../../../../services/api/CSRFService';
 
 interface ProductOption {
@@ -44,7 +44,7 @@ interface ProductData {
 
 export class ProductPageApi {
   getProductData = (productId: string): Promise< { ok: boolean, body: ProductData }> => {
-    return getWithCred(`${backurl}/product/${productId}`)
+    return get(`${backurl}/product/${productId}`)
       .then((res) => {
         switch (res.status) {
           case 200:

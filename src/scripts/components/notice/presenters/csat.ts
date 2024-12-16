@@ -21,22 +21,22 @@ export class csatPresenter implements csatPresenterInterface {
 
     private startPolling() {
         this.updateData();
-        setInterval(() => this.updateData(), 5 * 60 * 1000); // Раз в 5 минут
+        setInterval(() => this.updateData(), 60 * 1000); // Раз в минут
     }
 
     private async updateData() {
         try {
             const data = await CsatApi.getData();
 
-            if (data && data.order_id && data.new_status) {
-                this.render(data.order_id, data.new_status);
+            if (data && data.orders_updates) {
+                this.render(data.orders_updates);
             }
         } catch {
             return;
         }
     }
 
-    public render(id: string, status: string) {
-        this.view.render(id, status);
+    public render(data: any) {
+        this.view.render(data);
     }
 }
