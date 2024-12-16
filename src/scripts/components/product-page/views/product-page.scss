@@ -426,7 +426,7 @@
     width: 2/3 * 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1150px) {
     .product {
         flex-direction: column;
         padding: 10px;
@@ -547,6 +547,10 @@
     #reviews {
         width: 100%;
     }
+
+    .recommendations-page {
+        width: 100%;
+    }
 }
 
 .cards-view-title {
@@ -559,7 +563,7 @@
     }
 }
 
-@media (max-width: parameters.$smallest-phone) {
+@media screen and (max-width: parameters.$smallest-phone) {
     .cards-view-title {
         transition: max-height 0.3s ease-in-out, white-space 0.5s ease-in-out;
         max-height: 10em;

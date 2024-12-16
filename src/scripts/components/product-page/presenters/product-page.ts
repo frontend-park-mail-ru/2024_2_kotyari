@@ -207,7 +207,7 @@ export class ProductPageBuilder {
         }
 
         if (result.ok) {
-          cartButton.textContent = 'Удалить из корзины';
+          cartButton.textContent = `Удалить из корзины (${result.body.count})`;
           incrementButton.style.display = 'inline-block';
           this.productPage.setButtonPressedState(cartButton);
         }
@@ -248,8 +248,6 @@ export class ProductPageBuilder {
 
     try {
       const count = await ProductPageApi.updateProductQuantity(id);
-      console.log(count)
-      console.log(count.count)
       cartButton.textContent = `Удалить из корзины (${count.count})`;
     } catch (error) {
       // console.error('Ошибка при обновлении количества:', error);
