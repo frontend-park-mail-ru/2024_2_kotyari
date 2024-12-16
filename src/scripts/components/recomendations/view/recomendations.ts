@@ -19,8 +19,6 @@ export class RecommendationsView implements RecommendationsViewInterface {
     public renderProducts = (data: { products: Product[] , page_title?: string}, query: string, config: DropdownConfig, newRootId: string = rootId, show: boolean = true, flag: boolean = false, url: string = '') => {
         data.page_title = '';
 
-        console.log(data)
-
         data.products.forEach((pr) => {
             pr.image_url = `${backurl}/${pr.image_url}`;
         });

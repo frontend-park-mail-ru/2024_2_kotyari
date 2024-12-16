@@ -89,25 +89,25 @@ router.addRoute(
   false,
 );
 
-router.addRoute(
-    '/product/:id/recommendations',
-    () => {
-        const routeParams = router.getRouteParams();
-
-        const name = router.getQueryParam('title');
-        const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
-        const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
-
-        if (routeParams['id']) {
-            recommendations.recommendationsProducts(routeParams['id'], name, sort, order); // Передаем параметры в searchProducts
-        } else {
-            router.navigate('/'); // Перенаправляем на главную, если нет запроса
-        }
-    },
-    new RegExp('^\\/product\\/(\\d+)\\/recommendations(\\?.*)?$'), // Обновляем RegExp для новых параметров
-    false,
-    false,
-);
+// router.addRoute(
+//     '/product/:id/recommendations',
+//     () => {
+//         const routeParams = router.getRouteParams();
+//
+//         const name = router.getQueryParam('title');
+//         const sort = router.getQueryParam('sort') || 'price'; // Параметр сортировки по умолчанию
+//         const order = router.getQueryParam('order') || 'asc'; // Порядок сортировки по умолчанию
+//
+//         if (routeParams['id']) {
+//             recommendations.recommendationsProducts(routeParams['id'], name, sort, order); // Передаем параметры в searchProducts
+//         } else {
+//             router.navigate('/'); // Перенаправляем на главную, если нет запроса
+//         }
+//     },
+//     new RegExp('^\\/product\\/(\\d+)\\/recommendations(\\?.*)?$'), // Обновляем RegExp для новых параметров
+//     false,
+//     false,
+// );
 
 router.addRoute(AUTH_URLS.LOGIN.route,
   () => loginPresenter.init(),

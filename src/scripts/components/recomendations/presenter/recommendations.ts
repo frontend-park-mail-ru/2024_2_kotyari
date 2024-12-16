@@ -1,6 +1,6 @@
 import { RecommendationsApiInterface } from '../api/recommendations';
 import { RecommendationsViewInterface } from '../view/recomendations';
-import { backurl } from '../../../../services/app/config';
+import {backurl, rootId} from '../../../../services/app/config';
 import { router } from '../../../../services/app/init';
 import { DropdownConfig, DropdownPresenter } from '../../dropdown-btn/presenter/dropdown';
 import { DropdownAPI } from '../../dropdown-btn/api/dropdown';
@@ -67,11 +67,11 @@ export class Recommendations {
         const products = {products: await this.api.getProducts(this.id)};
 
         if (products.products.length > 6) {
-            products.more = true;
+            //products.more = true;
             products.products = products.products.slice(0, 6);
         }
 
-        this.view.renderProducts(products, 'Похожее на ' + this.name, this.config, rootId, false, true, this.apiEndpoint + this.id + '/recommendations' + `?id=${this.id}&title=${this.name}`);
+        this.view.renderProducts(products, 'Похожее на ' + this.name, this.config, rootId, false, false, this.apiEndpoint + this.id + '/recommendations' + `?id=${this.id}&title=${this.name}`);
     }
 
     public recommendationsProducts(id: number, name: string, sort: string, order: string) {
@@ -88,7 +88,7 @@ export class Recommendations {
                     products = {};
                 }
 
-                await this.view.renderProducts({products: products}, 'Похожее на ' + name, this.config);
+                await this.view.renderProducts({products: products}, 'Похожее на ' + name, this.config, rootId, false, false);
             })
             .catch(() => {
                 return

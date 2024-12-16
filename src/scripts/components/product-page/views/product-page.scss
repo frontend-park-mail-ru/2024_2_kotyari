@@ -547,12 +547,27 @@
     #reviews {
         width: 100%;
     }
+}
 
-    .recommendations-page {
-        width: 100%;
+.cards-view-title {
+    transition: max-height 0.3s ease-in-out, white-space 0.5s ease-in-out;
+    max-height: 1.5em;
+
+    &:hover {
+        white-space: normal;
+        max-height: 10em;
     }
 }
 
+@media (max-width: parameters.$smallest-phone) {
+    .cards-view-title {
+        transition: max-height 0.3s ease-in-out, white-space 0.5s ease-in-out;
+        max-height: 10em;
+        white-space: normal !important;
 
-
-
+        &:hover {
+            white-space: normal;
+            max-height: 10em;
+        }
+    }
+}

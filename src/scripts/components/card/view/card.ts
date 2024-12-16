@@ -37,7 +37,9 @@ export class CardView implements CardViewInterface {
     templateElement.innerHTML = this.compiled(data);
     rootElement.appendChild(templateElement);
 
-    this.initButton(flag, url);
+    if (flag) {
+      this.initButton(flag, url);
+    }
   };
 
   initButton = (flag: boolean, url: string) => {
