@@ -89,9 +89,9 @@ export class AccountPresenter {
         detailsClass: 'account__favorites-details',
         titleClass: 'account__favorites-title',
         textClass: 'account__favorites-text',
-        title: 'Избранное',
-        text: 'скоро',
-        href: '/soon',
+        title: 'Вишлисты',
+        text: 'Смотреть',
+        href: '/wishlists',
       },
       {
         class: 'account__purchases-info',
