@@ -21,6 +21,7 @@ export class CardView implements CardViewInterface {
     const rootElement = document.getElementById(newRootId);
 
     if (!rootElement) {
+      // console.log(`ошибка rootElement ${rootElement} -- rootId ${rootId}`);
       return;
     }
 

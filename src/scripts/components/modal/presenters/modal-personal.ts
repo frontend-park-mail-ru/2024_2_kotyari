@@ -40,9 +40,9 @@ export class PersonalDataModal extends BaseModal {
         updatedUser[key] = value as string;
       });
 
-      this.handleSubmit(updatedUser)
-        .then(() => {/*console.log("Submit successful")*/})
-        .catch((error) => {/*console.error("Submit failed:", error)*/});
+      this.handleSubmit(updatedUser).finally()
+        // .then(() => console.log("Submit successful"))
+        // .catch((error) => console.error("Submit failed:", error));
     });
 
     const inputs = form.querySelectorAll('input, select') as HTMLInputElement[];

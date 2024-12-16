@@ -33,5 +33,6 @@ export class DropdownAPI {
     } catch {
       return undefined;
     }
+    // console.log(123, `${endpoint}&${params.toString()}`);
   };
 }

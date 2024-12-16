@@ -28,6 +28,7 @@ import { PERSONAL_ACCOUNT } from '../../scripts/components/personal-account/conf
 import { SearcherApi } from '../../scripts/components/searcher/api/search';
 import { SearcherView } from '../../scripts/components/searcher/view/search';
 import { Searcher } from '../../scripts/components/searcher/presenter/search';
+import { WishlistPresenter } from '../../scripts/components/wish-list/presenter/wish-list';
 import {Recommendations} from "../../scripts/components/recomendations/presenter/recommendations";
 import {RecommendationsApi} from "../../scripts/components/recomendations/api/recommendations";
 import {RecommendationsView} from "../../scripts/components/recomendations/view/recomendations";
@@ -210,6 +211,34 @@ router.addRoute(
     categoryPresenter.loadCategoryProducts(link, sort, order);
   },
   new RegExp('^/category/([^/]+)$'),
+  false,
+  false
+);
+
+const wishlistPresenter = new WishlistPresenter();
+
+router.addRoute(
+  '/wishlists',
+  () => wishlistPresenter.renderWishlistList(),
+  new RegExp('^/wishlists$'),
+  false,
+  false
+);
+
+router.addRoute(
+  '/wishlist/:link',
+  () => {
+    const routeParams = router.getRouteParams();
+    if (!routeParams) {
+      router.navigate('/wishlists');
+      return;
+    }
+
+    const link = routeParams['link'];
+
+    wishlistPresenter.renderWishlist(link).finally();
+  },
+  new RegExp('^\\/wishlist\\/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$'),
   false,
   false
 );

@@ -10,12 +10,7 @@ export interface UserData {
   age: number;
   avatar_url: string;
   Address: {
-    id: number;
-    city: string;
-    street: string;
-    house: string;
-    flat: string;
-    profile_id: number;
+    address: string;
   };
 }
 

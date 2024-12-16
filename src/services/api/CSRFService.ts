@@ -64,6 +64,7 @@ export class CSRFService {
   private protectedFetchWithoutResponse = async (url: string, method: string, body: any): Promise<Response> => {
     const info = this.getRequestInfo(method, body);
     if (!info) {
+      console.log(method, body, info);
       return Promise.reject(new Error('Отсутствует конфигурация запроса (RequestInit)'));
     }
 

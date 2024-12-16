@@ -3,11 +3,17 @@ import { editAddressConfig, ModalControllerParams } from '../views/types';
 import { ModalRenderer } from '../views/modal-render';
 import { backurl } from '../../../../services/app/config';
 import { csrf } from '../../../../services/api/CSRFService';
+import { debounce } from '../../../utils/debounce';
+import { API_KEY } from './key-yandex';
 
 export class AddressModal extends BaseModal {
   private readonly onSubmitCallback: (updatedAddress: Record<string, string>) => void;
 
-  constructor(config: ModalControllerParams, userAddress: Record<string, string>, onSubmit: (updatedAddress: Record<string, string>) => void) {
+  constructor(
+    config: ModalControllerParams,
+    userAddress: Record<string, string>,
+    onSubmit: (updatedAddress: Record<string, string>) => void,
+  ) {
     super(config, editAddressConfig, userAddress);
     this.onSubmitCallback = onSubmit;
   }
@@ -26,20 +32,40 @@ export class AddressModal extends BaseModal {
     const form = this.modalElement.querySelector(`#${editAddressConfig.formId}`) as HTMLFormElement;
     if (!form) return;
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+    const addressInput = this.modalElement.querySelector(`[name="address"]`) as HTMLInputElement;
+    const suggestionsList = this.modalElement.querySelector('#suggestions-list') as HTMLElement;
 
-      if (!this.validateForm()) {
-        // console.log("Validation failed: Some required fields are empty.");
-        return;
-      }
+    if (addressInput && suggestionsList) {
+      addressInput.addEventListener(
+        'input',
+        debounce(async () => {
+          const query = addressInput.value.trim();
+          if (query.length < 3) {
+            suggestionsList.innerHTML = ''; // Очистка списка предложений
+            return;
+          }
 
-      const formData = new FormData(form);
-      const updatedAddress: Record<string, string> = {};
+          const suggestions = await this.fetchAddressSuggestions(query);
 
-      formData.forEach((value, key) => {
-        updatedAddress[key] = value as string;
-      });
+          // Обновляем UI для показа подсказок
+          this.updateSuggestionsList(suggestionsList, suggestions, addressInput);
+        }, 300),
+      );
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!this.validateForm()) {
+          // console.log('Validation failed: Some required fields are empty.');
+          return;
+        }
+
+        const formData = new FormData(form);
+        const updatedAddress: Record<string, string> = {};
+
+        formData.forEach((value, key) => {
+          updatedAddress[key] = value as string;
+        });
 
       return csrf.put(`${backurl}/address`, updatedAddress)
         .then(res => {
@@ -60,12 +86,47 @@ export class AddressModal extends BaseModal {
         })
     });
 
-    if (!this.modalElement) {
-      return;
-    }
+      if (!this.modalElement) {
+        return;
+      }
 
-    const closeButton = this.modalElement.querySelector('.btn__close');
-    closeButton?.addEventListener('click', this.close.bind(this));
+      const closeButton = this.modalElement.querySelector('.btn__close');
+      closeButton?.addEventListener('click', this.close.bind(this));
+    }
+  }
+
+  private updateSuggestionsList(suggestionsList: HTMLElement, suggestions: any[], addressInput: HTMLInputElement) {
+    suggestionsList.innerHTML = ''; // Очищаем текущие подсказки
+
+    suggestions.forEach((suggestion) => {
+      const option = document.createElement('div');
+      option.className = 'suggestions__item';
+      option.textContent = suggestion.address.formatted_address;
+
+      option.addEventListener('click', () => {
+        addressInput.value = suggestion.address.formatted_address;
+        suggestionsList.innerHTML = '';
+      });
+
+      suggestionsList.appendChild(option);
+    });
+  }
+
+  private async fetchAddressSuggestions(query: string): Promise<any[]> {
+    const url = `https://suggest-maps.yandex.ru/v1/suggest?apikey=${API_KEY}&text=${encodeURIComponent(query)}&print_address=1&attrs=uri`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Ошибка API Яндекса: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.results || [];
+    } catch (error) {
+      console.error('Ошибка получения подсказок адреса:', error);
+      return [];
+    }
   }
 
   private validateForm(): boolean {
@@ -74,11 +135,16 @@ export class AddressModal extends BaseModal {
     editAddressConfig.fields.forEach((field) => {
       const inputElement = this.modalElement?.querySelector(`[name="${field.name}"]`) as HTMLInputElement;
 
-      if (inputElement && field.name !== 'flat' && !inputElement.value.trim()) {
+      const regex = /^[a-zA-Zа-яА-Я0-9№\s.,\/-]+$/u;
+      this.removeInputError(inputElement);
+      isValid = true;
+
+      if (inputElement && !inputElement.value.trim()) {
         this.addInputError(inputElement, `Поле "${field.label}" не должно быть пустым`);
         isValid = false;
-      } else {
-        this.removeInputError(inputElement);
+      } else if (!regex.test(inputElement.value)) {
+        this.addInputError(inputElement, 'Поле должно содержать буквы цифры, точки, запятые, слэши и дефисы')
+        isValid = false;
       }
     });
 

@@ -1,0 +1,35 @@
+<div class="wishlist-create">
+  <input
+    id="wishlist-name-input"
+    type="text"
+    placeholder="Введите название нового вишлиста"
+    class="wishlist-create__input"
+  />
+  <button id="create-wishlist-btn" class="btn wishlist-create__btn">Создать</button>
+</div>
+
+<div class="wishlist-container">
+  {{#if wishlists.length}}
+    {{#each wishlists as |w|}}
+      <div class="wishlist-container__card">
+        <a href="/wishlist/{{w.link}}" class="wishlist-container__link" data-link="{{w.link}}">
+          <div class="wishlist-container__content">
+            <div class="wishlist-container__title">
+              {{w.name}}
+            </div>
+          </div>
+        </a>
+        <button class="wishlist-container__delete-btn" data-id="{{link}}">×</button>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="wishlist-container__placeholder" id="empty-wishlist-placeholder">
+      <svg class="wishlist-container__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M16 12l-4 4-4-4"></path>
+      </svg>
+      <p class="wishlist-container__placeholder-text">Ваш список вишлистов пуст</p>
+      <p class="wishlist-container__placeholder-suggestion">Создайте свой первый вишлист, чтобы начать!</p>
+    </div>
+  {{/if}}
+</div>

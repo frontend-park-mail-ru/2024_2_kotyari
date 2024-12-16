@@ -6,6 +6,10 @@ import { router } from '../../../../services/app/init';
 import { ProductData } from '../types/types';
 import { isAuth } from '../../../../services/storage/user';
 import { csrf } from '../../../../services/api/CSRFService';
+import { ReviewsView } from '../../reviews/views/reviews';
+import { ReviewsPresenter } from '../../reviews/presenters/reviews';
+import { ReviewsApi } from '../../reviews/api/api';
+import { WishlistApi } from '../../wish-list/api/wish-list';
 import {ReviewsView} from "../../reviews/views/reviews";
 import {ReviewsPresenter} from "../../reviews/presenters/reviews";
 import {ReviewsApi} from "../../reviews/api/api";
@@ -21,6 +25,9 @@ export class ProductPageBuilder {
 
   private productPage: ProductPage;
   private api = new ProductPageApi();
+  private reviewsPresenter: ReviewsPresenter;
+  private wishlistModal: HTMLElement | null = null;
+  private wishlistCheckboxes: NodeListOf<HTMLInputElement> | null = null;
   private reviewsPresenter: ReviewsPresenter
   private recommendations: Recommendations;
 
@@ -46,8 +53,8 @@ export class ProductPageBuilder {
 
       }
 
-      if (id === ''){
-        router.navigate('/')
+      if (id === '') {
+        router.navigate('/');
         return;
       }
 
@@ -79,14 +86,140 @@ export class ProductPageBuilder {
 
       this.reviewsPresenter.init(id, hash);
 
+      this.initializeFavoriteButton();
+
     } catch (error) {
       // console.error('Error building product page:', error);
     }
   }
 
+  private initializeFavoriteButton() {
+    const favoriteButton = document.querySelector('.product-page__favorite-button') as HTMLElement;
+
+    favoriteButton?.addEventListener('click', () => {
+      this.openWishlistModal();
+    });
+  }
+
+  private openWishlistModal() {
+    this.wishlistModal = document.querySelector('.modal-add-wish') as HTMLElement;
+    this.wishlistCheckboxes = this.wishlistModal?.querySelectorAll('.modal-add-wish__checkbox') as NodeListOf<HTMLInputElement>;
+
+    if (this.wishlistModal) {
+      this.wishlistModal.classList.add('modal-add-wish--open');
+      console.log('Modal opened');
+      this.loadUserWishlists().then(() => this.attachModalCloseEvent());
+    } else {
+      console.error('Modal not found');
+    }
+  }
+
+  private closeWishlistModal() {
+    if (this.wishlistModal) {
+      this.wishlistModal.classList.remove('modal-add-wish--open');
+    }
+  }
+
+  private async loadUserWishlists() {
+    const response = await WishlistApi.getWishlists();
+
+    this.populateWishlistCheckboxes(response);
+
+    const submitButton = this.wishlistModal?.querySelector('.modal-add-wish__submit-button') as HTMLElement;
+    submitButton?.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.saveSelectedWishlists();
+    });
+  }
+
+
+  private populateWishlistCheckboxes(wishlists: any[]) {
+    const wishlistContainer = document.getElementById('wishlistCheckboxes');
+    if (wishlistContainer) {
+      wishlistContainer.innerHTML = ''; // очищаем контейнер
+
+      wishlists.forEach((wishlist) => {
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('modal-add-wish__checkbox');
+        checkbox.setAttribute('data-wishlist-link', wishlist.link); // сохраняем ссылку
+
+        const label = document.createElement('label');
+        label.textContent = wishlist.name;
+
+        const checkboxWrapper = document.createElement('div');
+        checkboxWrapper.appendChild(checkbox);
+        checkboxWrapper.appendChild(label);
+
+        wishlistContainer.appendChild(checkboxWrapper);
+      });
+    } else {
+      console.error('Wishlist container not found');
+    }
+  }
+
+
+  private saveSelectedWishlists() {
+    const wishlistContainer = document.getElementById('wishlistCheckboxes');
+    if (!wishlistContainer) {
+      console.error('Wishlist container not found');
+      return;
+    }
+
+    // Получаем все выбранные чекбоксы и извлекаем их ссылки (data-wishlist-link)
+    const selectedWishlists = Array.from(wishlistContainer.querySelectorAll('.modal-add-wish__checkbox:checked'))
+      .map((checkbox) => (checkbox as HTMLInputElement).getAttribute('data-wishlist-link')); // извлекаем ссылку
+
+    if (selectedWishlists.length === 0) {
+      console.log('zero');
+      return;
+    }
+
+    const productId = this.getProductId();
+    const numId = Number(productId);
+
+    if (!numId) {
+      console.error('Invalid product ID');
+      return;
+    }
+
+    WishlistApi.addProductToWishlist(numId, selectedWishlists)
+      .then((result) => {
+        if (result.status === 201) {
+          console.log('Product added to wishlist');
+          this.closeWishlistModal();
+        } else {
+          console.error('Failed to add product to wishlist');
+        }
+      })
+      .catch((error) => {
+        console.error('Error saving wishlists:', error);
+      });
+  }
+
+  private handleDocumentClick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+
+    if (this.wishlistModal && !this.wishlistModal.contains(target)) {
+      this.closeWishlistModal();
+      document.removeEventListener('click', this.handleDocumentClick); // Убираем обработчик после закрытия
+    }
+  };
+
+
+  private attachModalCloseEvent() {
+    const closeButton = this.wishlistModal?.querySelector('.modal-add-wish__close-button') as HTMLElement;
+
+    closeButton?.addEventListener('click', () => {
+      this.closeWishlistModal();
+    });
+
+    document.addEventListener('click', this.handleDocumentClick);
+  }
+
   private initializeConditionButtons() {
     const conditionButtons = Array.from(document.querySelectorAll('.product-page__condition-buttons button')).filter(
-      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
+      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement,
     );
 
     const currentPriceElement = document.querySelector('.product-page__current-price-product-page') as HTMLElement;
@@ -102,7 +235,7 @@ export class ProductPageBuilder {
   private initializeOptionButtons() {
     // Обработка цветовых кнопок
     const colorButtons = Array.from(document.querySelectorAll('.product-page__color-button')).filter(
-      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
+      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement,
     );
 
     colorButtons.forEach((button) => {
@@ -116,7 +249,7 @@ export class ProductPageBuilder {
     });
 
     const sizeButtons = Array.from(document.querySelectorAll('.product-page__size-button')).filter(
-      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement
+      (el): el is HTMLButtonElement => el instanceof HTMLButtonElement,
     );
 
     sizeButtons.forEach((button) => {
@@ -130,7 +263,7 @@ export class ProductPageBuilder {
     });
 
     const textOptions = Array.from(document.querySelectorAll('.product-page__text-option')).filter(
-      (el): el is HTMLAnchorElement => el instanceof HTMLAnchorElement
+      (el): el is HTMLAnchorElement => el instanceof HTMLAnchorElement,
     );
 
     textOptions.forEach((link) => {
@@ -145,14 +278,14 @@ export class ProductPageBuilder {
     });
   }
 
-  private getProductId = (): string =>{
+  private getProductId = (): string => {
     const keys = router.getRouteParams();
     if (keys === null) {
       return '';
     }
 
     return keys['id'];
-  }
+  };
 
   private initializeCartButtons(isInCart: boolean, count: number = 0) {
     const cartButton = document.querySelector('.product-page__cart-button') as HTMLButtonElement;
@@ -193,8 +326,8 @@ export class ProductPageBuilder {
 
   private async addToCart(cartButton: HTMLElement, incrementButton: HTMLElement) {
     const id = this.getProductId();
-    if (id === ''){
-      router.navigate('/')
+    if (id === '') {
+      router.navigate('/');
       return;
     }
 
@@ -216,8 +349,8 @@ export class ProductPageBuilder {
 
   private async removeFromCart(cartButton: HTMLElement, incrementButton: HTMLElement) {
     const id = this.getProductId();
-    if (id === ''){
-      router.navigate('/')
+    if (id === '') {
+      router.navigate('/');
       return;
     }
 
@@ -237,7 +370,7 @@ export class ProductPageBuilder {
           incrementButton.style.display = 'none';
           this.productPage.setButtonDefaultState(cartButton);
         }
-    });
+      });
   }
 
   private async increaseCartCount(cartButton: HTMLElement, incrementButton: HTMLElement) {

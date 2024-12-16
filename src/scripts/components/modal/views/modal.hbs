@@ -22,7 +22,8 @@
                 {{/each}}
               </select>
             {{else}}
-              <input type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" value="{{field.value}}" class="form__input" />
+              <input autocomplete="off" type="{{field.type}}" id="{{field.id}}" name="{{field.name}}" value="{{field.value}}" class="form__input" />
+              <div class="suggestions" id="suggestions-list"></div>
             {{/if}}
           </div>
           <span class="form__error-feedback" id="{{field.error_id}}"></span>
