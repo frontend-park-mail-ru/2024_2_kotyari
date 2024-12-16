@@ -28,8 +28,8 @@ export class csatPresenter implements csatPresenterInterface {
         try {
             const data = await CsatApi.getData();
 
-            if (data && data.orders_updates) {
-                this.render(data.orders_updates);
+            if (data && data.body.orders_updates) {
+                this.render(data.body.orders_updates);
             }
         } catch {
             return;
