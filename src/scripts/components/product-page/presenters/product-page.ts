@@ -13,6 +13,7 @@ import {Recommendations} from "../../recomendations/presenter/recommendations";
 import {RecommendationsView} from "../../recomendations/view/recomendations";
 import {CardView} from "../../card/view/card";
 import {RecommendationsApi} from "../../recomendations/api/recommendations";
+import {productData} from "./data";
 
 export class ProductPageBuilder {
   private readonly reviewsId = 'reviews';
@@ -197,21 +198,20 @@ export class ProductPageBuilder {
       return;
     }
 
-    this.api.addToCart(id)
-      .then((result) => {
-        if (result.unauthorized) {
-          cartButton.textContent = 'Войдите в аккаунт';
-          cartButton.setAttribute('router', 'changed-active');
-          cartButton.setAttribute('href', '/login');
-          return;
-        }
+    const result = await this.api.addToCart(id)
 
-        if (result.ok) {
-          cartButton.textContent = `Удалить из корзины (${result.body.count})`;
-          incrementButton.style.display = 'inline-block';
-          this.productPage.setButtonPressedState(cartButton);
-        }
-      });
+    if (result.unauthorized) {
+      cartButton.textContent = 'Войдите в аккаунт';
+      cartButton.setAttribute('router', 'changed-active');
+      cartButton.setAttribute('href', '/login');
+      return;
+    }
+
+    if (result.ok) {
+      cartButton.textContent = `Удалить из корзины (1)`;
+      incrementButton.style.display = 'inline-block';
+      this.productPage.setButtonPressedState(cartButton);
+    }
   }
 
   private async removeFromCart(cartButton: HTMLElement, incrementButton: HTMLElement) {
@@ -248,6 +248,7 @@ export class ProductPageBuilder {
 
     try {
       const count = await ProductPageApi.updateProductQuantity(id);
+
       cartButton.textContent = `Удалить из корзины (${count.count})`;
     } catch (error) {
       // console.error('Ошибка при обновлении количества:', error);

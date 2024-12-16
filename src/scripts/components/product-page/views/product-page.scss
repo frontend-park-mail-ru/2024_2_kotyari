@@ -299,7 +299,7 @@
 
     &__purchase-info {
         flex: 0.75;
-        width: 20%;
+        width: 300px;
         margin-left: parameters.$big-margin;
     }
 
@@ -315,6 +315,7 @@
         padding: parameters.$big-margin;
         margin-bottom: parameters.$big-margin;
         position: relative;
+        width: 300px;
     }
 
     &__current-price-product-page {
@@ -529,6 +530,10 @@
         }
 
         &__slider {
+            width: 100% !important;
+        }
+
+        &__price-box {
             width: 100% !important;
         }
     }
