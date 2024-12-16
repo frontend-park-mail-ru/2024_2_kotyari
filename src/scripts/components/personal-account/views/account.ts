@@ -10,6 +10,7 @@ export class AccountView {
   public onEditAvatarClick?: () => void;
   public onEditUserInfoClick?: () => void;
   public onEditAddressClick?: () => void;
+  public onChangePasswordClick?: () => void;
 
   constructor(rootId: string) {
     this.rootId = rootId;
@@ -17,7 +18,7 @@ export class AccountView {
     this.compiledTemplate = Handlebars.compile(accountTemplate);
   }
 
-  public render(data: UserData & { deliveryInfo: Array<any>; rightColumnInfo: Array<any>  }) {
+  public render(data: UserData & { deliveryInfo: Array<any>; rightColumnInfo: Array<any> }) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement) {
       // console.error(`Root element with id ${this.rootId} not found`);
@@ -29,7 +30,7 @@ export class AccountView {
 
   public updateAvatar(newAvatarUrl: string) {
     this.rootElement = document.getElementById(this.rootId);
-    if (!this.rootElement){
+    if (!this.rootElement) {
       // console.error(this.rootElement, 'not found');
       return;
     }
@@ -64,9 +65,11 @@ export class AccountView {
       errorContainer.remove();
     }, 20000);
   }
+
+  public updateAddress(address: UserData['Address']) {
   public updateAddress(address: string) {
     this.rootElement = document.getElementById(this.rootId);
-    if (!this.rootElement){
+    if (!this.rootElement) {
       // console.error(this.rootElement, 'not found');
       return;
     }
@@ -85,7 +88,7 @@ export class AccountView {
 
   private setupListeners() {
     this.rootElement = document.getElementById(this.rootId);
-    if (!this.rootElement){
+    if (!this.rootElement) {
       // console.error(this.rootElement, 'not found');
       return;
     }
@@ -108,6 +111,13 @@ export class AccountView {
     if (editAddressButton) {
       editAddressButton.addEventListener('click', () => {
         if (this.onEditAddressClick) this.onEditAddressClick();
+      });
+    }
+
+    const changePasswordBtn = this.rootElement.querySelector('#change-password');
+    if (changePasswordBtn) {
+      changePasswordBtn.addEventListener('click', () => {
+        if (this.onChangePasswordClick) this.onChangePasswordClick();
       });
     }
   }

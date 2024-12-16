@@ -6,6 +6,7 @@ import { backurl } from '../../../../services/app/config';
 import { storageUser } from '../../../../services/storage/user';
 import { updateAfterAuth } from '../../../layouts/body';
 import { csrf } from '../../../../services/api/CSRFService';
+import { ChangePasswordModal } from '../../modal/presenters/change-password';
 
 export class AccountPresenter {
   private accountAPI: AccountAPI;
@@ -21,6 +22,15 @@ export class AccountPresenter {
     this.view.onEditAvatarClick = this.handleEditAvatar.bind(this);
     this.view.onEditUserInfoClick = this.handleEditUserInfo.bind(this);
     this.view.onEditAddressClick = this.handleEditAddress.bind(this);
+    this.view.onChangePasswordClick = this.changePassword.bind(this);
+  }
+
+
+  private changePassword() {
+    const changePasswordModal = new ChangePasswordModal(
+      { modal: 'change-password-modal', rootId: 'modal-render', btnOpen: 'change-password' },
+      console.log,
+    );
   }
 
   public async initialize() {
@@ -183,4 +193,6 @@ export class AccountPresenter {
     );
     addressModal.open();
   }
+
+
 }

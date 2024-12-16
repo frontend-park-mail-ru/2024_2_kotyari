@@ -48,6 +48,41 @@ export const editNameGenderEmailConfig = {
   submitText: 'Сохранить изменения',
 };
 
+export const changePasswordConfig = {
+  id: 'edit_password',
+  title: 'Редактировать',
+  formId: 'user-edit-form',
+  fields: [
+    {
+      id: 'old-pass',
+      label: 'Старый пароль',
+      type: 'password',
+      name: 'old-password',
+      value: '',
+      error_id: 'passwordError',
+    },
+    {
+      id: 'new-pass',
+      label: 'Новый пароль',
+      type: 'newPassword',
+      name: 'old-password',
+      value: '',
+      error_id: 'newPasswordError',
+    },
+    {
+      id: 'repeat-pass',
+      label: 'Повторите',
+      type: 'password',
+      name: 'repeatPassword',
+      value: '',
+      error_id: 'repeatPasswordError',
+    },
+  ] as ModalField[],
+  submitText: 'Сохранить изменения',
+};
+
+
+
 export const editAddressConfig = {
   id: 'edit_address',
   title: 'Редактировать',

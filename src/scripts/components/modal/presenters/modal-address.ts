@@ -69,21 +69,21 @@ export class AddressModal extends BaseModal {
 
       return csrf.put(`${backurl}/address`, updatedAddress)
         .then(res => {
-          switch (res.status){
+          switch (res.status) {
             case 200:
               this.onSubmitCallback(updatedAddress);
               this.close();
               return;
             case 403:
               csrf.refreshToken();
-              throw new Error('протух csrf токен, попробуйте еще раз')
+              throw new Error('протух csrf токен, попробуйте еще раз');
             default:
               throw new Error(`${res.status} - ${res.body.error_message}`);
           }
         })
         .catch((err) => {
           // console.error('Error updating address:', err);
-        })
+        });
     });
 
       if (!this.modalElement) {
