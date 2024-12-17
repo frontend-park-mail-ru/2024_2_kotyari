@@ -67,6 +67,8 @@ export class ReviewsPresenter {
                     }))
                 };
 
+                console.log(reviewsData);
+
                 this.view.render(id, formattedReviews);
                 const view = new AddReviewView();
                 new AddReviewPresenter(id, view, this.loadReviews);

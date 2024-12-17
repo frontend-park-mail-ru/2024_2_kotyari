@@ -66,7 +66,6 @@ export class AccountView {
     }, 20000);
   }
 
-  public updateAddress(address: UserData['Address']) {
   public updateAddress(address: string) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement) {
@@ -76,12 +75,6 @@ export class AccountView {
 
     const addressElement = this.rootElement.querySelector('.account__address-details .account__address-text');
     if (addressElement) {
-      addressElement.textContent = `${address.city}, ${address.street}, ${address.house}`;
-      if (address.flat) {
-        // console.log(address.flat);
-
-        addressElement.textContent += `, ${address.flat}`;
-      }
       addressElement.textContent = `${address}`;
     }
   }
