@@ -50,7 +50,7 @@ export function buildBody(data: any): Promise<void> {
           handleHeaderScroll()
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
       });
 }
 
@@ -59,12 +59,12 @@ export function buildBody(data: any): Promise<void> {
 export const updateAfterAuth = (user: User): void => {
   const avatarElement = document.getElementById('avatar');
   if (!avatarElement) {
-    console.error('avatarElement not found');
+    // console.error('avatarElement not found');
     return;
   }
   const nameElement = document.getElementById('name');
   if (!nameElement) {
-    console.error('nameElement not found');
+    // console.error('nameElement not found');
     return;
   }
 
@@ -85,12 +85,12 @@ export const updateAfterAuth = (user: User): void => {
 export const updateAfterLogout = (user: User): void => {
   const avatarElement = document.getElementById('avatar');
   if (!avatarElement) {
-    console.error('avatarElement not found');
+    // console.error('avatarElement not found');
     return;
   }
   const nameElement = document.getElementById('name');
   if (!nameElement) {
-    console.error('nameElement not found');
+    // console.error('nameElement not found');
     return;
   }
 

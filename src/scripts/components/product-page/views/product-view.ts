@@ -11,9 +11,10 @@ export class ProductPage {
     this.rootElement = document.getElementById(rootId);
 
     if (!this.rootElement) {
-      console.error(`Элемент root ${rootId} не найден`);
+      // console.error(`Элемент root ${rootId} не найден`);
       return;
     }
+
     Handlebars.registerPartial('carousel-slider', carouselSliderTemplate);
     this.rootElement.innerHTML = '';
     const templateElement = document.createElement('div');

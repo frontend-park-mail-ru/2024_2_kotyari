@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+    <!-- Outer Circle -->
+    <circle cx="25" cy="25" r="25" fill="#C0C0C0"></circle>
+
+    <!-- Head -->
+    <circle cx="25" cy="15" r="10" fill="#808080"></circle>
+
+    <!-- Hair -->
+    <path d="M17 12c2-7 12-6 16 0-4-6-12-6-16 1z" fill="#606060"></path>
+
+    <!-- Left Eye Tear and Puddle -->
+    <path d="M21 16.5 Q22 19.5 20 19.5 Q18 19.5 21 16.5" fill="#0099ff" opacity="0.6" />
+    <ellipse cx="22" cy="16.5" rx="2" ry="1.2" fill="#0099ff" opacity="0.4" />
+
+    <!-- Right Eye Tear and Puddle -->
+    <path d="M29 16.5 Q28 19.5 30 19.5 Q32 19.5 29 16.5" fill="#0099ff" opacity="0.6" />
+    <ellipse cx="28" cy="16.5" rx="2" ry="1.2" fill="#0099ff" opacity="0.4" />
+
+    <!-- Left Eye -->
+    <ellipse cx="22" cy="14" rx="2.5" ry="3" fill="black" />
+    <circle cx="21.5" cy="13.5" r="1" fill="white" />
+    <circle cx="23" cy="15" r="0.5" fill="white" />
+
+    <!-- Right Eye -->
+    <ellipse cx="28" cy="14" rx="2.5" ry="3" fill="black" />
+    <circle cx="27.5" cy="13.5" r="1" fill="white" />
+    <circle cx="29" cy="15" r="0.5" fill="white" />
+
+    <!-- Mouth -->
+    <path d="M22 20c1-2 5-2 6 0" fill="none" stroke="#606060" stroke-width="0.5"></path>
+
+    <!-- Body -->
+    <path d="M14 35c0-6 6-12 11-12s11 6 11 12v8H14v-8z" fill="#808080"></path>
+
+    <!-- T-shirt Details -->
+    <path d="M14 43c0 0 6-8 11-8s11 8 11 8H14z" fill="#606060"></path>
+    <line x1="19" y1="35" x2="19" y2="43" stroke="#707070" stroke-width="0.5"></line>
+    <line x1="31" y1="35" x2="31" y2="43" stroke="#707070" stroke-width="0.5"></line>
+</svg>

@@ -93,7 +93,7 @@ export class CartBuilder {
             await this.renderCart();
             this.initializeCartPresenter();
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     }
 

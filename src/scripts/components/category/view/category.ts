@@ -32,16 +32,40 @@ export class CategoryView implements CategoryViewInterface {
     root.innerHTML = htmlContent;
   }
 
-  renderCategoryProducts = (products: { products: any[] , page_title?: string }, link: string): void => {
-    products.page_title = 'Категория: ';
+  private transform (link: string): string {
+    let name = ''
 
-    this.cardView.render(products, link);
+    switch (link) {
+      case 'perfumery':
+        name = 'Парфюмерия'
+        break;
+      case 'appliances':
+        name = 'Бытовая техника'
+        break;
+      case 'clothes':
+        name = 'Одежда'
+        break;
+      case 'electronics':
+        name = 'Электроника'
+        break;
+      default:
+        name = 'Другое'
+        break;
+    }
+
+    return name;
+  }
+
+  renderCategoryProducts = (products: { products: any[] , page_title?: string }, link: string): void => {
+    products.page_title = `Категория: `;
+
+    this.cardView.render(products, this.transform(link));
   }
 
   renderBreadcrumbs = (breadcrumbs: { title: string, link: string }[]) => {
     // const breadcrumbContainer = document.getElementById('breadcrumbs');
     // if (!breadcrumbContainer) {
-    //   console.error('Не найден контейнер для хлебных крошек');
+    //   // console.error('Не найден контейнер для хлебных крошек');
     //   return;
     // }
     //

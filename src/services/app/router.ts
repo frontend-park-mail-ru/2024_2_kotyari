@@ -136,10 +136,10 @@ export default class Router {
    */
   private addHandlers = () => {
     const checkDOMAndAddListeners = () => {
-      let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
+      const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
 
       routes.forEach((route) => {
-        let href = route.getAttribute(urlAttribute);
+        const href = route.getAttribute(urlAttribute);
         if (href && !route.hasAttribute('data-listener-added')) {
           route.addEventListener('click', (event) => {
             event.preventDefault();
@@ -218,10 +218,10 @@ export default class Router {
    * Удаляет обработчики событий с элементов маршрутов.
    */
   private removeHandlers() {
-    let routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
+    const routes = document.querySelectorAll(`[router="${CLICK_CLASSES.overrideable}"]`);
 
     routes.forEach((route) => {
-      let href = route.getAttribute(urlAttribute);
+      const href = route.getAttribute(urlAttribute);
       if (href) {
         route.removeEventListener('click', (event) => {
           event.preventDefault();

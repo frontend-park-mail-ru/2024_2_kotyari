@@ -1,0 +1,62 @@
+.wishlist-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); // Полупрозрачный фон
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+
+      &.confirm {
+        background: #e74c3c;
+        color: white;
+
+        &:hover {
+          background: #c0392b;
+        }
+      }
+
+      &.cancel {
+        background: #ddd;
+        color: black;
+
+        &:hover {
+          background: #bbb;
+        }
+      }
+    }
+  }
+}

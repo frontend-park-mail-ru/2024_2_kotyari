@@ -3,7 +3,7 @@
     <div class="right-card__summary">
         <!-- Строка с количеством товаров, весом и ценой -->
         <p class="right-card__total-items">
-            Всего: {{totalItems}} {{pluralize totalItems 'товар' 'товара' 'товаров'}}, {{totalWeight}}кг
+            Всего: {{totalItems}} {{pluralize totalItems 'товар' 'товара' 'товаров'}}
             <span class="right-card__total-price">{{totalPrice}}{{#if (isNotUndefined currency)}}{{currency}}{{else}}₽{{/if}}</span>
         </p>
 

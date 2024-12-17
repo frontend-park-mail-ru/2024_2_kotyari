@@ -55,9 +55,9 @@ export class LoginPresenter {
         this.router.clearHistory();
         this.router.navigate('/');
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      // .catch((err) => {
+      //   // console.error(err);
+      // });
   };
 
   private handleLogin = (event: SubmitEvent) => {
@@ -90,12 +90,12 @@ export class LoginPresenter {
         }
 
         const error = response.body as ErrorResponse;
-        console.error('Login error:', error.error_message);
+        //// console.error('Login error:', error.error_message);
         this.errorView.displayBackError(error.error_message ?? 'неизвестная ошибка');
       })
       .catch((error: authResponse) => {
         const errorBody = error.body as ErrorResponse;
-        console.error('Ошибка при логине:', errorBody.error_message);
+        //// console.error('Ошибка при логине:', errorBody.error_message);
         this.errorView.displayBackError(errorBody.error_message);
       });
   };

@@ -13,7 +13,6 @@ export class SingleOrderApiInterface {
     }));
 
     const totalItems = products.reduce((sum, product) => sum + product.count, 0);
-    const totalPrice = products.reduce((sum, product) => sum + product.cost * product.count, 0);
 
     return {
       id: data.id,
@@ -22,7 +21,7 @@ export class SingleOrderApiInterface {
       address: data.address,
       recipient: data.recipient,
       totalItems: totalItems,
-      totalPrice: totalPrice,
+      totalPrice: data.total_price,
       products: products,
     };
   }
@@ -47,7 +46,7 @@ export class SingleOrderApiInterface {
       .then(res => {
         switch (res.status) {
           case 200:
-            console.log(res.body);
+            // console.log(res.body);
 
             return SingleOrderApiInterface.transformSingleOrderData(res.body);
           default:
@@ -55,7 +54,7 @@ export class SingleOrderApiInterface {
         }
       })
       .catch(err => {
-        console.error('Ошибка: ', err);
+        // console.error('Ошибка: ', err);
         throw err;
       })
   }

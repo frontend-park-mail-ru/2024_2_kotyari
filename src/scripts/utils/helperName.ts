@@ -74,7 +74,7 @@ const helperName: Array<iHelper> = [
  * @returns {Promise<boolean>} Возвращает true в случае успешной регистрации,
  * иначе false при ошибке.
  */
-export async function registerFunctions(): Promise<Boolean> {
+export async function registerFunctions(): Promise<boolean> {
     try {
         helperName.forEach((helpFunction: iHelper) => {
             Handlebars.registerHelper(helpFunction.name, helpFunction.function);
@@ -84,7 +84,7 @@ export async function registerFunctions(): Promise<Boolean> {
             return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
 
         return false;
     }

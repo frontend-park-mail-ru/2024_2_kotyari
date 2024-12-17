@@ -7,7 +7,7 @@ export class ModalRenderer {
   public static render(rootId: string, data: any): HTMLElement | null {
     const root = document.getElementById(rootId) as HTMLElement | null;
     if (!root) {
-      console.error(`Root element with id ${rootId} not found.`);
+      // console.error(`Root element with id ${rootId} not found.`);
       return null;
     }
 

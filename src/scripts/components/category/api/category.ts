@@ -40,7 +40,7 @@ export class CategoryApi implements CategoryApiInterface {
     return fetch(`${backurl}/categories`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         return data;
       })
       .then((data: ApiResponse<Category[]>) => {
@@ -65,7 +65,7 @@ export class CategoryApi implements CategoryApiInterface {
         return data as ProductError;
       })
       .catch(error =>{
-        console.log(error);
+        // console.log(error);
 
         return error;
       })

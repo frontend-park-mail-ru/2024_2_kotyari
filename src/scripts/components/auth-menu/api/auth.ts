@@ -48,7 +48,7 @@ export default class AuthAPI {
         throw Error(`ошибка сервера ${res.status} - ${res.body.error_message}`);
       })
       .catch((err) => {
-        console.error(err);
+        //// console.error(err);
         return false;
       });
   };

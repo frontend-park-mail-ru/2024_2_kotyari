@@ -1,0 +1,62 @@
+<div class="list__wishlist-header">
+  <div class="list__wishlist-back">
+    <button id="back-btn" class="btn back-btn">← Назад</button>
+  </div>
+
+  <div class="list__wishlist-header__title-container">
+    <h1 class="list__wishlist-header__title" id="wishlist-title" data-id="{{link}}">{{name}}</h1>
+    <div class="list__wishlist-header__actions">
+      <button id="share-btn" class="btn">Поделиться</button>
+      {{#if is_creator}}
+      <button id="delete-btn" class="btn">Удалить</button>
+      <button id="rename-btn" class="btn">Переименовать</button>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+
+<div id="delete-confirmation-modal" class="wishlist-modal hidden">
+  <div class="wishlist-modal-content">
+    <h3>Вы уверены, что хотите удалить этот товар?</h3>
+    <div class="wishlist-modal-actions">
+      <button id="confirm-delete-btn" class="btn confirm">Удалить</button>
+      <button id="cancel-delete-btn" class="btn cancel">Отмена</button>
+    </div>
+  </div>
+</div>
+<div id="delete-wishlist-modal" class="wishlist-modal hidden">
+  <div class="wishlist-modal-content">
+    <h3>Вы уверены, что хотите удалить этот вишлист?</h3>
+    <div class="wishlist-modal-actions">
+      <button id="confirm-delete-wishlist-btn" class="btn confirm">Удалить</button>
+      <button id="cancel-delete-wishlist-btn" class="btn cancel">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<div class="list__wishlist-container">
+  {{#if items.length}}
+    {{#each items}}
+      <div class="list__wishlist-container__card" href="/product/{{id}}" router="changed-active">
+        <div class="list__wishlist-container__card-image">
+          <img src="{{image_url}}" alt="{{title}}" loading="lazy" />
+          <button class="delete-item-btn" data-item-name="{{id}}">×</button>
+        </div>
+        <div class="list__wishlist-container__card-info">
+          <div class="list__wishlist-container__card-info__title">{{title}}</div>
+          <div class="list__wishlist-container__card-info__description">{{price}}</div>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="list__wishlist-placeholder">
+      <svg class="list__wishlist-placeholder-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M16 12l-4 4-4-4"></path>
+      </svg>
+      <p class="list__wishlist-placeholder-text">Ваш вишлист пуст</p>
+      <p class="list__wishlist-placeholder-suggestion">Добавьте товары, чтобы они появились здесь!</p>
+    </div>
+  {{/if}}
+</div>

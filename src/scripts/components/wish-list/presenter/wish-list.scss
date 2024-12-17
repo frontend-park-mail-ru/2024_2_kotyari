@@ -1,0 +1,256 @@
+@use "/public/css/parametrs/parameters";
+@use "/public/css/parametrs/basic-mixins" as mixins;
+
+.list__wishlist {
+  &-header {
+    display: flex;
+    align-items: center;
+    margin: 50px;
+    justify-content: space-between;
+    position: relative;
+
+
+    .list__wishlist-back {
+      margin-right: 20px;
+    }
+
+    .back-btn {
+      background: #ddd;
+      color: #000;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #bbb;
+      }
+    }
+
+    .list__wishlist-back {
+      flex-shrink: 0;
+
+    }
+
+
+    &__title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      .btn {
+        background: #7a16d5;
+        color: #fff;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background: #5e11b0;
+        }
+      }
+    }
+
+    &__title-container {
+
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+    gap: 30px;
+    padding: parameters.$padding 0;
+    justify-content: center;
+
+    &__card {
+      @include mixins.card-styles(parameters.$color-card-background, parameters.$color-border, parameters.$color-shadow, parameters.$transition-duration);
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: parameters.$padding;
+      border-radius: parameters.$default-border-radius;
+      cursor: pointer;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      max-width: 350px;
+      transition: transform parameters.$transition-duration ease, box-shadow parameters.$transition-duration ease;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px parameters.$color-shadow-hover;
+        z-index: parameters.$z-index-hover;
+      }
+
+      &-image {
+        width: 100%;
+        height: parameters.$image-height;
+        border-radius: parameters.$default-border-radius;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: parameters.$gap;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform parameters.$transition-duration ease;
+        }
+      }
+
+      &:hover &-image img {
+        transform: scale(1.1);
+      }
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+
+        &__title {
+          font-size: 24px;
+          font-weight: parameters.$font-weight-bold;
+          color: parameters.$color-text;
+          margin-bottom: parameters.$gap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          max-width: 100%;
+        }
+
+        &__description {
+          font-size: parameters.$font-size-description;
+          color: white;
+          margin-bottom: parameters.$gap;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 999px) {
+    &-container {
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      padding: parameters.$padding 10px;
+
+      &__card {
+        height: auto;
+      }
+    }
+  }
+
+  @media (max-width: parameters.$smallest-phone) {
+    &__container {
+      grid-template-columns: 2fr;
+    }
+  }
+}
+
+.wishlist-title-editor {
+  font-size: 30px;
+  font-weight: bold;
+  border: none;
+  border-bottom: 2px solid #7a16d5;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  color: inherit;
+}
+
+.list__wishlist-container__card {
+  position: relative;
+  overflow: hidden;
+}
+
+.delete-item-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: none;
+  border: 2px solid red;
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.5s ease;
+
+  &:hover {
+    color: rgba(200, 0, 0, 1);
+    border: 3px solid rgba(200, 0, 0, 1);
+  }
+}
+
+.list__wishlist-back {
+  margin-bottom: 20px;
+}
+
+.list__wishlist-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.list__wishlist-placeholder-icon {
+  margin-bottom: 15px;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.list__wishlist-placeholder-text,
+.list__wishlist-placeholder-suggestion {
+  font-size: 16px;
+  color: #555;
+}
+
+.list__wishlist-placeholder:hover .list__wishlist-placeholder-icon {
+  transform: scale(1.1);
+  opacity: 1;
+}

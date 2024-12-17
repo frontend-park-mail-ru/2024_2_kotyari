@@ -26,7 +26,7 @@ export class ModalFactory {
 
     const ModalClass = modalRegistry[modalType];
     if (!ModalClass) {
-      console.warn(`Unknown modal type: ${modalType}`);
+      // console.warn(`Unknown modal type: ${modalType}`);
       return null;
     }
 

@@ -10,6 +10,7 @@ export class AccountView {
   public onEditAvatarClick?: () => void;
   public onEditUserInfoClick?: () => void;
   public onEditAddressClick?: () => void;
+  public onChangePasswordClick?: () => void;
 
   constructor(rootId: string) {
     this.rootId = rootId;
@@ -17,10 +18,10 @@ export class AccountView {
     this.compiledTemplate = Handlebars.compile(accountTemplate);
   }
 
-  public render(data: UserData & { deliveryInfo: Array<any>; rightColumnInfo: Array<any>  }) {
+  public render(data: UserData & { deliveryInfo: Array<any>; rightColumnInfo: Array<any> }) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement) {
-      console.error(`Root element with id ${this.rootId} not found`);
+      // console.error(`Root element with id ${this.rootId} not found`);
       return;
     }
     this.rootElement.innerHTML = this.compiledTemplate(data);
@@ -29,8 +30,8 @@ export class AccountView {
 
   public updateAvatar(newAvatarUrl: string) {
     this.rootElement = document.getElementById(this.rootId);
-    if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
+    if (!this.rootElement) {
+      // console.error(this.rootElement, 'not found');
       return;
     }
 
@@ -46,46 +47,42 @@ export class AccountView {
     errorContainer.textContent = errorMessage;
 
     if (!this.rootElement) {
-      console.error('root element with id ${this.rootId} not found');
+      // console.error('root element with id ${this.rootId} not found');
       return;
     }
     const avatarContainer = this.rootElement.querySelector('.account__user-name') as HTMLElement | null;
     if (!avatarContainer) {
-      console.error('avatar container not found');
+      // console.error('avatar container not found');
       return;
     }
 
-    console.log(avatarContainer,errorContainer);
+    // console.log(avatarContainer,errorContainer);
     avatarContainer.appendChild(errorContainer);
 
-    console.log(avatarContainer);
+    // console.log(avatarContainer);
 
     setTimeout(() => {
       errorContainer.remove();
     }, 20000);
   }
-  public updateAddress(address: UserData['Address']) {
+
+  public updateAddress(address: string) {
     this.rootElement = document.getElementById(this.rootId);
-    if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
+    if (!this.rootElement) {
+      // console.error(this.rootElement, 'not found');
       return;
     }
 
     const addressElement = this.rootElement.querySelector('.account__address-details .account__address-text');
     if (addressElement) {
-      addressElement.textContent = `${address.city}, ${address.street}, ${address.house}`;
-      if (address.flat) {
-        console.log(address.flat);
-
-        addressElement.textContent += `, ${address.flat}`;
-      }
+      addressElement.textContent = `${address}`;
     }
   }
 
   private setupListeners() {
     this.rootElement = document.getElementById(this.rootId);
-    if (!this.rootElement){
-      console.error(this.rootElement, 'not found');
+    if (!this.rootElement) {
+      // console.error(this.rootElement, 'not found');
       return;
     }
 
@@ -107,6 +104,13 @@ export class AccountView {
     if (editAddressButton) {
       editAddressButton.addEventListener('click', () => {
         if (this.onEditAddressClick) this.onEditAddressClick();
+      });
+    }
+
+    const changePasswordBtn = this.rootElement.querySelector('#change-password');
+    if (changePasswordBtn) {
+      changePasswordBtn.addEventListener('click', () => {
+        if (this.onChangePasswordClick) this.onChangePasswordClick();
       });
     }
   }

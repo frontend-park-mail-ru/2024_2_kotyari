@@ -41,35 +41,3 @@
         cursor: pointer;
     }
 }
-
-.suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    margin-top: 2px;
-    background-color: white;
-    border-radius: 10px;
-    z-index: 10;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: calc(7 * 40px + 15px);
-    overflow-y: auto;
-
-    &--active {
-        display: block;
-    }
-
-    &__item {
-        padding: 15px;
-        cursor: pointer;
-
-        &--link {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        &:hover {
-            background-color: #f0f0f0;
-        }
-    }
-}

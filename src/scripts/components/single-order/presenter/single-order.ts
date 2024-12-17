@@ -25,7 +25,7 @@ export class SingleOrderPresenter {
       this.orderData = await this.singleOrderApi.getOrderData(orderId);
       this.singleOrderView.render(this.orderData);
     } catch (error) {
-      console.error('Не удалось инициализировать заказ', error);
+      // console.error('Не удалось инициализировать заказ', error);
     }
   }
 }

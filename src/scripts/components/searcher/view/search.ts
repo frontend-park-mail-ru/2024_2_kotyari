@@ -30,7 +30,7 @@ export class SearcherView implements SearcherViewInterface {
 
     const rootElement = document.getElementById(rootId);
     if (!rootElement) {
-      return console.error(`Элемент ID =  ${rootId} не найден`);
+      return // console.error(`Элемент ID =  ${rootId} не найден`);
     }
 
     rootElement.innerHTML = '';

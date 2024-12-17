@@ -27,9 +27,9 @@ export class CSRFService {
 
         this.token = csrfToken;
       })
-      .catch(err => {
-        console.error(err);
-      });
+      // .catch(err => {
+      //   // console.error(err);
+      // });
   }
 
   /**
@@ -40,7 +40,6 @@ export class CSRFService {
    */
   private getRequestInfo(method: string, body: any): RequestInit | undefined {
     if (!this.token) {
-      console.log(this.token);
       return undefined;
     }
 
@@ -65,6 +64,7 @@ export class CSRFService {
   private protectedFetchWithoutResponse = async (url: string, method: string, body: any): Promise<Response> => {
     const info = this.getRequestInfo(method, body);
     if (!info) {
+      console.log(method, body, info);
       return Promise.reject(new Error('Отсутствует конфигурация запроса (RequestInit)'));
     }
 

@@ -17,7 +17,7 @@ export class OrderListPresenter {
       this.orderData = await this.orderListApi.getOrderData()
       this.orderListView.render(this.orderData);
     } catch (error) {
-      console.error('Не удалось инициализировать заказ', error)
+      // console.error('Не удалось инициализировать заказ', error)
     }
   }
 }

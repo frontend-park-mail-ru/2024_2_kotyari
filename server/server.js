@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -101,5 +101,5 @@ app.get('/', (req, res) => {
  * @param {number} PORT - Порт, на котором будет запущен сервер
  */
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  //// console.log(`Server is running on port ${PORT}`);
 });

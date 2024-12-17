@@ -17,7 +17,7 @@ export class OrderListView {
   public render(data: Order[]) {
     this.rootElement = document.getElementById(this.rootId);
     if (!this.rootElement) {
-      console.error(`Root element with id ${this.rootId} not found`);
+      // console.error(`Root element with id ${this.rootId} not found`);
       return;
     }
 

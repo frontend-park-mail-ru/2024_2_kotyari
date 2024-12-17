@@ -140,7 +140,7 @@ export class OrderPlacementBuilder {
             await this.renderLeftPart();
             this.initializeOrderPlacement();
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     }
 
@@ -222,7 +222,7 @@ export class OrderPlacementBuilder {
 
             this.rightElementsView = new RightElementOfOrderPlacementView(this.orderData.recipient.address);
         } catch {
-            console.error('что-то не так');
+            // console.error('что-то не так');
         }
     }
 }

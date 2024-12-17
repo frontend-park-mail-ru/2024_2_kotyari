@@ -48,43 +48,54 @@ export const editNameGenderEmailConfig = {
   submitText: 'Сохранить изменения',
 };
 
+export const changePasswordConfig = {
+  id: 'edit_password',
+  title: 'Редактировать',
+  formId: 'user-edit-form',
+  fields: [
+    {
+      id: 'old-pass',
+      label: 'Старый пароль',
+      type: 'password',
+      name: 'old-password',
+      value: '',
+      error_id: 'passwordError',
+    },
+    {
+      id: 'new-pass',
+      label: 'Новый пароль',
+      type: 'newPassword',
+      name: 'old-password',
+      value: '',
+      error_id: 'newPasswordError',
+    },
+    {
+      id: 'repeat-pass',
+      label: 'Повторите',
+      type: 'password',
+      name: 'repeatPassword',
+      value: '',
+      error_id: 'repeatPasswordError',
+    },
+  ] as ModalField[],
+  submitText: 'Сохранить изменения',
+};
+
+
+
 export const editAddressConfig = {
   id: 'edit_address',
   title: 'Редактировать',
   formId: 'address-edit-form',
   fields: [
     {
-      id: 'user-city',
-      label: 'Город',
+      id: 'user-address',
+      label: 'Введите ваш адрес',
       type: 'text',
-      name: 'city',
+      name: 'address',
       value: '',
       error_id: 'city-error',
     },
-    {
-      id: 'user-street',
-      label: 'Улица',
-      type: 'text',
-      name: 'street',
-      value: '',
-      error_id: 'street-error',
-    },
-    {
-      id: 'user-house',
-      label: 'Дом',
-      type: 'text',
-      name: 'house',
-      value: '',
-      error_id: 'house-error',
-    },
-    {
-      id: 'user-flat',
-      label: 'Квартира',
-      type: 'text',
-      name: 'flat',
-      value: '',
-      error_id: 'flat-error',
-    }
   ],
   submitText: 'Сохранить изменения',
 };

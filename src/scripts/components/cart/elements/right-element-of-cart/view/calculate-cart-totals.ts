@@ -72,7 +72,7 @@ export class RightCartView {
   ) {
     if (this.totalItemsElement && this.benefitPriceElement && this.finalPriceElement) {
       this.totalItemsElement.innerHTML = `
-                Всего: ${totalItems} ${Helper.pluralize(totalItems, 'товар', 'товара', 'товаров')}, ${Math.round(totalWeight * 10) / 10}кг
+                Всего: ${totalItems} ${Helper.pluralize(totalItems, 'товар', 'товара', 'товаров')}
                 <span class="total-price">${totalPrice} ${currency ? Helper.isNotUndefined(currency) : '₽' }</span>
             `;
 
@@ -121,7 +121,7 @@ export class RightCartView {
 
       // Обработчик клика для вывода в консоль выбранных товаров
       this.checkoutButton.addEventListener('click', () => {
-        console.log('Selected products:', selectedItems);
+        // console.log('Selected products:', selectedItems);
       });
     }
   }

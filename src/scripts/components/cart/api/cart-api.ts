@@ -31,7 +31,7 @@ export class CartApiInterface {
   static async updateProductQuantity(productId: string, count: number): Promise<void> {
     return csrf.patch(`${backurl}${CART_URLS.updateProductQuantity.route}${productId}`, { count })
       .then(res => {
-        if (res.status !== 204) {
+        if (res.status !== 200) {
           throw new Error(`Ошибка при обновлении количества: ${res.status} - ${res.body.error_message}`);
         }
       })
@@ -54,13 +54,13 @@ export class CartApiInterface {
             csrf.refreshToken();
         }
 
-        console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
+        //// console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
         throw new Error(`${res.body}`);
 
       })
-      .catch(err => {
-        console.error(err);
-      })
+      /*.catch(err => {
+        // console.error(err);
+      })*/
   }
 
   /**
@@ -79,13 +79,13 @@ export class CartApiInterface {
             csrf.refreshToken();
         }
 
-        console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
+        //// console.error(`ошибка при выборе: ${res.status} - ${res.body}`);
         throw new Error(`${res.body}`);
 
       })
-      .catch(err => {
-        console.error(err);
-      })
+      /*.catch(err => {
+        // console.error(err);
+      })*/
   }
 
   /**

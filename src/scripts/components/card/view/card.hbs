@@ -9,7 +9,7 @@
     <div class="cards-view-title">
       {{page_title}}
     </div>
-    <div id="sort-container" class="sort-container"></div>
+      {{#if sorting}}<div id="sort-container" class="sort-container"></div>{{/if}}
   </div>
 <!--  <div class="cards-view-title" style="display: block; margin-bottom: 10px; margin-left: 20px;">-->
 <!--    <div id="breadcrumbs" class="breadcrumbs-container"></div>-->
@@ -27,7 +27,7 @@
                     <!--                />-->
                 </div>
                 <div class="catalog__card-info">
-                  <div>
+                  <div class="catalog__wrap">
                     <div class="catalog__card-info__price">
                       <span class="catalog__card-info__price__current-price">{{costFormat price}}₽</span>
                       {{#if original_price}}
@@ -36,6 +36,7 @@
                       {{#if discount}}
                         <span class="catalog__card-info__price__discount">-{{discount}}%</span>
                       {{/if}}
+                    </div>
                       <div class="product-page__rating">
                         <span class="text-rating reviews-header-scroll">
                           <svg xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +44,7 @@
                                viewBox="0 -960 960 960"
                                width="24px" fill="#ffcd42">
                               <path
-                                d="m378-330 102-60 103 60-29-113
+                                      d="m378-330 102-60 103 60-29-113
                                   89-75-116-10-47-108-47 109-116
                                   9 90 74-29 114ZM185-65l80-331L3-620l343-29
                                    134-313 134 314 343 28-262 224 80
@@ -54,7 +55,6 @@
                         </span>
                       </div>
                     </div>
-                    </div>
                   <div class="catalog__card-title">
                         {{title}}
                     </div>
@@ -64,4 +64,8 @@
             </div>
         {{/each}}
     </div>
+
+    {{#if more}}
+        <button class="catalog__show-more" id="show-more">Показать ещё</button>
+    {{/if}}
 </div>
