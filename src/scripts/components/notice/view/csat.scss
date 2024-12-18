@@ -8,6 +8,11 @@ $voting-frame-transition: 0.3s ease-in-out;
 $voting-frame-color-primary: #6a0dad;
 $voting-frame-color-gray: #8c8c8c;
 
+#voting-frame__title__text {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+}
+
 .voting-frame {
   position: fixed;
   bottom: 1rem;

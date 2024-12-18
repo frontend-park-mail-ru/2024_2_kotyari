@@ -51,13 +51,15 @@ export class csatView implements csatViewInterface {
 
     public render = (data_in: any) => {
         let text: string = '';
+        let count: number = 0;
 
         for (const key in data_in) {
             text += `\n<div class='order-status'>Статус заказа <b class='order-id'>${data_in[key].order_id}</b> изменился на <span class='order-status__highlight'>"${this.switchOrderStatus(data_in[key].new_status)}"</span></div>`;
+            count += 1;
         }
 
         const data = {
-            "title": `Изменения значений:`,
+            "title": (count === 1) ? `Обновление заказа` : `Обновления заказов`,
             "text": text.trim(),
         };
 
