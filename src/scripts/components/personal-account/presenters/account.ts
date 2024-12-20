@@ -60,7 +60,7 @@ export class AccountPresenter {
         userData.Address?.address?.trim(),
       ]
         .filter(Boolean)
-        .join(', ') || 'Добавьте адресс';
+        .join(', ') || 'Добавьте адрес';
 
     const msg = await this.accountAPI.getNearestDeliveryDate();
 
