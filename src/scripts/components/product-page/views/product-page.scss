@@ -136,7 +136,7 @@
         }
 
         & .text-review {
-            margin-left: parameters.$margin-left-material-icons;
+            margin-left: 45px;
         }
 
         & span {
@@ -425,6 +425,7 @@
 
 .recommendations-page {
     width: 2/3 * 100%;
+    margin-left: 20px;
 }
 
 @media screen and (max-width: 1150px) {
@@ -555,7 +556,14 @@
 
     .recommendations-page {
         width: 100%;
+        margin-right: 0;
+        margin-left: 0;
     }
+}
+
+.recommendations__catalog {
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .cards-view-title {
@@ -738,4 +746,16 @@
 /* Анимация при клике */
 .modal-add-wish__checkbox:active {
   transform: scale(0.9); /* Небольшое сжатие */
+}
+
+.recommendations__catalog {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+}
+
+.recommendations__catalog .product-page__rating {
+    justify-content: center;
+}
+
+.recommendations__catalog .catalog__wrap {
+    display: contents;
 }

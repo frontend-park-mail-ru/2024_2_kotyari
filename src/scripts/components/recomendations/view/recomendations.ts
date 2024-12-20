@@ -25,6 +25,10 @@ export class RecommendationsView implements RecommendationsViewInterface {
 
         this.cardView.render(data, query, newRootId, show, flag, url);
 
+        document.querySelectorAll('.catalog').forEach((catalog) => {
+            catalog.classList.add('recommendations__catalog');
+        });
+
         const dropdownPresenter = new DropdownPresenter(config);
         dropdownPresenter.initView();
     };

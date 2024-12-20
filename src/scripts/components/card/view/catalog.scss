@@ -33,7 +33,6 @@
         padding: parameters.$padding;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
         text-align: center;
         position: relative;
@@ -203,7 +202,7 @@
 .reviews-header-scroll {
     display: inline-flex;
     align-items: center;
-    width: 50px;
+    width: 68px;
 }
 
 @keyframes spin {

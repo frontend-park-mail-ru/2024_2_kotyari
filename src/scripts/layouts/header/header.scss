@@ -282,7 +282,7 @@ header {
 }
 
 txt {
-    transform: translateY(parameters.$y-coord-min);
+    transform: translateY(0);
 }
 
 @media (max-width: 1150px) {
