@@ -108,10 +108,15 @@ export class ProductPageBuilder {
     if (this.wishlistModal) {
       this.wishlistModal.classList.add('modal-add-wish--open');
       console.log('Modal opened');
-      this.loadUserWishlists().then(() => this.attachModalCloseEvent());
-    } else {
-      console.error('Modal not found');
+      this.loadUserWishlists()
+        .then(() => this.attachModalCloseEvent())
+        .catch(()=>this.attachModalCloseEvent());
+      return;
     }
+
+
+    this.attachModalCloseEvent();
+
   }
 
   private closeWishlistModal() {
