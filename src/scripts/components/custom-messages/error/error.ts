@@ -15,7 +15,7 @@ const returnPage = '/catalog';
  * @returns {Promise} Промис, который разрешается после успешного отображения страницы ошибки.
  */
 export function errorPage(name: string): void {
-  let config = {
+  const config = {
     name: name,
     description: errorsDescriptions[name],
     return: returnPage,
@@ -25,7 +25,7 @@ export function errorPage(name: string): void {
 
   const rootElement = document.getElementById(rootId) as HTMLElement;
   if (!rootElement) {
-    console.error(`Element ID = ${rootId} not found`);
+    // console.error(`Element ID = ${rootId} not found`);
   }
 
   rootElement.innerHTML = '';

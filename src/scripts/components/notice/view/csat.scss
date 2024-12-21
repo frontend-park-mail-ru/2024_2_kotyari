@@ -1,0 +1,141 @@
+@use '../../../../../public/css/parametrs/basic-mixins';
+@use '../../../../../public/css/parametrs/parameters';
+
+$voting-frame-bg-color: #f4f4f4;
+$voting-frame-border-color: #cccccc;
+$voting-frame-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$voting-frame-transition: 0.3s ease-in-out;
+$voting-frame-color-primary: #6a0dad;
+$voting-frame-color-gray: #8c8c8c;
+
+#voting-frame__title__text {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+}
+
+.voting-frame {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: $voting-frame-bg-color;
+  border: 1px solid $voting-frame-border-color;
+  box-shadow: $voting-frame-shadow;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 450px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+  transition: transform $voting-frame-transition, opacity $voting-frame-transition;
+  opacity: 1;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
+    align-self: flex-start;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    &__close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 24px;
+      color: parameters.$text-color;
+      transition: color parameters.$short-duration ease;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+  &__content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 306px;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    &--hidden {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+  }
+
+  &__vote-button {
+    @include basic-mixins.checkout-btn();
+    width: 262px;
+    text-align: center;
+    font-size: 14px;
+    padding: 15px 0;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $voting-frame-color-primary;
+    }
+  }
+
+  #back {
+    flex: 0 0 auto;
+  }
+}
+
+@for $i from 0 through 9 {
+  .rating-circles {
+    &__circle-#{$i} {
+      background: hsl((120 / 10) * $i, 100%, 50%);
+    }
+  }
+}
+
+.order-status {
+  margin-bottom: 10px;
+  font-size: 14px;
+
+  &__highlight {
+    color: $voting-frame-color-primary;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 350px) {
+  .voting-frame {
+    bottom: 0.5rem;
+    width: calc(100% - 20px);
+    max-width: none;
+
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+
+  .voting-frame__title {
+    font-size: 0.9rem;
+  }
+
+  .rating-circles__labels span {
+    font-size: 12px;
+  }
+
+  .voting-frame__vote-button {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+  .voting-frame__content {
+    min-width: calc(100% - 20px);
+    margin-top: 7px;
+  }
+
+  .order-status {
+    font-size: 12px;
+  }
+}

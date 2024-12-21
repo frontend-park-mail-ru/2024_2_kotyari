@@ -136,7 +136,7 @@
         }
 
         & .text-review {
-            margin-left: parameters.$margin-left-material-icons;
+            margin-left: 45px;
         }
 
         & span {
@@ -247,8 +247,8 @@
         margin-bottom: parameters.$big-margin-bottom;
         font-size: 18px;
         font-weight: 440;
-        margin-top: parameters.$small-margin;
-        margin-left: 10px;
+        margin-top: 10px;
+        margin-left: 20px;
     }
 
     &__description-item {
@@ -287,6 +287,7 @@
         word-break: normal;
         overflow-wrap: break-word;
         hyphens: auto;
+        margin-left: 0.5px;
 
         &__header {
             font-size: 25px;
@@ -298,7 +299,7 @@
 
     &__purchase-info {
         flex: 0.75;
-        width: 20%;
+        width: 300px;
         margin-left: parameters.$big-margin;
     }
 
@@ -314,6 +315,7 @@
         padding: parameters.$big-margin;
         margin-bottom: parameters.$big-margin;
         position: relative;
+        width: 300px;
     }
 
     &__current-price-product-page {
@@ -421,7 +423,12 @@
     width: 2/3 * 100%;
 }
 
-@media screen and (max-width: 768px) {
+.recommendations-page {
+    width: 2/3 * 100%;
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 1150px) {
     .product {
         flex-direction: column;
         padding: 10px;
@@ -470,6 +477,7 @@
                 margin-bottom: 10px;
             }
 
+            margin-left: 0.5px;
             font-size: 14px;
             padding: 10px;
         }
@@ -525,11 +533,16 @@
         &__slider {
             width: 100% !important;
         }
+
+        &__price-box {
+            width: 100% !important;
+        }
     }
 
     .product-page__description-product-page {
         font-size: 14px;
-        margin-top: 15px;
+        margin-top: 10px;
+        margin-left: 20px;
         padding: 10px;
     }
 
@@ -540,8 +553,209 @@
     #reviews {
         width: 100%;
     }
+
+    .recommendations-page {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+.recommendations__catalog {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.cards-view-title {
+    transition: max-height 0.3s ease-in-out, white-space 0.5s ease-in-out;
+    max-height: 1.5em;
+
+    &:hover {
+        white-space: normal;
+        max-height: 10em;
+    }
+}
+
+@media screen and (max-width: parameters.$smallest-phone) {
+    .cards-view-title {
+        transition: max-height 0.3s ease-in-out, white-space 0.5s ease-in-out;
+        max-height: 10em;
+        white-space: normal !important;
+
+        &:hover {
+            white-space: normal;
+            max-height: 10em;
+        }
+    }
+}
+.modal-add-wish {
+  display: none; /* Скрыть модалку по умолчанию */
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+
+  &__content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 55%;
+    border-radius: 20px;
+  }
+
+  &__header {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  &__checkboxes {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    label{
+      font-size: 20px;
+      padding-left: 12px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__submit-button,
+  &__close-button {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: parameters.$base-background-color;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    font-size: 1rem;
+
+  }
+
+  &__close-button {
+    background-color: #ccc;
+    color: black;
+    font-weight: 600;
+  }
+
+  &__submit-button:hover {
+    background-color: #4b0e8c;
+    font-weight: 600;
+  }
+
+  &__close-button:hover {
+    background-color: #999;
+  }
+
+  &--active {
+    display: block;
+  }
 }
 
 
+.product-page__price-and-favorite {
+  display: flex;  // Используем flexbox для размещения элементов в одну строку
+  align-items: center;  // Центрируем элементы по вертикали
+  gap: 10px;  // Расстояние между ценой и кнопкой
+}
+
+.product-page__current-price-product-page {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.product-page__favorite-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;  // Центрируем SVG внутри кнопки
+}
+
+.product-page__favorite-button svg {
+  width: 24px;
+  height: 24px;
+  stroke: #ff4040;
+}
 
 
+.modal-add-wish {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-add-wish--open {
+  display: flex;
+}
+
+.modal-add-wish__checkbox {
+  position: relative;
+  width: 24px; /* Увеличенный размер чекбокса */
+  height: 24px;
+  appearance: none; /* Убираем стандартный чекбокс */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #6a5acd; /* Фиолетовая рамка */
+  border-radius: 5px; /* Скругленные края */
+  outline: none;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.3s ease; /* Плавный переход */
+}
+
+.modal-add-wish__checkbox:checked {
+  background: #6a5acd; /* Заполнение фиолетовым цветом */
+  border-color: #6a5acd;
+}
+
+.modal-add-wish__checkbox:checked::after {
+  content: '✔'; /* Галочка */
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 16px;
+  color: #fff; /* Цвет галочки */
+  transition: all 0.2s ease; /* Плавное появление */
+}
+
+/* Эффект при наведении */
+.modal-add-wish__checkbox:hover {
+  border-color: #9370db; /* Светлее фиолетовый */
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.5); /* Тень вокруг */
+}
+
+/* Анимация при клике */
+.modal-add-wish__checkbox:active {
+  transform: scale(0.9); /* Небольшое сжатие */
+}
+
+.recommendations__catalog {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+}
+
+.recommendations__catalog .product-page__rating {
+    justify-content: center;
+}
+
+.recommendations__catalog .catalog__wrap {
+    display: contents;
+}

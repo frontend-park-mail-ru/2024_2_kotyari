@@ -3,7 +3,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import string from 'vite-plugin-string';
-import fs from 'fs';
+import fs from "fs";
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -54,14 +54,14 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'), // Явно указываем index.html
-        ...templates, // Добавляем все найденные шаблоны
+        main: path.resolve(__dirname, 'index.html'),
+        ...templates,
       },
       external: [resolve(__dirname, 'services/app/app.ts')],
     },
   },
   server: {
-    port: 3000, // Порт для dev-сервера
+    port: 3000,
   },
   preview: {
     // host: '0.0.0.0',
@@ -69,7 +69,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'), // Правильное задание алиаса для пути
+      '@': resolve(__dirname, 'src'),
     },
   },
 });

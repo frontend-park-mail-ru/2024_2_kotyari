@@ -6,14 +6,14 @@ import { backurl } from '../../../../services/app/config';
 import { storageUser } from '../../../../services/storage/user';
 import { updateAfterAuth } from '../../../layouts/body';
 import { csrf } from '../../../../services/api/CSRFService';
-
+import { ChangePasswordModal } from '../../modal/presenters/change-password';
 
 export class AccountPresenter {
   private accountAPI: AccountAPI;
   private view: AccountView;
-  private userData: UserData;
-  private deliveryInfo: Array<any>;
-  private rightColumnInfo: Array<any>;
+  private userData: UserData | undefined;
+  private deliveryInfo: Array<any> | undefined;
+  private rightColumnInfo: Array<any> | undefined;
 
   constructor(apiBaseUrl: string, rootId: string) {
     this.accountAPI = new AccountAPI(apiBaseUrl);
@@ -22,6 +22,15 @@ export class AccountPresenter {
     this.view.onEditAvatarClick = this.handleEditAvatar.bind(this);
     this.view.onEditUserInfoClick = this.handleEditUserInfo.bind(this);
     this.view.onEditAddressClick = this.handleEditAddress.bind(this);
+    this.view.onChangePasswordClick = this.changePassword.bind(this);
+  }
+
+
+  private changePassword() {
+    const changePasswordModal = new ChangePasswordModal(
+      { modal: 'change-password-modal', rootId: 'modal-render', btnOpen: 'change-password' },
+      console.log,
+    );
   }
 
   public async initialize() {
@@ -46,16 +55,14 @@ export class AccountPresenter {
   }
 
   private async buildDeliveryInfo(userData: UserData) {
-    const addressText = [
-      userData.Address?.city?.trim(),
-      userData.Address?.street?.trim(),
-      userData.Address?.house?.trim(),
-      userData.Address?.flat?.trim()
-    ].filter(Boolean).join(', ') || 'Добавьте адресс';
+    const addressText =
+      [
+        userData.Address?.address?.trim(),
+      ]
+        .filter(Boolean)
+        .join(', ') || 'Добавьте адрес';
 
-    let msg: string;
-
-    msg = await this.accountAPI.getNearestDeliveryDate()
+    const msg = await this.accountAPI.getNearestDeliveryDate();
 
     return [
       {
@@ -92,9 +99,9 @@ export class AccountPresenter {
         detailsClass: 'account__favorites-details',
         titleClass: 'account__favorites-title',
         textClass: 'account__favorites-text',
-        title: 'Избранное',
-        text: 'скоро',
-        href: '/soon'
+        title: 'Вишлисты',
+        text: 'Смотреть',
+        href: '/wishlists',
       },
       {
         class: 'account__purchases-info',
@@ -106,7 +113,7 @@ export class AccountPresenter {
         title: 'Заказы',
         text: 'Смотреть',
         href: '/order_list',
-      }
+      },
     ];
   }
 
@@ -122,10 +129,9 @@ export class AccountPresenter {
           let newAvatarUrl = await this.accountAPI.updateAvatar(file);
           newAvatarUrl = `${backurl}/${newAvatarUrl}`;
 
-          this.userData.avatar_url = `${backurl}/${newAvatarUrl}`;
+          this.userData!.avatar_url = `${backurl}/${newAvatarUrl}`;
           this.view.updateAvatar(newAvatarUrl);
         } catch (error) {
-
           const errorMessage = this.parseError(error);
 
           this.view.displayErrorMessage(errorMessage);
@@ -142,9 +148,9 @@ export class AccountPresenter {
 
   private async handleEditUserInfo() {
     const userDataRecord: Record<string, string> = {
-      username: this.userData.username,
-      gender: this.userData.gender,
-      email: this.userData.email,
+      username: this.userData!.username,
+      gender: this.userData!.gender,
+      email: this.userData!.email,
     };
 
     const userInfoModal = new PersonalDataModal(
@@ -160,7 +166,7 @@ export class AccountPresenter {
 
         storageUser.changeUsername(this.userData.username);
         updateAfterAuth(storageUser.getUserData());
-      }
+      },
     );
 
     userInfoModal.open();
@@ -168,23 +174,25 @@ export class AccountPresenter {
 
   private async handleEditAddress() {
     const addressRecord: Record<string, string> = {
-      city: this.userData.Address.city,
-      street: this.userData.Address.street,
-      house: this.userData.Address.house,
-      flat: this.userData.Address.flat,
+      address: this.userData!.Address.address,
     };
 
     const addressModal = new AddressModal(
       { modal: 'edit-address-modal', rootId: 'modal-render', btnOpen: 'edit-user-address' },
       addressRecord,
       (updatedAddress) => {
-        this.userData.Address = { ...this.userData.Address, ...updatedAddress };
-        this.view.updateAddress(this.userData.Address);
+        this.userData!.Address = { ...this.userData!.Address, ...updatedAddress };
 
-        storageUser.changeCity(this.userData.Address.city);
+        console.log(this.userData!.Address );
+
+        this.view.updateAddress(this.userData!.Address.address);
+
+        storageUser.changeCity(this.userData!.Address.address);
         updateAfterAuth(storageUser.getUserData());
-      }
+      },
     );
     addressModal.open();
   }
+
+
 }

@@ -10,12 +10,7 @@ export interface UserData {
   age: number;
   avatar_url: string;
   Address: {
-    id: number;
-    city: string;
-    street: string;
-    house: string;
-    flat: string;
-    profile_id: number;
+    address: string;
   };
 }
 
@@ -54,7 +49,7 @@ export class AccountAPI {
 
         const data = response.body;
 
-        console.log(data, data.delivery_date);
+        // console.log(data, data.delivery_date);
 
         const deliveryDate = new Date(data.delivery_date);
         return `Ожидаемая дата доставки: ${deliveryDate.toLocaleDateString('ru-RU', {

@@ -67,6 +67,10 @@ export class LeftCardsPresenter {
     this.view.updateSelectedCount(selectedCount);
     this.rightCartPresenter.calculateCartTotals(this.cartData);
 
+    if (this.cartData.products.length === 0) {
+      LeftCardsView.displayEmptyCartMessage();
+    }
+
     // Обновляем состояние чекбокса "Выбрать все"
     this.updateSelectAllCheckbox();
   }
@@ -125,7 +129,7 @@ export class LeftCardsPresenter {
           await this.rightCartPresenter.calculateCartTotals(this.cartData);
         })
       } catch (error) {
-        console.error('Ошибка при обновлении количества товара:', error);
+        //// console.error('Ошибка при обновлении количества товара:', error);
       }
     }
   }
@@ -149,7 +153,7 @@ export class LeftCardsPresenter {
         this.checkIfCartIsEmpty();
       })
     } catch (error) {
-      console.error('Ошибка при удалении товара из корзины:', error);
+      //// console.error('Ошибка при удалении товара из корзины:', error);
     }
   }
 
@@ -170,7 +174,7 @@ export class LeftCardsPresenter {
         }
       })
     } catch (error) {
-      console.error('Ошибка при выборе товара в корзине:', error);
+      //// console.error('Ошибка при выборе товара в корзине:', error);
     }
   }
 

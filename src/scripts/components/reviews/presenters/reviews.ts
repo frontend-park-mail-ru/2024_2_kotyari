@@ -33,10 +33,10 @@ export class ReviewsPresenter {
         this.loadReviews(id)
           .then(() => {
               if (hash) {
-                  console.log(hash);
+                  // console.log(hash);
 
                   const targetElement = document.getElementById(hash);
-                  console.log(targetElement);
+                  // console.log(targetElement);
 
                   if (targetElement) {
                       targetElement.scrollIntoView({ behavior: 'smooth' });
@@ -67,28 +67,24 @@ export class ReviewsPresenter {
                     }))
                 };
 
+                console.log(reviewsData);
+
                 this.view.render(id, formattedReviews);
                 const view = new AddReviewView();
                 new AddReviewPresenter(id, view, this.loadReviews);
             })
             .catch((err: Error) => {
-                console.error(123, err);
+                const formattedReviews = {
+                    total_review_count: 0,
+                    total_review_rating: 0,
+                    reviews: []
+                };
 
-                if (err.message === 'Ошибка при загрузке отзывов: 404'){
-                    const formattedReviews = {
-                        total_review_count: 0,
-                        total_review_rating: 0,
-                        reviews: []
-                    };
+                this.view.render(id, formattedReviews);
+                const view = new AddReviewView();
+                new AddReviewPresenter(id, view, this.loadReviews);
 
-                    this.view.render(id, formattedReviews);
-                    const view = new AddReviewView();
-                    new AddReviewPresenter(id, view, this.loadReviews);
-
-                    return;
-                }
-
-                this.view.renderError('Не удалось загрузить отзывы. Попробуйте позже.');
+                return;
             });
     };
 }

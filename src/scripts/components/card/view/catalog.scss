@@ -33,7 +33,6 @@
         padding: parameters.$padding;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
         text-align: center;
         position: relative;
@@ -86,9 +85,22 @@
         }
     }
 
-    &__card-info {
-        width: 100%;
+    .product-page__rating {
+        margin-bottom: 0;
         display: flex;
+        gap: 1px;
+    }
+
+    &__wrap {
+        display: flex;
+        margin-bottom: 10px;
+        gap: 15px;
+        width: 100%;
+    }
+
+    &__card-info {
+        width: 70%;
+        display: inline-block;
         flex-direction: column;
         align-items: center;
 
@@ -116,7 +128,6 @@
                 font-size: 16px;
                 color: parameters.$color-discount;
                 margin-left: 8px;
-                margin-right: 40px;
             }
         }
 
@@ -158,6 +169,12 @@
     &:hover {
         transform: none;
     }
+
+    &__show-more {
+        @include mixins.checkout-btn();
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
 }
 
 /* Центрирование и стили для сообщения ожидания */
@@ -182,6 +199,12 @@
     }
 }
 
+.reviews-header-scroll {
+    display: inline-flex;
+    align-items: center;
+    width: 68px;
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -191,7 +214,7 @@
 /* Медиазапросы для адаптивности */
 @media (max-width: parameters.$phone-smallest-header) {
     .catalog {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));;
         width: 100%;
         padding: parameters.$padding 10px;
 
@@ -208,6 +231,10 @@
             width: 100%;
             text-align: center;
         }
+
+        &__wrap {
+            display: block;
+        }
     }
 }
 
@@ -223,7 +250,7 @@
         }
 
         &__card-image {
-            height: 300px;
+            height: 200px;
         }
 
         &__buy-button {

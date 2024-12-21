@@ -55,7 +55,7 @@
     }
 
     &__avatar-container:hover .account__avatar-overlay {
-      display: block;  // Показываем подсказку при наведении
+      display: block;
     }
 
     .product-page__description-wrapper {
@@ -63,7 +63,7 @@
     }
 
     .product-page__description-item {
-      display: block;  // Делает каждый элемент блока в одну строку
+      display: block;
       margin-bottom: 6px;
     }
 
@@ -99,13 +99,12 @@
       padding-top: 10px;
     }
 
-    // Показываем <br> только на мобильных устройствах
     br {
-      display: none;  // Скрываем по умолчанию
+      display: none;
     }
 
     br.mobile-break {
-      display: block;  // Показываем только на мобильных устройствах
+      display: block;
     }
   }
 
@@ -115,11 +114,11 @@
       &__pin-drop,
       &__favorite,
       &__shopping-basket {
-        font-size: 24px; // Уменьшаем иконки
+        font-size: 24px;
       }
 
       &__edit {
-        font-size: 20px; // Уменьшаем размер иконки редактирования
+        font-size: 20px;
       }
     }
   }

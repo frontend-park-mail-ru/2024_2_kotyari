@@ -27,6 +27,13 @@ export const ORDER_PLACEMENT_URLS = {
             'Content-Type': 'application/json',
         }
     },
+    getCartProductsWithPromocode: {
+        route: '/cart/select/products?promocode=',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    },
     updatePaymentMethod: {
         route: '/cart/pay-method',
         method: 'PATCH',
